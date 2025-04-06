@@ -33,10 +33,10 @@
                                 empowerment cross unit solutions.
                             </p>
                             <div class="btn-group mb-3" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-secondary">Shopee</button>
-                                <button type="button" class="btn btn-secondary">Tokopedia</button>
-                                <button type="button" class="btn btn-secondary">WhatsApp</button>
-                                <button type="button" class="btn btn-secondary">Email</button>
+                                <button type="button" class="btn btn-secondary" style="background-color: #ee4d2d;border: 1px solid #ca3315;border-radius: 5px;color: white;">Shopee</button>
+                                <button type="button" class="btn btn-secondary" style="background-color: #3faa52;border: 1px solid #4f975b;border-radius: 5px;color: white;">Tokopedia</button>
+                                <button type="button" class="btn btn-secondary" style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">WhatsApp</button>
+                                <button type="button" class="btn btn-secondary" style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">Email</button>
                             </div>
                         </div>
                     </div>

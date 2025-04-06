@@ -83,7 +83,7 @@
 
         .explore {
             display: inline-block;
-            background-color: black;
+            background-color: #383838;
             color: white;
             padding: 6px 14px;
             font-size: 16px;
@@ -93,10 +93,12 @@
             border-radius: 5px;
             transition: background 0.3s;
             margin: 0 auto;
+            border-left: 4px solid #B80F0F;
         }
 
         .explore:hover {
-            background-color: red;
+            background-color: #B80F0F;
+            color: white;
             text-align: center;
         }
 

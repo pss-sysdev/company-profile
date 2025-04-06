@@ -77,7 +77,7 @@
 
         .explore {
             display: inline-block;
-            background-color: black;
+            background-color: #383838;
             color: white;
             padding: 6px 14px;
             font-size: 16px;
@@ -87,10 +87,12 @@
             border-radius: 5px;
             transition: background 0.3s;
             margin: 0 auto;
+            border-left: 4px solid #B80F0F;
         }
 
         .explore:hover {
-            background-color: red;
+            background-color: #B80F0F;
+            color: white;
             text-align: center;
         }
 
@@ -197,9 +199,9 @@
     <div class="container py-5">
         <div class="product-category">
             <div style="display: flex; justify-content: center; align-items: center; gap: 90px;">
-                <h2><i class="fa-solid fa-check text-red-500" style="color: red"></i> Sale</h2>
-                <h2><i class="fa-solid fa-check text-red-500" style="color: red"></i> Repair</h2>
-                <h2><i class="fa-solid fa-check text-red-500" style="color: red"></i> Rental</h2>
+                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Sale</h3>
+                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Repair</h3>
+                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Rental</h3>
             </div><br><br>
             <h6 class="text-uppercase" style="color: black">Product Category</h6>
             <h2 class="title">We Provide Type of Product</h2>

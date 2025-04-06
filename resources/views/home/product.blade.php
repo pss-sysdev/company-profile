@@ -221,10 +221,10 @@
                     </tr>
                 </table>
                 <div class="button-container">
-                    <button class="btn btn-danger btn-custom">Shopee</button>
-                    <button class="btn btn-success btn-custom">Tokopedia</button>
-                    <button class="btn btn-warning btn-custom">WhatsApp</button>
-                    <button class="btn btn-info btn-custom">Email</button>
+                    <button class="btn btn-danger btn-custom" style="background-color: #ee4d2d;border: 1px solid #ca3315;border-radius: 5px;color: white;">Shopee</button>
+                    <button class="btn btn-success btn-custom" style="background-color: #3faa52;border: 1px solid #4f975b;border-radius: 5px;color: white;">Tokopedia</button>
+                    <button class="btn btn-warning btn-custom" style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">WhatsApp</button>
+                    <button class="btn btn-info btn-custom" style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">Email</button>
                 </div>
                 <button class="btn btn-dark btn-wide mt-2">Request Quotation</button>
             </div>

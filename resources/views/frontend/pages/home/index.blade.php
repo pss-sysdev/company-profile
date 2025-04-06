@@ -5,9 +5,9 @@
     <div class="container py-5">
         <div class="product-category">
             <div style="display: flex; justify-content: center; align-items: center; gap: 90px;">
-                <h2><i class="fa-solid fa-check text-red-500" style="color: red"></i> Sale</h2>
-                <h2><i class="fa-solid fa-check text-red-500" style="color: red"></i> Repair</h2>
-                <h2><i class="fa-solid fa-check text-red-500" style="color: red"></i> Rental</h2>
+                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Sale</h3>
+                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Repair</h3>
+                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Rental</h3>
             </div><br><br>
             <h6 class="text-uppercase" style="color: black">Product Category</h6>
             <h2 class="title">We Provide Type of Product</h2>

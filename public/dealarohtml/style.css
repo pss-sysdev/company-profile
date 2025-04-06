@@ -90,8 +90,8 @@ Version: 1.0.0
 /*------------------- 1.2. Function -------------------*/
 /*------------------- 1.3. Variable-------------------*/
 :root {
-  --theme-color: #FFC000;
-  --theme-color2: #F02801;
+  --theme-color: #B80F0F;
+  --theme-color2: #383838;
   --title-color: #161921;
   --body-color: #525960;
   --smoke-color: #EFF3FA;
@@ -3192,6 +3192,7 @@ textarea.is-invalid {
   border-radius: 0px;
   min-width: 160px;
   cursor: pointer;
+  border-radius: 5px;
 }
 
 .as-btn:before,
@@ -3214,6 +3215,7 @@ textarea.is-invalid {
   -moz-transition: 0.7s ease;
   transition: 0.7s ease;
   z-index: -1;
+  border-radius: 5px;
 }
 
 .as-btn:before {
@@ -3250,7 +3252,7 @@ textarea.is-invalid {
 
 .as-btn.style3 {
   background: var(--theme-color2);
-  color: var(--title-color);
+  color: #ffffff;
 }
 
 .as-btn.style3:after {
@@ -6031,7 +6033,7 @@ a.text-theme:hover,
   border: none;
   font-size: 16px;
   background-color: var(--theme-color2);
-  color: var(--title-color);
+  color: var(--white-color);
   display: inline-block;
   padding: 0;
   line-height: 56px;
@@ -12210,6 +12212,7 @@ table.woocommerce-product-attributes {
   box-shadow: 0px 4px 30px rgba(1, 19, 60, 0.1);
   position: relative;
   text-align: center;
+  border-radius: 8px;
 }
 
 .as-product ul {
