@@ -319,28 +319,28 @@
     <div id="overview" class="content active">
         @foreach ($data as $value)
             <p>
-                <center>{{ $value->overview }}</center>
+                <center class="center-pss">{{ $value->overview }}</center>
             </p>
         @endforeach
     </div>
     <div id="history" class="content">
         <p>
-            <center>{{ $value->history }}</center>
+            <center class="center-pss">{{ $value->history }}</center>
         </p>
     </div>
     <div id="growth" class="content">
         <p>
-            <center>{{ $value->growth }}</center>
+            <center class="center-pss">{{ $value->growth }}</center>
         </p>
     </div>
     <div id="industries" class="content">
         <p>
-            <center>{{ $value->industries }}</center>
+            <center class="center-pss">{{ $value->industries }}</center>
         </p>
     </div>
     <div id="commitment" class="content">
         <p>
-            <center>{{ $value->commitment }}<center>
+            <center class="center-pss">{{ $value->commitment }}<center>
         </p>
     </div><br>
     {{-- Accordion End --}}
