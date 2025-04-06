@@ -346,12 +346,14 @@
     {{-- Accordion End --}}
 
     {{-- Let’s Build Success Together! --}}
-    <div class="header">
-        <h1 style="color: white">Let’s Build Success Together!</h1>
-        <p>We are ready to be your trusted partner in welding equipment and industrial solutions. Whether you are
-            working on a large-scale industrial project or need reliable tools for your business, <strong>PT. PERINTIS
-                SUKSES SEJAHTERA</strong> is here to help.</p>
-    </div><br>
+    <a href="{{ route('contact_us') }}">
+        <div class="header">
+            <h1 style="color: white">Let’s Build Success Together!</h1>
+            <p>We are ready to be your trusted partner in welding equipment and industrial solutions. Whether you are
+                working on a large-scale industrial project or need reliable tools for your business, <strong>PT. PERINTIS
+                    SUKSES SEJAHTERA</strong> is here to help.</p>
+        </div>
+    </a><br>
     {{-- Let’s Build Success Together! End --}}
 
     {{-- Visi, Misi Motto --}}
