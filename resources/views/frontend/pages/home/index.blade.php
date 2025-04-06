@@ -4,7 +4,7 @@
     <!-- Product Category -->
     <div class="container py-5">
         <div class="product-category">
-            <div style="display: flex; justify-content: center; align-items: center; gap: 90px;">
+            <div class="slogan-pss">
                 <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Sale</h3>
                 <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Repair</h3>
                 <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Rental</h3>

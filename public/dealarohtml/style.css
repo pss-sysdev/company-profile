@@ -6846,6 +6846,13 @@ a.text-theme:hover,
   }
 }
 
+.slogan-pss{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 90px;
+}
+
 /* Small devices */
 @media (max-width: 767px) {
   .widget_info {
@@ -6870,6 +6877,13 @@ a.text-theme:hover,
 
   .widget_banner {
     padding: 0;
+  }
+
+  .slogan-pss{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: unset;
   }
 }
 
