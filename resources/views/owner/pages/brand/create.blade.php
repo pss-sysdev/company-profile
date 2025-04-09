@@ -14,7 +14,7 @@
         <section class="section">
             <div class="section-header">
                 <div class="section-header-back">
-                    <a href="{{ URL::previous() }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                    <a href="{{ route('owner.brand') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                 </div>
                 <h1>Create New Brand</h1>
                 <div class="section-header-breadcrumb">
@@ -68,6 +68,11 @@
                                             <option value="1">YES</option>
                                             <option value="0">NO</option>
                                         </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Description *</label>
+                                        <textarea class="summernote-simple" id="description" name="description"></textarea>
                                     </div>
 
 
