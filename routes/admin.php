@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Owner\OwnerAuthController;
 use App\Http\Controllers\Owner\OwnerBrandController;
 use App\Http\Controllers\Owner\OwnerCategoryController;
+use App\Http\Controllers\Owner\OwnerClientController;
 use App\Http\Controllers\Owner\OwnerOtherPageController;
 use App\Http\Controllers\Owner\OwnerProductController;
 use App\Http\Controllers\Owner\OwnerSettingController;
@@ -49,6 +50,13 @@ Route::prefix('owner')->group(function () {
         Route::post('/other-page/about-us', [OwnerOtherPageController::class, 'updatePageAboutUs'])->name('owner.other-page.aboutus');
         Route::get('/setting/general', [OwnerSettingController::class, 'index'])->name('owner.setting-general');
         Route::post('/setting/general', [OwnerSettingController::class, 'update'])->name('owner.setting-general.update');
+
+        Route::get('/client', [OwnerClientController::class, 'index'])->name('owner.client.index');
+        Route::get('/client/create', [OwnerClientController::class, 'create'])->name('owner.client.index.create');
+        Route::post('/client/store', [OwnerClientController::class, 'store'])->name('owner.client.index.store');
+        Route::get('/client/edit/{id}', [OwnerClientController::class, 'edit'])->name('owner.client.index.edit');
+        Route::post('/client/update/{id}', [OwnerClientController::class, 'update'])->name('owner.client.index.update');
+        Route::get('/client/destroy/{id}', [OwnerClientController::class, 'destroy'])->name('owner.client.index.destroy');
     });
 });
 

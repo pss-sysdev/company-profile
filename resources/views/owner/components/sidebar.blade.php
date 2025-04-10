@@ -41,6 +41,11 @@
                     <i class="fas fa-folder"></i> <span>Website Setting</span>
                 </a>
             </li>
+            <li class="{{ Request::is('owner/client/*') || Request::is('owner/client') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('owner.client.index') }}">
+                    <i class="fas fa-folder"></i> <span>Client</span>
+                </a>
+            </li>
         </ul>
     </aside>
 </div>

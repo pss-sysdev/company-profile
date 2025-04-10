@@ -1,15 +1,15 @@
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('dashboard') }}">Stisla</a>
+            <a href="#">Stisla</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('dashboard') }}">St</a>
+            <a href="#">St</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
             <li class="{{ $type_menu == 'dashboard' ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+                <a class="nav-link" href="#">
                     <i class="fas fa-home"></i> <span>Dashboard</span>
                 </a>
             </li>
