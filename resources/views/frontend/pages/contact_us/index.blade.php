@@ -246,11 +246,14 @@
 
         .service-item {
             display: flex;
+            flex-direction: row;
             align-items: center;
-            gap: 15px;
+            gap: 10px;
             font-size: 20px;
             font-weight: bold;
             color: #000;
+            line-height: 1.5;
+            justify-content: center;
         }
 
         .service-item i {
@@ -258,11 +261,34 @@
             color: red;
         }
 
-        @media (max-width: 480px) {
+        @media (max-width: 768px) {
             .service-container {
-                gap: 15px;
+                gap: 20px;
+            }
+
+            .service-item {
+                font-size: 18px;
+            }
+
+            .service-item i {
+                font-size: 28px;
             }
         }
+
+        @media (max-width: 480px) {
+            .service-container {
+                gap: 10px;
+            }
+
+            .service-item {
+                font-size: 16px;
+            }
+
+            .service-item i {
+                font-size: 25px;
+            }
+        }
+
 
         .brand-section {
             margin-top: 40px;
@@ -271,15 +297,26 @@
         .brand-logos {
             display: flex;
             justify-content: center;
-            align-items: center;
             gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .brand-logo {
-            width: 120px;
+            width: 70px;
             height: 50px;
             object-fit: cover;
             border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -289,7 +326,6 @@
 
     <section class="contact-us py-5">
         <div class="container">
-            {{-- <h2 class="text-center fw-bold">Contact Us</h2> --}}
             <h2 class="text-center fw-bold underline-title">Contact Us</h2>
             <p class="text-center">
                 If you have any questions, feel free to reach out! You can contact us by email or give us a call during
@@ -366,6 +402,13 @@
             <div class="container-xxl py-5">
                 <div class="container">
                     <div class="row g-5">
+                        @if (session('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ session('success') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                        @endif
                         <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                             <div class="border-start border-5 border-danger ps-4 mb-5">
                                 <h6 class="text-body text-uppercase mb-2">Appointment / Quotation</h6>
@@ -373,47 +416,50 @@
                                     Please fill this if you are interested to have partnership and request quotation
                                 </h6>
                             </div>
-                            <form>
+                            <form action="{{ route('create_quotation_request') }}" method="POST">
+                                @csrf
                                 <div class="row g-3">
                                     <div class="col-md-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light" id="name"
-                                                placeholder="Name" />
+                                                name="name" placeholder="Name" />
                                             <label for="name">Name</label>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light"
-                                                id="your_category" placeholder="your_category" />
+                                                id="your_category" name="your_category" placeholder="your_category" />
                                             <label for="your_category">Your Category (Buyer/seller)</label>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control border-0 bg-light" id="request"
+                                            <input type="date" class="form-control border-0 bg-light"
+                                                id="request_appointment" name="request_appointment"
                                                 placeholder="request" />
-                                            <label for="e">Request appointment/quotation</label>
+                                            <label for="request_appointment">Request appointment/quotation</label>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light"
-                                                id="company_name" placeholder="company_name" />
+                                                id="company_name" name="company_name" placeholder="company_name" />
                                             <label for="company_name">Company Name</label>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light"
-                                                id="industry" placeholder="industry" />
+                                                id="industry" name="industry" placeholder="industry" />
                                             <label for="industry">Industry</label>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light"
-                                                maxlength="15" id="contact_number" placeholder="Contact Number"
+                                                id="contact_number" name="contact_number"
+                                                maxlength="15"placeholder="Contact Number"
                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
                                             <label for="contact_number">Contact Number</label>
                                         </div>
@@ -422,14 +468,15 @@
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="email" class="form-control border-0 bg-light"
-                                                id="email_address" placeholder="email_address" />
+                                                id="email_address" name="email_address"
+                                                placeholder="email_address" />
                                             <label for="email_address">Email Address</label>
                                         </div>
                                     </div>
                                     <div class="col-12">
                                         <div class="form-floating">
                                             <input type="text" class="form-control border-0 bg-light"
-                                                id="your_message" placeholder="your_message" />
+                                                id="your_message" name="your_message" placeholder="your_message" />
                                             <label for="your_message">Your Message</label>
                                         </div>
                                     </div>
@@ -452,15 +499,14 @@
                         </div>
                         <div class="brand-section text-center mt-5">
                             <p>Find more about our another brand</p>
-                            @foreach ($brand as $value)
-                                <div class="brand-logos d-flex justify-content-center gap-3">
-                                    <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="Isotech"
-                                        class="brand-logo">
-                                    {{-- <img src="apex-1.0.0/img/fact-2.jpg" alt="M" class="brand-logo">
-                                <img src="apex-1.0.0/img/fact-3.jpg" alt="Nishida" class="brand-logo">
-                                <img src="apex-1.0.0/img/fact-4.jpg" alt="Master" class="brand-logo"> --}}
-                                </div>
-                            @endforeach
+                            <div class="brand-logos d-flex justify-content-center gap-4">
+                                @foreach ($brand as $value)
+                                    <div class="brand-logo-container">
+                                        <img src="{{ asset('uploads/' . $value->logo_picture) }}"
+                                            alt="{{ $value->name }}" class="brand-logo">
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

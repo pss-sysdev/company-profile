@@ -10,6 +10,8 @@
 
     <!-- Favicon -->
     <link href="apex-1.0.0/img/favicon.ico" rel="icon" />
+    <link rel="shortcut icon" href="{{ asset('uploads/' . $global_setting->favicon) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('uploads/' . $global_setting->favicon) }}" type="image/x-icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -288,15 +290,26 @@
         .brand-logos {
             display: flex;
             justify-content: center;
-            align-items: center;
             gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand-logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .brand-logo {
-            width: 120px;
+            width: 70px;
             height: 50px;
             object-fit: cover;
             border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -350,7 +363,8 @@
         <div class="header">
             <h1 style="color: white">Let’s Build Success Together!</h1>
             <p>We are ready to be your trusted partner in welding equipment and industrial solutions. Whether you are
-                working on a large-scale industrial project or need reliable tools for your business, <strong>PT. PERINTIS
+                working on a large-scale industrial project or need reliable tools for your business, <strong>PT.
+                    PERINTIS
                     SUKSES SEJAHTERA</strong> is here to help.</p>
         </div>
     </a><br>
@@ -457,20 +471,19 @@
                 <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
             </button>
         </div>
-
         <div class="brand-section text-center mt-5">
             <p style="color: black">Find more about our another brand</p>
-            @foreach ($brand as $value)
-                <div class="brand-logos d-flex justify-content-center gap-3">
-                    <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="Isotech" class="brand-logo">
-                    {{-- <img src="apex-1.0.0/img/fact-2.jpg" alt="M" class="brand-logo">
-                <img src="apex-1.0.0/img/fact-3.jpg" alt="Nishida" class="brand-logo">
-                <img src="apex-1.0.0/img/fact-4.jpg" alt="Master" class="brand-logo"> --}}
-                </div>
-            @endforeach
+            <div class="brand-logos d-flex justify-content-center gap-4">
+                @foreach ($categoryOnBrand as $value)
+                    <div class="brand-logo-container">
+                        <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="{{ $value->name }}"
+                            class="brand-logo">
+                    </div>
+                @endforeach
+            </div>
         </div>
     </div>
-    {{-- Project  End --}}
+    {{-- Project End --}}
 
     @include('components_frontend.footer')
 

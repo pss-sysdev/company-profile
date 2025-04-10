@@ -160,10 +160,11 @@
                 <div class="footer-title">
                     <h6 style="color: white">Navigation</h6>
                     <ul>
-                        <li onclick="location.href='http://example';">> Home</li>
-                        <li onclick="location.href='http://example';">> Product</li>
-                        <li onclick="location.href='http://example';">> About Us</li>
-                        <li onclick="location.href='http://example';">> Contacts</li>
+                        <li onclick="location.href='{{ route('home') }}';">> Home</li>
+                        <li onclick="location.href='{{ route('product') }}';">> Product</li>
+                        <li onclick="location.href='{{ route('brand') }}';">> Brand</li>
+                        <li onclick="location.href='{{ route('contact_us') }}';">> Contact Us</li>
+                        <li onclick="location.href='{{ route('about_us') }}';">> About Us</li>
                     </ul>
                 </div>
             </div>
@@ -193,7 +194,9 @@
                     <h6 style="color: white">Our Brands</h6>
                     <ul>
                         @foreach ($categoryOnBrand as $value)
-                            <li>> {{ $value->name }}</li>
+                            <a href="{{ route('page', $value->id) }}">
+                                <li style="color: white">> {{ $value->name }}</li>
+                            </a>
                         @endforeach
                     </ul>
                 </div>
@@ -204,10 +207,18 @@
                 <div class="footer-title">
                     <h6 style="color: white">Social Media</h6>
                     <div class="social-icons">
-                        <i class="fab fa-facebook-f"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-linkedin-in"></i>
-                        <i class="fab fa-whatsapp"></i>
+                        <a href="{{ $global_setting->facebook }}" target="_blank">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="{{ $global_setting->facebook }}" target="_blank">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="{{ $global_setting->facebook }}" target="_blank">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="{{ $global_setting->facebook }}" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
                     </div>
                 </div>
             </div>

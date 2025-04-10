@@ -1,19 +1,5 @@
 @extends('frontend.layouts.app')
 
-<style>
-    .carousel-item .d-flex {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-    }
-
-    .carousel-item img {
-        max-width: 100%;
-        object-fit: contain;
-    }
-</style>
-
 @section('content')
     <!-- Product Category -->
     <div class="container py-5">
@@ -77,8 +63,10 @@
             @foreach ($brand as $value)
                 <div class="col">
                     <div class="card border-0 text-center shadow-sm p-3">
-                        <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid"
-                            alt="{{ $value->name }}">
+                        <a href="{{ route('page', $value->id) }}">
+                            <img src="{{ asset('uploads/' . $value->logo_picture) }}"
+                                class="card-img-top img-fluid resized-img" alt="{{ $value->name }}">
+                        </a>
                     </div>
                 </div>
             @endforeach
@@ -97,16 +85,32 @@
         <div id="brandCarousel" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel"
             data-bs-interval="1000">
             <div class="carousel-inner">
-                @foreach ($brand->chunk(5) as $index => $brandChunk)
-                    <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
-                        <div class="d-flex justify-content-center gap-3">
-                            @foreach ($brandChunk as $brand)
-                                <img src="{{ asset('uploads/' . $brand->logo_picture) }}" class="img-fluid brand-logo"
-                                    alt="{{ $brand->name }}">
-                            @endforeach
-                        </div>
+                @php
+                    $brands = $brand->take(5);
+                    $shuffledBrands = $brands->shuffle();
+                @endphp
+
+                <!-- Carousel Item pertama (dengan gambar acak) -->
+                <div class="carousel-item active">
+                    <div class="d-flex justify-content-center gap-3">
+                        @foreach ($brands as $brandItem)
+                            <!-- Menampilkan gambar secara urut -->
+                            <img src="{{ asset('uploads/' . $brandItem->logo_picture) }}" class="img-fluid brand-logo"
+                                alt="{{ $brandItem->name }}">
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
+
+                <!-- Carousel Item kedua (dengan gambar acak yang berbeda) -->
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center gap-3">
+                        @foreach ($shuffledBrands as $brandItem)
+                            <!-- Menampilkan gambar acak -->
+                            <img src="{{ asset('uploads/' . $brandItem->logo_picture) }}" class="img-fluid brand-logo"
+                                alt="{{ $brandItem->name }}">
+                        @endforeach
+                    </div>
+                </div>
             </div>
 
             <!-- Controls -->
@@ -118,17 +122,28 @@
             </button>
         </div>
 
+        <!-- Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#brandCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#brandCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
+        </button>
+    </div>
 
-        <!-- Button Explore -->
-        <div class="text-center mt-4">
-            <a href="{{ route('brand') }}" class="explore">Explore Brands</a>
-        </div>
+    <!-- Button Explore -->
+    <div class="text-center mt-4">
+        <a href="{{ route('brand') }}" class="explore">Explore Brands</a>
+    </div>
     </div>
     <!-- We Provide Brands End -->
 @endsection
+
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        var myCarousel = document.querySelector('#brandCarousel');
-        var carousel = new bootstrap.Carousel(myCarousel);
+        var carousel = new bootstrap.Carousel(document.getElementById('brandCarousel'), {
+            interval: 2000,
+            ride: 'carousel'
+        });
     });
 </script>

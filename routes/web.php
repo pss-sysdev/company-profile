@@ -24,10 +24,12 @@ use Faker\Provider\ar_EG\Company;
 
 // Company Profile
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/brand', [BrandController::class, 'index'])->name('brand');
-Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact_us');
-Route::get('/about-us', [AboutUsController::class, 'index'])->name('about_us');
 Route::get('/product', [ProductController::class, 'index'])->name('product');
+Route::get('/brand', [BrandController::class, 'index'])->name('brand');
+Route::get('/brand/{slug}', [BrandController::class, 'page'])->name('page');
+Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact_us');
+Route::post('/contact-us', [ContactUsController::class, 'create'])->name('create_quotation_request');
+Route::get('/about-us', [AboutUsController::class, 'index'])->name('about_us');
 Route::get('/product/{slug}', [ProductController::class, 'detail'])->name('product.detail');
 
 // Register

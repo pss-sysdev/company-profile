@@ -195,6 +195,13 @@
         .request-quotation .btn:hover {
             background-color: #333;
         }
+
+        .resized-img {
+            width: 300px;
+            height: 150px !important;
+            object-fit: cover;
+            margin: 0 auto;
+        }
     </style>
 </head>
 

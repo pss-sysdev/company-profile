@@ -10,6 +10,8 @@
 
     <!-- Favicon -->
     <link href="apex-1.0.0/img/favicon.ico" rel="icon" />
+    <link rel="shortcut icon" href="{{ asset('uploads/' . $global_setting->favicon) }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('uploads/' . $global_setting->favicon) }}" type="image/x-icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -86,8 +88,10 @@
                 @foreach ($categoryOnBrand as $value)
                     <div class="col">
                         <div class="card border-0 text-center shadow-sm p-3">
-                            <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid"
-                                alt="Product 1">
+                            <a href="{{ route('page', $value->id) }}">
+                                <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid"
+                                    alt="Product 1">
+                            </a>
                         </div>
                     </div>
                 @endforeach
