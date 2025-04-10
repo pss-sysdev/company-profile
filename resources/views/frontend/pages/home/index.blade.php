@@ -15,8 +15,8 @@
         <div class="product-list">
             @foreach ($productCategory as $value)
                 <div class="product-item">
-                    <img src="{{ asset('uploads/' . $value->picture_url) }}" alt="Air Compressor">
-                    <h5>Air Compressor</h5>
+                    <img src="{{ asset('uploads/' . $value->picture_url) }}" alt="{{ $value->name }}">
+                    <h5>{{ $value->name }}</h5>
                 </div>
             @endforeach
         </div>

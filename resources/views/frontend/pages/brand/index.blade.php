@@ -110,15 +110,13 @@
 
             <div class="custom-container">
                 <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 g-4 mt-3">
-                    @foreach ($brand as $value)
-                        @if ($brandCategory->category_id == $value->category_id)
-                            <div class="col">
-                                <div class="card border-0 shadow-sm">
-                                    <img src="{{ asset('uploads/' . $value->banner_picture) }}"
-                                        class="card-img-top img-fluid" alt="Isotech">
-                                </div>
+                    @foreach ($brand->where('category_id', $brandCategory->category_id) as $value)
+                        <div class="col">
+                            <div class="card border-0 shadow-sm">
+                                <img src="{{ asset('uploads/' . $value->banner_picture) }}"
+                                    class="card-img-top img-fluid" alt="{{ $value->name }}">
                             </div>
-                        @endif
+                        </div>
                     @endforeach
                 </div>
             </div>
