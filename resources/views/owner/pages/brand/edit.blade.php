@@ -14,7 +14,7 @@
         <section class="section">
             <div class="section-header">
                 <div class="section-header-back">
-                    <a href="{{ URL::previous() }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                    <a href="{{ route('owner.brand') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                 </div>
                 <h1>Edit Brand</h1>
                 <div class="section-header-breadcrumb">
@@ -34,14 +34,14 @@
                                     @if ($errors->any())
                                         <ul>
                                             @foreach ($errors->all() as $error)
-                                                <li class="text-danger>{{ $error }}</li>
+                                                <li class="text-danger">{{ $error }}</li>
                                             @endforeach
                                         </ul>
 
                                     @endif
                                 </div>
                                 <form action="{{ route('owner.brand.update', ['id' => $brand->id]) }}" method="post"
-                                    enctype="multipart/form-data">
+                                    enctype="multipart/form-data" novalidate>
                                     @csrf
 
                                     <div class="row">
@@ -56,7 +56,7 @@
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Slug url *</label>
-                                                <input type="text" class="form-control" name="name" id="name"
+                                                <input type="text" class="form-control" name="url" id="url"
                                                     value="{{ $brand->url }}">
                                             </div>
                                         </div>
@@ -68,6 +68,11 @@
                                             <option value="1" @selected($brand->is_own == 1)>YES</option>
                                             <option value="0" @selected($brand->is_own == 0)>NO</option>
                                         </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Description *</label>
+                                        <textarea class="summernote-simple" id="description" name="description">{{ $brand->section->description ?? '' }}</textarea>
                                     </div>
 
 
@@ -89,7 +94,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Logo</label>
-                                                <div><input type="file" name="photo"></div>
+                                                <div><input type="file" name="logo_picture"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
@@ -109,13 +114,14 @@
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Logo 2</label>
-                                                <div><input type="file" name="banner"></div>
+                                                <div><input type="file" name="logo_picture2"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
 
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Banner Picture</label>
+                                                <label for="" class="form-label">Banner
+                                                    Picture</label>
                                                 <div class="photo-container">
                                                     @if ($brand->logo_picture == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">
@@ -129,13 +135,15 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Banner Picture</label>
-                                                <div><input type="file" name="pdf"></div>
+                                                <label for="" class="form-label">Banner
+                                                    Picture</label>
+                                                <div><input type="file" name="banner_picture"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Background Logo Picture</label>
+                                                <label for="" class="form-label">Background Logo
+                                                    Picture</label>
                                                 <div class="photo-container">
                                                     @if ($brand->bg_logo_picture == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">
@@ -148,13 +156,14 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Background Logo Picture</label>
-                                                <div><input type="file" name="pdf"></div>
+                                                <label for="" class="form-label">Background Logo
+                                                    Picture</label>
+                                                <div><input type="file" name="bg_logo_picture"></div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <button class="btn btn-primary" type="submit">Create Brand</button>
+                                    <button class="btn btn-primary" type="submit">Update Brand</button>
                                 </form>
                             </div>
                         </div>
