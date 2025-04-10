@@ -51,7 +51,7 @@
 <nav
     class="navbar navbar-expand-lg bg-white navbar-light sticky-top d-flex justify-content-between align-items-center px-0 px-lg-5 py-lg-0">
     <a href="{{ route('home') }}" class="navbar-brand me-auto ps-0">
-        <img src="{{ asset('uploads/' . $global_setting->logo) }}" alt="{{ env('APP_NAME') }}">
+        <img src="{{ asset('uploads/' . $global_setting->logo) }}" alt="{{ env('APP_NAME') }}" style="max-height: 55px">
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

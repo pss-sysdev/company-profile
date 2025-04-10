@@ -1,5 +1,19 @@
 @extends('frontend.layouts.app')
 
+<style>
+    .carousel-item .d-flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .carousel-item img {
+        max-width: 100%;
+        object-fit: contain;
+    }
+</style>
+
 @section('content')
     <!-- Product Category -->
     <div class="container py-5">
@@ -80,37 +94,8 @@
         </div>
 
         <!-- Carousel -->
-        {{-- <div id="brandCarousel" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                @foreach ($brand as $value)
-                    <div class="carousel-item active">
-                        <div class="d-flex justify-content-center gap-3">
-                            <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="img-fluid" alt="Brand 1">
-                        </div>
-                    </div>
-                @endforeach
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-center gap-3">
-                        <img src="apex-1.0.0/img/fact-4.jpg" class="img-fluid" alt="Brand 6">
-                        <img src="apex-1.0.0/img/fact-3.jpg" class="img-fluid" alt="Brand 7">
-                        <img src="apex-1.0.0/img/fact-2.jpg" class="img-fluid" alt="Brand 8">
-                        <img src="apex-1.0.0/img/fact-1.jpg" class="img-fluid" alt="Brand 9">
-                        <img src="apex-1.0.0/img/fact-3.jpg" class="img-fluid" alt="Brand 10">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#brandCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
-        </div> --}}
-
         <div id="brandCarousel" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel"
-            data-bs-interval="3000">
+            data-bs-interval="1000">
             <div class="carousel-inner">
                 @foreach ($brand->chunk(5) as $index => $brandChunk)
                     <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
@@ -124,6 +109,7 @@
                 @endforeach
             </div>
 
+            <!-- Controls -->
             <button class="carousel-control-prev" type="button" data-bs-target="#brandCarousel" data-bs-slide="prev">
                 <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
             </button>
@@ -132,6 +118,7 @@
             </button>
         </div>
 
+
         <!-- Button Explore -->
         <div class="text-center mt-4">
             <a href="{{ route('brand') }}" class="explore">Explore Brands</a>
@@ -139,3 +126,9 @@
     </div>
     <!-- We Provide Brands End -->
 @endsection
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var myCarousel = document.querySelector('#brandCarousel');
+        var carousel = new bootstrap.Carousel(myCarousel);
+    });
+</script>

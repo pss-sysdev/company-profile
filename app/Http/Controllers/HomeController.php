@@ -15,6 +15,7 @@ class HomeController extends Controller
         $title           = 'Home - Perintis Sukses Sejahtera';
         $setting         = Setting::find(1);
         $productCategory = Category::where('is_discontinue', 0)->limit(10)->get();
+        $categoryOnBrand = DB::table('brand')->where('is_own', 1)->get();
         $product         = DB::table('category as A')
             ->join('product as B', 'A.id', '=', 'B.id_category')
             ->select([
@@ -41,7 +42,8 @@ class HomeController extends Controller
             'Setting'         => $setting,
             'productCategory' => $productCategory,
             'product'         => $product,
-            'brand'           => $brand
+            'brand'           => $brand,
+            'categoryOnBrand' => $categoryOnBrand,
         ]);
     }
 }

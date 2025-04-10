@@ -160,10 +160,10 @@
                 <div class="footer-title">
                     <h6 style="color: white">Navigation</h6>
                     <ul>
-                        <li>> Home</li>
-                        <li>> Product</li>
-                        <li>> About Us</li>
-                        <li>> Contacts</li>
+                        <li onclick="location.href='http://example';">> Home</li>
+                        <li onclick="location.href='http://example';">> Product</li>
+                        <li onclick="location.href='http://example';">> About Us</li>
+                        <li onclick="location.href='http://example';">> Contacts</li>
                     </ul>
                 </div>
             </div>
@@ -192,10 +192,9 @@
                 <div class="footer-title">
                     <h6 style="color: white">Our Brands</h6>
                     <ul>
-                        <li>> Master</li>
-                        <li>> Isotech</li>
-                        <li>> Hasco</li>
-                        <li>> Makita</li>
+                        @foreach ($categoryOnBrand as $value)
+                            <li>> {{ $value->name }}</li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

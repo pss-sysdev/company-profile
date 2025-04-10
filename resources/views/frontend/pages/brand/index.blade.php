@@ -83,7 +83,7 @@
 
         <div class="custom-container">
             <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
-                @foreach ($brand as $value)
+                @foreach ($categoryOnBrand as $value)
                     <div class="col">
                         <div class="card border-0 text-center shadow-sm p-3">
                             <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid"
@@ -97,85 +97,30 @@
     <!-- Our Brands End -->
 
     {{-- Welding Machine Section  --}}
-    <div class="container-fluid ">
-        <div class="section-header">
-            <div class="section-line"></div>
-            <h2 class="section-title">WELDING MACHINE</h2>
-        </div>
-
-        <div class="custom-container">
-            <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 g-4 mt-3">
-                @foreach ($brand as $value)
-                    <div class="col">
-                        <div class="card border-0 shadow-sm">
-                            <img src="{{ asset('uploads/' . $value->logo_picture2) }}" class="card-img-top img-fluid"
-                                alt="Isotech">
-                        </div>
-                    </div>
-                @endforeach
+    @foreach ($brandCategory as $brandCategory)
+        <div class="container-fluid ">
+            <div class="section-header">
+                <div class="section-line"></div>
+                <h2 class="section-title">{{ $brandCategory->category_name }}</h2>
             </div>
-        </div>
-    </div><br>
+
+            <div class="custom-container">
+                <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 g-4 mt-3">
+                    @foreach ($brand as $value)
+                        @if ($brandCategory->category_id == $value->category_id)
+                            <div class="col">
+                                <div class="card border-0 shadow-sm">
+                                    <img src="{{ asset('uploads/' . $value->banner_picture) }}"
+                                        class="card-img-top img-fluid" alt="Isotech">
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div><br>
+    @endforeach
     {{-- Welding Machine Section End  --}}
-
-    {{-- Section Tools  --}}
-    <div class="container-fluid">
-        <div class="section-header">
-            <div class="section-line"></div>
-            <h2 class="section-title">TOOLS</h2>
-        </div>
-
-        <div class="custom-container">
-            <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 g-4 mt-3">
-                @foreach ($brand as $value)
-                    <div class="col-lg-6">
-                        <div class="card border-0 shadow-sm">
-                            <img src="{{ asset('uploads/' . $value->banner_picture) }}" class="card-img-top img-fluid"
-                                alt="Isotech">
-                        </div>
-                    </div>
-                @endforeach
-                {{-- <div class="col-lg-6">
-                    <div class="card border-0 shadow-sm">
-                        <img src="apex-1.0.0/img/service-5.jpg" class="card-img-top img-fluid" alt="Isotech">
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="card border-0 shadow-sm">
-                        <img src="apex-1.0.0/img/service-6.jpg" class="card-img-top img-fluid" alt="Master Black">
-                    </div>
-                </div>
-                <div class="col-lg-6 mx-auto">
-                    <div class="card border-0 shadow-sm">
-                        <img src="apex-1.0.0/img/team-1.jpg" class="card-img-top img-fluid" alt="West Lake">
-                    </div>
-                </div> --}}
-            </div>
-        </div>
-    </div><br>
-    {{-- Section Tools End --}}
-
-    {{-- STEEL BEVEL & PRESSURE PAINT --}}
-    <div class="container-fluid">
-        <div class="section-header">
-            <div class="section-line"></div>
-            <h2 class="section-title">STEEL BEVEL & PRESSURE PAINT</h2>
-        </div>
-
-        <div class="custom-container">
-            <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 g-4 mt-3">
-                @foreach ($brand as $value)
-                    <div class="col">
-                        <div class="card border-0 shadow-sm">
-                            <img src="{{ asset('uploads/' . $value->bg_logo_picture) }}" class="card-img-top img-fluid"
-                                alt="Isotech">
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </div><br>
-    {{-- STEEL BEVEL & PRESSURE PAINT End --}}
 
     @include('components_frontend.footer')
 

@@ -12,7 +12,7 @@ class AboutUsController extends Controller
     {
         $title = 'About Us - Perintis Sukses Sejahtera';
         $data  = CompanyProfile::all();
-        $brand = DB::table('brand')->get();
+        $brand = DB::table('brand')->where('is_own', 1)->get();
 
         return view('frontend.pages.about_us.index', [
             'type_menu' => 'about_us',
