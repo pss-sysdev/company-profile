@@ -8,25 +8,26 @@ use App\Models\QuotationRequest;
 
 class ContactUsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $title           = 'Brand - Perintis Sukses Sejahtera';
-        $brand           = DB::table('brand')->get();
-        $categoryOnBrand = DB::table('brand')->where('is_own', 1)->get();
+        $title = 'Brand - Perintis Sukses Sejahtera';
+        $brand = DB::table('brand')->get();
 
         return view('frontend.pages.contact_us.index', [
             'type_menu'       => 'contact_us',
+            'product_id'      => $request->product_id,
             'title'           => $title,
             'brand'           => $brand,
-            'categoryOnBrand' => $categoryOnBrand,
+            'categoryOnBrand' => categoryOnBrand(),
         ]);
     }
 
     public function create(Request $request)
     {
         $request->validate([
+            'product_id'          => 'nullable|integer',
             'name'                => 'required|string|max:255',
-            'category'            => 'required|string|max:255',
+            'your_category'       => 'required|string|max:255',
             'request_appointment' => 'required|string|max:255',
             'company_name'        => 'required|string|max:255',
             'industry'            => 'required|string|max:255',
@@ -36,6 +37,7 @@ class ContactUsController extends Controller
         ]);
 
         QuotationRequest::create([
+            'product_id'          => !empty($request->product_id) ? $request->product_id : null,
             'name'                => $request->name,
             'category'            => $request->your_category,
             'request_appointment' => $request->request_appointment,

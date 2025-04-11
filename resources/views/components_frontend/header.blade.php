@@ -28,7 +28,7 @@
     }
 
     @media (max-width: 991px) {
-        .nav-pss-name{
+        .nav-pss-name {
             display: none;
         }
 

@@ -194,8 +194,8 @@
                     <h6 style="color: white">Our Brands</h6>
                     <ul>
                         @foreach ($categoryOnBrand as $value)
-                            <a href="{{ route('page', $value->id) }}">
-                                <li style="color: white">> {{ $value->name }}</li>
+                            <a href="{{ route('page', $value->brand_id) }}">
+                                <li style="color: white">> {{ $value->title }}</li>
                             </a>
                         @endforeach
                     </ul>

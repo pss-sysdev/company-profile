@@ -409,6 +409,18 @@
                                     aria-label="Close"></button>
                             </div>
                         @endif
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <strong>Oops! something wrong:</strong>
+                                <ul class="mb-0 mt-2">
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.5s">
                             <div class="border-start border-5 border-danger ps-4 mb-5">
                                 <h6 class="text-body text-uppercase mb-2">Appointment / Quotation</h6>
@@ -416,70 +428,96 @@
                                     Please fill this if you are interested to have partnership and request quotation
                                 </h6>
                             </div>
+
                             <form action="{{ route('create_quotation_request') }}" method="POST">
                                 @csrf
+                                @if ($product_id)
+                                    <input type="hidden" name="product_id" value="{{ $product_id }}">
+                                @endif
+
                                 <div class="row g-3">
                                     <div class="col-md-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control border-0 bg-light" id="name"
-                                                name="name" placeholder="Name" />
+                                            <input type="text"
+                                                class="form-control border-0 bg-light @error('name') is-invalid @enderror"
+                                                id="name" name="name" value="{{ old('name') }}"
+                                                placeholder="Name" />
                                             <label for="name">Name</label>
                                         </div>
                                     </div>
+
                                     <div class="col-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control border-0 bg-light"
-                                                id="your_category" name="your_category" placeholder="your_category" />
+                                            <input type="text"
+                                                class="form-control border-0 bg-light @error('your_category') is-invalid @enderror"
+                                                id="your_category" name="your_category"
+                                                value="{{ old('your_category') }}" placeholder="your_category" />
                                             <label for="your_category">Your Category (Buyer/seller)</label>
                                         </div>
                                     </div>
+
                                     <div class="col-6">
                                         <div class="form-floating">
-                                            <input type="date" class="form-control border-0 bg-light"
+                                            <input type="date"
+                                                class="form-control border-0 bg-light @error('request_appointment') is-invalid @enderror"
                                                 id="request_appointment" name="request_appointment"
-                                                placeholder="request" />
+                                                value="{{ old('request_appointment') }}" placeholder="request" />
                                             <label for="request_appointment">Request appointment/quotation</label>
                                         </div>
                                     </div>
+
                                     <div class="col-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control border-0 bg-light"
-                                                id="company_name" name="company_name" placeholder="company_name" />
+                                            <input type="text"
+                                                class="form-control border-0 bg-light @error('company_name') is-invalid @enderror"
+                                                id="company_name" name="company_name"
+                                                value="{{ old('company_name') }}" placeholder="company_name" />
                                             <label for="company_name">Company Name</label>
                                         </div>
                                     </div>
+
                                     <div class="col-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control border-0 bg-light"
-                                                id="industry" name="industry" placeholder="industry" />
+                                            <input type="text"
+                                                class="form-control border-0 bg-light @error('industry') is-invalid @enderror"
+                                                id="industry" name="industry" value="{{ old('industry') }}"
+                                                placeholder="industry" />
                                             <label for="industry">Industry</label>
                                         </div>
                                     </div>
+
                                     <div class="col-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control border-0 bg-light"
-                                                id="contact_number" name="contact_number"
-                                                maxlength="15"placeholder="Contact Number"
-                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')" />
+                                            <input type="text"
+                                                class="form-control border-0 bg-light @error('contact_number') is-invalid @enderror"
+                                                id="contact_number" name="contact_number" maxlength="15"
+                                                value="{{ old('contact_number') }}"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                                placeholder="Contact Number" />
                                             <label for="contact_number">Contact Number</label>
                                         </div>
                                     </div>
 
                                     <div class="col-6">
                                         <div class="form-floating">
-                                            <input type="email" class="form-control border-0 bg-light"
+                                            <input type="email"
+                                                class="form-control border-0 bg-light @error('email_address') is-invalid @enderror"
                                                 id="email_address" name="email_address"
-                                                placeholder="email_address" />
+                                                value="{{ old('email_address') }}" placeholder="email_address" />
                                             <label for="email_address">Email Address</label>
                                         </div>
                                     </div>
+
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control border-0 bg-light"
-                                                id="your_message" name="your_message" placeholder="your_message" />
+                                            <input type="text"
+                                                class="form-control border-0 bg-light @error('your_message') is-invalid @enderror"
+                                                id="your_message" name="your_message"
+                                                value="{{ old('your_message') }}" placeholder="your_message" />
                                             <label for="your_message">Your Message</label>
                                         </div>
                                     </div>
+
                                     <div class="col-12 text-center">
                                         <button class="btn btn-info request-quotation-btn w-100 w-md-auto"
                                             type="submit" style="color: white">
@@ -489,6 +527,7 @@
                                 </div>
                             </form>
                         </div>
+
                         <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s" style="min-height: 450px">
                             <div class="position-relative h-100">
                                 <iframe class="position-relative w-100 h-100"
@@ -497,6 +536,7 @@
                                     aria-hidden="false" tabindex="0"></iframe>
                             </div>
                         </div>
+
                         <div class="brand-section text-center mt-5">
                             <p>Find more about our another brand</p>
                             <div class="brand-logos d-flex justify-content-center gap-4">
