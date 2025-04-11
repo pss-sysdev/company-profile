@@ -34,13 +34,13 @@ class BrandController extends Controller
         $brand = DB::table('brand as A')
             ->join('brand_section as B', 'A.id', '=', 'B.brand_id')
             ->select('A.*', 'B.*')
-            ->where('a.id', $slug)
-            ->where('a.is_own', 1)
+            ->where('A.id', $slug)
+            ->where('A.is_own', 1)
             ->get();
         $brand_2 = DB::table('brand as A')
             ->join('brand_section as B', 'A.id', '=', 'B.brand_id')
             ->select('A.*', 'B.*')
-            ->where('a.is_own', 1)
+            ->where('A.is_own', 1)
             ->limit(6)
             ->get();
         $listBrand     = DB::table('brand')->where('id', '!=', $slug)->get();
