@@ -27,107 +27,175 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <div>
-                                    @if ($errors->any())
-                                        <ul>
-                                            @foreach ($errors->all() as $error)
-                                                <li class="text-danger">{{ $error }}</li>
-                                            @endforeach
+                                <div class="row">
+                                    <div class="col-12 col-sm-12 col-md-4">
+                                        <ul class="nav nav-pills flex-column" id="myTab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="details-tab" data-toggle="tab"
+                                                    href="#details" role="tab" aria-controls="details"
+                                                    aria-selected="true">Details</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="addtional-information-tab" data-toggle="tab"
+                                                    href="#addtional-information" role="tab"
+                                                    aria-controls="addtional-information" aria-selected="false">Addtional
+                                                    Information</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="external-link-tab" data-toggle="tab"
+                                                    href="#external-link" role="tab" aria-controls="external-link"
+                                                    aria-selected="false">External
+                                                    Link</a>
+                                            </li>
                                         </ul>
+                                    </div>
 
-                                    @endif
+
+                                    <div class="col-12 col-sm-12 col-md-8">
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-content no-padding">
+
+                                                <div class="tab-pane fade show active" id="details" role="tabpanel"
+                                                    aria-labelledby="details-tab">
+
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">Name *</label>
+                                                        <input type="text" class="form-control" name="name"
+                                                            id="name" value="{{ old('name') }}">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">Slug *</label>
+                                                        <input type="text" class="form-control" name="slug"
+                                                            id="slug" value="{{ old('slug') }}">
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Category *</label>
+                                                                <select class="form-control selectric" id="id_category"
+                                                                    name="id_category">
+                                                                    @foreach ($categories as $category)
+                                                                        <option value="{{ $category->id }}">
+                                                                            {{ $category->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Brand *</label>
+                                                                <select class="form-control selectric" id="id_brand"
+                                                                    name="id_brand">
+                                                                    @foreach ($brands as $brand)
+                                                                        <option value="{{ $brand->id }}">
+                                                                            {{ $brand->name }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">Description *</label>
+                                                        <textarea class="summernote-simple" id="description" name="description"></textarea>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">Price *</label>
+                                                        <input type="text" class="form-control" name="price"
+                                                            id="price" value="{{ old('price') }}">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">Sku Code *</label>
+                                                        <input type="text" class="form-control" name="sku_code"
+                                                            id="sku_code" value="{{ old('sku_code') }}">
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label for="" class="form-label">Main Picture Url
+                                                            *</label>
+                                                        <div><input type="file" name="main_picture_url"
+                                                                id="main_picture_url">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Is Top Product
+                                                                    ?</label>
+                                                                <select class="form-control selectric" id="is_discontinue"
+                                                                    name="is_discontinue">
+                                                                    <option value="1" @selected(old('is_top_product') == 1)>YES
+                                                                    </option>
+                                                                    <option value="0" @selected(old('is_top_product') == 0)>NO
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Is Discontinue
+                                                                    ?</label>
+                                                                <select class="form-control selectric" id="is_discontinue"
+                                                                    name="is_discontinue">
+                                                                    <option value="1" @selected(old('is_discontinue') == 1)>YES
+                                                                    </option>
+                                                                    <option value="0" @selected(old('is_discontinue') == 0)>NO
+                                                                    </option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="tab-pane fade" id="addtional-information" role="tabpanel"
+                                                    aria-labelledby="addtional-information-tab">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Title</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="addtional_information_name[]"
+                                                                    id="addtional_information_name[]">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-5">
+                                                            <div class="mb-3">
+                                                                <label for="" class="form-label">Title</label>
+                                                                <input type="text" class="form-control"
+                                                                    name="addtional_information_data[]"
+                                                                    id="addtional_information_data[]">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-1">
+                                                            <button type="button"
+                                                                class="btn btn-danger remove-item">Remove</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="tab-pane fade" id="external-link" role="tabpanel"
+                                                    aria-labelledby="external-link-tab">
+                                                </div>
+                                            </div>
+
+                                            <button class="btn btn-primary" type="submit">Create Product</button>
+                                        </div>
+                                    </div>
                                 </div>
-                                <form action="{{ route('owner.product.store') }}" method="post"
-                                    enctype="multipart/form-data">
-                                    @csrf
 
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Name *</label>
-                                        <input type="text" class="form-control" name="name" id="name"
-                                            value="{{ old('name') }}">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Slug *</label>
-                                        <input type="text" class="form-control" name="slug" id="slug"
-                                            value="{{ old('slug') }}">
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">Category *</label>
-                                                <select class="form-control selectric" id="id_category" name="id_category">
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">Brand *</label>
-                                                <select class="form-control selectric" id="id_brand" name="id_brand">
-                                                    @foreach ($brands as $brand)
-                                                        <option value="{{ $brand->id }}">{{ $brand->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Description *</label>
-                                        <textarea class="summernote-simple" id="description" name="description"></textarea>
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Price *</label>
-                                        <input type="text" class="form-control" name="price" id="price"
-                                            value="{{ old('price') }}">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Sku Code *</label>
-                                        <input type="text" class="form-control" name="sku_code" id="sku_code"
-                                            value="{{ old('sku_code') }}">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Main Picture Url *</label>
-                                        <div><input type="file" name="main_picture_url" id="main_picture_url"></div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">Is Top Product ?</label>
-                                                <select class="form-control selectric" id="is_discontinue"
-                                                    name="is_discontinue">
-                                                    <option value="1" @selected(old('is_top_product') == 1)>YES</option>
-                                                    <option value="0" @selected(old('is_top_product') == 0)>NO</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-6">
-                                            <div class="mb-3">
-                                                <label for="" class="form-label">Is Discontinue ?</label>
-                                                <select class="form-control selectric" id="is_discontinue"
-                                                    name="is_discontinue">
-                                                    <option value="1" @selected(old('is_discontinue') == 1)>YES</option>
-                                                    <option value="0" @selected(old('is_discontinue') == 0)>NO</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <button class="btn btn-primary" type="submit">Create Product</button>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     </div>
 @endsection
@@ -137,4 +205,41 @@
     <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
 
     <!-- Page Specific JS File -->
+
+    <script>
+        $(document).ready(function() {
+            $('#addItem').click(function() {
+                var newItem = `
+                    <div class="form-group repeater-item">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <input type="text" name="name[]" class="form-control" placeholder="Name">
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="email[]" class="form-control" placeholder="Email">
+                            </div>
+                            <div class="col-md-3">
+                                <input type="text" name="phone[]" class="form-control" placeholder="Phone">
+                            </div>
+                            <div class="col-md-1">
+                                <button type="button" class="btn btn-danger remove-item">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                $('#repeaterContainer').append(newItem);
+            });
+
+            $(document).on('click', '.remove-item', function() {
+                $(this).closest('.repeater-item').remove();
+            });
+
+            // Form submission
+            // $('#repeaterForm').submit(function(event) {
+            //     event.preventDefault();
+            //     var formData = $(this).serialize();
+            //     console.log('Form Data:', formData);
+            // });
+        })
+    </script>
 @endpush
