@@ -8,7 +8,7 @@ if (!function_exists('categoryOnBrand')) {
         $categoryOnBrand = DB::table('brand as A')
             ->join('brand_section as B', 'A.id', '=', 'B.brand_id')
             ->select('A.*', 'B.*')
-            ->where('a.is_own', 1)
+            ->where('A.is_own', 1)
             ->get();
         return $categoryOnBrand;
     }
