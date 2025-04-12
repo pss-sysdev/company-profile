@@ -32,10 +32,9 @@
 
                                     @endif
                                 </div>
-                                <form action="{{ route('owner.category.store') }}" method="post"
-                                    enctype="multipart/form-data">
+                                <form action="{{ route('owner.category.update', $category->id) }}" method="post" enctype="multipart/form-data">
                                     @csrf
-
+                                    
                                     <div class="mb-3">
                                         <label for="" class="form-label">Name *</label>
                                         <input type="text" class="form-control" name="name" id="name"
@@ -47,12 +46,23 @@
                                         <input type="text" class="form-control" name="category_code" id="category_code"
                                             value="{{ $category->category_code }}">
                                     </div>
-                                    <div class="mb-3">
+                                    <!-- <div class="mb-3">
                                         <label for="" class="form-label">Sub Category Name *</label>
                                         <input type="text" class="form-control" name="sub_category_name"
                                             id="sub_category_name" value="{{ $category->sub_category_name }}">
-                                    </div>
+                                    </div> -->
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Sub Category</label>
+                                        <select class="form-control selectric" id="id_sub_cat" name="id_sub_cat">
+                                            <option value="">-- Select Sub Category --</option>
 
+                                            @foreach ($sub_cat as $sc)
+                                                <option value="{{ $sc->id }}" @selected($sc->id == $category->sub_cat_id)>
+                                                    {{ $sc->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="mb-3">
                                         <label for="" class="form-label">Is Discontinue ?</label>
                                         <select class="form-control selectric" id="is_discontinue" name="is_discontinue">
@@ -77,11 +87,11 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="" class="form-label">Picture Url</label>
-                                            <div><input type="file" name="pdf"></div>
+                                            <div><input type="file" name="picture_url"></div>
                                         </div>
                                     </div>
 
-                                    <button class="btn btn-primary" type="submit">Create Category</button>
+                                    <button class="btn btn-primary" type="submit">Edit Category</button>
                                 </form>
                             </div>
                         </div>

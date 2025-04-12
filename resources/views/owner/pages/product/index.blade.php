@@ -37,9 +37,10 @@
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
-                                                <th>slug</th>
+                                                <th>Slug</th>
                                                 <th>Category</th>
                                                 <th>Brand</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -48,8 +49,9 @@
                                                 <tr>
                                                     <td>{{ $product->name }}</td>
                                                     <td>{{ $product->slug }}</td>
-                                                    <td>{{ $product->id_category }}</td>
-                                                    <td>{{ $product->id_brand }}</td>
+                                                    <td>{{ $product->category->name ?? '-' }}</td>
+                                                    <td>{{ $product->brand->name ?? '-' }}</td>
+                                                    <td>{{ $product->is_discontinue == 1 ? 'Discontinue' : 'Active' }}</td>
                                                     <td>
                                                         <a href="{{ route('owner.product.edit', $product->id) }}"
                                                             class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>

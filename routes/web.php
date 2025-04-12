@@ -10,6 +10,7 @@ use App\Http\Controllers\AboutUsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use Faker\Provider\ar_EG\Company;
+use App\Http\Controllers\Owner\OwnerAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,12 @@ Route::get('/register', [RegisterController::class, 'index_register']);
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
 require __DIR__ . '/admin.php';
+
+// Owner
+// Route::get('/owner/login', [OwnerAuthController::class, 'index'])->name('owner.login');
+// Route::post('/owner/login', [OwnerAuthController::class, 'login'])->name('owner.login.submit');
+// Route::post('/owner/logout', [OwnerAuthController::class, 'logout'])->name('owner.logout');
+
 
 // Dashboard
 Route::get('/dashboard-general-dashboard', function () {

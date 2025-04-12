@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
+
 class OwnerCategoryController extends Controller
 {
     public function index()
@@ -20,8 +21,10 @@ class OwnerCategoryController extends Controller
 
     public function create()
     {
+        $sub_cat = Category::all();
         return view('owner.pages.category.create', [
-            'type_menu' => 'company'
+            'type_menu' => 'company',
+            'sub_cat' => $sub_cat
         ]);
     }
 
@@ -37,7 +40,7 @@ class OwnerCategoryController extends Controller
         $category                    = new Category();
         $category->name              = $request->name;
         $category->category_code     = $request->category_code;
-        $category->sub_category_name = $request->sub_category_name;
+        $category->sub_cat_id        = $request->id_sub_cat;
 
         $final_name = 'picture_url_' . time() . '.' . $request->picture_url->extension();
         $request->picture_url->move(public_path('uploads'), $final_name);
@@ -52,7 +55,12 @@ class OwnerCategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-        return view('owner.pages.category.edit', ['type_menu' => 'company', 'category' => $category]);
+        $sub_cat = Category::all();
+        return view('owner.pages.category.edit', [
+            'type_menu' => 'company',
+            'category' => $category,
+            'sub_cat' => $sub_cat
+        ]);
     }
 
     public function update(Request $request, $id)
@@ -63,22 +71,26 @@ class OwnerCategoryController extends Controller
         $request->validate([
             'name'              => ['required'],
             'category_code'     => ['required'],
-            'sub_category_name' => ['required'],
+            // 'sub_category_name' => ['required'],
         ]);
 
-        if ($request->picture_url != null) {
+        if ($request->hasFile('picture_url')) {
             if ($category->picture_url) {
-                unlink(public_path('uploads/' . $category->picture_url));
+                $file = public_path('uploads/' . $category->picture_url);
+            
+                if (file_exists($file)) {
+                    unlink($file);
+                }
             }
-
+        
             $final_name = 'picture_url_' . time() . '.' . $request->picture_url->extension();
-            $request->photo->move(public_path('uploads'), $final_name);
+            $request->picture_url->move(public_path('uploads'), $final_name);
             $category->picture_url = $final_name;
         }
 
         $category->name              = $request->name;
         $category->category_code     = $request->category_code;
-        $category->sub_category_name = $request->sub_category_name;
+        $category->sub_cat_id        = $request->id_sub_cat;
         $category->update();
 
         return redirect()->route('owner.category')->with('success', __('Data is updated successfully'));

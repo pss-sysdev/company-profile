@@ -47,12 +47,23 @@
                                         <input type="text" class="form-control" name="category_code"
                                             id="category_code" value="{{ old('category_code') }}">
                                     </div>
-                                    <div class="mb-3">
+                                    <!-- <div class="mb-3">
                                         <label for="" class="form-label">Sub Category Name *</label>
                                         <input type="text" class="form-control" name="sub_category_name"
                                             id="sub_category_name" value="{{ old('sub_category_name') }}">
-                                    </div>
+                                    </div> -->
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Sub Category</label>
+                                        <select class="form-control selectric" id="id_sub_cat" name="id_sub_cat">
+                                            <option value="">-- Select Sub Category --</option>
 
+                                            @foreach ($sub_cat as $sc)
+                                                <option value="{{ $sc->id }}">
+                                                    {{ $sc->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="mb-3">
                                         <label for="" class="form-label">Is Discontinue ?</label>
                                         <select class="form-control selectric" id="is_discontinue" name="is_discontinue">
