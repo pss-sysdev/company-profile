@@ -200,11 +200,6 @@
                                 </a>
                             @endif
                         @endforeach
-                        <!-- @foreach ($categoryOnBrand as $value)
-                            <a href="{{ route('page', $value->brand_id) }}">
-                                <li style="color: white">> {{ $value->title }}</li>
-                            </a>
-                        @endforeach -->
                     </ul>
                 </div>
             </div>
