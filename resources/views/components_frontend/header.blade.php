@@ -59,7 +59,7 @@
     <a style="display: flex;" href="{{ route('home') }}" class="navbar-brand me-auto ps-0">
         <img src="{{ asset('uploads/' . $global_setting->logo) }}" alt="{{ env('APP_NAME') }}" style="max-height: 55px">
         <div class="nav-pss-name" style="margin-left: 10px; align-content: center;">
-            <h5 style="margin: 0 0 4 0; color: #FF272B; line-height: normal;">
+            <h5 style="margin: 0 0 4px 0; color: #FF272B; line-height: normal;">
                 PT. Perintis Sukses Sejahtera
             </h5>
             <div style="font-size: small; line-height: normal; color: #0000FF;">

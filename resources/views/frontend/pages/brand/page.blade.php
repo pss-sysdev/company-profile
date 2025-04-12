@@ -180,7 +180,7 @@
                 <div class="col-12">
                     <center>
                         <img src="{{ asset('uploads/' . $value->banner_picture) }}" alt="Your Image Description"
-                            class="img-fluid rectangular-image" style="max-width: 1000px; height: auto;" />
+                            class="img-fluid rectangular-image" style="max-width: 1000px;max-height: 170px;height: auto;aspect-ratio: 100 / 17;" />
                         <br><br>
                     </center>
                 </div>
