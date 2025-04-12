@@ -540,11 +540,13 @@
                         <div class="brand-section text-center mt-5">
                             <p>Find more about our another brand</p>
                             <div class="brand-logos d-flex justify-content-center gap-4">
-                                @foreach ($brand as $value)
-                                    <div class="brand-logo-container">
-                                        <img src="{{ asset('uploads/' . $value->logo_picture) }}"
-                                            alt="{{ $value->name }}" class="brand-logo">
-                                    </div>
+                                @foreach ($categoryOnBrand as $value)
+                                    <a href="{{ route('page', ['slug' => $value->url]) }}">
+                                        <div class="brand-logo-container">
+                                            <img src="{{ asset('uploads/' . $value->logo_picture) }}"
+                                                alt="{{ $value->name }}" class="brand-logo">
+                                        </div>
+                                    </a>
                                 @endforeach
                             </div>
                         </div>

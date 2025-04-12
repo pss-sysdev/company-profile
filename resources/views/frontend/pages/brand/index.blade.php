@@ -88,7 +88,7 @@
                 @foreach ($categoryOnBrand as $value)
                     <div class="col">
                         <div class="card border-0 text-center shadow-sm p-3">
-                            <a href="{{ route('page', $value->brand_id) }}">
+                            <a href="{{ route('page', $value->url) }}">
                                 <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid"
                                     alt="Product 1">
                             </a>

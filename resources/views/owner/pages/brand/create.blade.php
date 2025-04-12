@@ -55,7 +55,7 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Slug url *</label>
+                                                <label for="" class="form-label">Slug Url *</label>
                                                 <input type="text" class="form-control" name="url" id="url"
                                                     value="{{ old('url') }}">
                                             </div>
@@ -63,18 +63,23 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Owner ?</label>
+                                        <label for="" class="form-label">Brand Ownership *</label>
                                         <select class="form-control selectric" id="is_own" name="is_own">
-                                            <option value="1">YES</option>
-                                            <option value="0">NO</option>
+                                            <option value="0">Distributor</option>
+                                            <option value="1">Owned</option>
                                         </select>
                                     </div>
 
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Description *</label>
-                                        <textarea class="summernote-simple" id="description" name="description"></textarea>
+                                    <div id="owned-fields" style="display: none;">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Title *</label>
+                                            <input type="text" class="form-control" name="title" id="title">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Description *</label>
+                                            <textarea class="summernote" id="description" name="description"></textarea>
+                                        </div>
                                     </div>
-
 
                                     <div class="row mb-4">
 
@@ -132,5 +137,29 @@
                 },
             });
         })
+
+        $(document).ready(function () {
+            function toggleOwnedFields() {
+                const ownership = $('#is_own').val();
+                const ownedFields = $('#owned-fields');
+
+                if (ownership === '1') {
+                    ownedFields.show();
+                } else {
+                    ownedFields.hide();
+                }
+            }
+
+            // Init Selectric
+            $('#is_own').selectric({
+                onChange: function () {
+                    toggleOwnedFields();
+                }
+            });
+
+            // Initial check
+            toggleOwnedFields();
+        });
     </script>
+
 @endpush

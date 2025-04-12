@@ -60,10 +60,10 @@
         </div>
 
         <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
-            @foreach ($brand as $value)
+            @foreach ($categoryOnBrand as $value)
                 <div class="col">
                     <div class="card border-0 text-center shadow-sm p-3">
-                        <a href="{{ route('page', $value->id) }}">
+                        <a href="{{ route('page', $value->url) }}">
                             <img src="{{ asset('uploads/' . $value->logo_picture) }}"
                                 class="card-img-top img-fluid resized-img" alt="{{ $value->name }}">
                         </a>
@@ -75,61 +75,173 @@
     <!-- Find More About Our Brands End -->
 
     <!-- We Provide Brands -->
+    <!-- Carousel Wrapper -->
     <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
             <h6 class="text-uppercase">Brand</h6>
             <h2 class="title">We Provide Brands</h2>
         </div>
 
-        <!-- Carousel -->
-        <div id="brandCarousel" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel"
-            data-bs-interval="1000">
-            <div class="carousel-inner">
-                @php
-                    $brands = $brand->take(5);
-                    $shuffledBrands = $brands->shuffle();
-                @endphp
-
-                <!-- Carousel Item pertama (dengan gambar acak) -->
-                <div class="carousel-item active">
-                    <div class="d-flex justify-content-center gap-3">
-                        @foreach ($brands as $brandItem)
-                            <!-- Menampilkan gambar secara urut -->
-                            <img src="{{ asset('uploads/' . $brandItem->logo_picture) }}" class="img-fluid brand-logo"
-                                alt="{{ $brandItem->name }}">
-                        @endforeach
+        <div class="carousel-wrapper" id="carouselWrapper">
+            <div class="carousel-track" id="carouselTrack">
+                @foreach ($brand as $item)
+                    <div class="carousel-item">
+                        <img src="{{ asset('uploads/' . $item->logo_picture) }}" alt="{{ $item->name }}">
                     </div>
-                </div>
-
-                <!-- Carousel Item kedua (dengan gambar acak yang berbeda) -->
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-center gap-3">
-                        @foreach ($shuffledBrands as $brandItem)
-                            <!-- Menampilkan gambar acak -->
-                            <img src="{{ asset('uploads/' . $brandItem->logo_picture) }}" class="img-fluid brand-logo"
-                                alt="{{ $brandItem->name }}">
-                        @endforeach
+                @endforeach
+                @foreach ($brand as $item) {{-- duplicated for loop --}}
+                    <div class="carousel-item">
+                        <img src="{{ asset('uploads/' . $item->logo_picture) }}" alt="{{ $item->name }}">
                     </div>
-                </div>
+                @endforeach
             </div>
-
-            <!-- Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#brandCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
-            </button>
         </div>
-
-        <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#brandCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#brandCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon bg-dark rounded-circle p-2" aria-hidden="true"></span>
-        </button>
     </div>
+
+    <!-- Styles -->
+    <style>
+        .carousel-wrapper {
+            overflow: hidden;
+            width: 100%;
+            max-width: 1160px;
+            margin: auto;
+            position: relative;
+            height: 100px;
+        }
+
+        .carousel-track {
+            display: flex;
+            flex-wrap: nowrap;
+            will-change: transform;
+            min-width: 200%; /* ✅ force to overflow beyond wrapper */
+        }
+
+        .carousel-item {
+            flex: 0 0 auto;
+            width: 160px;
+            height: 80px;
+            margin: 0 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .carousel-item img {
+            max-height: 80px;
+            max-width: 100%;
+            object-fit: cover;
+            user-drag: none;
+            -webkit-user-drag: none;
+            pointer-events: none;
+        }
+    </style>
+
+    <!-- Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('carouselTrack');
+            const wrapper = document.getElementById('carouselWrapper');
+
+            let position = 0;
+            const speed = 0.6;
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
+            let velocity = 0;
+            let animationFrame;
+
+            const itemWidth = 180; // 160 + margin
+            const totalItems = track.children.length;
+            const loopPoint = itemWidth * totalItems / 2;
+
+            // Inside DOMContentLoaded
+            const originalItems = track.innerHTML;
+            track.innerHTML += originalItems; // duplicate once on client
+
+
+            function animate() {
+                if (!isDragging) {
+                    position -= speed;
+                    if (position <= -loopPoint) position = 0;
+                    if (position > 0) position = -loopPoint;
+                }
+
+                track.style.transform = `translateX(${position}px)`;
+                animationFrame = requestAnimationFrame(animate);
+            }
+
+            animate();
+
+            wrapper.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                cancelAnimationFrame(animationFrame);
+                startX = e.pageX - position;
+            });
+
+            wrapper.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                currentX = e.pageX;
+                position = currentX - startX;
+                track.style.transform = `translateX(${position}px)`;
+            });
+
+            wrapper.addEventListener('mouseup', (e) => {
+                isDragging = false;
+                velocity = (e.pageX - currentX) * 0.8;
+                momentum();
+            });
+
+            wrapper.addEventListener('mouseleave', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    momentum();
+                }
+            });
+
+            wrapper.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                cancelAnimationFrame(animationFrame);
+                startX = e.touches[0].pageX - position;
+            });
+
+            wrapper.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                currentX = e.touches[0].pageX;
+                position = currentX - startX;
+                track.style.transform = `translateX(${position}px)`;
+            });
+
+            wrapper.addEventListener('touchend', () => {
+                isDragging = false;
+                momentum();
+            });
+
+            function momentum() {
+                velocity *= 0.95;
+                position += velocity;
+
+                if (position <= -loopPoint) position = 0;
+                if (position > 0) position = -loopPoint;
+
+                track.style.transform = `translateX(${position}px)`;
+
+                if (Math.abs(velocity) > 0.1) {
+                    requestAnimationFrame(momentum);
+                } else {
+                    animate();
+                }
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+
+
 
     <!-- Button Explore -->
     <div class="text-center mt-4">

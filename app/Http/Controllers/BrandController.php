@@ -31,19 +31,27 @@ class BrandController extends Controller
 
     public function page($slug)
     {
+        // $brand = DB::table('brand as A')
+        //     ->join('brand_section as B', 'A.id', '=', 'B.brand_id')
+        //     ->select('A.*', 'B.*')
+        //     ->where('A.id', $slug)
+        //     ->where('A.is_own', 1)
+        //     ->get();
         $brand = DB::table('brand as A')
             ->join('brand_section as B', 'A.id', '=', 'B.brand_id')
             ->select('A.*', 'B.*')
-            ->where('A.id', $slug)
+            ->where('A.url', $slug)
             ->where('A.is_own', 1)
             ->get();
+        
         $brand_2 = DB::table('brand as A')
             ->join('brand_section as B', 'A.id', '=', 'B.brand_id')
             ->select('A.*', 'B.*')
             ->where('A.is_own', 1)
             ->limit(6)
             ->get();
-        $listBrand     = DB::table('brand')->where('id', '!=', $slug)->get();
+        // $listBrand     = DB::table('brand')->where('id', '!=', $slug)->get();
+        $listBrand     = DB::table('brand')->where('url', '!=', $slug)->where('is_own', 1)->get();
         $title         = 'Brand Detail - Perintis Sukses Sejahtera';
         $brandCategory = DB::table('product as a')
             ->distinct()

@@ -196,7 +196,7 @@
                         @foreach ($categoryOnBrand as $value)
                             @if (!empty($value->url))
                                 <a href="{{ route('page', ['slug' => $value->url]) }}">
-                                    <li style="color: white">> {{ $value->title }}</li>
+                                    <li style="color: white"> > {{ $value->name }}</li>
                                 </a>
                             @endif
                         @endforeach

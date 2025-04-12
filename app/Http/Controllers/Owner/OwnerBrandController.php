@@ -26,15 +26,29 @@ class OwnerBrandController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'unique:brand'],
-            'url' => ['required', 'alpha_dash', 'unique:brand,url'],
-            // 'description' => ['required'],
-            'logo_picture' => ['required', 'mimes:jpeg,png,gif'],
-            'logo_picture2' => ['nullable', 'mimes:jpeg,png,gif'],
-            'banner_picture' => ['nullable', 'mimes:jpeg,png,gif'],
-            'bg_logo_picture' => ['nullable', 'mimes:jpeg,png,gif'],
-        ]);
+        if ($request->is_own == 1) {
+            $request->validate([
+                'name' => ['required', 'unique:brand'],
+                'url' => ['required', 'alpha_dash', 'unique:brand,url'],
+                // 'description' => ['required'],
+                'logo_picture' => ['required', 'mimes:jpeg,png,gif'],
+                'logo_picture2' => ['nullable', 'mimes:jpeg,png,gif'],
+                'banner_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+                'bg_logo_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+                'title' => 'required',
+                'description' => 'required',
+            ]);
+        }else{
+            $request->validate([
+                'name' => ['required', 'unique:brand'],
+                'url' => ['required', 'alpha_dash', 'unique:brand,url'],
+                // 'description' => ['required'],
+                'logo_picture' => ['required', 'mimes:jpeg,png,gif'],
+                'logo_picture2' => ['nullable', 'mimes:jpeg,png,gif'],
+                'banner_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+                'bg_logo_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+            ]);
+        }
 
         $brand = new Brand();
 
@@ -68,7 +82,7 @@ class OwnerBrandController extends Controller
         $brand->save();
 
         $brand->section()->create([
-            'title' => '',
+            'title' => $request->title,
             'description' => $request->description,
             'is_show_brand_product' => 1
         ]);
@@ -169,6 +183,7 @@ class OwnerBrandController extends Controller
         $obj->is_own = $request->is_own;
         $obj->update();
         $obj->section()->update([
+            'title' => $request->title,
             'description' => $request->description
         ]);
 

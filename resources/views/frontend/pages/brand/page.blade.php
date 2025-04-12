@@ -153,19 +153,25 @@
     @include('components_frontend.header')
 
     {{-- Find more about our another brand --}}
-    <div class="brand-section text-center mt-5">
-        <p>Find more about our another brand</p>
-        <div class="brand-logos d-flex justify-content-center gap-4">
-            @foreach ($listBrand as $value)
-                <div class="brand-logo-container">
-                    <a href="{{ route('page', $value->id) }}">
-                        <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="{{ $value->name }}"
-                            class="brand-logo">
-                    </a>
-                </div>
-            @endforeach
-        </div>
-    </div><br>
+    @if (!$listBrand->isEmpty())
+        <div class="brand-section text-center mt-5">
+            <p>Find more about our other brands</p>
+            <div class="brand-logos d-flex justify-content-center gap-4">
+                @foreach ($listBrand as $value)
+                    <div class="brand-logo-container">
+                        <a href="{{ route('page', ['slug' => $value->url]) }}">
+                            <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="{{ $value->name }}"
+                                class="brand-logo">
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div><br>
+    @else
+        <div class="brand-section text-center mt-5"></div>
+        <br>
+    @endif
+
     {{-- Find more about our another brand --}}
 
     <div class="container-fluid">
@@ -173,14 +179,14 @@
             @foreach ($brand as $value)
                 <div class="col-12">
                     <center>
-                        <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="Your Image Description"
+                        <img src="{{ asset('uploads/' . $value->banner_picture) }}" alt="Your Image Description"
                             class="img-fluid rectangular-image" style="max-width: 1000px; height: auto;" />
                         <br><br>
                     </center>
                 </div>
                 <div class="col-12">
                     <h1>{{ $value->title }}</h1>
-                    <p class="text-justify">{{ $value->description }}</p>
+                    {!! $value->description !!}
                 </div>
                 <div class="col-12">
                     <h5>Our Catalogue</h5>
