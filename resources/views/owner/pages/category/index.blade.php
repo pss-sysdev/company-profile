@@ -42,7 +42,7 @@
                                                 <th>Category Code</th>
                                                 <th>Sub Category Name</th>
                                                 <th>Picture Url</th>
-                                                <th>Is Discontinue</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -66,7 +66,7 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        {{ $category->is_discontinue }}
+                                                        {{ $category->is_discontinue == 1 ? 'Discontinue' : 'Active'  }}
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('owner.category.edit', $category->id) }}"

@@ -29,10 +29,10 @@ class OwnerBrandController extends Controller
         $request->validate([
             'name' => ['required', 'unique:brand'],
             'url' => ['required', 'alpha_dash', 'unique:brand,url'],
-            'description' => ['required'],
+            // 'description' => ['required'],
             'logo_picture' => ['required', 'mimes:jpeg,png,gif'],
-            'logo_picture2' => ['required', 'mimes:jpeg,png,gif'],
-            'banner_picture' => ['required', 'mimes:jpeg,png,gif'],
+            // 'logo_picture2' => ['required', 'mimes:jpeg,png,gif'],
+            // 'banner_picture' => ['required', 'mimes:jpeg,png,gif'],
         ]);
 
         $brand = new Brand();
@@ -83,7 +83,7 @@ class OwnerBrandController extends Controller
         $request->validate([
             'name' => ['required', 'unique:brand,name,' . $id],
             'url' => ['required', 'alpha_dash', 'unique:brand,url,' . $id],
-            'description' => ['required'],
+            // 'description' => ['required'],
         ]);
         $obj = Brand::find($id);
 

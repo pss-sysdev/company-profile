@@ -101,7 +101,7 @@
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Logo 2</label>
                                                 <div class="photo-container">
-                                                    @if ($brand->logo_picture == null)
+                                                    @if ($brand->logo_picture2 == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">
                                                     @else
                                                         <a href="{{ asset('uploads/' . $brand->logo_picture2) }}"
@@ -123,7 +123,7 @@
                                                 <label for="" class="form-label">Banner
                                                     Picture</label>
                                                 <div class="photo-container">
-                                                    @if ($brand->logo_picture == null)
+                                                    @if ($brand->banner_picture == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">
                                                     @else
                                                         <a href="{{ asset('uploads/' . $brand->banner_picture) }}"
