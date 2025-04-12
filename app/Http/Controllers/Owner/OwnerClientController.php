@@ -65,7 +65,7 @@ class OwnerClientController extends Controller
             }
 
             $final_name = 'picture_url_client_' . time() . '.' . $request->picture_url->extension();
-            $request->photo->move(public_path('uploads'), $final_name);
+            $request->picture_url->move(public_path('uploads'), $final_name);
             $client->client_logo = $final_name;
         }
 
