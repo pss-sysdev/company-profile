@@ -194,10 +194,17 @@
                     <h6 style="color: white">Our Brands</h6>
                     <ul>
                         @foreach ($categoryOnBrand as $value)
+                            @if (!empty($value->url))
+                                <a href="{{ route('page', ['slug' => $value->url]) }}">
+                                    <li style="color: white">> {{ $value->title }}</li>
+                                </a>
+                            @endif
+                        @endforeach
+                        <!-- @foreach ($categoryOnBrand as $value)
                             <a href="{{ route('page', $value->brand_id) }}">
                                 <li style="color: white">> {{ $value->title }}</li>
                             </a>
-                        @endforeach
+                        @endforeach -->
                     </ul>
                 </div>
             </div>
