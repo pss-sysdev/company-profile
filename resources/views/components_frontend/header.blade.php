@@ -27,11 +27,13 @@
         text-align: center;
     }
 
-    @media (max-width: 991px) {
-        .nav-pss-name{
+    @media (max-width: 768px) {
+        .nav-pss-name {
             display: none;
         }
+    }
 
+    @media (max-width: 991px) {
         .navbar-nav {
             margin-top: 10px;
         }
@@ -54,10 +56,10 @@
 <!-- Navbar Start -->
 <nav
     class="navbar navbar-expand-lg bg-white navbar-light sticky-top d-flex justify-content-between align-items-center px-0 px-lg-5 py-lg-0">
-    <a href="{{ route('home') }}" class="navbar-brand me-auto ps-0">
+    <a style="display: flex;" href="{{ route('home') }}" class="navbar-brand me-auto ps-0">
         <img src="{{ asset('uploads/' . $global_setting->logo) }}" alt="{{ env('APP_NAME') }}" style="max-height: 55px">
         <div class="nav-pss-name" style="margin-left: 10px; align-content: center;">
-            <h5 style="margin: 0 0 4 0; color: #FF272B; line-height: normal;">
+            <h5 style="margin: 0 0 4px 0; color: #FF272B; line-height: normal;">
                 PT. Perintis Sukses Sejahtera
             </h5>
             <div style="font-size: small; line-height: normal; color: #0000FF;">

@@ -32,10 +32,11 @@
                                         <a class="nav-link active" id="home-tab4" data-toggle="tab" href="#home4"
                                             role="tab" aria-controls="home" aria-selected="true">About Us</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <!-- <li class="nav-item">
                                         <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4"
                                             role="tab" aria-controls="profile" aria-selected="false">Contact Us</a>
-                                    </li>
+                                    </li> -->
+                                    <!-- Di Hide karena hard code dulu -->
                                 </ul>
                             </div>
                             <div class="col-12 col-sm-12 col-md-8">

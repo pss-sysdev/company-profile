@@ -26,32 +26,55 @@ class OwnerBrandController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'unique:brand'],
-            'url' => ['required', 'alpha_dash', 'unique:brand,url'],
-            'description' => ['required'],
-            'logo_picture' => ['required', 'mimes:jpeg,png,gif'],
-            'logo_picture2' => ['required', 'mimes:jpeg,png,gif'],
-            'banner_picture' => ['required', 'mimes:jpeg,png,gif'],
-        ]);
+        if ($request->is_own == 1) {
+            $request->validate([
+                'name' => ['required', 'unique:brand'],
+                'url' => ['required', 'alpha_dash', 'unique:brand,url'],
+                // 'description' => ['required'],
+                'logo_picture' => ['required', 'mimes:jpeg,png,gif'],
+                'logo_picture2' => ['nullable', 'mimes:jpeg,png,gif'],
+                'banner_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+                'bg_logo_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+                'title' => 'required',
+                'description' => 'required',
+            ]);
+        }else{
+            $request->validate([
+                'name' => ['required', 'unique:brand'],
+                'url' => ['required', 'alpha_dash', 'unique:brand,url'],
+                // 'description' => ['required'],
+                'logo_picture' => ['required', 'mimes:jpeg,png,gif'],
+                'logo_picture2' => ['nullable', 'mimes:jpeg,png,gif'],
+                'banner_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+                'bg_logo_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+            ]);
+        }
 
         $brand = new Brand();
 
-        $final_name = 'logo_picture_' . time() . '.' . $request->logo_picture->extension();
-        $request->logo_picture->move(public_path('uploads'), $final_name);
-        $brand->logo_picture = $final_name;
-
-        $final_name2 = 'logo_picture2_' . time() . '.' . $request->logo_picture2->extension();
-        $request->logo_picture2->move(public_path('uploads'), $final_name2);
-        $brand->logo_picture2 = $final_name2;
-
-        $final_name3 = 'banner_picture_' . time() . '.' . $request->banner_picture->extension();
-        $request->banner_picture->move(public_path('uploads'), $final_name3);
-        $brand->banner_picture = $final_name3;
-
-        $final_name4 = 'bg_logo_picture_' . time() . '.' . $request->bg_logo_picture->extension();
-        $request->bg_logo_picture->move(public_path('uploads'), $final_name4);
-        $brand->bg_logo_picture = $final_name4;
+        if ($request->hasFile('logo_picture')) {
+            $final_name = 'logo_picture_' . time() . '.' . $request->logo_picture->extension();
+            $request->logo_picture->move(public_path('uploads'), $final_name);
+            $brand->logo_picture = $final_name;
+        }
+        
+        if ($request->hasFile('logo_picture2')) {
+            $final_name2 = 'logo_picture2_' . time() . '.' . $request->logo_picture2->extension();
+            $request->logo_picture2->move(public_path('uploads'), $final_name2);
+            $brand->logo_picture2 = $final_name2;
+        }
+        
+        if ($request->hasFile('banner_picture')) {
+            $final_name3 = 'banner_picture_' . time() . '.' . $request->banner_picture->extension();
+            $request->banner_picture->move(public_path('uploads'), $final_name3);
+            $brand->banner_picture = $final_name3;
+        }
+        
+        if ($request->hasFile('bg_logo_picture')) {
+            $final_name4 = 'bg_logo_picture_' . time() . '.' . $request->bg_logo_picture->extension();
+            $request->bg_logo_picture->move(public_path('uploads'), $final_name4);
+            $brand->bg_logo_picture = $final_name4;
+        }        
 
         $brand->name = $request->name;
         $brand->url = strtolower($request->url);
@@ -59,7 +82,7 @@ class OwnerBrandController extends Controller
         $brand->save();
 
         $brand->section()->create([
-            'title' => '',
+            'title' => $request->title,
             'description' => $request->description,
             'is_show_brand_product' => 1
         ]);
@@ -83,7 +106,7 @@ class OwnerBrandController extends Controller
         $request->validate([
             'name' => ['required', 'unique:brand,name,' . $id],
             'url' => ['required', 'alpha_dash', 'unique:brand,url,' . $id],
-            'description' => ['required'],
+            // 'description' => ['required'],
         ]);
         $obj = Brand::find($id);
 
@@ -160,6 +183,7 @@ class OwnerBrandController extends Controller
         $obj->is_own = $request->is_own;
         $obj->update();
         $obj->section()->update([
+            'title' => $request->title,
             'description' => $request->description
         ]);
 

@@ -40,6 +40,7 @@
                                                 <th>Logo</th>
                                                 <th>Banner</th>
                                                 <th>Site Url</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -74,6 +75,9 @@
                                                         </div>
                                                     </td>
                                                     <td>{{ $brand->url }}</td>
+                                                    <td>
+                                                        {{ $brand->is_discontinue == 1 ? 'Discontinue' : 'Active'  }}
+                                                    </td>
                                                     <td>
                                                         <a href="{{ route('owner.brand.edit', $brand->id) }}"
                                                             class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>

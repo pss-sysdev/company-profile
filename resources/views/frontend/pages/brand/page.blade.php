@@ -152,50 +152,41 @@
 <body>
     @include('components_frontend.header')
 
-    <div class="brand-section text-center mt-5">
-        <p>Find more about our another brand</p>
-        <div class="brand-logos d-flex justify-content-center gap-4">
-            @foreach ($listBrand as $value)
-                <div class="brand-logo-container">
-                    <a href="{{ route('page', $value->id) }}">
-                        <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="{{ $value->name }}"
-                            class="brand-logo">
-                    </a>
-                </div>
-            @endforeach
-        </div>
-    </div><br>
+    {{-- Find more about our another brand --}}
+    @if (!$listBrand->isEmpty())
+        <div class="brand-section text-center mt-5">
+            <p>Find more about our other brands</p>
+            <div class="brand-logos d-flex justify-content-center gap-4">
+                @foreach ($listBrand as $value)
+                    <div class="brand-logo-container">
+                        <a href="{{ route('page', ['slug' => $value->url]) }}">
+                            <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="{{ $value->name }}"
+                                class="brand-logo">
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+        </div><br>
+    @else
+        <div class="brand-section text-center mt-5"></div>
+        <br>
+    @endif
+
+    {{-- Find more about our another brand --}}
 
     <div class="container-fluid">
         <div class="row">
             @foreach ($brand as $value)
                 <div class="col-12">
-                    <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="Your Image Description"
-                        class="img-fluid w-100 rectangular-image" /><br><br>
+                    <center>
+                        <img src="{{ asset('uploads/' . $value->banner_picture) }}" alt="Your Image Description"
+                            class="img-fluid rectangular-image" style="max-width: 1000px;max-height: 170px;height: auto;aspect-ratio: 100 / 17;" />
+                        <br><br>
+                    </center>
                 </div>
                 <div class="col-12">
                     <h1>{{ $value->title }}</h1>
-                    <p class="text-justify">{{ $value->description }}</p>
-                </div>
-                <div class="col-12">
-                    <h5>Heading Text</h5>
-                    <p class="text-justify">
-                        - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur in quas doloremque
-                        illum,
-                        ab consectetur expedita amet ea accusantium praesentium perferendis id aspernatur, alias quasi
-                        eum!
-                        Non, soluta! Totam, accusamus.<br>
-                        - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur in quas doloremque
-                        illum,
-                        ab consectetur expedita amet ea accusantium praesentium perferendis id aspernatur, alias quasi
-                        eum!
-                        Non, soluta! Totam, accusamus.<br>
-                        - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur in quas doloremque
-                        illum,
-                        ab consectetur expedita amet ea accusantium praesentium perferendis id aspernatur, alias quasi
-                        eum!
-                        Non, soluta! Totam, accusamus.<br>
-                    </p>
+                    {!! $value->description !!}
                 </div>
                 <div class="col-12">
                     <h5>Our Catalogue</h5>
@@ -206,24 +197,13 @@
                     </p>
                 </div>
                 <div class="col-12">
-                    <h5>NISHIDA's Category </h5>
-                    <p class="text-justify">
-                        - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur in quas doloremque
-                        illum,
-                        ab consectetur expedita amet ea accusantium praesentium perferendis id aspernatur, alias quasi
-                        eum!
-                        Non, soluta! Totam, accusamus.<br>
-                        - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur in quas doloremque
-                        illum,
-                        ab consectetur expedita amet ea accusantium praesentium perferendis id aspernatur, alias quasi
-                        eum!
-                        Non, soluta! Totam, accusamus.<br>
-                        - Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequuntur in quas doloremque
-                        illum,
-                        ab consectetur expedita amet ea accusantium praesentium perferendis id aspernatur, alias quasi
-                        eum!
-                        Non, soluta! Totam, accusamus.<br>
-                    </p>
+                    <h5>{{ $value->title }}'s Category </h5>
+                    @foreach ($brandCategoryDistinct as $distinct)
+                        <p class="text-justify">
+                            {{-- - <a href="{{ route('page', $distinct->product_id) }}">{{ $distinct->category_name }}</a> --}}
+                            - <a href="{{ route('product') }}">{{ $distinct->category_name }}</a>
+                        </p>
+                    @endforeach
                 </div>
             @endforeach
         </div>
@@ -231,15 +211,20 @@
 
     <div class="product-section">
         <div class="product-grid">
-            <!-- Product Card 1 -->
-            <div class="product-card">
-                <img src="{{ asset('uploads/banner_picture1744205914.png') }}" alt="Product Image"
-                    class="product-image">
-                <div class="product-info">
-                    <h5>TIG 150-400A</h5>
-                    <a href="{{ route('contact_us') }}#service-wrapper" class="request-btn">Request Quotation</a>
+            @foreach ($brandCategoryDistinct as $value)
+                <div class="product-card">
+                    <img src="{{ asset('uploads/' . $value->banner_picture) }}" alt="Product Image"
+                        class="product-image">
+                    <div class="product-info">
+                        <h5>{{ $value->name }}</h5>
+                        <a href="#" class="request-btn swal-request"
+                            data-link="{{ route('contact_us') }}?product_id={{ $value->product_id }}#service-wrapper"
+                            data-name="{{ $value->name }}">
+                            Request Quotation
+                        </a>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
 
         <!-- Explore Link -->
@@ -263,6 +248,8 @@
     <script src="{{ asset('apex-1.0.0/lib/owlcarousel/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('library/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('library/slick/slick.min.js') }}"></script>
+    <!-- Tambahkan ini di bagian <head> atau sebelum penutup </body> -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Template Javascript -->
     <script src="{{ asset('apex-1.0.0/js/main.js') }}"></script>
@@ -270,3 +257,31 @@
 </body>
 
 </html>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const requestButtons = document.querySelectorAll('.swal-request');
+
+        requestButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const link = this.dataset.link;
+                const productName = this.dataset.name;
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: `You want request this item?`,
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes',
+                    cancelButtonText: 'Cancel'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = link;
+                    }
+                });
+            });
+        });
+    });
+</script>

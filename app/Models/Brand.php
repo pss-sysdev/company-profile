@@ -18,4 +18,11 @@ class Brand extends Model
     {
         return $this->hasOne(BrandSection::class, 'brand_id', 'id');
     }
+
+    // relational
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'id_brand', 'id');
+    }
+
 }

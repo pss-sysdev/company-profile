@@ -51,8 +51,9 @@
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Slug *</label>
-                                        <input type="text" class="form-control" name="name" id="name"
+                                        <input type="text" class="form-control" name="slug" id="slug" 
                                             value="{{ $product->slug }}">
+
                                     </div>
 
                                     <div class="row">

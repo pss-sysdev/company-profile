@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class OwnerProductController extends Controller
 {
@@ -14,7 +15,9 @@ class OwnerProductController extends Controller
     {
 
 
-        $products = Product::all();
+        // $products = Product::all();
+        $products = Product::with(['category', 'brand'])->get();
+        // dd($products);
         return view('owner.pages.product.index', [
             'type_menu' => 'company',
             'products' => $products
@@ -83,8 +86,15 @@ class OwnerProductController extends Controller
         $product = Product::find($id);
 
         $request->validate([
-            'name' => ['required', 'unique:product'],
-            'slug' => ['required', 'alpha_dash', 'unique:product'],
+            'name' => [
+                'required',
+                Rule::unique('product')->ignore($product->id)
+            ],
+            'slug' => [
+                'required',
+                'alpha_dash',
+                Rule::unique('product')->ignore($product->id)
+            ],
             'id_category' => ['required'],
             'id_brand' => ['required'],
             'description' => ['required'],
@@ -92,15 +102,20 @@ class OwnerProductController extends Controller
             'sku_code' => ['required'],
         ]);
 
-        if ($request->main_picture_url != null) {
-            if ($product->picture_url) {
-                unlink(public_path('uploads/' . $product->picture_url));
+        if ($request->hasFile('main_picture_url')) {
+            if ($product->main_picture_url) {
+                $file = public_path('uploads/' . $product->main_picture_url);
+            
+                if (file_exists($file)) {
+                    unlink($file);
+                }
             }
-
-            $final_name = 'main_picture_url_' . time() . '.' . $request->picture_url->extension();
-            $request->photo->move(public_path('uploads'), $final_name);
+        
+            $final_name = 'main_picture_url_' . time() . '.' . $request->main_picture_url->extension();
+            $request->main_picture_url->move(public_path('uploads'), $final_name);
             $product->main_picture_url = $final_name;
         }
+        
 
         $product->name = $request->name;
         $product->slug = $request->slug;

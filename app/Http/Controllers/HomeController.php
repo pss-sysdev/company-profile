@@ -15,13 +15,12 @@ class HomeController extends Controller
         $title           = 'Home - Perintis Sukses Sejahtera';
         $setting         = Setting::find(1);
         $productCategory = Category::where('is_discontinue', 0)->limit(10)->get();
-        $categoryOnBrand = DB::table('brand')->where('is_own', 1)->get();
         $product         = DB::table('category as A')
             ->join('product as B', 'A.id', '=', 'B.id_category')
             ->select([
                 'A.name as name_category',
                 'A.picture_url as picture_url_category',
-                'A.sub_category_name',
+                'A.sub_cat_id',
                 'A.is_discontinue as is_discontinue_category',
                 'B.name as name_product',
                 'B.slug as slug_product',
@@ -43,7 +42,7 @@ class HomeController extends Controller
             'productCategory' => $productCategory,
             'product'         => $product,
             'brand'           => $brand,
-            'categoryOnBrand' => $categoryOnBrand,
+            'categoryOnBrand' => categoryOnBrand(),
         ]);
     }
 }

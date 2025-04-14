@@ -170,8 +170,8 @@
         .request-quotation .btn {
             background-color: black;
             color: white;
-            padding: 12px 30px;
-            font-size: 18px;
+            padding: 10px 30px;
+            font-size: 14px;
             border-radius: 5px;
             display: inline-flex;
             align-items: center;
@@ -186,7 +186,7 @@
             }
 
             .request-quotation .btn {
-                font-size: 16px;
+                font-size: 14px;
                 margin-bottom: 8%;
                 padding: 10px 25px;
             }

@@ -55,7 +55,8 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Slug url *</label>
+                                                <label for="" class="form-label">Slug Url *</label>
+                                                <small style="color: #ff0000;">This to fill your brand url. E.g. pss.id/brand/Isotech (Isotech is Slug Url)</small>
                                                 <input type="text" class="form-control" name="url" id="url"
                                                     value="{{ $brand->url }}">
                                             </div>
@@ -63,18 +64,24 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Owner ?</label>
+                                        <label for="" class="form-label">Brand Ownership *</label>
                                         <select class="form-control selectric" id="is_own" name="is_own">
-                                            <option value="1" @selected($brand->is_own == 1)>YES</option>
-                                            <option value="0" @selected($brand->is_own == 0)>NO</option>
+                                            <option value="1" @selected($brand->is_own == 1)>Owned</option>
+                                            <option value="0" @selected($brand->is_own == 0)>Distributor</option>
                                         </select>
                                     </div>
+                                    <div id="owned-fields" style="display: none;">
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Title *</label>
+                                            <input type="text" class="form-control" name="title" id="title"
+                                                value="{{ $brand->section->title ?? '' }}">
+                                        </div>
 
-                                    <div class="mb-3">
-                                        <label for="" class="form-label">Description *</label>
-                                        <textarea class="summernote-simple" id="description" name="description">{{ $brand->section->description ?? '' }}</textarea>
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Description *</label>
+                                            <textarea class="summernote" id="description" name="description">{{ $brand->section->description ?? '' }}</textarea>
+                                        </div>
                                     </div>
-
 
                                     <div class="row mb-4">
 
@@ -101,7 +108,7 @@
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Logo 2</label>
                                                 <div class="photo-container">
-                                                    @if ($brand->logo_picture == null)
+                                                    @if ($brand->logo_picture2 == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">
                                                     @else
                                                         <a href="{{ asset('uploads/' . $brand->logo_picture2) }}"
@@ -123,7 +130,7 @@
                                                 <label for="" class="form-label">Banner
                                                     Picture</label>
                                                 <div class="photo-container">
-                                                    @if ($brand->logo_picture == null)
+                                                    @if ($brand->banner_picture == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">
                                                     @else
                                                         <a href="{{ asset('uploads/' . $brand->banner_picture) }}"
@@ -190,5 +197,28 @@
                 },
             });
         })
+
+        $(document).ready(function () {
+            function toggleOwnedFields() {
+                const ownership = $('#is_own').val();
+                const ownedFields = $('#owned-fields');
+
+                if (ownership === '1') {
+                    ownedFields.show();
+                } else {
+                    ownedFields.hide();
+                }
+            }
+
+            // Init Selectric
+            $('#is_own').selectric({
+                onChange: function () {
+                    toggleOwnedFields();
+                }
+            });
+
+            // Initial check
+            toggleOwnedFields();
+        });
     </script>
 @endpush
