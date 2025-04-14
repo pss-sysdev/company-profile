@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateBrandSectionsTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
         Schema::create('brand_section', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('brand_id'); // Foreign key to 'brand' table
+            $table->id(); // id for this table (auto-increment)
+            $table->integer('brand_id'); // matches int(11) in `brand.id`
 
             $table->string('title');
             $table->text('description')->nullable();
@@ -18,14 +18,18 @@ class CreateBrandSectionsTable extends Migration
 
             $table->timestamps();
 
-            // Foreign key constraint
+            // Foreign key constraint (NO UNSIGNED)
             $table->foreign('brand_id')
-                ->references('id')->on('brand')
+                ->references('id')
+                ->on('brand')
                 ->onDelete('cascade');
         });
     }
 
-    public function down()
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
     {
         Schema::dropIfExists('brand_section');
     }
