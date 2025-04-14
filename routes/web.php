@@ -293,12 +293,21 @@ Route::get('/credits', function () {
 
 // In routes/web.php
 
+//before
+// Route::get('/run-migrations-php-142515', function (Request $request) {
+//     if ($request->get('key') !== 'P@ssw0rd!') {
+//         abort(403, 'Unauthorized');
+//     }
+
+//     Artisan::call('migrate', ['--force' => true]);
+//     return 'Migrations have been run!';
+// });
+//after
 Route::get('/run-migrations-php-142515', function (Request $request) {
-    if ($request->get('key') !== 'P@ssw0rd!') {
+    if ($request->input('key') !== 'P@ssw0rd!') {
         abort(403, 'Unauthorized');
     }
 
     Artisan::call('migrate', ['--force' => true]);
     return 'Migrations have been run!';
 });
-
