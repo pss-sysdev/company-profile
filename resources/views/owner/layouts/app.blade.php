@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('library/magnific-popup/magnific-popup.css') }}">
 
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/jquery.dataTables.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('library/jquery-ui-dist/jquery-ui.min.css') }}"> --}}
+
     @stack('style')
 
     <!-- Template CSS -->
@@ -59,6 +61,10 @@
 
     <!-- General JS Scripts -->
     <script src="{{ asset('library/jquery/dist/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('library/jquery-ui-dist/jquery-ui.min.js') }}"></script> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.repeater/1.2.1/jquery.repeater.min.js"
+        integrity="sha512-foIijUdV0fR0Zew7vmw98E6mOWd9gkGWQBWaoA1EOFAx+pY+N8FmmtIYAVj64R98KeD2wzZh1aHK0JSpKmRH8w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="{{ asset('library/popper.js/dist/umd/popper.js') }}"></script>
     <script src="{{ asset('library/tooltip.js/dist/umd/tooltip.js') }}"></script>
     <script src="{{ asset('library/bootstrap/dist/js/bootstrap.min.js') }}"></script>

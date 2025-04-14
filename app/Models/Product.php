@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+
 class Product extends Model
 {
     protected $table = 'product';
@@ -22,5 +23,10 @@ class Product extends Model
     public function brand()
     {
         return $this->belongsTo(Brand::class, 'id_brand', 'id');
+    }
+
+    public function productSpec()
+    {
+        return $this->hasMany(productSpec::class, 'product_id', 'id');
     }
 }
