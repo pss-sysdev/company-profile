@@ -11,6 +11,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use Faker\Provider\ar_EG\Company;
 use App\Http\Controllers\Owner\OwnerAuthController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+
 
 /*
 |--------------------------------------------------------------------------
