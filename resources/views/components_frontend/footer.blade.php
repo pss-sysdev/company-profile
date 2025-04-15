@@ -174,16 +174,11 @@
                 <div class="footer-title">
                     <h6 style="color: white">Our Business Line</h6>
                     <ul>
-                        <li>> Air Compressor</li>
-                        <li>> Airless Painting</li>
-                        <li>> Diesel Generator</li>
-                        <li>> Drilling & Tapping Machine</li>
-                        <li>> Gas Cutting Machine</li>
-                        <li>> Hydraulic Punch Machine</li>
-                        <li>> Lifting Equipment</li>
-                        <li>> Safety Equipment</li>
-                        <li>> Tools</li>
-                        <li>> Welding Equipment</li>
+                        @foreach ($categorys as $value)
+                            <a href="{{ route('product', ['category[]' => $value->id]) }}">
+                                <li style="color: white"> > {{ $value->name }}</li>
+                            </a>
+                        @endforeach
                     </ul>
                 </div>
             </div>

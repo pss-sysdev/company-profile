@@ -19,6 +19,7 @@ class BrandController extends Controller
         $brandCategory = $brand->unique(function ($item) {
             return $item->category_name . $item->category_id;
         });
+        $category = category();
 
         return view('frontend.pages.brand.index', [
             'type_menu'       => 'brand',
@@ -26,6 +27,7 @@ class BrandController extends Controller
             'brand'           => $brand,
             'brandCategory'   => $brandCategory,
             'categoryOnBrand' => categoryOnBrand(),
+            'categorys'       => $category,
         ]);
     }
 
@@ -43,7 +45,7 @@ class BrandController extends Controller
             ->where('A.url', $slug)
             ->where('A.is_own', 1)
             ->get();
-        
+
         $brand_2 = DB::table('brand as A')
             ->join('brand_section as B', 'A.id', '=', 'B.brand_id')
             ->select('A.*', 'B.*')
@@ -71,6 +73,7 @@ class BrandController extends Controller
             'brand'                 => $brand,
             'brand_2'               => $brand_2,
             'categoryOnBrand'       => categoryOnBrand(),
+            'categorys'             => category(),
             'listBrand'             => $listBrand,
             'brandCategoryDistinct' => $brandCategoryDistinct,
         ]);

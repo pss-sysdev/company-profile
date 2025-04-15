@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\DB;
+use App\Models\Category;
 
 if (!function_exists('categoryOnBrand')) {
     function categoryOnBrand()
@@ -11,5 +12,14 @@ if (!function_exists('categoryOnBrand')) {
             ->where('A.is_own', 1)
             ->get();
         return $categoryOnBrand;
+    }
+}
+
+if (!function_exists('category')) {
+    function category()
+    {
+        // $category = Category::all();
+        $category = DB::table('Category')->get();
+        return $category;
     }
 }

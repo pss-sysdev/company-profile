@@ -34,6 +34,7 @@ class HomeController extends Controller
             ->where('B.is_top_product', 1)
             ->get();
         $brand = Brand::get();
+        // dd(category());
 
         return view('frontend.pages.home.index', [
             'type_menu'       => 'home',
@@ -43,6 +44,7 @@ class HomeController extends Controller
             'product'         => $product,
             'brand'           => $brand,
             'categoryOnBrand' => categoryOnBrand(),
+            'categorys'       => category(),
         ]);
     }
 }

@@ -18,6 +18,7 @@ class AboutUsController extends Controller
             'title'           => $title,
             'data'            => $data,
             'categoryOnBrand' => categoryOnBrand(),
+            'categorys'       => category(),
         ]);
     }
 }
