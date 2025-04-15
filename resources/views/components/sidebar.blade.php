@@ -1,10 +1,20 @@
+@php
+
+    use App\Models\Setting;
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Http\Request;
+
+
+    $setting    = Setting::find(1);
+@endphp
+
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="#">Stisla</a>
+            <a href="#"><img src="{{ asset('uploads/' . $setting->logo) }}" alt="PT PSS" style="max-height: 55px"></a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="#">St</a>
+            <a href="#"><img src="{{ asset('uploads/' . $setting->logo) }}" alt="PT PSS" style="max-height: 41px"></a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -17,10 +27,10 @@
             {{-- <li class="nav-item dropdown {{ $type_menu === 'dashboard' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
-                    <li class='{{ Request::is('dashboard-general-dashboard') ? 'active' : '' }}'>
+                    <li class='{{ request()->is('dashboard-general-dashboard') ? 'active' : '' }}'>
                         <a class="nav-link" href="{{ url('dashboard-general-dashboard') }}">General Dashboard</a>
                     </li>
-                    <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
+                    <li class="{{ request()->is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('dashboard-ecommerce-dashboard') }}">Ecommerce Dashboard</a>
                     </li>
                 </ul>
@@ -30,82 +40,82 @@
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                     <span>Layout</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('layout-default-layout') ? 'active' : '' }}">
+                    <li class="{{ request()->is('layout-default-layout') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('layout-default-layout') }}">Default Layout</a>
                     </li>
-                    <li class="{{ Request::is('transparent-sidebar') ? 'active' : '' }}">
+                    <li class="{{ request()->is('transparent-sidebar') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('transparent-sidebar') }}">Transparent Sidebar</a>
                     </li>
-                    <li class="{{ Request::is('layout-top-navigation') ? 'active' : '' }}">
+                    <li class="{{ request()->is('layout-top-navigation') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('layout-top-navigation') }}">Top Navigation</a>
                     </li>
                 </ul>
             </li>
-            <li class="{{ Request::is('blank-page') ? 'active' : '' }}">
+            <li class="{{ request()->is('blank-page') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('blank-page') }}"><i class="far fa-square"></i> <span>Blank
                         Page</span></a>
             </li>
             <li class="nav-item dropdown {{ $type_menu === 'bootstrap' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th"></i> <span>Bootstrap</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('bootstrap-alert') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-alert') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-alert') }}">Alert</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-badge') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-badge') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-badge') }}">Badge</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-breadcrumb') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-breadcrumb') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-breadcrumb') }}">Breadcrumb</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-buttons') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-buttons') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-buttons') }}">Buttons</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-card') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-card') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-card') }}">Card</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-carousel') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-carousel') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-carousel') }}">Carousel</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-collapse') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-collapse') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-collapse') }}">Collapse</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-dropdown') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-dropdown') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-dropdown') }}">Dropdown</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-form') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-form') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-form') }}">Form</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-list-group') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-list-group') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-list-group') }}">List Group</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-media-object') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-media-object') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-media-object') }}">Media Object</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-modal') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-modal') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-modal') }}">Modal</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-nav') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-nav') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-nav') }}">Nav</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-navbar') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-navbar') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-navbar') }}">Navbar</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-pagination') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-pagination') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-pagination') }}">Pagination</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-popover') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-popover') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-popover') }}">Popover</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-progress') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-progress') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-progress') }}">Progress</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-table') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-table') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-table') }}">Table</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-tooltip') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-tooltip') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-tooltip') }}">Tooltip</a>
                     </li>
-                    <li class="{{ Request::is('bootstrap-typography') ? 'active' : '' }}">
+                    <li class="{{ request()->is('bootstrap-typography') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('bootstrap-typography') }}">Typography</a>
                     </li>
                 </ul>
@@ -115,44 +125,44 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-th-large"></i>
                     <span>Components</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('components-article') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-article') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('components-article') }}">Article</a>
                     </li>
-                    <li class="{{ Request::is('components-avatar') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-avatar') ? 'active' : '' }}">
                         <a class="nav-link beep beep-sidebar" href="{{ url('components-avatar') }}">Avatar</a>
                     </li>
-                    <li class="{{ Request::is('components-chat-box') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-chat-box') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('components-chat-box') }}">Chat Box</a>
                     </li>
-                    <li class="{{ Request::is('components-empty-state') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-empty-state') ? 'active' : '' }}">
                         <a class="nav-link beep beep-sidebar" href="{{ url('components-empty-state') }}">Empty
                             State</a>
                     </li>
-                    <li class="{{ Request::is('components-gallery') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-gallery') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('components-gallery') }}">Gallery</a>
                     </li>
-                    <li class="{{ Request::is('components-hero') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-hero') ? 'active' : '' }}">
                         <a class="nav-link beep beep-sidebar" href="{{ url('components-hero') }}">Hero</a>
                     </li>
-                    <li class="{{ Request::is('components-multiple-upload') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-multiple-upload') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('components-multiple-upload') }}">Multiple Upload</a>
                     </li>
-                    <li class="{{ Request::is('components-pricing') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-pricing') ? 'active' : '' }}">
                         <a class="nav-link beep beep-sidebar" href="{{ url('components-pricing') }}">Pricing</a>
                     </li>
-                    <li class="{{ Request::is('components-statistic') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-statistic') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('components-statistic') }}">Statistic</a>
                     </li>
-                    <li class="{{ Request::is('components-tab') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-tab') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('components-tab') }}">Tab</a>
                     </li>
-                    <li class="{{ Request::is('components-table') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-table') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('components-table') }}">Table</a>
                     </li>
-                    <li class="{{ Request::is('components-user') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-user') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('components-user') }}">User</a>
                     </li>
-                    <li class="{{ Request::is('components-wizard') ? 'active' : '' }}">
+                    <li class="{{ request()->is('components-wizard') ? 'active' : '' }}">
                         <a class="nav-link beep beep-sidebar" href="{{ url('components-wizard') }}">Wizard</a>
                     </li>
                 </ul>
@@ -161,13 +171,13 @@
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-file-alt"></i>
                     <span>Forms</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('forms-advanced-form') ? 'active' : '' }}">
+                    <li class="{{ request()->is('forms-advanced-form') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('forms-advanced-form') }}">Advanced Form</a>
                     </li>
-                    <li class="{{ Request::is('forms-editor') ? 'active' : '' }}">
+                    <li class="{{ request()->is('forms-editor') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('forms-editor') }}">Editor</a>
                     </li>
-                    <li class="{{ Request::is('forms-validation') ? 'active' : '' }}">
+                    <li class="{{ request()->is('forms-validation') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('forms-validation') }}">Validation</a>
                     </li>
                 </ul>
@@ -190,40 +200,40 @@
             <li class="nav-item dropdown {{ $type_menu === 'modules' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-plug"></i> <span>Modules</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('modules-calendar') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-calendar') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-calendar') }}">Calendar</a>
                     </li>
-                    <li class="{{ Request::is('modules-chartjs') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-chartjs') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-chartjs') }}">ChartJS</a>
                     </li>
-                    <li class="{{ Request::is('modules-datatables') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-datatables') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-datatables') }}">DataTables</a>
                     </li>
-                    <li class="{{ Request::is('modules-flag') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-flag') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-flag') }}">Flag</a>
                     </li>
-                    <li class="{{ Request::is('modules-font-awesome') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-font-awesome') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-font-awesome') }}">Font Awesome</a>
                     </li>
-                    <li class="{{ Request::is('modules-ion-icons') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-ion-icons') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-ion-icons') }}">Ion Icons</a>
                     </li>
-                    <li class="{{ Request::is('modules-owl-carousel') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-owl-carousel') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-owl-carousel') }}">Owl Carousel</a>
                     </li>
-                    <li class="{{ Request::is('modules-sparkline') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-sparkline') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-sparkline') }}">Sparkline</a>
                     </li>
-                    <li class="{{ Request::is('modules-sweet-alert') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-sweet-alert') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-sweet-alert') }}">Sweet Alert</a>
                     </li>
-                    <li class="{{ Request::is('modules-toastr') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-toastr') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-toastr') }}">Toastr</a>
                     </li>
-                    <li class="{{ Request::is('modules-vector-map') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-vector-map') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-vector-map') }}">Vector Map</a>
                     </li>
-                    <li class="{{ Request::is('modules-weather-icon') ? 'active' : '' }}">
+                    <li class="{{ request()->is('modules-weather-icon') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('modules-weather-icon') }}">Weather Icon</a>
                     </li>
                 </ul>
@@ -232,19 +242,19 @@
             <li class="nav-item dropdown {{ $type_menu === 'auth' ? 'active' : '' }}">
                 <a href="#" class="nav-link has-dropdown"><i class="far fa-user"></i> <span>Auth</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('auth-forgot-password') ? 'active' : '' }}">
+                    <li class="{{ request()->is('auth-forgot-password') ? 'active' : '' }}">
                         <a href="{{ url('auth-forgot-password') }}">Forgot Password</a>
                     </li>
-                    <li class="{{ Request::is('auth-login') ? 'active' : '' }}">
+                    <li class="{{ request()->is('auth-login') ? 'active' : '' }}">
                         <a href="{{ url('auth-login') }}">Login</a>
                     </li>
-                    <li class="{{ Request::is('auth-login2') ? 'active' : '' }}">
+                    <li class="{{ request()->is('auth-login2') ? 'active' : '' }}">
                         <a class="beep beep-sidebar" href="{{ url('auth-login2') }}">Login 2</a>
                     </li>
-                    <li class="{{ Request::is('auth-register') ? 'active' : '' }}">
+                    <li class="{{ request()->is('auth-register') ? 'active' : '' }}">
                         <a href="{{ url('auth-register') }}">Register</a>
                     </li>
-                    <li class="{{ Request::is('auth-reset-password') ? 'active' : '' }}">
+                    <li class="{{ request()->is('auth-reset-password') ? 'active' : '' }}">
                         <a href="{{ url('auth-reset-password') }}">Reset Password</a>
                     </li>
                 </ul>
@@ -253,16 +263,16 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-exclamation"></i>
                     <span>Errors</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('error-403') ? 'active' : '' }}">
+                    <li class="{{ request()->is('error-403') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('error-403') }}">403</a>
                     </li>
-                    <li class="{{ Request::is('error-404') ? 'active' : '' }}">
+                    <li class="{{ request()->is('error-404') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('error-404') }}">404</a>
                     </li>
-                    <li class="{{ Request::is('error-500') ? 'active' : '' }}">
+                    <li class="{{ request()->is('error-500') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('error-500') }}">500</a>
                     </li>
-                    <li class="{{ Request::is('error-503') ? 'active' : '' }}">
+                    <li class="{{ request()->is('error-503') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('error-503') }}">503</a>
                     </li>
                 </ul>
@@ -271,25 +281,25 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-bicycle"></i>
                     <span>Features</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('features-activities') ? 'active' : '' }}">
+                    <li class="{{ request()->is('features-activities') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('features-activities') }}">Activities</a>
                     </li>
-                    <li class="{{ Request::is('features-post-create') ? 'active' : '' }}">
+                    <li class="{{ request()->is('features-post-create') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('features-post-create') }}">Post Create</a>
                     </li>
-                    <li class="{{ Request::is('features-post') ? 'active' : '' }}">
+                    <li class="{{ request()->is('features-post') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('features-post') }}">Posts</a>
                     </li>
-                    <li class="{{ Request::is('features-profile') ? 'active' : '' }}">
+                    <li class="{{ request()->is('features-profile') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('features-profile') }}">Profile</a>
                     </li>
-                    <li class="{{ Request::is('features-settings') ? 'active' : '' }}">
+                    <li class="{{ request()->is('features-settings') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('features-settings') }}">Settings</a>
                     </li>
-                    <li class="{{ Request::is('features-setting-detail') ? 'active' : '' }}">
+                    <li class="{{ request()->is('features-setting-detail') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('features-setting-detail') }}">Setting Detail</a>
                     </li>
-                    <li class="{{ Request::is('features-tickets') ? 'active' : '' }}">
+                    <li class="{{ request()->is('features-tickets') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('features-tickets') }}">Tickets</a>
                     </li>
                 </ul>
@@ -298,18 +308,18 @@
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-ellipsis-h"></i>
                     <span>Utilities</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{ Request::is('utilities-contact') ? 'active' : '' }}">
+                    <li class="{{ request()->is('utilities-contact') ? 'active' : '' }}">
                         <a href="{{ url('utilities-contact') }}">Contact</a>
                     </li>
-                    <li class="{{ Request::is('utilities-invoice') ? 'active' : '' }}">
+                    <li class="{{ request()->is('utilities-invoice') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ url('utilities-invoice') }}">Invoice</a>
                     </li>
-                    <li class="{{ Request::is('utilities-subscribe') ? 'active' : '' }}">
+                    <li class="{{ request()->is('utilities-subscribe') ? 'active' : '' }}">
                         <a href="{{ url('utilities-subscribe') }}">Subscribe</a>
                     </li>
                 </ul>
             </li>
-            <li class="{{ Request::is('credits') ? 'active' : '' }}">
+            <li class="{{ request()->is('credits') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ url('credits') }}"><i class="fas fa-pencil-ruler">
                     </i> <span>Credits</span>
                 </a>
