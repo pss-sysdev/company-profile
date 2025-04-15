@@ -1,3 +1,13 @@
+@php
+
+    use App\Models\Setting;
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Http\Request;
+
+
+    $setting    = Setting::find(1);
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,9 +37,11 @@
             <div class="d-flex align-items-stretch flex-wrap">
                 <div class="col-lg-4 col-md-6 col-12 order-lg-1 min-vh-100 order-2 bg-white">
                     <div class="m-3 p-4">
-                        <img src="{{ asset('img/stisla-fill.svg') }}" alt="logo" width="80"
-                            class="shadow-light rounded-circle mb-5 mt-2">
-                        <h4 class="text-dark font-weight-normal">Welcome to <span class="font-weight-bold">Stisla</span>
+                        <div style="justify-self: center;">
+                            <img src="{{ asset('uploads/' . $setting->logo) }}" alt="PT PSS" width="80"
+                            class="mb-5 mt-2">
+                        </div>
+                        <h4 class="text-dark font-weight-normal"><span class="font-weight-bold">PT PSS</span> Content Administrator
                         </h4>
                         <p class="text-muted">Before you get started, you must login or register if you don't already
                             have an account.</p>
@@ -80,12 +92,12 @@
                     <div class="absolute-bottom-left index-2">
                         <div class="text-light p-5 pb-2">
                             <div class="mb-5 pb-3">
-                                <h1 class="display-4 font-weight-bold mb-2">Good Morning</h1>
+                                <h1 class="display-4 font-weight-bold mb-2">Hello!</h1>
                                 <h5 class="font-weight-normal text-muted-transparent">Bali, Indonesia</h5>
                             </div>
-                            Photo by <a class="text-light bb" target="_blank"
+                            <!--Photo by <a class="text-light bb" target="_blank"
                                 href="https://unsplash.com/photos/a8lTjWJJgLA">Justin Kauffman</a> on <a
-                                class="text-light bb" target="_blank" href="https://unsplash.com">Unsplash</a>
+                                class="text-light bb" target="_blank" href="https://unsplash.com">Unsplash</a>-->
                         </div>
                     </div>
                 </div>
