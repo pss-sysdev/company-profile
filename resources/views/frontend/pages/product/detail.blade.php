@@ -33,10 +33,22 @@
                                 empowerment cross unit solutions.
                             </p>
                             <div class="btn-group mb-3" role="group" aria-label="Basic example">
-                                <button type="button" class="btn btn-secondary" style="background-color: #ee4d2d;border: 1px solid #ca3315;border-radius: 5px;color: white;">Shopee</button>
-                                <button type="button" class="btn btn-secondary" style="background-color: #3faa52;border: 1px solid #4f975b;border-radius: 5px;color: white;">Tokopedia</button>
-                                <button type="button" class="btn btn-secondary" style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">WhatsApp</button>
-                                <button type="button" class="btn btn-secondary" style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">Email</button>
+                                @foreach ($product->externalLink as $item)
+                                    @if ($item->link_name == 'shopee')
+                                        <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
+                                            style="background-color: #ee4d2d;border: 1px solid #ca3315;border-radius: 5px;color: white;">Shopee</a>
+                                    @elseif ($item->link_name == 'tokopedia')
+                                        <button href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
+                                            style="background-color: #3faa52;border: 1px solid #4f975b;border-radius: 5px;color: white;">Tokopedia</button>
+                                    @elseif ($item->link_name == 'whatsapp')
+                                        <button href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
+                                            style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">WhatsApp</button>
+                                    @else
+                                        <button href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
+                                            style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">Email</button>
+                                    @endif
+                                @endforeach
+
                             </div>
                         </div>
                     </div>
@@ -59,26 +71,12 @@
                     <div class="tab-pane fade" id="add_info" role="tabpanel">
                         <table class="woocommerce-table">
                             <tbody>
-                                <tr>
-                                    <th>Brand</th>
-                                    <td>Jakuna</td>
-                                </tr>
-                                <tr>
-                                    <th>Color</th>
-                                    <td>Yellow</td>
-                                </tr>
-                                <tr>
-                                    <th>Weight</th>
-                                    <td>400 gm</td>
-                                </tr>
-                                <tr>
-                                    <th>Battery</th>
-                                    <td>Lithium</td>
-                                </tr>
-                                <tr>
-                                    <th>Material</th>
-                                    <td>Wood</td>
-                                </tr>
+                                @foreach ($product->spec as $item)
+                                    <tr>
+                                        <th>{{ $item->title }}</th>
+                                        <td>{{ $item->data }}</td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

@@ -38,7 +38,7 @@ class ProductController extends Controller
     //         $query->whereHas('category', function ($q) use ($categoryFilter) {
     //             $q->whereIn('id', $categoryFilter);
     //         });
-    //     }        
+    //     }
 
     //     $filteredProductIds = (clone $query)->pluck('id');
 
@@ -143,6 +143,7 @@ class ProductController extends Controller
         $title          = 'Product Detail - Perintis Sukses Sejahtera';
         $product        = Product::where('slug', $slug)->first();
         $productsRelate = Product::where('is_top_product', 1)->limit(5)->get();
+        $categorys  = category();
 
         return view('frontend.pages.product.detail', [
             'type_menu'       => 'product',
@@ -150,6 +151,7 @@ class ProductController extends Controller
             'product'         => $product,
             'productsRelate'  => $productsRelate,
             'categoryOnBrand' => categoryOnBrand(),
+            'categorys'       => $categorys,
         ]);
     }
 }
