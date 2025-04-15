@@ -60,6 +60,16 @@
 
                                                     <div class="tab-pane fade show active" id="details" role="tabpanel"
                                                         aria-labelledby="details-tab">
+                                                        <div>
+                                                            @if ($errors->any())
+                                                                <ul>
+                                                                    @foreach ($errors->all() as $error)
+                                                                        <li class="text-danger">{{ $error }}</li>
+                                                                    @endforeach
+                                                                </ul>
+
+                                                            @endif
+                                                        </div>
 
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Name *</label>
@@ -199,6 +209,30 @@
 
                                                     <div class="tab-pane fade" id="external-link" role="tabpanel"
                                                         aria-labelledby="external-link-tab">
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Shope</label>
+                                                            <input type="text" class="form-control"
+                                                                name="input_shopee" id="input_shopee" value="">
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Tokopedia</label>
+                                                            <input type="text" class="form-control"
+                                                                name="input_tokopedia" id="input_tokopedia"
+                                                                value="">
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">WhatsApp</label>
+                                                            <input type="text" class="form-control"
+                                                                name="input_whatsapp" id="input_whatsapp" value="">
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <label for="" class="form-label">Email</label>
+                                                            <input type="text" class="form-control" name="input_email"
+                                                                id="input_email" value="">
+                                                        </div>
                                                     </div>
                                                 </div>
 
@@ -207,7 +241,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

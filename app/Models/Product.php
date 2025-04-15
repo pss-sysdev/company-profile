@@ -25,8 +25,13 @@ class Product extends Model
         return $this->belongsTo(Brand::class, 'id_brand', 'id');
     }
 
-    public function productSpec()
+    public function spec()
     {
-        return $this->hasMany(productSpec::class, 'product_id', 'id');
+        return $this->hasMany(ProductSpec::class, 'product_id', 'id');
+    }
+
+    public function externalLink()
+    {
+        return $this->hasMany(ProductExternalLink::class, 'product_id', 'id');
     }
 }
