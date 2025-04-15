@@ -70,6 +70,18 @@
             max-width: 85%;
             margin: 0 auto;
         }
+
+        .own-brand-card{
+            aspect-ratio: 285 / 118;
+            width: 100%;
+            max-width: 285px;
+        }
+
+        .own-brand-img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
     </style>
 </head>
 
@@ -87,9 +99,9 @@
             <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
                 @foreach ($categoryOnBrand as $value)
                     <div class="col">
-                        <div class="card border-0 text-center shadow-sm p-3">
+                        <div class="card border-0 text-center shadow-sm own-brand-card">
                             <a href="{{ route('page', $value->url) }}">
-                                <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid"
+                                <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid own-brand-img"
                                     alt="Product 1">
                             </a>
                         </div>

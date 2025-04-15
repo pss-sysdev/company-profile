@@ -19,6 +19,7 @@ class ContactUsController extends Controller
             'title'           => $title,
             'brand'           => $brand,
             'categoryOnBrand' => categoryOnBrand(),
+            'categorys'        => category(),
         ]);
     }
 

@@ -11,6 +11,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use Faker\Provider\ar_EG\Company;
 use App\Http\Controllers\Owner\OwnerAuthController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -288,4 +291,26 @@ Route::get('/utilities-subscribe', function () {
 // credits
 Route::get('/credits', function () {
     return view('pages.credits', ['type_menu' => '']);
+});
+
+
+// In routes/web.php
+
+//before
+// Route::get('/run-migrations-php-142515', function (Request $request) {
+//     if ($request->get('key') !== 'P@ssw0rd!') {
+//         abort(403, 'Unauthorized');
+//     }
+
+//     Artisan::call('migrate', ['--force' => true]);
+//     return 'Migrations have been run!';
+// });
+//after
+Route::get('/run-migrations-php-142515', function (Request $request) {
+    if ($request->input('key') !== 'P@ssw0rd!') {
+        abort(403, 'Unauthorized');
+    }
+
+    Artisan::call('migrate', ['--force' => true]);
+    return 'Migrations have been run!';
 });
