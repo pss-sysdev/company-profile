@@ -188,31 +188,34 @@
                                                     <div class="tab-pane fade" id="addtional-information" role="tabpanel"
                                                         aria-labelledby="addtional-information-tab">
                                                         <div id="repeaterContainer">
+
                                                             @foreach ($product->spec as $item)
-                                                                <div class="row mb-2">
-                                                                    <div class="col-md-6">
+                                                                <div class="repeater-item">
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-6">
 
-                                                                        <label for=""
-                                                                            class="form-label">Title</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="addtional_information__title[]"
-                                                                            value="{{ $item->title }}">
+                                                                            <label for=""
+                                                                                class="form-label">Title</label>
+                                                                            <input type="text" class="form-control"
+                                                                                name="addtional_information__title[]"
+                                                                                value="{{ $item->title }}">
 
-                                                                    </div>
+                                                                        </div>
 
-                                                                    <div class="col-md-5">
+                                                                        <div class="col-md-5">
 
-                                                                        <label for=""
-                                                                            class="form-label">Data</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="addtional_information__data[]"
-                                                                            value="{{ $item->data }}">
+                                                                            <label for=""
+                                                                                class="form-label">Data</label>
+                                                                            <input type="text" class="form-control"
+                                                                                name="addtional_information__data[]"
+                                                                                value="{{ $item->data }}">
 
-                                                                    </div>
+                                                                        </div>
 
-                                                                    <div class="col-md-1 d-flex align-items-end">
-                                                                        <button type="button"
-                                                                            class="btn btn-danger remove-item">Remove</button>
+                                                                        <div class="col-md-1 d-flex align-items-end">
+                                                                            <button type="button"
+                                                                                class="btn btn-danger remove-item">Remove</button>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             @endforeach
@@ -298,9 +301,11 @@
                 $('#repeaterContainer').append(newItem);
             });
 
-            $(document).on('click', '.remove-item', function() {
-                $(this).closest('.repeater-item').remove();
-            });
+
         })
+
+        $(document).on('click', '.remove-item', function() {
+            $(this).closest('.repeater-item').remove();
+        });
     </script>
 @endpush
