@@ -32,7 +32,7 @@
 
                                     @endif
                                 </div>
-                                <form action="{{ route('owner.client.index.store') }}" method="post"
+                                <form action="{{ route('owner.client.store') }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
 

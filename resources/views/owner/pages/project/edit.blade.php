@@ -1,6 +1,6 @@
 @extends('owner.layouts.app')
 
-@section('title', 'Create New Clients')
+@section('title', 'Update Project')
 
 @section('main')
     <div class="main-content">
@@ -9,11 +9,11 @@
                 <div class="section-header-back">
                     <a href="{{ URL::previous() }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                 </div>
-                <h1>Create New Clients</h1>
+                <h1>Update Project</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Categories</a></div>
-                    <div class="breadcrumb-item">Create New Clients</div>
+                    <div class="breadcrumb-item"><a href="#">Projects</a></div>
+                    <div class="breadcrumb-item">Update Project</div>
                 </div>
             </div>
 
@@ -32,24 +32,23 @@
 
                                     @endif
                                 </div>
-                                <form action="{{ route('owner.client.update', ['id' => $client->id]) }}" method="post"
+                                <form action="{{ route('owner.project.update', ['id' => $project->id]) }}" method="post"
                                     enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Name *</label>
-                                        <input type="text" class="form-control" name="name" id="name"
-                                            value="{{ $client->client_name }}">
+                                        <label for="" class="form-label">Title *</label>
+                                        <input type="text" class="form-control" name="title" id="title"
+                                            value="{{ $project->title }}">
                                     </div>
 
                                     <div class="mb-3">
                                         <div class="photo-container" id="preview_old">
-                                            @if ($client->client_logo == null)
+                                            @if ($project->picture == null)
                                                 <img src="{{ asset('uploads/no_photo.png') }}" alt="">
                                             @else
-                                                <a href="{{ asset('uploads/' . $client->client_logo) }}"
-                                                    class="magnific"><img
-                                                        src="{{ asset('uploads/' . $client->client_logo) }}"
+                                                <a href="{{ asset('uploads/' . $project->picture) }}" class="magnific"><img
+                                                        src="{{ asset('uploads/' . $project->picture) }}"
                                                         alt=""></a>
                                             @endif
                                         </div>
@@ -57,11 +56,16 @@
                                             <img id="imagePreview" class="preview" src="" alt="Image Preview"
                                                 style="display:none;">
                                         </div>
-                                        <label for="" class="form-label">Logo *</label>
-                                        <div><input type="file" name="picture_url" id="picture_url"></div>
+                                        <label for="" class="form-label">Picture *</label>
+                                        <div><input type="file" name="picture" id="picture"></div>
                                     </div>
 
-                                    <button class="btn btn-primary" type="submit">Create Client</button>
+                                    <div class="mb-3">
+                                        <label for="" class="form-label">Description</label>
+                                        <textarea class="form-control" data-height="150" name="description" id="description">{{ $project->description }}</textarea>
+                                    </div>
+
+                                    <button class="btn btn-primary" type="submit">Update Project</button>
                                 </form>
                             </div>
                         </div>
@@ -75,7 +79,7 @@
 @push('scripts')
     <script>
         $(function() {
-            $('#picture_url').on('change', function(e) {
+            $('#picture').on('change', function(e) {
                 previewImage(e)
             });
         })
