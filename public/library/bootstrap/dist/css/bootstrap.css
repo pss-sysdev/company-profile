@@ -4263,6 +4263,7 @@ input[type="button"].btn-block {
 }
 
 .nav-link:hover, .nav-link:focus {
+  color: var(--title-color) !important;
   text-decoration: none;
 }
 
@@ -10129,7 +10130,7 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #007bff !important;
+  color: #B80F0F !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {

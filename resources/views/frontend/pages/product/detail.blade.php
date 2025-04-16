@@ -34,20 +34,19 @@
                             </p>
                             <div class="btn-group mb-3" role="group" aria-label="Basic example">
                                 @foreach ($product->externalLink as $item)
-                                    @if ($item->link_name == 'shopee')
+                                    @if ($item->link_name == 'shopee' && !empty($item->link))
                                         <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
                                             style="background-color: #ee4d2d;border: 1px solid #ca3315;border-radius: 5px;color: white;">Shopee</a>
-                                    @elseif ($item->link_name == 'tokopedia')
-                                        <button href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #3faa52;border: 1px solid #4f975b;border-radius: 5px;color: white;">Tokopedia</button>
-                                    @elseif ($item->link_name == 'whatsapp')
-                                        <button href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">WhatsApp</button>
-                                    @else
-                                        <button href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">Email</button>
+                                    @elseif ($item->link_name == 'tokopedia' && !empty($item->link))
+                                        <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
+                                            style="background-color: #3faa52;border: 1px solid #4f975b;border-radius: 5px;color: white;">Tokopedia</a>
+                                    @elseif ($item->link_name == 'whatsapp' && !empty($item->link))
+                                        <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
+                                            style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">WhatsApp</a>
                                     @endif
                                 @endforeach
+                                <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
+                                    style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">Email</a>
 
                             </div>
                         </div>

@@ -6,6 +6,8 @@
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('library/codemirror/lib/codemirror.css') }}">
     <link rel="stylesheet" href="{{ asset('library/codemirror/theme/duotone-dark.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
+
 @endpush
 
 @section('main')
@@ -57,40 +59,40 @@
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Overview</label>
-                                                <textarea class="form-control" data-height="150" name="overview">{{ $company->overview }}</textarea>
+                                                <textarea class="summernote-simple" name="overview">{{ $company->overview }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">History</label>
-                                                <textarea class="form-control" data-height="150" name="history">{{ $company->history }}</textarea>
+                                                <textarea class="summernote-simple" data-height="150" name="history">{{ $company->history }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Growth</label>
-                                                <textarea class="form-control" data-height="150" name="growth">{{ $company->growth }}</textarea>
+                                                <textarea class="summernote-simple" data-height="150" name="growth">{{ $company->growth }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">industries</label>
-                                                <textarea class="form-control" data-height="150" name="industries">{{ $company->industries }}</textarea>
+                                                <textarea class="summernote-simple" data-height="150" name="industries">{{ $company->industries }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Commitment</label>
-                                                <textarea class="form-control" data-height="150" name="commitment">{{ $company->commitment }}</textarea>
+                                                <textarea class="summernote-simple" data-height="150" name="commitment">{{ $company->commitment }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Vision</label>
-                                                <textarea class="form-control" data-height="150" name="vision">{{ $company->vision }}</textarea>
+                                                <textarea class="summernote-simple" data-height="150" name="vision">{{ $company->vision }}</textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Mission</label>
-                                                <textarea class="form-control" data-height="150" name="mission">{{ $company->mission }}</textarea>
+                                                <textarea class="summernote-simple" data-height="150" name="mission">{{ $company->mission }}</textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Motto</label>
-                                                <textarea class="form-control" data-height="150" name="motto">{{ $company->motto }}</textarea>
+                                                <textarea class="summernote-simple" data-height="150" name="motto">{{ $company->motto }}</textarea>
                                             </div>
                                             <button class="btn btn-primary" type="submit">Update</button>
                                         </form>
@@ -116,6 +118,10 @@
 
 @push('scripts')
     <!-- JS Libraies -->
+    <script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
+    <script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+    <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
+    <script src="{{ asset('library/upload-preview/upload-preview.js') }}"></script>
     <script src="{{ asset('library/codemirror/lib/codemirror.js') }}"></script>
     <script src="{{ asset('library/codemirror/mode/javascript/javascript.js') }}"></script>
 

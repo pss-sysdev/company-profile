@@ -76,6 +76,9 @@
             position: relative;
             transition: background-color 0.3s ease;
             border-right: 1px solid rgba(255, 255, 255, 0.3);
+            background-clip: unset;
+            border-image-width: 0;
+            border-right-width: 0px;
         }
 
         .accordion-nav button:last-child {
@@ -120,11 +123,18 @@
             .accordion-nav button {
                 width: 100%;
                 border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             }
 
             .accordion-nav button:last-child {
                 border-bottom: none;
+            }
+
+            .accordion-nav button.active::after {
+                width: 10px;
+                height: 100%;
+                bottom: 0px;
+                left: -2px;
             }
         }
 
@@ -233,6 +243,14 @@
             flex-wrap: wrap;
         }
 
+        .content-pss {
+            color: #222222;
+            border-radius: 0px;
+            border: none;
+            margin: auto;
+            padding: 26px 68px 17px 68px;
+        }
+
         @media (max-width: 768px) {
             .card-container {
                 grid-template-columns: repeat(1, 1fr);
@@ -240,6 +258,13 @@
 
             .card {
                 max-width: 100%;
+            }
+
+            .content-pss {
+                border-radius: 0px;
+                border: none;
+                margin: auto;
+                padding: 24px 15px 15px 15px;
             }
         }
 
@@ -329,32 +354,22 @@
         <button onclick="showContent('industries', this)">Industries</button>
         <button onclick="showContent('commitment', this)">Commitment</button>
     </div>
-    <div id="overview" class="content active">
+    <div id="overview" class="content content-pss active">
         @foreach ($data as $value)
-            <p>
-                <center class="center-pss">{{ $value->overview }}</center>
-            </p>
+            <center class="center-pss">{!! $value->overview !!}</center>
         @endforeach
     </div>
-    <div id="history" class="content">
-        <p>
-            <center class="center-pss">{{ $value->history }}</center>
-        </p>
+    <div id="history" class="content content-pss">
+        <center class="center-pss">{!! $value->history !!}</center>
     </div>
-    <div id="growth" class="content">
-        <p>
-            <center class="center-pss">{{ $value->growth }}</center>
-        </p>
+    <div id="growth" class="content content-pss">
+        <center class="center-pss">{!! $value->growth !!}</center>
     </div>
-    <div id="industries" class="content">
-        <p>
-            <center class="center-pss">{{ $value->industries }}</center>
-        </p>
+    <div id="industries" class="content content-pss">
+        <center class="center-pss">{!! $value->industries !!}</center>
     </div>
-    <div id="commitment" class="content">
-        <p>
-            <center class="center-pss">{{ $value->commitment }}<center>
-        </p>
+    <div id="commitment" class="content content-pss">
+        <center class="center-pss">{!! $value->commitment !!}<center>
     </div><br>
     {{-- Accordion End --}}
 
@@ -376,20 +391,19 @@
             <h3>
                 Vision
             </h3>
-            <p>"To be the leading and most trusted distributor company, recognized as the partner of choice by
-                prioritizing customer satisfaction."</p>
+            <p>{!! $value->vision !!}</p>
         </div>
         <div class="card">
             <h3>
                 Mission
             </h3>
-            <p>{{ $value->mission }}</p>
+            <p>{!! $value->mission !!}</p>
         </div>
         <div class="card">
             <h3>
                 Motto
             </h3>
-            <p>{{ $value->motto }}</p>
+            <p>{!! $value->motto !!}</p>
         </div>
     </div><br>
     {{-- Visi, Misi Motto End --}}

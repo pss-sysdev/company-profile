@@ -94,21 +94,27 @@
                                 <div class="row gy-25">
                                     @foreach ($products as $product)
                                         <div class="col-xl-3 col-lg-4 col-sm-4">
-                                            <div class="as-product">
-                                                <div class="product-img">
-                                                    <img src="{{ asset('uploads/' . $product->main_picture_url) }}"
-                                                        alt="product image" />
+                                                <div class="as-product" onclick="window.location='{{ route('product.detail', ['slug' => $product->slug]) }}'" style="cursor: pointer;">
+                                                    <div class="product-img">
+                                                        <img src="{{ asset('uploads/' . $product->main_picture_url) }}"
+                                                            alt="product image" />
+                                                    </div>
+                                                    <div class="product-content">
+                                                        <p class="meta"></p>
+                                                        <h4 class="product-title h5">
+                                                            <a href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
+                                                        </h4>
+                                                        <span class="price">
+                                                            @if (empty($product->price) || $product->price == 0)
+                                                                Call
+                                                            @else
+                                                                Rp. {{ number_format($product->price, 0, ',', '.') }}
+                                                            @endif
+                                                        </span>
+                                                        <a class="as-btn style3"
+                                                            href="{{ route('product.detail', ['slug' => $product->slug]) }}">Detail</a>
+                                                    </div>
                                                 </div>
-                                                <div class="product-content">
-                                                    <p class="meta"></p>
-                                                    <h4 class="product-title h5">
-                                                        <a href="shop-details.html">{{ $product->name }}</a>
-                                                    </h4>
-                                                    <span class="price">Rp. {{ number_format($product->price, 2) }}</span>
-                                                    <a class="as-btn style3"
-                                                        href="{{ route('product.detail', ['slug' => $product->slug]) }}">Detail</a>
-                                                </div>
-                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -165,7 +171,13 @@
                                         <h4 class="recent-post-title h5">
                                             <a href="shop-details.html">{{ $product->name }}</a>
                                         </h4>
-                                        <span class="price">Rp. {{ number_format($product->price, 2) }}</span>
+                                        <span class="price">
+                                            @if (empty($product->price) || $product->price == 0)
+                                                Call
+                                            @else
+                                                Rp. {{ number_format($product->price, 0, ',', '.') }}
+                                            @endif
+                                        </span>
                                     </div>
                                 </li>
                             @endforeach
