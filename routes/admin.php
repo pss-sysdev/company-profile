@@ -9,6 +9,8 @@ use App\Http\Controllers\Owner\OwnerCategoryController;
 use App\Http\Controllers\Owner\OwnerClientController;
 use App\Http\Controllers\Owner\OwnerOtherPageController;
 use App\Http\Controllers\Owner\OwnerProductController;
+use App\Http\Controllers\Owner\OwnerProjectController;
+use App\Http\Controllers\Owner\OwnerQuotationController;
 use App\Http\Controllers\Owner\OwnerSettingController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,11 +54,25 @@ Route::prefix('owner')->group(function () {
         Route::post('/setting/general', [OwnerSettingController::class, 'update'])->name('owner.setting-general.update');
 
         Route::get('/client', [OwnerClientController::class, 'index'])->name('owner.client.index');
-        Route::get('/client/create', [OwnerClientController::class, 'create'])->name('owner.client.index.create');
-        Route::post('/client/store', [OwnerClientController::class, 'store'])->name('owner.client.index.store');
-        Route::get('/client/edit/{id}', [OwnerClientController::class, 'edit'])->name('owner.client.index.edit');
-        Route::post('/client/update/{id}', [OwnerClientController::class, 'update'])->name('owner.client.index.update');
-        Route::get('/client/destroy/{id}', [OwnerClientController::class, 'destroy'])->name('owner.client.index.destroy');
+        Route::get('/client/create', [OwnerClientController::class, 'create'])->name('owner.client.create');
+        Route::post('/client/store', [OwnerClientController::class, 'store'])->name('owner.client.store');
+        Route::get('/client/edit/{id}', [OwnerClientController::class, 'edit'])->name('owner.client.edit');
+        Route::post('/client/update/{id}', [OwnerClientController::class, 'update'])->name('owner.client.update');
+        Route::get('/client/destroy/{id}', [OwnerClientController::class, 'destroy'])->name('owner.client.destroy');
+
+        Route::get('/project', [OwnerProjectController::class, 'index'])->name('owner.project.index');
+        Route::get('/project/create', [OwnerProjectController::class, 'create'])->name('owner.project.create');
+        Route::post('/project/store', [OwnerProjectController::class, 'store'])->name('owner.project.store');
+        Route::get('/project/edit/{id}', [OwnerProjectController::class, 'edit'])->name('owner.project.edit');
+        Route::post('/project/update/{id}', [OwnerProjectController::class, 'update'])->name('owner.project.update');
+        Route::get('/project/destroy/{id}', [OwnerProjectController::class, 'destroy'])->name('owner.project.destroy');
+
+        Route::get('/quotation', [OwnerQuotationController::class, 'index'])->name('owner.quotation.index');
+        Route::get('/quotation/create', [OwnerQuotationController::class, 'create'])->name('owner.quotation.create');
+        Route::post('/quotation/store', [OwnerQuotationController::class, 'store'])->name('owner.quotation.store');
+        Route::get('/quotation/edit/{id}', [OwnerQuotationController::class, 'edit'])->name('owner.quotation.edit');
+        Route::post('/quotation/update/{id}', [OwnerQuotationController::class, 'update'])->name('owner.quotation.update');
+        Route::get('/quotation/destroy/{id}', [OwnerQuotationController::class, 'destroy'])->name('owner.quotation.destroy');
     });
 });
 

@@ -1,20 +1,21 @@
-@php
+a@php
 
     use App\Models\Setting;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Http\Request;
 
-
-    $setting    = Setting::find(1);
+    $setting = Setting::find(1);
 @endphp
 
 <div class="main-sidebar sidebar-style-2">
     <aside id="sidebar-wrapper">
         <div class="sidebar-brand">
-            <a href="{{ route('owner.dashboard') }}"><img src="{{ asset('uploads/' . $setting->logo) }}" alt="PT PSS" style="max-height: 55px"></a>
+            <a href="{{ route('owner.dashboard') }}"><img src="{{ asset('uploads/' . $setting->logo) }}" alt="PT PSS"
+                    style="max-height: 55px"></a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="{{ route('owner.dashboard') }}"><img src="{{ asset('uploads/' . $setting->logo) }}" alt="PT PSS" style="max-height: 41px"></a>
+            <a href="{{ route('owner.dashboard') }}"><img src="{{ asset('uploads/' . $setting->logo) }}" alt="PT PSS"
+                    style="max-height: 41px"></a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>
@@ -54,6 +55,16 @@
             <li class="{{ request()->is('owner/client/*') || request()->is('owner/client') ? 'active' : '' }}">
                 <a class="nav-link" href="{{ route('owner.client.index') }}">
                     <i class="fas fa-folder"></i> <span>Client</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('owner/project/*') || request()->is('owner/project') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('owner.project.index') }}">
+                    <i class="fas fa-folder"></i> <span>Project</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('owner/quotation/*') || request()->is('owner/quotation') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('owner.quotation.index') }}">
+                    <i class="fas fa-folder"></i> <span>Quotation</span>
                 </a>
             </li>
         </ul>
