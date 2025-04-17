@@ -19,7 +19,7 @@ if (!function_exists('category')) {
     function category()
     {
         // $category = Category::all();
-        $category = DB::table('Category')->get();
+        $category = DB::table('category')->get();
         return $category;
     }
 }
