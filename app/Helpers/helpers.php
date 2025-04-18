@@ -19,7 +19,13 @@ if (!function_exists('category')) {
     function category()
     {
         // $category = Category::all();
-        $category = DB::table('category')->get();
+        // $category = DB::table('category')->get();
+
+        $category = DB::table('category')->where('is_discontinue', 0)
+            ->where(function ($query) {
+                $query->where('parent_cat_id', 0)
+                    ->orWhereNull('parent_cat_id');
+            })->get();
         return $category;
     }
 }

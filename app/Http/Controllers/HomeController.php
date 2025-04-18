@@ -14,7 +14,14 @@ class HomeController extends Controller
     {
         $title           = 'Home - Perintis Sukses Sejahtera';
         $setting         = Setting::find(1);
-        $productCategory = Category::where('is_discontinue', 0)->limit(10)->get();
+        $productCategory = Category::where('is_discontinue', 0)
+            ->where(function ($query) {
+                $query->where('parent_cat_id', 0)
+                    ->orWhereNull('parent_cat_id');
+            })
+            ->limit(10)
+            ->get();
+
         $product         = DB::table('category as A')
             ->join('product as B', 'A.id', '=', 'B.id_category')
             ->select([
