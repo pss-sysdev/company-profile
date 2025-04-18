@@ -43,11 +43,12 @@
                                     @elseif ($item->link_name == 'whatsapp' && !empty($item->link))
                                         <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
                                             style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">WhatsApp</a>
-                                    @endif
+                                    @else
+                                        <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
+                                            style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">Email</a>
+                                    @endif 
                                 @endforeach
-                                <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                    style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">Email</a>
-
+                               
                             </div>
                         </div>
                     </div>
