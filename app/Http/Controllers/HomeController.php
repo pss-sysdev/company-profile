@@ -20,7 +20,7 @@ class HomeController extends Controller
             ->select([
                 'A.name as name_category',
                 'A.picture_url as picture_url_category',
-                'A.sub_cat_id',
+                'A.parent_cat_id',
                 'A.is_discontinue as is_discontinue_category',
                 'B.name as name_product',
                 'B.slug as slug_product',

@@ -48,18 +48,18 @@
                                             id="category_code" value="{{ old('category_code') }}">
                                     </div>
                                     <!-- <div class="mb-3">
-                                        <label for="" class="form-label">Sub Category Name *</label>
+                                        <label for="" class="form-label">Parent Category Name *</label>
                                         <input type="text" class="form-control" name="sub_category_name"
                                             id="sub_category_name" value="{{ old('sub_category_name') }}">
                                     </div> -->
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Sub Category</label>
-                                        <select class="form-control selectric" id="id_sub_cat" name="id_sub_cat">
-                                            <option value="">-- Select Sub Category --</option>
+                                        <label for="" class="form-label">Parent Category</label>
+                                        <select class="form-control selectric" id="id_parent_cat" name="id_parent_cat">
+                                            <option value="">-- Select Parent Category --</option>
 
-                                            @foreach ($sub_cat as $sc)
+                                            @foreach ($parent_cat as $pc)
                                                 <option value="{{ $sc->id }}">
-                                                    {{ $sc->name }}
+                                                    {{ $pc->name }}
                                                 </option>
                                             @endforeach
                                         </select>

@@ -82,7 +82,7 @@ class ProductController extends Controller
         $brandFilter    = $request->input('brand', []);
         $categoryFilter = $request->input('category', []);
 
-        $productsBase = Product::with(['category', 'brand']);
+        $productsBase = Product::with(['category.parent', 'brand']);
 
         if ($filter) {
             $productsBase->where(function ($q) use ($filter) {
@@ -92,11 +92,15 @@ class ProductController extends Controller
         }
 
         if (!empty($categoryFilter)) {
-            $productsBase->whereHas('category', function ($q) use ($categoryFilter) {
-                $q->whereIn('id', $categoryFilter);
+            $productsBase->where(function ($query) use ($categoryFilter) {
+                $query->whereHas('category', function ($q) use ($categoryFilter) {
+                    $q->whereIn('id', $categoryFilter);
+                })->orWhereHas('category.parent', function ($q) use ($categoryFilter) {
+                    $q->whereIn('id', $categoryFilter);
+                });
             });
         }
-
+        
         $allFilteredProducts = $productsBase->get();
 
         $brands = $allFilteredProducts->pluck('brand')->filter()->unique('id')->values();

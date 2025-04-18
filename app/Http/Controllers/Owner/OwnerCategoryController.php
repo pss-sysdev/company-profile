@@ -12,7 +12,9 @@ class OwnerCategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        // $categories = Category::all();
+        $categories = Category::with('parent')->get();
+        // dd($categories);
         return view('owner.pages.category.index', [
             'type_menu'  => 'company',
             'categories' => $categories
@@ -21,10 +23,10 @@ class OwnerCategoryController extends Controller
 
     public function create()
     {
-        $sub_cat = Category::all();
+        $parent_cat = Category::all();
         return view('owner.pages.category.create', [
             'type_menu' => 'company',
-            'sub_cat' => $sub_cat
+            'parent_cat' => $parent_cat
         ]);
     }
 
@@ -40,7 +42,7 @@ class OwnerCategoryController extends Controller
         $category                    = new Category();
         $category->name              = $request->name;
         $category->category_code     = $request->category_code;
-        $category->sub_cat_id        = $request->id_sub_cat;
+        $category->parent_cat_id        = $request->id_parent_cat;
 
         $final_name = 'picture_url_' . time() . '.' . $request->picture_url->extension();
         $request->picture_url->move(public_path('uploads'), $final_name);
@@ -55,11 +57,11 @@ class OwnerCategoryController extends Controller
     public function edit($id)
     {
         $category = Category::find($id);
-        $sub_cat = Category::all();
+        $parent_cat = Category::where('id', '!=', $category->id)->get();
         return view('owner.pages.category.edit', [
             'type_menu' => 'company',
             'category' => $category,
-            'sub_cat' => $sub_cat
+            'parent_cat' => $parent_cat
         ]);
     }
 
@@ -90,7 +92,7 @@ class OwnerCategoryController extends Controller
 
         $category->name              = $request->name;
         $category->category_code     = $request->category_code;
-        $category->sub_cat_id        = $request->id_sub_cat;
+        $category->parent_cat_id        = $request->id_parent_cat;
         $category->update();
 
         return redirect()->route('owner.category')->with('success', __('Data is updated successfully'));

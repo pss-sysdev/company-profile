@@ -13,6 +13,17 @@ class Category extends Model
     //     'password',
     // ];
 
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_cat_id');
+    }
+
+    public function children()
+    {
+        return $this->hasMany(Category::class, 'parent_cat_id')->where('parent_id', '!=', 0);
+    }
+
+
     public function products()
     {
         return $this->hasMany(Product::class, 'id_category', 'id');

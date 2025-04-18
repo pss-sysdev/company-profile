@@ -40,7 +40,7 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Category Code</th>
-                                                <th>Sub Category Name</th>
+                                                <th>Parent Category Name</th>
                                                 <th>Picture Url</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
@@ -51,7 +51,7 @@
                                                 <tr>
                                                     <td>{{ $category->name }}</td>
                                                     <td>{{ $category->category_code }}</td>
-                                                    <td>{{ $category->sub_category_name }}</td>
+                                                    <td>{{ $category->parent ? $category->parent->name : '-' }}</td>
                                                     <td>
                                                         <div class="photo-container-small">
                                                             @if ($category->picture_url == null)
