@@ -12,13 +12,25 @@ class BrandController extends Controller
         $title = 'Brand - Perintis Sukses Sejahtera';
         $brand = DB::table('product as a')
             ->distinct()
-            ->select('b.id', 'b.name', 'b.banner_picture', 'c.name as category_name', 'c.id as category_id')
+            ->select('b.id', 'b.name', 'b.banner_picture', 'c.name as category_name', 'c.id as category_id', 'c.parent_cat_id', 'd.name as parent_cat_name')
             ->join('brand as b', 'a.id_brand', '=', 'b.id')
             ->join('category as c', 'a.id_category', '=', 'c.id')
+            ->Leftjoin('category as d', 'c.parent_cat_id', '=', 'd.id')
             ->get();
-        $brandCategory = $brand->unique(function ($item) {
-            return $item->category_name . $item->category_id;
+        // $brandCategory = $brand->unique(function ($item) {
+        //     $item->group_name  = $item->parent_cat_name??$item->category_name; 
+        //     $item->group_id    = $item->parent_cat_id??$item->category_id;
+        //     return $item;
+        // });
+
+        $brand->transform(function ($item) {
+            $item->group_id = $item->parent_cat_id ?? $item->category_id;
+            $item->group_name = $item->parent_cat_name ?? $item->category_name;
+            return $item;
         });
+
+        $brandCategory = $brand->unique('group_id');
+
         $category = category();
 
         return view('frontend.pages.brand.index', [
