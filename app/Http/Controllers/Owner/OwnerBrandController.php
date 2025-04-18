@@ -175,8 +175,8 @@ class OwnerBrandController extends Controller
         $obj->is_own = $request->is_own;
         $obj->update();
         $obj->section()->update([
-            'title' => $request->title,
-            'description' => $request->description
+            'title' => $request->title??'',
+            'description' => $request->description??''
         ]);
 
         return redirect()->route('owner.brand')->with('success', 'Data is updated successfully');
