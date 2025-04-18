@@ -57,7 +57,7 @@
                                         data-id="{{ $brand->id }}"
                                         style="margin-bottom: 8px;">
                                         <div class="wrapper-item shadow-sm filter-brand {{ in_array($brand->id, request()->input('brand', [])) ? 'active' : '' }}">
-                                            <img src="{{ asset('uploads/' . $brand->logo_picture) }}" alt="{{ $brand->name }}">
+                                            <img src="{{ asset('uploads/' . $brand->logo_picture) }}" alt="{{ $brand->name }}" class="brand-logo" >
                                         </div>
                                     </a>
                                 @endforeach
@@ -70,7 +70,7 @@
                                 }
 
                                 .wrapper-item img {
-                                    object-fit: cover;
+                                    object-fit: contain;
                                     border-radius: 8px;
                                     max-height: 83px;
                                     width: 100%;
@@ -189,8 +189,54 @@
             </div>
         </div>
     </div>
-
+    
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const images = document.querySelectorAll('.brand-logo');
+
+            images.forEach(img => {
+                const wrapper = img.closest('.wrapper-item');
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                img.crossOrigin = "anonymous"; // just in case
+                img.onload = function () {
+                    const width = img.naturalWidth;
+                    const height = img.naturalHeight;
+                    canvas.width = width;
+                    canvas.height = height;
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const step = 5;
+                    const edgePixels = [];
+
+                    for (let x = 0; x < width; x += step) {
+                        edgePixels.push(...ctx.getImageData(x, 0, 1, 1).data); // top
+                        edgePixels.push(...ctx.getImageData(x, height - 1, 1, 1).data); // bottom
+                    }
+                    for (let y = 0; y < height; y += step) {
+                        edgePixels.push(...ctx.getImageData(0, y, 1, 1).data); // left
+                        edgePixels.push(...ctx.getImageData(width - 1, y, 1, 1).data); // right
+                    }
+
+                    let r = 0, g = 0, b = 0, count = 0;
+                    for (let i = 0; i < edgePixels.length; i += 4) {
+                        r += edgePixels[i];
+                        g += edgePixels[i + 1];
+                        b += edgePixels[i + 2];
+                        count++;
+                    }
+
+                    r = Math.round(r / count);
+                    g = Math.round(g / count);
+                    b = Math.round(b / count);
+
+                    const avgColor = `rgb(${r}, ${g}, ${b})`;
+                    wrapper.style.backgroundColor = avgColor;
+                };
+            });
+        });
+
         document.querySelectorAll('.filter-btn').forEach(button => {
             button.addEventListener('click', () => {
                 const type = button.getAttribute('data-type'); // 'brand' or 'category'

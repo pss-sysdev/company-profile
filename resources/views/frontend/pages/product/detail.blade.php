@@ -24,7 +24,13 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="product-about">
-                            <p class="price">Rp. {{ number_format($product->price, 2) }}</p>
+                            <p class="price">
+                                @if (empty($product->price) || $product->price == 0)
+                                    Call
+                                @else
+                                    Rp. {{ number_format($product->price, 0, ',', '.') }}
+                                @endif
+                            </p>
                             <h2 class="product-title">{{ $product->name }}</h2>
                             <p class="text">
                                 Syndicate customized growth strategies prospective human capital
