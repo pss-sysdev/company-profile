@@ -58,7 +58,7 @@
                                             <option value="">-- Select Parent Category --</option>
 
                                             @foreach ($parent_cat as $pc)
-                                                <option value="{{ $sc->id }}">
+                                                <option value="{{ $pc->id }}">
                                                     {{ $pc->name }}
                                                 </option>
                                             @endforeach
