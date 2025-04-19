@@ -72,6 +72,8 @@ class OwnerProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->sku_code = $request->sku_code;
+        $product->is_top_product = $request->is_top_product;
+        $product->is_discontinue = $request->is_discontinue;
         $product->save();
 
         $product->externalLink()->createMany([
@@ -164,6 +166,8 @@ class OwnerProductController extends Controller
         $product->description = $request->description;
         $product->price = $request->price;
         $product->sku_code = $request->sku_code;
+        $product->is_top_product = $request->is_top_product;
+        $product->is_discontinue = $request->is_discontinue;
         $product->update();
 
         $dataProductSpec = $this->mappingDataAdditionalInformation($request, $product);
