@@ -10,8 +10,10 @@ class AboutUsController extends Controller
 {
     public function index()
     {
-        $title = 'About Us - Perintis Sukses Sejahtera';
-        $data  = CompanyProfile::all();
+        $title   = 'About Us - Perintis Sukses Sejahtera';
+        $data    = CompanyProfile::all();
+        $client  = DB::table('portofolio_client')->get();
+        $project = DB::table('portofolio')->get();
 
         return view('frontend.pages.about_us.index', [
             'type_menu'       => 'about_us',
@@ -19,6 +21,8 @@ class AboutUsController extends Controller
             'data'            => $data,
             'categoryOnBrand' => categoryOnBrand(),
             'categorys'       => category(),
+            'client'          => $client,
+            'project'         => $project,
         ]);
     }
 }

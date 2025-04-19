@@ -409,7 +409,7 @@
     {{-- Visi, Misi Motto End --}}
 
     {{-- Client  --}}
-    <div class="container-fluid my-5">
+    {{-- <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
             <h2 class="title">Client</h2>
         </div>
@@ -447,11 +447,121 @@
                 <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
             </button>
         </div>
-    </div>
-    {{-- Client End  --}}
+    </div> --}}
 
-    {{-- Project  --}}
+    {{-- Client --}}
+    @php
+        use Illuminate\Support\Collection;
+
+        $clients = collect($client);
+        $clients = $clients->shuffle();
+        if ($clients->count() < 10) {
+            while ($clients->count() < 10) {
+                $clients = $clients->merge($clients->shuffle());
+            }
+            $clients = $clients->shuffle()->take(10);
+        }
+
+        $chunks = $clients->chunk(5);
+    @endphp
+
     <div class="container-fluid my-5">
+        <div class="we-provide-brands text-center">
+            <h2 class="title">Client</h2>
+        </div>
+
+        <div id="brandCarouselClient" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel"
+            data-bs-interval="1500" data-bs-wrap="true">
+            <div class="carousel-inner">
+                @foreach ($chunks as $index => $chunk)
+                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        <div class="d-flex justify-content-center gap-3">
+                            @foreach ($chunk as $c)
+                                <img src="{{ asset('uploads/' . $c->client_logo) }}" class="img-fluid"
+                                    alt="Client Logo">
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselClient"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselClient"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            </button>
+        </div>
+    </div>
+
+    {{-- Client End --}}
+
+    {{-- Project --}}
+    @php
+        $projects = collect($project)->shuffle();
+        $minProjectCount = 9;
+
+        while ($projects->count() < $minProjectCount) {
+            $projects = $projects->merge($project)->shuffle();
+        }
+
+        $projects = $projects->take($minProjectCount);
+        $projectChunks = $projects->chunk(3);
+    @endphp
+
+    <div class="container-fluid my-5">
+        <div class="we-provide-brands text-center">
+            <h2 class="title">Projects</h2>
+        </div>
+
+        <!-- Carousel -->
+        <div id="brandCarouselProject" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel"
+            data-bs-interval="3000" data-bs-wrap="true">
+            <div class="carousel-inner">
+                @foreach ($projectChunks as $index => $chunk)
+                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        <div class="d-flex justify-content-center gap-3">
+                            @foreach ($chunk as $p)
+                                <img src="{{ asset('uploads/' . $p->picture) }}" class="img-fluid"
+                                    alt="{{ $p->title }}">
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselProject"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselProject"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            </button>
+        </div>
+
+        <!-- Brand Links -->
+        <div class="brand-section text-center mt-5">
+            <p style="color: black">Find more about our another brand</p>
+            <div class="brand-logos d-flex justify-content-center gap-4">
+                @foreach ($categoryOnBrand as $value)
+                    <a href="{{ route('page', ['slug' => $value->url]) }}">
+                        <div class="brand-logo-container">
+                            <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="{{ $value->name }}"
+                                class="brand-logo">
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </div>
+
+    {{-- <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
             <h2 class="title">Projects</h2>
         </div>
@@ -498,7 +608,7 @@
                 @endforeach
             </div>
         </div>
-    </div>
+    </div> --}}
     {{-- Project End --}}
 
     @include('components_frontend.footer')
