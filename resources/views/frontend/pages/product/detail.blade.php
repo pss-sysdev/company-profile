@@ -33,7 +33,7 @@
                     <div class="col-lg-6">
                         <div class="product-big-img">
                             <div class="img">
-                                <img src="{{ asset('uploads/' . $product->main_picture_url) }}" alt="Product Image" />
+                                <img src="{{ asset('uploads/' . $product->main_picture_url) }}" alt="Product Image" style="aspect-ratio: 1 / 1; object-fit: cover;" />
                             </div>
                         </div>
                     </div>
@@ -130,7 +130,12 @@
                                         <h4 class="product-title h5">
                                             <a href="shop-details.html">{{ $product->name }}</a>
                                         </h4>
-                                        <span class="price">Rp. {{ number_format($product->price, 2) }}</span>
+                                        <span class="price">
+                                            @if (empty($product->price) || $product->price == 0)
+                                                Call
+                                            @else
+                                                Rp. {{ number_format($product->price, 0, ',', '.') }}
+                                            @endif</span>
                                         <a class="as-btn style3"
                                             href="{{ route('product.detail', ['slug' => $product->slug]) }}"> Detail</a>
                                     </div>

@@ -146,7 +146,10 @@ class ProductController extends Controller
     {
         $title          = 'Product Detail - Perintis Sukses Sejahtera';
         $product        = Product::where('slug', $slug)->first();
-        $productsRelate = Product::where('is_top_product', 1)->limit(5)->get();
+        $productsRelate = Product::where('id_category', $product->id_category)
+                            ->orWhere('id_brand', $product->id_brand)
+                            ->limit(5)
+                            ->get();
         $categorys  = category();
 
         return view('frontend.pages.product.detail', [

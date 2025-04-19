@@ -137,8 +137,8 @@ body {
 
 body .theme-red,
 body.theme-red {
-  --theme-color: #F02801;
-  --theme-color2: #FFC000;
+  --theme-color: #B80F0F;
+  --theme-color2: #383838;
 }
 
 body::-webkit-scrollbar {
