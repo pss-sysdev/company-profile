@@ -54,59 +54,58 @@
                                 <span class="badge-info bg-warning">This product needs to be indented</span>
                             @endif
 
-                            <p class="text mt-2">
-                                Syndicate customized growth strategies prospective human capital
-                                leverage other's optimal e-markets without transparent catalysts
-                                for change. Credibly coordinate highly efficient methods of
-                                empowerment cross unit solutions.
-                            </p>
                             <div class="btn-group mb-3" role="group" aria-label="Basic example">
                                 @foreach ($product->externalLink as $item)
                                     @if ($item->link_name == 'shopee' && !empty($item->link))
                                         <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #ee4d2d;border: 1px solid #ca3315;border-radius: 5px;color: white;">Shopee</a>
+                                            style="background-color: #ee4d2d;border: 1px solid #ca3315;border-radius: 5px;color: white;">{{ ucwords($item->link_name) }}</a>
                                     @elseif ($item->link_name == 'tokopedia' && !empty($item->link))
                                         <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #3faa52;border: 1px solid #4f975b;border-radius: 5px;color: white;">Tokopedia</a>
+                                            style="background-color: #3faa52;border: 1px solid #4f975b;border-radius: 5px;color: white;">{{ ucwords($item->link_name) }}</a>
                                     @elseif ($item->link_name == 'whatsapp' && !empty($item->link))
                                         <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">WhatsApp</a>
+                                            style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">{{ ucwords($item->link_name) }}</a>
                                     @else
                                         <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">Email</a>
+                                            style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">{{ ucwords($item->link_name) }}</a>
                                     @endif 
                                 @endforeach
                                
                             </div>
+                            <ul class="nav product-tab-style1" id="productTab" role="tablist">
+                                @if (!empty($product->description) && $product->description != '')
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description"
+                                            role="tab" aria-controls="description" aria-selected="false">description</a>
+                                    </li>
+                                @endif
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link" id="info-tab" data-bs-toggle="tab" href="#add_info" role="tab"
+                                        aria-controls="add_info" aria-selected="false">Additional Information</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="productTabContent">
+                                @if (!empty($product->description) && $product->description != '')
+                                    <div class="tab-pane fade show active" id="description" role="tabpanel"
+                                        aria-labelledby="description-tab">
+                                        {!! $product->description !!}
+                                    </div>
+                                @endif
+                                <div class="tab-pane fade" id="add_info" role="tabpanel">
+                                    <h6>Specification</h6>
+                                    <table class="woocommerce-table">
+                                        <tbody>
+                                            @foreach ($product->spec as $item)
+                                                <tr>
+                                                    <th>{{ $item->title }}</th>
+                                                    <td>{{ $item->data }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <ul class="nav product-tab-style1" id="productTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description"
-                            role="tab" aria-controls="description" aria-selected="false">description</a>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="info-tab" data-bs-toggle="tab" href="#add_info" role="tab"
-                            aria-controls="add_info" aria-selected="false">Additional Information</a>
-                    </li>
-                </ul>
-                <div class="tab-content" id="productTabContent">
-                    <div class="tab-pane fade show active" id="description" role="tabpanel"
-                        aria-labelledby="description-tab">
-                        {!! $product->description !!}
-                    </div>
-                    <div class="tab-pane fade" id="add_info" role="tabpanel">
-                        <table class="woocommerce-table">
-                            <tbody>
-                                @foreach ($product->spec as $item)
-                                    <tr>
-                                        <th>{{ $item->title }}</th>
-                                        <td>{{ $item->data }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
                     </div>
                 </div>
 
