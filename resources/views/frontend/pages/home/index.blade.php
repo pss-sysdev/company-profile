@@ -1,6 +1,12 @@
 @extends('frontend.layouts.app')
 
 @section('content')
+
+    <style>
+        .card-body {
+            padding: 0.25rem 0.55rem;
+        }
+    </style>
     <!-- Product Category -->
     <div class="container py-5">
         <div class="product-category">
@@ -40,15 +46,15 @@
             <h2 class="title">Our High Demand Products</h2>
         </div><br>
 
-        <div class="row row-cols-lg-5 row-cols-md-3 row-cols-sm-2 row-cols-1 g-4 justify-content-center">
+        <div class="row row-cols-lg-5 row-cols-md-3 row-cols-sm-3 row-cols-2 g-4 justify-content-center">
             @foreach ($product as $value)
-                <div class="col">
-                    <div class="card border-0 text-center">
+                <div class="col mt-0">
+                    <div class="card border-0 text-center" style="align-items: center;">
                         <img src="{{ asset('uploads/' . $value->main_picture_url_product) }}" class="card-img-top img-fluid"
                             alt="Product 1">
                         <div class="card-body">
-                            <h6 class="fw-bold">{{ $value->name_product }}</h6>
-                            <p class="text-muted">{{ $value->name_category }}</p>
+                            <h6 class="fw-bold mb-0">{{ $value->name_product }}</h6>
+                            <p class="text-muted mb-0">{{ $value->name_category }}</p>
                         </div>
                     </div>
                 </div>
