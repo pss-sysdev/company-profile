@@ -6,6 +6,16 @@
         .card-body {
             padding: 0.25rem 0.55rem;
         }
+
+        .vr {
+            width: 1px;
+            background-color: #cccccc98;
+            height: auto;
+            margin-top: 0 !important;
+            padding: 0 !important;
+            border-radius: 10px;
+        }
+
     </style>
     <!-- Product Category -->
     <div class="container py-5">
@@ -48,16 +58,19 @@
 
         <div class="row row-cols-lg-5 row-cols-md-3 row-cols-sm-3 row-cols-2 g-4 justify-content-center">
             @foreach ($product as $value)
-                <div class="col mt-0">
+                <a class="col mt-0" href="{{ route('product.detail', ['slug' => $value->slug_product]) }}">
                     <div class="card border-0 text-center" style="align-items: center;">
                         <img src="{{ asset('uploads/' . $value->main_picture_url_product) }}" class="card-img-top img-fluid"
-                            alt="Product 1">
+                            alt="Product 1" style="width: 85%; aspect-ratio: 1 / 1;">
                         <div class="card-body">
                             <h6 class="fw-bold mb-0">{{ $value->name_product }}</h6>
                             <p class="text-muted mb-0">{{ $value->name_category }}</p>
                         </div>
                     </div>
-                </div>
+                </a>
+                @if (!$loop->last)
+                    <div class="vr mx-2" style="height: auto;"></div>
+                @endif
             @endforeach
         </div>
     </div>

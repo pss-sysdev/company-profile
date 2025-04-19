@@ -11,6 +11,7 @@ use App\Models\ProductSpec;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 class OwnerProductController extends Controller
 {
@@ -52,8 +53,14 @@ class OwnerProductController extends Controller
             'main_picture_url' => ['required', 'mimes:jpeg,png,gif'],
         ]);
 
-
-        $slug = trim(preg_replace("/[^a-z0-9]+/", "-", strtolower($request->slug)));
+        $slug = Str::slug($request->slug ?? $request->name, '-');
+        // $slug = strtolower(
+        //     str_replace(
+        //         [' ', '/', '(', ')', "'", '&', '.'],
+        //         ['_', '', '', '', '', ''],
+        //         $request->slug
+        //     )
+        // );
 
         if (Product::where('slug', $slug)->exists()) {
             return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
@@ -126,14 +133,14 @@ class OwnerProductController extends Controller
                 'required',
                 Rule::unique('product')->ignore($product->id)
             ],
-            'slug' => [
-                'required',
-                'alpha_dash',
-                Rule::unique('product')->ignore($product->id)
-            ],
+            // 'slug' => [
+            //     'required',
+            //     'alpha_dash',
+            //     Rule::unique('product')->ignore($product->id)
+            // ],
             'id_category' => ['required'],
             'id_brand' => ['required'],
-            'description' => ['required'],
+            // 'description' => ['required'],
             'price' => ['required'],
             'sku_code' => ['required'],
         ]);
@@ -152,7 +159,14 @@ class OwnerProductController extends Controller
             $product->main_picture_url = $final_name;
         }
 
-        $slug = trim(preg_replace("/[^a-z0-9]+/", "-", strtolower($request->slug)));
+        // $slug = strtolower(
+        //     str_replace(
+        //         [' ', '/', '(', ')'],
+        //         ['_', '', '', ''],
+        //         $request->slug
+        //     )
+        // );
+        $slug = Str::slug($request->slug ?? $request->name, '-');
 
         if (Product::where('slug', $slug)->where('id', '!=', $product->id)->exists()) {
             return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
