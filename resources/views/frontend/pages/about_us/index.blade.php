@@ -290,7 +290,7 @@
         #brandCarouselClient .carousel-item img {
             width: 16.66%;
             aspect-ratio: 8 / 5;
-            object-fit: cover;
+            object-fit: contain;
             height: auto;
             border-radius: 8px;
         }
