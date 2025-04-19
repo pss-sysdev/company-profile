@@ -77,15 +77,32 @@ class BrandController extends Controller
         $title         = 'Brand Detail - Perintis Sukses Sejahtera';
         $brandCategory = DB::table('product as a')
             ->distinct()
-            ->select('b.id', 'b.name', 'b.banner_picture', 'c.name as category_name', 'c.id as category_id', 'a.id as product_id', 'a.main_picture_url')
+            ->select('b.id', 'b.name', 'b.banner_picture', 'c.name as category_name', 'c.id as category_id', 'c.parent_cat_id', 'd.name as parent_cat_name', 'a.name as product_name', 'a.id as product_id', 'a.main_picture_url')
             ->join('brand as b', 'a.id_brand', '=', 'b.id')
             ->join('category as c', 'a.id_category', '=', 'c.id')
-            ->where('b.id', $slug)
-            ->take('6')
+            ->Leftjoin('category as d', 'c.parent_cat_id', '=', 'd.id')
+            ->where('b.url', $slug)
             ->get();
-        $brandCategoryDistinct = $brandCategory->unique(function ($item) {
-            return $item->category_name . $item->product_id;
+
+        $brandCategory->transform(function ($item) {
+            $item->group_id = $item->parent_cat_id ?? $item->category_id;
+            $item->group_name = $item->parent_cat_name ?? $item->category_name;
+            return $item;
         });
+        // $brandCategory = DB::table('product as a')
+        //     ->distinct()
+        //     ->select('b.id', 'b.name', 'b.banner_picture', 'b.url', 'c.name as category_name', 'c.id as category_id', 'a.id as product_id', 'a.main_picture_url')
+        //     ->join('brand as b', 'a.id_brand', '=', 'b.id')
+        //     ->join('category as c', 'a.id_category', '=', 'c.id')
+        //     ->where('b.url', $slug)
+        //     ->take('6')
+        //     ->get();
+        
+        $brandCategoryDistinct = $brandCategory->unique(function ($item) {
+            return $item->group_id . $item->group_name;
+        });
+
+        
 
         return view('frontend.pages.brand.page', [
             'type_menu'             => 'brand',
@@ -95,6 +112,7 @@ class BrandController extends Controller
             'categoryOnBrand'       => categoryOnBrand(),
             'categorys'             => category(),
             'listBrand'             => $listBrand,
+            'listProduct'           => $brandCategory->take(6),
             'brandCategoryDistinct' => $brandCategoryDistinct,
         ]);
     }

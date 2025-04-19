@@ -345,7 +345,7 @@
 
         @media (max-width: 768px) {
             #brandCarouselClient .carousel-item img {
-                width: 30%;
+                width: 18%;
             }
 
             .justify-content-carausel{
@@ -467,88 +467,88 @@
 
     {{-- Client --}}
 
+    @php
+        $clients = collect($client)->shuffle(); // Randomize once
+
+        $perSlide = 5;
+        $count = $clients->count();
+
+        if ($count < $perSlide) {
+            // Pad until we hit at least 5
+            $padding = $clients->take($perSlide - $count);
+            $clients = $clients->merge($padding);
+        }
+
+        // If not divisible by 5, top up to next multiple of 5
+        $remainder = $clients->count() % $perSlide;
+        if ($remainder !== 0) {
+            $toFill = $perSlide - $remainder;
+            $clients = $clients->merge($clients->take($toFill));
+        }
+
+        $chunks = $clients->chunk($perSlide);
+    @endphp
+
+
     <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
             <h2 class="title">Client</h2>
         </div>
 
-        <div id="brandCarouselClient" class="carousel slide carousel-container" data-bs-ride="carousel" data-bs-interval="3000" data-bs-wrap="true">
-            <div class="carousel-inner" id="client-carousel-inner"></div>
+        <div id="brandCarouselClient" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel"
+            data-bs-interval="3000" data-bs-wrap="true">
+            <div class="carousel-inner">
+                @foreach ($chunks as $index => $chunk)
+                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        <div class="d-flex justify-content-carausel">
+                            @foreach ($chunk as $c)
+                                <img src="{{ asset('uploads/' . $c->client_logo) }}" class="img-fluid"
+                                    alt="Client Logo">
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselClient" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselClient" data-bs-slide="next">
-                <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
+            @if ($chunks->count() > 1)
+                <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselClient"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselClient"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                </button>   
+            @endif    
         </div>
 
     </div>
-
-    <script>
-        // Use a new array to avoid mutating original plucked array
-        const clientLogos = [...@json($client->pluck('client_logo'))];
-
-        function chunkArray(arr, size) {
-            const result = [];
-            for (let i = 0; i < arr.length; i += size) {
-                result.push(arr.slice(i, i + size));
-            }
-            return result;
-        }
-
-        function createClientCarousel() {
-            const container = document.getElementById('client-carousel-inner');
-            const isMobile = window.innerWidth <= 768;
-            const perSlide = isMobile ? 3 : 5;
-
-            let logos = [...clientLogos]; // Work on a fresh array
-
-            // Pad to ensure divisible by perSlide
-            const remainder = logos.length % perSlide;
-            if (remainder !== 0) {
-                const fillCount = perSlide - remainder;
-                logos = logos.concat(logos.slice(0, fillCount));
-            }
-
-            const chunks = chunkArray(logos, perSlide);
-
-            chunks.forEach((chunk, index) => {
-                const item = document.createElement('div');
-                item.classList.add('carousel-item');
-                if (index === 0) item.classList.add('active');
-
-                const innerDiv = document.createElement('div');
-                innerDiv.className = 'd-flex justify-content-center gap-3';
-
-                chunk.forEach(logo => {
-                    const img = document.createElement('img');
-                    img.src = `/uploads/${logo}`;
-                    img.alt = 'Client Logo';
-                    img.className = 'img-fluid';
-                    img.loading = 'lazy'; // optimization
-                    innerDiv.appendChild(img);
-                });
-
-                item.appendChild(innerDiv);
-                container.appendChild(item);
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", createClientCarousel);
-
-        window.addEventListener('resize', () => {
-            document.getElementById('client-carousel-inner').innerHTML = '';
-            createClientCarousel();
-        });
-
-    </script>
-
 
 
     {{-- Client End --}}
 
     {{-- Project --}}
+    @php
+        $projects = collect($project)->shuffle(); // shuffle once
+
+        $perSlide = 3;
+        $count = $projects->count();
+
+        // If less than a full slide, duplicate starting projects
+        if ($count < $perSlide) {
+            $projects = $projects->merge($projects->take($perSlide - $count));
+        }
+
+        // Pad to next multiple of 3
+        $remainder = $projects->count() % $perSlide;
+        if ($remainder !== 0) {
+            $toFill = $perSlide - $remainder;
+            $projects = $projects->merge($projects->take($toFill));
+        }
+
+        $projectChunks = $projects->chunk($perSlide);
+    @endphp
+
 
     <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
@@ -558,14 +558,31 @@
         <!-- Carousel -->
         <div id="brandCarouselProject" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel"
             data-bs-interval="3000" data-bs-wrap="true">
-            <div class="carousel-inner"></div>
+            <div class="carousel-inner">
+                @foreach ($projectChunks as $index => $chunk)
+                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                        <div class="d-flex justify-content-center gap-3">
+                            @foreach ($chunk as $p)
+                                <img src="{{ asset('uploads/' . $p->picture) }}" class="img-fluid"
+                                    alt="{{ $p->title }}">
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselProject" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselProject" data-bs-slide="next">
-                <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
+            <!-- Controls -->
+            @if ($projectChunks->count() > 1)
+                <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselProject"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselProject"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+                </button>
+            @endif
+
         </div>
 
         <!-- Brand Links -->
@@ -584,66 +601,54 @@
         </div>
     </div>
 
-    <script>
-        const projects = @json($project);
+    {{-- <div class="container-fluid my-5">
+        <div class="we-provide-brands text-center">
+            <h2 class="title">Projects</h2>
+        </div>
 
-        function chunkArray(arr, size) {
-            const result = [];
-            for (let i = 0; i < arr.length; i += size) {
-                result.push(arr.slice(i, i + size));
-            }
-            return result;
-        }
+        <!-- Carousel -->
+        <div id="brandCarouselProject" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="d-flex justify-content-center gap-3">
+                        <img src="apex-1.0.0/img/fact-1.jpg" class="img-fluid" alt="Brand 1">
+                        <img src="apex-1.0.0/img/fact-2.jpg" class="img-fluid" alt="Brand 2">
+                        <img src="apex-1.0.0/img/fact-3.jpg" class="img-fluid" alt="Brand 3">
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="d-flex justify-content-center gap-3">
+                        <img src="apex-1.0.0/img/fact-4.jpg" class="img-fluid" alt="Brand 6">
+                        <img src="apex-1.0.0/img/fact-3.jpg" class="img-fluid" alt="Brand 7">
+                        <img src="apex-1.0.0/img/fact-2.jpg" class="img-fluid" alt="Brand 8">
+                    </div>
+                </div>
+            </div>
 
-        function createProjectCarousel() {
-            const container = document.querySelector('#brandCarouselProject .carousel-inner');
-            container.innerHTML = ''; // Clear previous if resized
-
-            const isMobile = window.innerWidth <= 576;
-            const perSlide = isMobile ? 1 : 3;
-
-            let projectData = [...projects]; // Avoid mutating original
-
-            // Pad to next multiple of perSlide
-            const remainder = projectData.length % perSlide;
-            if (remainder !== 0) {
-                const fill = projectData.slice(0, perSlide - remainder);
-                projectData = projectData.concat(fill);
-            }
-
-            const chunks = chunkArray(projectData, perSlide);
-
-            chunks.forEach((chunk, index) => {
-                const item = document.createElement('div');
-                item.className = 'carousel-item' + (index === 0 ? ' active' : '');
-
-                const innerDiv = document.createElement('div');
-                innerDiv.className = 'd-flex justify-content-center gap-3 flex-wrap';
-
-                chunk.forEach(project => {
-                    const img = document.createElement('img');
-                    img.src = `/uploads/${project.picture}`;
-                    img.alt = project.title;
-                    img.className = 'img-fluid';
-                    img.style.width = isMobile ? '90%' : '30%';
-                    img.style.borderRadius = '8px';
-                    img.loading = 'lazy';
-
-                    innerDiv.appendChild(img);
-                });
-
-                item.appendChild(innerDiv);
-                container.appendChild(item);
-            });
-        }
-
-        document.addEventListener("DOMContentLoaded", createProjectCarousel);
-        
-        window.addEventListener("resize", () => {
-            createProjectCarousel(); // Re-render on resize
-        });
-    </script>
-
+            <!-- Controls -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselProject"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselProject"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div class="brand-section text-center mt-5">
+            <p style="color: black">Find more about our another brand</p>
+            <div class="brand-logos d-flex justify-content-center gap-4">
+                @foreach ($categoryOnBrand as $value)
+                    <a href="{{ route('page', ['slug' => $value->url]) }}">
+                        <div class="brand-logo-container">
+                            <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="{{ $value->name }}"
+                                class="brand-logo">
+                        </div>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </div> --}}
     {{-- Project End --}}
 
     @include('components_frontend.footer')

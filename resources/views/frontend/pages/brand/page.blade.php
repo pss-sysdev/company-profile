@@ -91,7 +91,7 @@
         }
 
         .product-card {
-            width: 250px;
+            width: 14.667%;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -104,8 +104,8 @@
 
         .product-image {
             width: 100%;
-            height: 200px;
-            object-fit: cover;
+            height: 100px;
+            object-fit: contain;
         }
 
         .product-info {
@@ -121,11 +121,11 @@
         .request-btn {
             background-color: #e52a2a;
             color: #fff;
-            padding: 10px;
+            padding: 7px;
             text-decoration: none;
             border-radius: 5px;
             display: inline-block;
-            font-size: 14px;
+            font-size: 10.5px;
             transition: background-color 0.3s ease;
         }
 
@@ -145,6 +145,30 @@
 
         .explore-link:hover {
             background-color: #bf2525;
+        }
+
+        @media (max-width: 1200px) {
+            .heading-product-pss {
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .product-card {
+                width: 24.445%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .product-card {
+                width: 27.778%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .product-card {
+                width: 44.445%;
+            }
         }
     </style>
 </head>
@@ -188,20 +212,20 @@
                     <h1>{{ $value->title }}</h1>
                     {!! $value->description !!}
                 </div>
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <h5>Our Catalogue</h5>
                     <p class="text-justify">
                         - <a href="{{ asset('path/to/your/pdf/filename.pdf') }}" download>Download Full Catalogue
                             PDF</a>
                         <br>
                     </p>
-                </div>
+                </div> -->
                 <div class="col-12">
                     <h5>{{ $value->title }}'s Category </h5>
                     @foreach ($brandCategoryDistinct as $distinct)
                         <p class="text-justify">
-                            {{-- - <a href="{{ route('page', $distinct->product_id) }}">{{ $distinct->category_name }}</a> --}}
-                            - <a href="{{ route('product') }}">{{ $distinct->category_name }}</a>
+                            {{-- - <a href="{{ route('page', $distinct->group_id) }}">{{ $distinct->group_name }}</a> --}}
+                            - <a href="{{ route('product') }}">{{ $distinct->group_name }}</a>
                         </p>
                     @endforeach
                 </div>
@@ -211,15 +235,15 @@
 
     <div class="product-section">
         <div class="product-grid">
-            @foreach ($brandCategoryDistinct as $value)
+            @foreach ($listProduct as $value)
                 <div class="product-card">
-                    <img src="{{ asset('uploads/' . $value->banner_picture) }}" alt="Product Image"
+                    <img src="{{ asset('uploads/' . $value->main_picture_url) }}" alt="{{ $value->product_name }}"
                         class="product-image">
                     <div class="product-info">
-                        <h5>{{ $value->name }}</h5>
+                        <h6 class="heading-product-pss">{{ $value->product_name }}</h6>
                         <a href="#" class="request-btn swal-request"
                             data-link="{{ route('contact_us') }}?product_id={{ $value->product_id }}#service-wrapper"
-                            data-name="{{ $value->name }}">
+                            data-name="{{ $value->product_name }}">
                             Request Quotation
                         </a>
                     </div>

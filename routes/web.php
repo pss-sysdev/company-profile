@@ -43,9 +43,10 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 require __DIR__ . '/admin.php';
 
 // Owner
-// Route::get('/owner/login', [OwnerAuthController::class, 'index'])->name('owner.login');
-// Route::post('/owner/login', [OwnerAuthController::class, 'login'])->name('owner.login.submit');
-// Route::post('/owner/logout', [OwnerAuthController::class, 'logout'])->name('owner.logout');
+Route::get('/owner/login', [OwnerAuthController::class, 'index'])->name('owner.login');
+Route::post('/owner/login', [OwnerAuthController::class, 'login'])->name('owner.login.submit');
+Route::post('/owner/logout', [OwnerAuthController::class, 'logout'])->name('owner.logout');
+// Route::get('owner/login', [YourLoginController::class, 'showLoginForm'])->name('owner.login');
 
 
 // Dashboard
