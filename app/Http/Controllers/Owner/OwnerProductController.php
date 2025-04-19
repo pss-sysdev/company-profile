@@ -52,6 +52,13 @@ class OwnerProductController extends Controller
             'main_picture_url' => ['required', 'mimes:jpeg,png,gif'],
         ]);
 
+
+        $slug = trim(preg_replace("/[^a-z0-9]+/", "-", strtolower($request->slug)));
+
+        if (Product::where('slug', $slug)->exists()) {
+            return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
+        }
+
         $product = new Product();
 
         $final_name = 'main_picture_url_' . time() . '.' . $request->main_picture_url->extension();
@@ -59,7 +66,7 @@ class OwnerProductController extends Controller
         $product->main_picture_url = $final_name;
 
         $product->name = $request->name;
-        $product->slug = trim(preg_replace("/[^a-z0-9]+/", "-", strtolower($request->name)));
+        $product->slug = $slug;
         $product->id_category = $request->id_category;
         $product->id_brand = $request->id_brand;
         $product->description = $request->description;
@@ -67,7 +74,7 @@ class OwnerProductController extends Controller
         $product->sku_code = $request->sku_code;
         $product->save();
 
-        $product->extrenalLink()->createMany([
+        $product->externalLink()->createMany([
             [
                 'link_name' => 'shopee',
                 'link' => $request->input_shopee
@@ -143,8 +150,15 @@ class OwnerProductController extends Controller
             $product->main_picture_url = $final_name;
         }
 
+        $slug = trim(preg_replace("/[^a-z0-9]+/", "-", strtolower($request->slug)));
+
+        if (Product::where('slug', $slug)->where('id', '!=', $product->id)->exists()) {
+            return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
+        }
+        
+
         $product->name = $request->name;
-        $product->slug = $request->slug;
+        $product->slug = $slug;
         $product->id_category = $request->id_category;
         $product->id_brand = $request->id_brand;
         $product->description = $request->description;

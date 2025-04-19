@@ -3235,7 +3235,7 @@ textarea.is-invalid {
 .as-btn:hover:after,
 .as-btn.active:before,
 .as-btn.active:after {
-  border-width: 55px 232px;
+  border-width: 62px 300px;
 }
 
 .as-btn.style2:after {
@@ -9276,7 +9276,7 @@ a.text-theme:hover,
 .as-pagination span:hover,
 .as-pagination a.active,
 .as-pagination a:hover {
-  color: var(--title-color);
+  color: var(--white-color);
   background-color: var(--theme-color2);
   -webkit-box-shadow: none;
   -moz-box-shadow: none;

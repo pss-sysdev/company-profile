@@ -30,13 +30,21 @@ class BrandController extends Controller
         });
 
         $brandCategory = $brand->unique('group_id');
+        
+        $brandGroup = $brand->unique(function ($item) {
+            return $item->group_id . 
+            $item->group_name .
+            $item->id .
+            $item->name .
+            $item->banner_picture;
+        });
 
         $category = category();
 
         return view('frontend.pages.brand.index', [
             'type_menu'       => 'brand',
             'title'           => $title,
-            'brand'           => $brand,
+            'brand'           => $brandGroup,
             'brandCategory'   => $brandCategory,
             'categoryOnBrand' => categoryOnBrand(),
             'categorys'       => $category,

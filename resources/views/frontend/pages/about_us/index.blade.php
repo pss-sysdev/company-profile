@@ -326,7 +326,7 @@
         }
 
         .brand-logo {
-            width: 70px;
+            width: 120px;
             height: 50px;
             object-fit: cover;
             border-radius: 5px;

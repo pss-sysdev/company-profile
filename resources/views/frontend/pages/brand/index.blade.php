@@ -102,7 +102,7 @@
                         <div class="card border-0 text-center shadow-sm own-brand-card">
                             <a href="{{ route('page', $value->url) }}">
                                 <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid own-brand-img"
-                                    alt="Product 1">
+                                    alt="{{ $value->name }}">
                             </a>
                         </div>
                     </div>
@@ -117,7 +117,7 @@
         <div class="container-fluid ">
             <div class="section-header">
                 <div class="section-line"></div>
-                <h2 class="section-title">{{ $brandCategory->category_name }}</h2>
+                <h2 class="section-title">{{ $brandCategory->group_name }}</h2>
             </div>
 
             <div class="custom-container">

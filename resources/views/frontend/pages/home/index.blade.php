@@ -53,6 +53,56 @@
     <!-- Top Selling Product End -->
 
     <!-- Find More About Our Brands -->
+    <style>
+        .title {
+            display: inline-block;
+            border-bottom: 3px solid red;
+            padding-bottom: 5px;
+        }
+
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-img-top {
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-line {
+            width: 5px;
+            height: 25px;
+            background-color: red;
+        }
+
+        .section-title {
+            margin: 0;
+        }
+
+        .custom-container {
+            max-width: 85%;
+            margin: 0 auto;
+        }
+
+        .own-brand-card{
+            aspect-ratio: 285 / 118;
+            width: 100%;
+            max-width: 285px;
+        }
+
+        .own-brand-img{
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
     <div class="container-fluid my-5">
         <div class="find-more-about-our-brands"
             style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
@@ -61,13 +111,11 @@
 
         <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
             @foreach ($categoryOnBrand as $value)
-                <div class="col">
-                    <div class="card border-0 text-center shadow-sm p-3">
-                        <a href="{{ route('page', $value->url) }}">
-                            <img src="{{ asset('uploads/' . $value->logo_picture) }}"
-                                class="card-img-top img-fluid resized-img" alt="{{ $value->name }}">
-                        </a>
-                    </div>
+                <div class="col" style="justify-items: center;">
+                    <a class="card border-0 text-center shadow-sm own-brand-card" href="{{ route('page', $value->url) }}">
+                        <img src="{{ asset('uploads/' . $value->logo_picture) }}"
+                            class="card-img-top img-fluid resized-img own-brand-img" alt="{{ $value->name }}">
+                    </a>
                 </div>
             @endforeach
         </div>

@@ -160,11 +160,11 @@
                 <div class="footer-title">
                     <h6 style="color: white">Navigation</h6>
                     <ul>
-                        <li onclick="location.href='{{ route('home') }}';">> Home</li>
-                        <li onclick="location.href='{{ route('product') }}';">> Product</li>
-                        <li onclick="location.href='{{ route('brand') }}';">> Brand</li>
-                        <li onclick="location.href='{{ route('contact_us') }}';">> Contact Us</li>
-                        <li onclick="location.href='{{ route('about_us') }}';">> About Us</li>
+                        <li onclick="location.href='{{ route('home') }}';"><i class="fa fa-chevron-right"></i> Home</li>
+                        <li onclick="location.href='{{ route('product') }}';"><i class="fa fa-chevron-right"></i> Product</li>
+                        <li onclick="location.href='{{ route('brand') }}';"><i class="fa fa-chevron-right"></i> Brand</li>
+                        <li onclick="location.href='{{ route('contact_us') }}';"><i class="fa fa-chevron-right"></i> Contact Us</li>
+                        <li onclick="location.href='{{ route('about_us') }}';"><i class="fa fa-chevron-right"></i> About Us</li>
                     </ul>
                 </div>
             </div>
@@ -176,7 +176,7 @@
                     <ul>
                         @foreach ($categorys as $value)
                             <a href="{{ route('product', ['category[]' => $value->id]) }}">
-                                <li style="color: white"> > {{ $value->name }}</li>
+                                <li style="color: white"><i class="fa fa-chevron-right"></i> {{ $value->name }}</li>
                             </a>
                         @endforeach
                     </ul>
@@ -191,7 +191,7 @@
                         @foreach ($categoryOnBrand as $value)
                             @if (!empty($value->url))
                                 <a href="{{ route('page', ['slug' => $value->url]) }}">
-                                    <li style="color: white"> > {{ $value->name }}</li>
+                                    <li style="color: white"><i class="fa fa-chevron-right"></i> {{ $value->name }}</li>
                                 </a>
                             @endif
                         @endforeach

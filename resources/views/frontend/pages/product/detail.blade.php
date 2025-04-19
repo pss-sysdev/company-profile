@@ -11,6 +11,21 @@
     <!-- Our Brands End -->
 
     {{-- Welding Machine Section  --}}
+    <style>
+        .badge-info {
+            border-radius: 0.25rem; /* Bootstrap default */
+            padding: 0.35em 0.65em; /* Bootstrap default */
+        }
+
+        .bg-warning {
+            color: #222222;
+        }
+
+        .bg-info {
+            color: #ffffff;
+        }
+
+    </style>
     <div class="container-fluid my-5">
         <section class="product-details space">
             <div class="container">
@@ -23,7 +38,7 @@
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <div class="product-about">
+                        <div class="product-about position-relative">
                             <p class="price">
                                 @if (empty($product->price) || $product->price == 0)
                                     Call
@@ -32,7 +47,14 @@
                                 @endif
                             </p>
                             <h2 class="product-title">{{ $product->name }}</h2>
-                            <p class="text">
+                            @if ($product->is_rental == 1)
+                                <span class="badge-info bg-info">This product can be rented</span>
+                            @endif
+                            @if ($product->is_indent == 1)
+                                <span class="badge-info bg-warning">This product needs to be indented</span>
+                            @endif
+
+                            <p class="text mt-2">
                                 Syndicate customized growth strategies prospective human capital
                                 leverage other's optimal e-markets without transparent catalysts
                                 for change. Credibly coordinate highly efficient methods of
