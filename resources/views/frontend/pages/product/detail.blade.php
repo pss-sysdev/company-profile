@@ -26,8 +26,8 @@
         }
 
     </style>
-    <div class="container-fluid my-5">
-        <section class="product-details space">
+    <div class="container-fluid">
+        <section class="product-details">
             <div class="container">
                 <div class="row gx-60">
                     <div class="col-lg-6">
