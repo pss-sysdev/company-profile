@@ -14,10 +14,15 @@
         </div>
         <div class="product-list">
             @foreach ($productCategory as $value)
-                <div class="product-item">
+            <a class="product-item"
+                data-id="{{ $value->id }}"
+                data-name="{{ $value->name }}"
+                href="{{ route('product', ['category[]' => $value->id]) }}"
+                style="cursor: pointer;">
+
                     <img src="{{ asset('uploads/' . $value->picture_url) }}" alt="{{ $value->name }}">
                     <h5>{{ $value->name }}</h5>
-                </div>
+            </a>
             @endforeach
         </div>
         <br>
