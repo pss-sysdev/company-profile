@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('library/magnific-popup/magnific-popup.css') }}">
 
     <link rel="stylesheet" href="{{ asset('library/datatables/media/css/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('library/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
     {{-- <link rel="stylesheet" href="{{ asset('library/jquery-ui-dist/jquery-ui.min.css') }}"> --}}
 
     @stack('style')
@@ -74,7 +75,7 @@
     <script src="{{ asset('library/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
     <script src="{{ asset('library/datatables/media/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('library/sweetalert/dist/sweetalert.min.js') }}"></script>
-
+    <script src="{{ asset('library/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.min.js') }}"></script>
     <!-- Page Specific JS File -->
     {{-- <script src="{{ asset('js/page/modules-sweetalert.js') }}"></script> --}}
     @stack('scripts')

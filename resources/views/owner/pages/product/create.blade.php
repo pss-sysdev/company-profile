@@ -250,30 +250,38 @@
 
                                                     <div class="tab-pane fade" id="external-link" role="tabpanel"
                                                         aria-labelledby="external-link-tab">
-                                                        <div class="mb-3">
-                                                            <label for="" class="form-label">Shope</label>
-                                                            <input type="text" class="form-control"
-                                                                name="input_shopee" id="input_shopee" value="">
+                                                        <div id="repeaterContainerExternalLink">
+                                                            <div class="row mb-2">
+                                                                <div class="col-md-3">
+                                                                    <input type="text" class="form-control"
+                                                                        name="external-link-tab__title[]"
+                                                                        placeholder="Title">
+
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    <input type="text" class="form-control"
+                                                                        name="external-link-tab__link[]"
+                                                                        placeholder="Link">
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    <input type="text"
+                                                                        class="form-control colorpickerinput"
+                                                                        name="external-link-tab__color[]"
+                                                                        placeholder="Color Button">
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    <button type="button"
+                                                                        class="btn btn-danger remove-item">Remove</button>
+                                                                </div>
+                                                            </div>
                                                         </div>
 
-                                                        <div class="mb-3">
-                                                            <label for="" class="form-label">Tokopedia</label>
-                                                            <input type="text" class="form-control"
-                                                                name="input_tokopedia" id="input_tokopedia"
-                                                                value="">
-                                                        </div>
-
-                                                        <div class="mb-3">
-                                                            <label for="" class="form-label">WhatsApp</label>
-                                                            <input type="text" class="form-control"
-                                                                name="input_whatsapp" id="input_whatsapp" value="">
-                                                        </div>
-
-                                                        <div class="mb-3">
-                                                            <label for="" class="form-label">Email</label>
-                                                            <input type="text" class="form-control" name="input_email"
-                                                                id="input_email" value="">
-                                                        </div>
+                                                        <button class="btn btn-warning mb-5" type="button"
+                                                            id="addItemExternalLink">Add
+                                                            Item Information</button>
                                                     </div>
                                                 </div>
 
@@ -329,6 +337,45 @@
                 $('#repeaterContainer').append(newItem);
             });
 
+            $('#addItemExternalLink').click(function() {
+                var newItem = `
+                 <div class="repeater-item">
+                         <div class="row mb-2">
+                                                                <div class="col-md-3">
+                                                                    <input type="text" class="form-control"
+                                                                        name="external-link-tab__title[]"
+                                                                        placeholder="Title">
+
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    <input type="text" class="form-control"
+                                                                        name="external-link-tab__link[]"
+                                                                        placeholder="Link">
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    <input type="text"
+                                                                        class="form-control colorpickerinput"
+                                                                        name="external-link-tab__color[]"
+                                                                        placeholder="Color Button">
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    <button type="button"
+                                                                        class="btn btn-danger remove-item">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                             </div>
+                `;
+                $('#repeaterContainerExternalLink').append(newItem);
+
+                $(".colorpickerinput").colorpicker({
+                    format: "hex",
+                    component: ".input-group-append",
+                });
+            });
+
             $(document).on('click', '.remove-item', function() {
                 $(this).closest('.repeater-item').remove();
             });
@@ -345,12 +392,10 @@
 
             $('#is_rental').change(toggleRentalPrice);
 
-            // Form submission
-            // $('#repeaterForm').submit(function(event) {
-            //     event.preventDefault();
-            //     var formData = $(this).serialize();
-            //     console.log('Form Data:', formData);
-            // });
+            $(".colorpickerinput").colorpicker({
+                format: "hex",
+                component: ".input-group-append",
+            });
         })
     </script>
 @endpush

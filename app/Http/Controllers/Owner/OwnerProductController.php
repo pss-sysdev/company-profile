@@ -77,29 +77,16 @@ class OwnerProductController extends Controller
         $product->rental_price = $request->rental_price ?? '';
         $product->save();
 
-        $product->externalLink()->createMany([
-            [
-                'link_name' => 'shopee',
-                'link' => $request->input_shopee
-            ],
-            [
-                'link_name' => 'tokopedia',
-                'link' => $request->input_tokopedia
-            ],
-            [
-                'link_name' => 'whatsapp',
-                'link' => $request->input_whatsapp
-            ],
-            [
-                'link_name' => 'email',
-                'link' => $request->input_email
-            ],
-        ]);
-
         $dataProductSpec = $this->mappingDataAdditionalInformation($request, $product);
         if ($dataProductSpec != null)
             foreach ($dataProductSpec as $data) {
                 ProductSpec::create($data);
+            }
+
+        $dataExternalLink = $this->mappingDataExternalLink($request, $product);
+        if ($dataExternalLink != null)
+            foreach ($dataExternalLink as $data) {
+                ProductExternalLink::create($data);
             }
 
         return redirect()->route('owner.product')->with('success', __('Data is added successfully'));
@@ -181,23 +168,13 @@ class OwnerProductController extends Controller
                 ProductSpec::create($data);
             }
         }
-
-        ProductExternalLink::updateOrCreate(
-            ['link_name' => 'shopee', 'product_id' => $product->id],
-            ['link' => $request->input_shopee,]
-        );
-        ProductExternalLink::updateOrCreate(
-            ['link_name' => 'tokopedia', 'product_id' => $product->id],
-            ['link' => $request->input_tokopedia,]
-        );
-        ProductExternalLink::updateOrCreate(
-            ['link_name' => 'email', 'product_id' => $product->id],
-            ['link' => $request->input_email,]
-        );
-        ProductExternalLink::updateOrCreate(
-            ['link_name' => 'whatsapp', 'product_id' => $product->id],
-            ['link' => $request->input_whatsapp,]
-        );
+        $dataExternalLink = $this->mappingDataExternalLink($request, $product);
+        if ($dataExternalLink != null) {
+            ProductExternalLink::where('product_id', $product->id)->delete();
+            foreach ($dataExternalLink as $data) {
+                ProductExternalLink::create($data);
+            }
+        }
 
         return redirect()->route('owner.product')->with('success', __('Data is updated successfully'));
     }
@@ -232,8 +209,27 @@ class OwnerProductController extends Controller
             $mappedData[$key]['product_id'] = $product->id;
             $mappedData[$key]['sort_number'] = $key;
         }
+        return $mappedData;
+    }
 
-        Log::debug($mappedData);
+    private function mappingDataExternalLink($request, $product)
+    {
+        $mappedData = [];
+        foreach ($request->input('external-link-tab__title') ?? [] as $key => $data) {
+            if ($data != null)
+                $mappedData[$key]['link_name'] = $data;
+        }
+        foreach ($request->input('external-link-tab__link') ?? []  as $key => $data) {
+            if ($data != null)
+                $mappedData[$key]['link'] = $data;
+        }
+        foreach ($request->input('external-link-tab__color') ?? []  as $key => $data) {
+            if ($data != null)
+                $mappedData[$key]['hex_color'] = $data;
+        }
+        foreach ($mappedData as $key => $data) {
+            $mappedData[$key]['product_id'] = $product->id;
+        }
         return $mappedData;
     }
 }

@@ -269,16 +269,43 @@
 
                                                     <div class="tab-pane fade" id="external-link" role="tabpanel"
                                                         aria-labelledby="external-link-tab">
-                                                        @foreach ($product->externalLink as $item)
-                                                            <div class="mb-3">
-                                                                <label for=""
-                                                                    class="form-label">{{ $item->link_name }}</label>
-                                                                <input type="text" class="form-control"
-                                                                    name="input_{{ $item->link_name }}"
-                                                                    id="input_{{ $item->link_name }}"
-                                                                    value="{{ $item->link }}">
-                                                            </div>
-                                                        @endforeach
+                                                        <div id="repeaterContainerExternalLink">
+                                                            @foreach ($product->externalLink as $item)
+                                                                <div class="repeater-item">
+                                                                    <div class="row mb-2">
+                                                                        <div class="col-md-3">
+                                                                            <input type="text" class="form-control"
+                                                                                name="external-link-tab__title[]"
+                                                                                placeholder="Title"
+                                                                                value="{{ $item->link_name }}">
+
+                                                                        </div>
+
+                                                                        <div class="col-md-3">
+                                                                            <input type="text" class="form-control"
+                                                                                name="external-link-tab__link[]"
+                                                                                placeholder="Link"
+                                                                                value="{{ $item->link }}">
+                                                                        </div>
+
+                                                                        <div class="col-md-3">
+                                                                            <input type="text"
+                                                                                class="form-control colorpickerinput"
+                                                                                name="external-link-tab__color[]"
+                                                                                placeholder="Color Button"
+                                                                                value="{{ $item->hex_color }}">
+                                                                        </div>
+
+                                                                        <div class="col-md-3">
+                                                                            <button type="button"
+                                                                                class="btn btn-danger remove-item">Remove</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                        <button class="btn btn-warning mb-5" type="button"
+                                                            id="addItemExternalLink">Add External Link</button>
                                                     </div>
                                                 </div>
 
@@ -342,6 +369,45 @@
                 $('#repeaterContainer').append(newItem);
             });
 
+            $('#addItemExternalLink').click(function() {
+                var newItem = `
+                 <div class="repeater-item">
+                         <div class="row mb-2">
+                                                                <div class="col-md-3">
+                                                                    <input type="text" class="form-control"
+                                                                        name="external-link-tab__title[]"
+                                                                        placeholder="Title">
+
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    <input type="text" class="form-control"
+                                                                        name="external-link-tab__link[]"
+                                                                        placeholder="Link">
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    <input type="text"
+                                                                        class="form-control colorpickerinput"
+                                                                        name="external-link-tab__color[]"
+                                                                        placeholder="Color Button">
+                                                                </div>
+
+                                                                <div class="col-md-3">
+                                                                    <button type="button"
+                                                                        class="btn btn-danger remove-item">Remove</button>
+                                                                </div>
+                                                            </div>
+                                                             </div>
+                `;
+                $('#repeaterContainerExternalLink').append(newItem);
+
+                $(".colorpickerinput").colorpicker({
+                    format: "hex",
+                    component: ".input-group-append",
+                });
+            });
+
             function toggleRentalPrice() {
                 if ($('#is_rental').val() === '1') {
                     $('#rental_price').closest('.mb-3').show();
@@ -354,7 +420,10 @@
 
             $('#is_rental').change(toggleRentalPrice);
 
-
+            $(".colorpickerinput").colorpicker({
+                format: "hex",
+                component: ".input-group-append",
+            });
         })
 
         $(document).on('click', '.remove-item', function() {

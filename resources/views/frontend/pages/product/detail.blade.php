@@ -13,8 +13,10 @@
     {{-- Welding Machine Section  --}}
     <style>
         .badge-info {
-            border-radius: 0.25rem; /* Bootstrap default */
-            padding: 0.35em 0.65em; /* Bootstrap default */
+            border-radius: 0.25rem;
+            /* Bootstrap default */
+            padding: 0.35em 0.65em;
+            /* Bootstrap default */
         }
 
         .bg-warning {
@@ -24,7 +26,6 @@
         .bg-info {
             color: #ffffff;
         }
-
     </style>
     <div class="container-fluid">
         <section class="product-details">
@@ -33,7 +34,8 @@
                     <div class="col-lg-6">
                         <div class="product-big-img">
                             <div class="img">
-                                <img src="{{ asset('uploads/' . $product->main_picture_url) }}" alt="Product Image" style="aspect-ratio: 1 / 1; object-fit: cover;" />
+                                <img src="{{ asset('uploads/' . $product->main_picture_url) }}" alt="Product Image"
+                                    style="aspect-ratio: 1 / 1; object-fit: cover;" />
                             </div>
                         </div>
                     </div>
@@ -54,29 +56,19 @@
                                 <span class="badge-info bg-warning">This product needs to be indented</span>
                             @endif
 
-                            <div class="btn-group mb-3" role="group" aria-label="Basic example">
+                            <div class="btn-group my-3" role="group" aria-label="Basic example">
                                 @foreach ($product->externalLink as $item)
-                                    @if ($item->link_name == 'shopee' && !empty($item->link))
-                                        <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #ee4d2d;border: 1px solid #ca3315;border-radius: 5px;color: white;">{{ ucwords($item->link_name) }}</a>
-                                    @elseif ($item->link_name == 'tokopedia' && !empty($item->link))
-                                        <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #3faa52;border: 1px solid #4f975b;border-radius: 5px;color: white;">{{ ucwords($item->link_name) }}</a>
-                                    @elseif ($item->link_name == 'whatsapp' && !empty($item->link))
-                                        <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #255bdb;border: 1px solid #204cb5;border-radius: 5px;color: white;">{{ ucwords($item->link_name) }}</a>
-                                    @else
-                                        <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                            style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">{{ ucwords($item->link_name) }}</a>
-                                    @endif
+                                    <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
+                                        @style(['background-color:' . $item->hex_color, 'border-radius: 5px;color: white'])>{{ ucwords($item->link_name) }}</a>
                                 @endforeach
 
                             </div>
                             <ul class="nav product-tab-style1" id="productTab" role="tablist">
                                 @if (!empty($product->description) && $product->description != '')
                                     <li class="nav-item" role="presentation">
-                                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab" href="#description"
-                                            role="tab" aria-controls="description" aria-selected="false">description</a>
+                                        <a class="nav-link active" id="description-tab" data-bs-toggle="tab"
+                                            href="#description" role="tab" aria-controls="description"
+                                            aria-selected="false">description</a>
                                     </li>
                                 @endif
                                 <li class="nav-item" role="presentation">
@@ -134,7 +126,8 @@
                                                 Call
                                             @else
                                                 Rp. {{ number_format($product->price, 0, ',', '.') }}
-                                            @endif</span>
+                                            @endif
+                                        </span>
                                         <a class="as-btn style3"
                                             href="{{ route('product.detail', ['slug' => $product->slug]) }}"> Detail</a>
                                     </div>
