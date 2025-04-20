@@ -16,6 +16,17 @@
             border-radius: 10px;
         }
 
+        @media (max-width: 567px) {
+            .card-body h6 {
+                font-size: 12px;
+            }
+
+            .card-body p {
+                font-size: 12px;
+            }
+        }
+        
+
     </style>
     <!-- Product Category -->
     <div class="container py-5">
@@ -49,28 +60,109 @@
     <!-- Product Category End -->
 
     <!-- Top Selling Product -->
+    <style>
+        /* Flex wrapper to center the grid */
+        .grid-wrapper {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        /* The actual grid */
+        .fixed-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 1rem;
+            gap: 0;
+        }
+
+
+        .fixed-grid-item {
+            position: relative;
+            padding: 1rem;
+            background-color: #fff;
+            text-align: center;
+            box-sizing: border-box;
+            width: 50%; /* mobile: 2 columns */
+        }
+
+        @media (min-width: 768px) {
+            .fixed-grid-item {
+                width: 33.3333%; /* tablet: 3 columns */
+            }
+        }
+
+        @media (min-width: 992px) {
+            .fixed-grid-item {
+                width: 20%; /* desktop: 5 columns */
+            }
+        }
+
+
+        /* Vertical separator line */
+        .fixed-grid-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            background-color: #ccc;
+        }
+
+        /* Remove separator at end of each row */
+        @media (min-width: 992px) {
+            .fixed-grid-item:nth-child(5n)::after {
+                content: none;
+            }
+        }
+        @media (min-width: 768px) and (max-width: 991.98px) {
+            .fixed-grid-item:nth-child(3n)::after {
+                content: none;
+            }
+        }
+        @media (max-width: 767.98px) {
+            .fixed-grid-item:nth-child(2n)::after {
+                content: none;
+            }
+        }
+
+        /* Hide separator on very last item */
+        .fixed-grid-item:last-of-type::after {
+            content: none !important;
+        }
+
+        /* Center content inside card */
+        .card.border-0.text-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+    </style>
+
+
     <div class="container my-5">
-        <div class="top-selling-product"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <div class="top-selling-product text-center d-flex flex-column align-items-center">
             <h6 class="text-uppercase">Top Selling Product</h6>
             <h2 class="title">Our High Demand Products</h2>
         </div><br>
-
-        <div class="row row-cols-lg-5 row-cols-md-3 row-cols-sm-3 row-cols-2 g-4 justify-content-center">
+        
+        <div class="fixed-grid justify-content-centers">
             @foreach ($product as $value)
-                <a class="col mt-0" href="{{ route('product.detail', ['slug' => $value->slug_product]) }}">
-                    <div class="card border-0 text-center" style="align-items: center;">
-                        <img src="{{ asset('uploads/' . $value->main_picture_url_product) }}" class="card-img-top img-fluid"
-                            alt="Product 1" style="width: 85%; aspect-ratio: 1 / 1;">
+                <div class="product-card text-decoration-none fixed-grid-item">
+                    <div class="card border-0 text-center">
+                        <img src="{{ asset('uploads/' . $value->main_picture_url_product) }}"
+                            class="card-img-top img-fluid"
+                            alt="{{ $value->name_product }}"
+                            style="width: 85%; aspect-ratio: 1 / 1;">
                         <div class="card-body">
                             <h6 class="fw-bold mb-0">{{ $value->name_product }}</h6>
                             <p class="text-muted mb-0">{{ $value->name_category }}</p>
                         </div>
                     </div>
-                </a>
-                @if (!$loop->last)
-                    <div class="vr mx-2" style="height: auto;"></div>
-                @endif
+                </div>
             @endforeach
         </div>
     </div>
