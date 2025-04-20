@@ -41,8 +41,6 @@ class OwnerProductController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-        // dd('test');
         $request->validate([
             'name' => ['required', 'unique:product'],
             'id_category' => ['required'],
@@ -54,13 +52,6 @@ class OwnerProductController extends Controller
         ]);
 
         $slug = Str::slug($request->slug ?? $request->name, '-');
-        // $slug = strtolower(
-        //     str_replace(
-        //         [' ', '/', '(', ')', "'", '&', '.'],
-        //         ['_', '', '', '', '', ''],
-        //         $request->slug
-        //     )
-        // );
 
         if (Product::where('slug', $slug)->exists()) {
             return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
@@ -81,6 +72,9 @@ class OwnerProductController extends Controller
         $product->sku_code = $request->sku_code;
         $product->is_top_product = $request->is_top_product;
         $product->is_discontinue = $request->is_discontinue;
+        $product->is_rental = $request->is_rental;
+        $product->is_indent = $request->is_indent;
+        $product->rental_price = $request->rental_price ?? '';
         $product->save();
 
         $product->externalLink()->createMany([
@@ -159,19 +153,12 @@ class OwnerProductController extends Controller
             $product->main_picture_url = $final_name;
         }
 
-        // $slug = strtolower(
-        //     str_replace(
-        //         [' ', '/', '(', ')'],
-        //         ['_', '', '', ''],
-        //         $request->slug
-        //     )
-        // );
         $slug = Str::slug($request->slug ?? $request->name, '-');
 
         if (Product::where('slug', $slug)->where('id', '!=', $product->id)->exists()) {
             return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
         }
-        
+
 
         $product->name = $request->name;
         $product->slug = $slug;
@@ -182,6 +169,9 @@ class OwnerProductController extends Controller
         $product->sku_code = $request->sku_code;
         $product->is_top_product = $request->is_top_product;
         $product->is_discontinue = $request->is_discontinue;
+        $product->is_rental = $request->is_rental;
+        $product->is_indent = $request->is_indent;
+        $product->rental_price = $request->rental_price ?? '';
         $product->update();
 
         $dataProductSpec = $this->mappingDataAdditionalInformation($request, $product);

@@ -68,9 +68,9 @@
                                     @else
                                         <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
                                             style="background-color: #ea4335;border: 1px solid #c8372a;border-radius: 5px;color: white;">{{ ucwords($item->link_name) }}</a>
-                                    @endif 
+                                    @endif
                                 @endforeach
-                               
+
                             </div>
                             <ul class="nav product-tab-style1" id="productTab" role="tablist">
                                 @if (!empty($product->description) && $product->description != '')

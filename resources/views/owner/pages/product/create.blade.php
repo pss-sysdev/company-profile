@@ -172,6 +172,47 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="" class="form-label">Is Rental
+                                                                        ?</label>
+                                                                    <select class="form-control selectric" id="is_rental"
+                                                                        name="is_rental">
+                                                                        <option value="1"
+                                                                            @selected(old('is_rental') == 1)>YES
+                                                                        </option>
+                                                                        <option value="0"
+                                                                            @selected(old('is_rental') == 0)>NO
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="mb-3">
+                                                                    <label for="" class="form-label">Rental
+                                                                        Price</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="rental_price" id="rental_price"
+                                                                        value="">
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-6">
+                                                                <div class="mb-3">
+                                                                    <label for="" class="form-label">Is Indent
+                                                                        ?</label>
+                                                                    <select class="form-control selectric" id="is_indent"
+                                                                        name="is_indent">
+                                                                        <option value="1"
+                                                                            @selected(old('is_indent') == 1)>YES
+                                                                        </option>
+                                                                        <option value="0"
+                                                                            @selected(old('is_indent') == 0)>NO
+                                                                        </option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
 
                                                     <div class="tab-pane fade" id="addtional-information" role="tabpanel"
@@ -291,6 +332,18 @@
             $(document).on('click', '.remove-item', function() {
                 $(this).closest('.repeater-item').remove();
             });
+
+            function toggleRentalPrice() {
+                if ($('#is_rental').val() === '1') {
+                    $('#rental_price').closest('.mb-3').show();
+                } else {
+                    $('#rental_price').closest('.mb-3').hide();
+                }
+            }
+
+            toggleRentalPrice();
+
+            $('#is_rental').change(toggleRentalPrice);
 
             // Form submission
             // $('#repeaterForm').submit(function(event) {
