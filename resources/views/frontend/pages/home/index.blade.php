@@ -227,8 +227,8 @@
 
         <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
             @foreach ($categoryOnBrand as $value)
-                <div class="col" style="justify-items: center;">
-                    <a class="card border-0 text-center shadow-sm own-brand-card" href="{{ route('page', $value->url) }}">
+                <div class="col" style="justify-items: center; align-items: center; text-align: -webkit-center; place-items: center;">
+                    <a class="card border-0 text-center shadow-sm own-brand-card" href="{{ route('page', $value->url) }}" style="justify-self: center;">
                         <img src="{{ asset('uploads/' . $value->logo_picture) }}"
                             class="card-img-top img-fluid resized-img own-brand-img" alt="{{ $value->name }}">
                     </a>
