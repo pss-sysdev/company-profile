@@ -151,7 +151,7 @@
         
         <div class="fixed-grid justify-content-centers">
             @foreach ($product as $value)
-                <div class="product-card text-decoration-none fixed-grid-item">
+                <a class="product-card text-decoration-none fixed-grid-item" href="{{ route('product.detail', ['slug' => $value->slug_product]) }}">
                     <div class="card border-0 text-center">
                         <img src="{{ asset('uploads/' . $value->main_picture_url_product) }}"
                             class="card-img-top img-fluid"
@@ -162,7 +162,7 @@
                             <p class="text-muted mb-0">{{ $value->name_category }}</p>
                         </div>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
     </div>

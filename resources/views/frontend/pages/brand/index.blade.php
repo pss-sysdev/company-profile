@@ -123,12 +123,12 @@
             <div class="custom-container">
                 <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 g-4 mt-3">
                     @foreach ($brand->where('group_id', $brandCategory->group_id) as $value)
-                        <div class="col">
+                        <a class="col" href="{{ route('product', ['category[]' => $value->group_id, 'brand[]' => $value->id]) }}">
                             <div class="card border-0 shadow-sm">
                                 <img src="{{ asset('uploads/' . $value->banner_picture) }}"
                                     class="card-img-top img-fluid" alt="{{ $value->name }}">
                             </div>
-                        </div>
+                        </a>
                     @endforeach
                 </div>
             </div>
