@@ -252,12 +252,12 @@
         <div class="carousel-wrapper" id="carouselWrapper">
             <div class="carousel-track" id="carouselTrack">
                 @foreach ($brand as $item)
-                    <div class="carousel-item">
+                    <div class="carousel-item" style="border-radius: 8px;">
                         <img src="{{ asset('uploads/' . $item->logo_picture) }}" alt="{{ $item->name }}">
                     </div>
                 @endforeach
                 @foreach ($brand as $item) {{-- duplicated for loop --}}
-                    <div class="carousel-item">
+                    <div class="carousel-item" style="border-radius: 8px;">
                         <img src="{{ asset('uploads/' . $item->logo_picture) }}" alt="{{ $item->name }}">
                     </div>
                 @endforeach
@@ -296,7 +296,7 @@
         .carousel-item img {
             max-height: 80px;
             max-width: 100%;
-            object-fit: cover;
+            object-fit: contain;
             user-drag: none;
             -webkit-user-drag: none;
             pointer-events: none;
@@ -416,6 +416,61 @@
     </div>
     </div>
     <!-- We Provide Brands End -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const applyEdgeBasedBgColor = (imgSelector, parentSelector) => {
+            const images = document.querySelectorAll(imgSelector);
+
+            images.forEach((img) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                img.addEventListener('load', () => {
+                    canvas.width = img.naturalWidth;
+                    canvas.height = img.naturalHeight;
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    let chosenPixel = null;
+
+                    // Scan vertically on the left side every 5px
+                    for (let y = 0; y < canvas.height; y += 5) {
+                        const [r, g, b, a] = ctx.getImageData(1, y, 1, 1).data;
+
+                        if (a > 0) {
+                            chosenPixel = { r, g, b, a };
+                            break;
+                        }
+                    }
+
+                    const target = img.closest(parentSelector);
+                    if (!chosenPixel || !target) {
+                        // target.style.backgroundColor = '#f0f0f0'; // fallback
+                        target.style.backgroundColor = '#ffffff'; // fallback
+                        return;
+                    }
+
+                    const { r, g, b, a } = chosenPixel;
+
+                    if (a < 255) {
+                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                        target.style.backgroundColor = brightness > 128 ? 'black' : 'white';
+                    } else {
+                        target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                    }
+                });
+            });
+        };
+
+        // Apply to both sections
+        applyEdgeBasedBgColor('.carousel-item img', '.carousel-item');
+        applyEdgeBasedBgColor('.own-brand-img', '.own-brand-card');
+    });
+</script>
+
+
+
+
+
 @endsection
 
 <script>

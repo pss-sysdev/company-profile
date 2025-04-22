@@ -12,7 +12,7 @@ class BrandController extends Controller
         $title = 'Brand - Perintis Sukses Sejahtera';
         $brand = DB::table('product as a')
             ->distinct()
-            ->select('b.id', 'b.name', 'b.banner_picture', 'c.name as category_name', 'c.id as category_id', 'c.parent_cat_id', 'd.name as parent_cat_name')
+            ->select('b.id', 'b.name', 'b.logo_picture', 'b.banner_picture', 'c.name as category_name', 'c.id as category_id', 'c.parent_cat_id', 'd.name as parent_cat_name')
             ->join('brand as b', 'a.id_brand', '=', 'b.id')
             ->join('category as c', 'a.id_category', '=', 'c.id')
             ->Leftjoin('category as d', 'c.parent_cat_id', '=', 'd.id')

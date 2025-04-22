@@ -84,6 +84,13 @@
             height: auto;
             aspect-ratio: 285 / 118;
         }
+
+        .own-brand-cat-img {
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 285 / 118;
+        }
     </style>
 </head>
 
@@ -127,8 +134,8 @@
                     @foreach ($brand->where('group_id', $brandCategory->group_id) as $value)
                         <a class="col" href="{{ route('product', ['category[]' => $value->group_id, 'brand[]' => $value->id]) }}">
                             <div class="card border-0 text-center shadow-sm own-brand-card">
-                                <img src="{{ asset('uploads/' . $value->banner_picture) }}"
-                                    class="card-img-top img-fluid" alt="{{ $value->name }}">
+                                <img src="{{ asset('uploads/' . $value->logo_picture) }}"
+                                    class="card-img-top img-fluid own-brand-cat-img" alt="{{ $value->name }}">
                             </div>
                         </a>
                     @endforeach
