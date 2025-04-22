@@ -72,8 +72,9 @@ class BrandController extends Controller
             ->where('A.is_own', 1)
             ->limit(6)
             ->get();
-        // $listBrand     = DB::table('brand')->where('id', '!=', $slug)->get();
-        $listBrand     = DB::table('brand')->where('url', '!=', $slug)->where('is_own', 1)->get();
+        
+        // $listBrand     = DB::table('brand')->where('url', '!=', $slug)->where('is_own', 1)->get();
+        $listBrand     = DB::table('brand')->where('is_own', 1)->get();
         $title         = 'Brand Detail - Perintis Sukses Sejahtera';
         $brandCategory = DB::table('product as a')
             ->distinct()

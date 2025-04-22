@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Owner;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\BrandSection;
 use Illuminate\Http\Request;
 
 class OwnerBrandController extends Controller
@@ -73,11 +74,14 @@ class OwnerBrandController extends Controller
         $brand->is_own = $request->is_own;
         $brand->save();
 
-        $brand->section()->create([
-            'title' => $request->title ?? '',
-            'description' => $request->description ?? '',
-            'is_show_brand_product' => 1
-        ]);
+        $obj->section()->updateOrCreate(
+            ['brand_id' => $obj->id],
+            [
+                'title' => $request->title??'',
+                'description' => $request->description??'',
+                'is_show_brand_product' => 1
+            ]
+        );
 
         return redirect()->route('owner.brand')->with('success', 'Data is added successfully');
     }
@@ -174,10 +178,15 @@ class OwnerBrandController extends Controller
         $obj->url = strtolower($request->url);
         $obj->is_own = $request->is_own;
         $obj->update();
-        $obj->section()->update([
-            'title' => $request->title??'',
-            'description' => $request->description??''
-        ]);
+        
+        $obj->section()->updateOrCreate(
+            ['brand_id' => $obj->id],
+            [
+                'title' => $request->title??'',
+                'description' => $request->description??'',
+                'is_show_brand_product' => 1
+            ]
+        );
 
         return redirect()->route('owner.brand')->with('success', 'Data is updated successfully');
     }

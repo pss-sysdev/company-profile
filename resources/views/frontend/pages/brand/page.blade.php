@@ -147,9 +147,20 @@
             background-color: #bf2525;
         }
 
+        .banner-pss-standar {
+            max-width: 1000px;
+            max-height: 170px;
+            height: auto;
+            aspect-ratio: 100 / 17;
+        }
+
         @media (max-width: 1200px) {
             .heading-product-pss {
                 font-size: 0.8rem;
+            }
+
+            .banner-pss-standar {
+                max-width: 100%;
             }
         }
 
@@ -183,7 +194,7 @@
             <div class="brand-logos d-flex justify-content-center gap-4">
                 @foreach ($listBrand as $value)
                     <div class="brand-logo-container">
-                        <a href="{{ route('page', ['slug' => $value->url]) }}">
+                        <a href="{{ $value->url === request()->segment(2) ? '#' : route('page', ['slug' => $value->url]) }}">
                             <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="{{ $value->name }}"
                                 class="brand-logo">
                         </a>
@@ -201,10 +212,10 @@
     <div class="container-fluid">
         <div class="row">
             @foreach ($brand as $value)
-                <div class="col-12">
+                <div class="col-12 p-0">
                     <center>
                         <img src="{{ asset('uploads/' . $value->banner_picture) }}" alt="Your Image Description"
-                            class="img-fluid rectangular-image" style="max-width: 1000px;max-height: 170px;height: auto;aspect-ratio: 100 / 17;" />
+                            class="img-fluid rectangular-image banner-pss-standar" style="" />
                         <br><br>
                     </center>
                 </div>
@@ -224,8 +235,7 @@
                     <h5>{{ $value->title }}'s Category </h5>
                     @foreach ($brandCategoryDistinct as $distinct)
                         <p class="text-justify">
-                            {{-- - <a href="{{ route('page', $distinct->group_id) }}">{{ $distinct->group_name }}</a> --}}
-                            - <a href="{{ route('product') }}">{{ $distinct->group_name }}</a>
+                            <a href="{{ route('product', ['category[]' => $distinct->group_id, 'brand[]' => $distinct->id]) }}">{{ $distinct->group_name }}</a>
                         </p>
                     @endforeach
                 </div>
