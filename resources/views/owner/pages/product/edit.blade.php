@@ -127,7 +127,7 @@
                                                         <div>
                                                             <div class="mb-3">
                                                                 <label for="" class="form-label">Main Picture
-                                                                    Url</label>
+                                                                    Url <span class="text-muted">(Recommended size: 450×450 px)</span></label>  
                                                                 <div class="photo-container">
                                                                     @if ($product->main_picture_url == null)
                                                                         <img src="{{ asset('uploads/no_photo.png') }}"
@@ -141,8 +141,6 @@
                                                                 </div>
                                                             </div>
                                                             <div class="mb-3">
-                                                                <label for="" class="form-label">Main Picture
-                                                                    Url</label>
                                                                 <div><input type="file" name="main_picture_url"></div>
                                                             </div>
                                                         </div>

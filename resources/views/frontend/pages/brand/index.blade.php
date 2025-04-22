@@ -91,8 +91,8 @@
     <!-- Our Brands -->
     <div class="container-fluid my-5">
         <div class="find-more-about-our-brands"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-            <h2 class="title"> Our Brands</h2>
+            style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin-bottom: 24px;">
+            <h3 class="title text-uppercase"> Our Brands</h3>
         </div>
 
         <div class="custom-container">
@@ -117,14 +117,14 @@
         <div class="container-fluid ">
             <div class="section-header">
                 <div class="section-line"></div>
-                <h2 class="section-title">{{ $brandCategory->group_name }}</h2>
+                <h4 class="section-title text-uppercase">{{ $brandCategory->group_name }}</h4>
             </div>
 
             <div class="custom-container">
-                <div class="row row-cols-lg-2 row-cols-md-2 row-cols-1 g-4 mt-3">
+                <div class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-2 g-3 g-md-4 mt-3">
                     @foreach ($brand->where('group_id', $brandCategory->group_id) as $value)
                         <a class="col" href="{{ route('product', ['category[]' => $value->group_id, 'brand[]' => $value->id]) }}">
-                            <div class="card border-0 shadow-sm">
+                            <div class="card border-0 text-center shadow-sm own-brand-card">
                                 <img src="{{ asset('uploads/' . $value->banner_picture) }}"
                                     class="card-img-top img-fluid" alt="{{ $value->name }}">
                             </div>

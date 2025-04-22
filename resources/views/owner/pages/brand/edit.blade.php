@@ -87,7 +87,9 @@
 
                                         <div class="col-md-3">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Logo</label>
+                                                <label for="" class="form-label">Logo 
+                                                    <span class="text-muted">(Recommended size: 210×90 px)</span>
+                                                </label>
                                                 <div class="photo-container">
                                                     @if ($brand->logo_picture == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">
@@ -100,11 +102,11 @@
                                                 </div>
                                             </div>
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Logo</label>
+                                                <!-- <label for="" class="form-label">Logo</label> -->
                                                 <div><input type="file" name="logo_picture"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <!-- <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Logo 2</label>
                                                 <div class="photo-container">
@@ -123,12 +125,12 @@
                                                 <label for="" class="form-label">Logo 2</label>
                                                 <div><input type="file" name="logo_picture2"></div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-3">
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Banner
-                                                    Picture</label>
+                                                    Picture <span class="text-muted">(Recommended size: 1000×170 px)</span></label>
                                                 <div class="photo-container">
                                                     @if ($brand->banner_picture == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">
@@ -142,12 +144,12 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Banner
-                                                    Picture</label>
+                                                <!-- <label for="" class="form-label">Banner
+                                                    Picture</label> -->
                                                 <div><input type="file" name="banner_picture"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <!-- <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Background Logo
                                                     Picture</label>
@@ -167,7 +169,7 @@
                                                     Picture</label>
                                                 <div><input type="file" name="bg_logo_picture"></div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <button class="btn btn-primary" type="submit">Update Brand</button>

@@ -34,7 +34,7 @@
     <style>
         .product-category {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 24px;
         }
 
         .product-category h6 {

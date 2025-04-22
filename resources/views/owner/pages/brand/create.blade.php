@@ -85,29 +85,31 @@
 
                                         <div class="col-md-3">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Logo *</label>
+                                                <label for="" class="form-label">Logo * 
+                                                    <span class="text-muted">(Recommended size: 210×90 px)</span>
+                                                </label>
                                                 <div><input type="file" name="logo_picture" id="logo_picture"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <!-- <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Logo 2 *</label>
                                                 <div><input type="file" name="logo_picture2" id="logo_picture2"></div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-md-3">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Banner Picture *</label>
+                                                <label for="" class="form-label">Banner Picture * <span class="text-muted">(Recommended size: 1000×170 px)</span></label>
                                                 <div><input type="file" name="banner_picture" id="banner_picture"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <!-- <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Background Logo Picture</label>
                                                 <div><input type="file" name="bg_logo_picture" id="bg_logo_picture">
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
 
                                     <button class="btn btn-primary" type="submit">Create Brand</button>

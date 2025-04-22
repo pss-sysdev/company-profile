@@ -30,9 +30,9 @@ class OwnerBrandController extends Controller
             'name' => ['required', 'unique:brand'],
             'url' => ['required', 'alpha_dash', 'unique:brand,url'],
             'logo_picture' => ['required', 'mimes:jpeg,png,gif'],
-            'logo_picture2' => ['nullable', 'mimes:jpeg,png,gif'],
+            // 'logo_picture2' => ['nullable', 'mimes:jpeg,png,gif'],
             'banner_picture' => ['nullable', 'mimes:jpeg,png,gif'],
-            'bg_logo_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+            // 'bg_logo_picture' => ['nullable', 'mimes:jpeg,png,gif'],
         ];
     
         if ($request->is_own == 1) {
@@ -50,11 +50,11 @@ class OwnerBrandController extends Controller
             $brand->logo_picture = $final_name;
         }
         
-        if ($request->hasFile('logo_picture2')) {
-            $final_name2 = 'logo_picture2_' . time() . '.' . $request->logo_picture2->extension();
-            $request->logo_picture2->move(public_path('uploads'), $final_name2);
-            $brand->logo_picture2 = $final_name2;
-        }
+        // if ($request->hasFile('logo_picture2')) {
+        //     $final_name2 = 'logo_picture2_' . time() . '.' . $request->logo_picture2->extension();
+        //     $request->logo_picture2->move(public_path('uploads'), $final_name2);
+        //     $brand->logo_picture2 = $final_name2;
+        // }
         
         if ($request->hasFile('banner_picture')) {
             $final_name3 = 'banner_picture_' . time() . '.' . $request->banner_picture->extension();
@@ -62,11 +62,11 @@ class OwnerBrandController extends Controller
             $brand->banner_picture = $final_name3;
         }
         
-        if ($request->hasFile('bg_logo_picture')) {
-            $final_name4 = 'bg_logo_picture_' . time() . '.' . $request->bg_logo_picture->extension();
-            $request->bg_logo_picture->move(public_path('uploads'), $final_name4);
-            $brand->bg_logo_picture = $final_name4;
-        }        
+        // if ($request->hasFile('bg_logo_picture')) {
+        //     $final_name4 = 'bg_logo_picture_' . time() . '.' . $request->bg_logo_picture->extension();
+        //     $request->bg_logo_picture->move(public_path('uploads'), $final_name4);
+        //     $brand->bg_logo_picture = $final_name4;
+        // }        
 
         $brand->name = $request->name;
         $brand->url = strtolower($request->url);
@@ -119,22 +119,22 @@ class OwnerBrandController extends Controller
             $obj->logo_picture = $final_name;
         }
 
-        if ($request->logo_picture2 != null) {
-            $request->validate([
-                'logo_picture2' => 'mimes:jpg,jpeg,png',
-            ]);
+        // if ($request->logo_picture2 != null) {
+        //     $request->validate([
+        //         'logo_picture2' => 'mimes:jpg,jpeg,png',
+        //     ]);
 
-            if ($obj->logo_picture2 != null) {
-                $filePath = 'uploads/' . $obj->logo_picture2;
-                if (file_exists($filePath) && is_file($filePath)) {
-                    unlink(public_path($filePath));
-                }
-            }
+        //     if ($obj->logo_picture2 != null) {
+        //         $filePath = 'uploads/' . $obj->logo_picture2;
+        //         if (file_exists($filePath) && is_file($filePath)) {
+        //             unlink(public_path($filePath));
+        //         }
+        //     }
 
-            $final_name = 'logo_picture2_' . time() . '.' . $request->logo_picture2->extension();
-            $request->logo_picture2->move(public_path('uploads'), $final_name);
-            $obj->logo_picture2 = $final_name;
-        }
+        //     $final_name = 'logo_picture2_' . time() . '.' . $request->logo_picture2->extension();
+        //     $request->logo_picture2->move(public_path('uploads'), $final_name);
+        //     $obj->logo_picture2 = $final_name;
+        // }
 
         if ($request->banner_picture != null) {
             $request->validate([
@@ -153,22 +153,22 @@ class OwnerBrandController extends Controller
             $obj->banner_picture = $final_name;
         }
 
-        if ($request->bg_logo_picture != null) {
-            $request->validate([
-                'bg_logo_picture' => 'mimes:jpg,jpeg,png',
-            ]);
+        // if ($request->bg_logo_picture != null) {
+        //     $request->validate([
+        //         'bg_logo_picture' => 'mimes:jpg,jpeg,png',
+        //     ]);
 
-            if ($obj->bg_logo_picture != null) {
-                $filePath = 'uploads/' . $obj->bg_logo_picture;
-                if (file_exists($filePath) && is_file($filePath)) {
-                    unlink(public_path($filePath));
-                }
-            }
+        //     if ($obj->bg_logo_picture != null) {
+        //         $filePath = 'uploads/' . $obj->bg_logo_picture;
+        //         if (file_exists($filePath) && is_file($filePath)) {
+        //             unlink(public_path($filePath));
+        //         }
+        //     }
 
-            $final_name = 'bg_logo_picture_' . time() . '.' . $request->bg_logo_picture->extension();
-            $request->bg_logo_picture->move(public_path('uploads'), $final_name);
-            $obj->bg_logo_picture = $final_name;
-        }
+        //     $final_name = 'bg_logo_picture_' . time() . '.' . $request->bg_logo_picture->extension();
+        //     $request->bg_logo_picture->move(public_path('uploads'), $final_name);
+        //     $obj->bg_logo_picture = $final_name;
+        // }
 
         $obj->name = $request->name;
         $obj->url = strtolower($request->url);

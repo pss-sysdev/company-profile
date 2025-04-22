@@ -37,7 +37,7 @@
                 <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Rental</h3>
             </div><br><br>
             <h6 class="text-uppercase" style="color: black">Product Category</h6>
-            <h2 class="title">We Provide Type of Product</h2>
+            <h3 class="title text-uppercase">We Provide Type of Product</h3>
         </div>
         <div class="product-list">
             @foreach ($productCategory as $value)
@@ -146,8 +146,9 @@
     <div class="container my-5">
         <div class="top-selling-product text-center d-flex flex-column align-items-center">
             <h6 class="text-uppercase">Top Selling Product</h6>
-            <h2 class="title">Our High Demand Products</h2>
-        </div><br>
+            <h3 class="title text-uppercase">Our High Demand Products</h3>
+        </div>
+        <!--<br>-->
         
         <div class="fixed-grid justify-content-centers">
             @foreach ($product as $value)
@@ -222,7 +223,7 @@
     <div class="container-fluid my-5">
         <div class="find-more-about-our-brands"
             style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-            <h2 class="title">Find More About Our Brands</h2>
+            <h3 class="title text-uppercase">Find More About Our Brands</h3>
         </div>
 
         <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
@@ -243,7 +244,7 @@
     <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
             <h6 class="text-uppercase">Brand</h6>
-            <h2 class="title">We Provide Brands</h2>
+            <h3 class="title text-uppercase">We Provide Brands</h3>
         </div>
 
         <div class="carousel-wrapper" id="carouselWrapper">

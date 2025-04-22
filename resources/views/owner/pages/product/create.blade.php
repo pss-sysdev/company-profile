@@ -130,8 +130,8 @@
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="" class="form-label">Main Picture Url
-                                                                *</label>
+                                                        <label for="" class="form-label">Main Picture
+                                                            Url* <span class="text-muted">(Recommended size: 450×450 px)</span></label> 
                                                             <div><input type="file" name="main_picture_url"
                                                                     id="main_picture_url">
                                                             </div>
