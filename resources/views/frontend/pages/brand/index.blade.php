@@ -78,14 +78,15 @@
         }
 
         .own-brand-img{
-            /* object-fit: cover; */
-            object-fit: contain;
+            /* object-fit: contain; */
+            object-fit: cover;
             width: 100%;
             height: auto;
             aspect-ratio: 285 / 118;
         }
 
         .own-brand-cat-img {
+            /* object-fit: contain; */
             object-fit: cover;
             width: 100%;
             height: auto;

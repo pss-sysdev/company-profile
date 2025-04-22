@@ -88,7 +88,7 @@
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Logo 
-                                                    <span class="text-muted">(Recommended size: 210×90 px)</span>
+                                                    <span class="text-muted">(Recommended size: 285×118 px)</span>
                                                 </label>
                                                 <div class="photo-container">
                                                     @if ($brand->logo_picture == null)
