@@ -129,8 +129,8 @@
                                         <div class="col-md-3">
 
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Banner
-                                                    Picture <span class="text-warning">(Recommended size: 1000×170 px)</span></label>
+                                                <label for="" class="form-label">Banner Picture 
+                                                    <span class="text-warning">(Recommended size: 1000×170 px)</span></label>
                                                 <div class="photo-container">
                                                     @if ($brand->banner_picture == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">

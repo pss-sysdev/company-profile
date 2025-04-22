@@ -99,7 +99,7 @@
                                         </div> -->
                                         <div class="col-md-3">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Banner Picture <span class="text-danger">*</span> <span class="text-warning">(Recommended size: 1000×170 px)</span></label>
+                                                <label for="" class="form-label">Banner Picture <span class="text-warning">(Recommended size: 1000×170 px)</span></label>
                                                 <div><input type="file" name="banner_picture" id="banner_picture"></div>
                                             </div>
                                         </div>
