@@ -36,18 +36,18 @@
                                     @csrf
                                     
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Name *</label>
+                                        <label for="" class="form-label">Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="name" id="name"
                                             value="{{ $category->name }}">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Category Code *</label>
+                                        <label for="" class="form-label">Category Code <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="category_code" id="category_code"
                                             value="{{ $category->category_code }}">
                                     </div>
                                     <!-- <div class="mb-3">
-                                        <label for="" class="form-label">Parent Category Name *</label>
+                                        <label for="" class="form-label">Parent Category Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="sub_category_name"
                                             id="sub_category_name" value="{{ $category->sub_category_name }}">
                                     </div> -->

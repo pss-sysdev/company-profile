@@ -72,13 +72,13 @@
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="" class="form-label">Name *</label>
+                                                            <label for="" class="form-label">Name <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" name="name"
                                                                 id="name" value="{{ old('name') }}">
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="" class="form-label">Slug *</label>
+                                                            <label for="" class="form-label">Slug <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" name="slug"
                                                                 id="slug" value="{{ old('slug') }}">
                                                         </div>
@@ -86,7 +86,7 @@
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
                                                                     <label for="" class="form-label">Category
-                                                                        *</label>
+                                                                        <span class="text-danger">*</span></label>
                                                                     <select class="form-control selectric" id="id_category"
                                                                         name="id_category">
                                                                         @foreach ($categories as $category)
@@ -99,7 +99,7 @@
                                                             </div>
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">
-                                                                    <label for="" class="form-label">Brand *</label>
+                                                                    <label for="" class="form-label">Brand <span class="text-danger">*</span></label>
                                                                     <select class="form-control selectric" id="id_brand"
                                                                         name="id_brand">
                                                                         @foreach ($brands as $brand)
@@ -113,25 +113,25 @@
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="" class="form-label">Description *</label>
+                                                            <label for="" class="form-label">Description <span class="text-danger">*</span></label>
                                                             <textarea class="summernote-simple" id="description" name="description"></textarea>
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="" class="form-label">Price *</label>
+                                                            <label for="" class="form-label">Price <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" name="price"
                                                                 id="price" value="{{ old('price') }}">
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <label for="" class="form-label">Sku Code *</label>
+                                                            <label for="" class="form-label">Sku Code <span class="text-danger">*</span></label>
                                                             <input type="text" class="form-control" name="sku_code"
                                                                 id="sku_code" value="{{ old('sku_code') }}">
                                                         </div>
 
                                                         <div class="mb-3">
                                                         <label for="" class="form-label">Main Picture
-                                                            Url* <span class="text-muted">(Recommended size: 450×450 px)</span></label> 
+                                                            Url<span class="text-danger">*</span> <span class="text-warning">(Recommended size: 450×450 px)</span></label> 
                                                             <div><input type="file" name="main_picture_url"
                                                                     id="main_picture_url">
                                                             </div>

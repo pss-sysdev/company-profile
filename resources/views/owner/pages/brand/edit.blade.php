@@ -47,7 +47,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Name *</label>
+                                                <label for="" class="form-label">Name <span class="text-danger">*</span></label>
                                                 <input type="text" class="form-control" name="name" id="name"
                                                     value="{{ $brand->name }}">
                                             </div>
@@ -55,7 +55,7 @@
 
                                         <div class="col-md-6">
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Slug Url *</label>
+                                                <label for="" class="form-label">Slug Url <span class="text-danger">*</span></label>
                                                 <small style="color: #ff0000;">This to fill your brand url. E.g. pss.id/brand/Isotech (Isotech is Slug Url)</small>
                                                 <input type="text" class="form-control" name="url" id="url"
                                                     value="{{ $brand->url }}">
@@ -64,7 +64,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Brand Ownership *</label>
+                                        <label for="" class="form-label">Brand Ownership <span class="text-danger">*</span></label>
                                         <select class="form-control selectric" id="is_own" name="is_own">
                                             <option value="1" @selected($brand->is_own == 1)>Owned</option>
                                             <option value="0" @selected($brand->is_own == 0)>Distributor</option>
@@ -72,13 +72,13 @@
                                     </div>
                                     <div id="owned-fields" style="display: none;">
                                         <div class="mb-3">
-                                            <label for="" class="form-label">Title *</label>
+                                            <label for="" class="form-label">Title <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control" name="title" id="title"
                                                 value="{{ $brand->section->title ?? '' }}">
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="" class="form-label">Description *</label>
+                                            <label for="" class="form-label">Description <span class="text-danger">*</span></label>
                                             <textarea class="summernote" id="description" name="description">{{ $brand->section->description ?? '' }}</textarea>
                                         </div>
                                     </div>
@@ -88,7 +88,7 @@
                                         <div class="col-md-3">
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Logo 
-                                                    <span class="text-muted">(Recommended size: 285×118 px)</span>
+                                                    <span class="text-warning">(Recommended size: 285×118 px)</span>
                                                 </label>
                                                 <div class="photo-container">
                                                     @if ($brand->logo_picture == null)
@@ -130,7 +130,7 @@
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Banner
-                                                    Picture <span class="text-muted">(Recommended size: 1000×170 px)</span></label>
+                                                    Picture <span class="text-warning">(Recommended size: 1000×170 px)</span></label>
                                                 <div class="photo-container">
                                                     @if ($brand->banner_picture == null)
                                                         <img src="{{ asset('uploads/no_photo.png') }}" alt="">

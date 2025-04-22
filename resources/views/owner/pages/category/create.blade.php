@@ -37,18 +37,18 @@
                                     @csrf
 
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Name *</label>
+                                        <label for="" class="form-label">Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="name" id="name"
                                             value="{{ old('name') }}">
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Category Code *</label>
+                                        <label for="" class="form-label">Category Code <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="category_code"
                                             id="category_code" value="{{ old('category_code') }}">
                                     </div>
                                     <!-- <div class="mb-3">
-                                        <label for="" class="form-label">Parent Category Name *</label>
+                                        <label for="" class="form-label">Parent Category Name <span class="text-danger">*</span></label>
                                         <input type="text" class="form-control" name="sub_category_name"
                                             id="sub_category_name" value="{{ old('sub_category_name') }}">
                                     </div> -->
@@ -73,7 +73,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <label for="" class="form-label">Picture Url *</label>
+                                        <label for="" class="form-label">Picture Url <span class="text-danger">*</span></label>
                                         <div><input type="file" name="picture_url" id="picture_url"></div>
                                     </div>
 
