@@ -215,7 +215,8 @@
         }
 
         .own-brand-img{
-            object-fit: cover;
+            /* object-fit: cover; */
+            object-fit: contain;
             width: 100%;
             height: auto;
             aspect-ratio: 285 / 118;
