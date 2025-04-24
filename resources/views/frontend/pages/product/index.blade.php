@@ -23,7 +23,8 @@
     <div class="container-fluid my-5">
         <div class="find-more-about-our-brands"
             style="display: flex; flex-direction: column; justify-content: center; align-items: start; text-align: start;">
-            <h2 class="title-product"> Product Page</h2>
+            <!-- <h3 class="title-product text-uppercase"> Product Page</h3> -->
+            <h3 class="title-product text-uppercase"> Product</h3>
         </div>
     </div>
     <!-- Our Brands End -->
@@ -35,7 +36,7 @@
                 <div class="find-more-about-our-brands"
                     style="display: flex; flex-direction: column; justify-content: center; align-items: start; text-align: start; border-bottom: 1px solid #e1e0e0; margin-bottom: 1rem;">
                     <div class="title-product mb-3">
-                        <h3 class="mb-0">
+                        <h4 class="mb-0 text-uppercase">
                             @if ($selected_cat->isNotEmpty())
                                 @foreach ($selected_cat as $sc)
                                     {{ $loop->last ? $sc->name : $sc->name . ', ' }}
@@ -43,8 +44,8 @@
                             @else
                                 All Product
                             @endif
-                        </h3>
-                        <h5 class="mb-0">Brand Includes</h5>
+                        </h4>
+                        <h6 class="mb-0 text-uppercase">Brand Includes</h6>
                     </div>
                 </div>
                 <div class="tab-content" id="nav-tabContent">
@@ -138,14 +139,14 @@
 
                     </div>
                     <div class="widget widget_categories">
-                        <h4 class="widget_title">Categories 
+                        <h5 class="widget_title text-uppercase">Categories 
                             <button id="resetFilterBtn" style="font-size: 12px;" class="btn btn-sm btn-link text-primary"
                                 data-bs-toggle="tooltip" 
                                 data-bs-placement="top" 
                                 title="Reset Filter">
                                     <i class="fas fa-sync-alt"></i>
                             </button>
-                        </h4>
+                        </h5>
                         <ul>
                             @foreach ($categories as $category)
                                 <li>

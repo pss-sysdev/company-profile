@@ -138,21 +138,37 @@
             }
         }
 
-        .about-title {
+        /* .about-title {
             text-align: center;
             font-size: 28px;
             font-weight: bold;
             margin-bottom: 15px;
             position: relative;
+        } */
+
+        .about-title {
+            text-align: center;
+            /* font-size: 28px; */
+            margin-bottom: 15px;
+            position: relative;
         }
 
-        .about-title::after {
+        /* .about-title::after {
             content: "";
             width: 130px;
             height: 3px;
             background-color: red;
             display: block;
             margin: 8px auto;
+        } */
+
+        .about-title::after {
+            content: "";
+            width: 100%;
+            height: 3px;
+            background-color: red;
+            display: block;
+            margin: 5px auto 0;
         }
 
         .content p {
@@ -252,6 +268,11 @@
         }
 
         @media (max-width: 768px) {
+            .header::after {
+                font-size: 32px;
+                top: 37%;
+            }
+            
             .card-container {
                 grid-template-columns: repeat(1, 1fr);
             }
@@ -265,6 +286,14 @@
                 border: none;
                 margin: auto;
                 padding: 24px 15px 15px 15px;
+            }
+        }
+
+        @media (max-width: 416px) {
+            .header::after {
+                font-size: 27px;
+                top: 33%;
+                right: 8px;
             }
         }
 
@@ -359,7 +388,10 @@
     @include('components_frontend.header')
 
     <div class="accordion-container">
-        <h2 class="about-title">About Us</h2>
+        <!-- <h2 class="about-title">About Us</h2> -->
+        <div class="d-flex justify-content-center">
+            <h3 class="about-title text-uppercase">About Us</h3>
+        </div>
     </div>
 
     {{-- Accordion --}}
@@ -425,51 +457,12 @@
     {{-- Visi, Misi Motto End --}}
 
     {{-- Client  --}}
-    {{-- <div class="container-fluid my-5">
-        <div class="we-provide-brands text-center">
-            <h2 class="title">Client</h2>
-        </div>
-
-        <!-- Carousel -->
-        <div id="brandCarouselClient" class="carousel slide mt-4 carousel-container" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class="d-flex justify-content-center gap-3">
-                        <img src="apex-1.0.0/img/fact-1.jpg" class="img-fluid" alt="Brand 1">
-                        <img src="apex-1.0.0/img/fact-2.jpg" class="img-fluid" alt="Brand 2">
-                        <img src="apex-1.0.0/img/fact-3.jpg" class="img-fluid" alt="Brand 3">
-                        <img src="apex-1.0.0/img/fact-3.jpg" class="img-fluid" alt="Brand 4">
-                        <img src="apex-1.0.0/img/fact-3.jpg" class="img-fluid" alt="Brand 5">
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class="d-flex justify-content-center gap-3">
-                        <img src="apex-1.0.0/img/fact-4.jpg" class="img-fluid" alt="Brand 6">
-                        <img src="apex-1.0.0/img/fact-3.jpg" class="img-fluid" alt="Brand 7">
-                        <img src="apex-1.0.0/img/fact-2.jpg" class="img-fluid" alt="Brand 8">
-                        <img src="apex-1.0.0/img/fact-2.jpg" class="img-fluid" alt="Brand 9">
-                        <img src="apex-1.0.0/img/fact-2.jpg" class="img-fluid" alt="Brand 10">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Controls -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselClient"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselClient"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
-            </button>
-        </div>
-    </div> --}}
 
     {{-- Client --}}
 
     <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
-            <h2 class="title">Client</h2>
+            <h4 class="title text-uppercase">Client</h4>
         </div>
 
         <div id="brandCarouselClient" class="carousel slide carousel-container" data-bs-ride="carousel" data-bs-interval="3000" data-bs-wrap="true">
@@ -552,7 +545,7 @@
 
     <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
-            <h2 class="title">Projects</h2>
+            <h4 class="title text-uppercase">Projects</h4>
         </div>
 
         <!-- Carousel -->

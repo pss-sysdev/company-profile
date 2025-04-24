@@ -1,14 +1,61 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-    <!-- Our Brands -->
-    <div class="container-fluid my-5">
-        <div class="find-more-about-our-brands"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-            <h2 class="title">Product Detail</h2>
+    
+    <style>
+        .breadcrumb {
+            background-color: transparent;
+            font-size: 0.9rem;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+        .breadcrumb a {
+            text-decoration: underline; /* show as link */
+            color: #3B3BE7; /* default blue color */
+            transition: color 0.2s ease-in-out;
+        }
+
+        .breadcrumb a:hover {
+            color: #dc3545; /* red on hover */
+        }
+
+        .breadcrumb {
+            --bs-breadcrumb-divider: '›'; /* or '»' */
+        }
+
+        .section-line {
+            width: 4px;
+            height: auto;
+            background-color: red;
+        }
+    </style>
+    <div class="container-fluid d-flex mt-4">
+        <div class="section-line" style="margin-right: 0.5rem;"></div>
+        <div aria-label="breadcrumb" class="m-0">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a href="{{ url('/') }}">Product</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{{ route('product', ['category[]' => $product->id_category]) }}">
+                        {{ $product->category_name ?? 'Category' }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {{ $product->name }}
+                </li>
+            </ol>
         </div>
     </div>
-    <!-- Our Brands End -->
+
+    <div class="container-fluid mt-3 mb-5">
+        <div class="find-more-about-our-brands"
+            style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <h3 class="title text-uppercase">Product Insights</h3>
+        </div>
+    </div>
+    
 
     {{-- Welding Machine Section  --}}
     <style>
@@ -31,7 +78,7 @@
         <section class="product-details">
             <div class="container">
                 <div class="row gx-60">
-                    <div class="col-lg-6">
+                    <div class="col-lg-5">
                         <div class="product-big-img">
                             <div class="img">
                                 <img src="{{ asset('uploads/' . $product->main_picture_url) }}" alt="Product Image"
@@ -39,7 +86,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-6">
+                    <div class="col-lg-7">
                         <div class="product-about position-relative">
                             <p class="price">
                                 @if (empty($product->price) || $product->price == 0)
@@ -103,8 +150,8 @@
 
 
                 <div class="space-top theme-red">
-                    <div class="title-area text-center">
-                        <h2 class="sec-title">Related Products</h2>
+                    <div class="title-area text-center mb-3">
+                        <h4 class="sec-title text-uppercase">Related Products</h4>
                     </div>
                     <div class="row as-carousel product-slider g-0" data-slide-show="4" data-lg-slide-show="3"
                         data-md-slide-show="2" data-sm-slide-show="2" data-xs-slide-show="1" data-arrows="true"

@@ -194,7 +194,7 @@
         }
 
         .section-line {
-            width: 5px;
+            width: 4px;
             height: 25px;
             background-color: red;
         }

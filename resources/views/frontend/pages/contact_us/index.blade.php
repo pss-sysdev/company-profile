@@ -174,20 +174,37 @@
             width: 100%;
         }
 
-        .underline-title {
+        /* .underline-title {
             font-size: 28px;
             font-weight: bold;
             position: relative;
             display: inline-block;
             margin-bottom: 10px;
             text-align: center;
+        } */
+        
+        .underline-title {
+            /* font-size: 28px; */
+            position: relative;
+            display: inline-block;
+            margin-bottom: 10px;
+            text-align: center;
         }
-
-        .underline-title::after {
+ 
+        /* .underline-title::after {
             content: "";
             display: block;
             width: 40%;
             max-width: 160px;
+            height: 3px;
+            background: red;
+            margin: 5px auto 0;
+        }  */
+       
+        .underline-title::after {
+            content: "";
+            display: block;
+            width: 100%;
             height: 3px;
             background: red;
             margin: 5px auto 0;
@@ -326,7 +343,11 @@
 
     <section class="contact-us py-5">
         <div class="container">
-            <h2 class="text-center fw-bold underline-title">Contact Us</h2>
+            <!-- <h2 class="text-center fw-bold underline-title">Contact Us</h2> -->
+
+            <div class="d-flex justify-content-center">
+                <h3 class="underline-title text-uppercase">Contact Us</h3>
+            </div>
             <p class="text-center">
                 If you have any questions, feel free to reach out! You can contact us by email or give us a call during
                 our business hours (Monday to Saturday, 8:00 AM – 5:30 PM). Alternatively, you can also fill the

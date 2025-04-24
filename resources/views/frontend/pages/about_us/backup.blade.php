@@ -138,21 +138,37 @@
             }
         }
 
-        .about-title {
+        /* .about-title {
             text-align: center;
             font-size: 28px;
             font-weight: bold;
             margin-bottom: 15px;
             position: relative;
+        } */
+
+        .about-title {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 15px;
+            position: relative;
         }
 
-        .about-title::after {
+        /* .about-title::after {
             content: "";
             width: 130px;
             height: 3px;
             background-color: red;
             display: block;
             margin: 8px auto;
+        } */
+
+        .about-title::after {
+            content: "";
+            width: 100%;
+            height: 3px;
+            background-color: red;
+            display: block;
+            margin: 5px auto 0;
         }
 
         .content p {
