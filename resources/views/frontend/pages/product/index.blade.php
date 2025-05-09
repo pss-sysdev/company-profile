@@ -42,7 +42,7 @@
                                     {{ $loop->last ? $sc->name : $sc->name . ', ' }}
                                 @endforeach
                             @else
-                                All Product
+                                All Products
                             @endif
                         </h4>
                         <h6 class="mb-0 text-uppercase">Brand Includes</h6>

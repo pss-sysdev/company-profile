@@ -61,7 +61,7 @@ class BrandController extends Controller
         //     ->get();
         $brand = DB::table('brand as A')
             ->join('brand_section as B', 'A.id', '=', 'B.brand_id')
-            ->select('A.*', 'B.*')
+            ->select('A.id as b_id','A.*', 'B.*')
             ->where('A.url', $slug)
             ->where('A.is_own', 1)
             ->get();
@@ -78,7 +78,7 @@ class BrandController extends Controller
         $title         = 'Brand Detail - Perintis Sukses Sejahtera';
         $brandCategory = DB::table('product as a')
             ->distinct()
-            ->select('b.id', 'b.name', 'b.banner_picture', 'c.name as category_name', 'c.id as category_id', 'c.parent_cat_id', 'd.name as parent_cat_name', 'a.name as product_name', 'a.id as product_id', 'a.main_picture_url')
+            ->select('b.id', 'b.name', 'b.banner_picture', 'c.name as category_name', 'c.id as category_id', 'c.parent_cat_id', 'd.name as parent_cat_name', 'a.name as product_name', 'a.id as product_id', 'a.main_picture_url', 'a.slug')
             ->join('brand as b', 'a.id_brand', '=', 'b.id')
             ->join('category as c', 'a.id_category', '=', 'c.id')
             ->Leftjoin('category as d', 'c.parent_cat_id', '=', 'd.id')

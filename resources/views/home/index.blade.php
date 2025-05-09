@@ -65,11 +65,14 @@
         }
 
         .product-item img {
+            aspect-ratio: 1 / 1;
             width: 100%;
-            height: 140px;
             object-fit: contain;
+            display: block;
             margin-bottom: 10px;
+            background-color: #f0f0f000; /* fallback background */
         }
+
 
         .product-item:hover {
             transform: scale(1.05);

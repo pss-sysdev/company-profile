@@ -246,7 +246,7 @@
     <div class="product-section">
         <div class="product-grid">
             @foreach ($listProduct as $value)
-                <div class="product-card">
+                <div class="product-card" onclick="window.location='{{ route('product.detail', ['slug' => $value->slug]) }}'" style="cursor: pointer;">
                     <img src="{{ asset('uploads/' . $value->main_picture_url) }}" alt="{{ $value->product_name }}"
                         class="product-image">
                     <div class="product-info">
@@ -262,7 +262,7 @@
         </div>
 
         <!-- Explore Link -->
-        <a href="#" class="explore-link">Explore Nishida Product</a>
+        <a href="{{ route('product', ['brand[]' => $brand->first()->b_id]) }}" class="explore-link">Explore {{ $brand->first()->title }} Product</a>
         <br><br>
     </div>
 

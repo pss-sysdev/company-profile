@@ -25,6 +25,14 @@
                 font-size: 12px;
             }
         }
+
+        .truncate-multiline {
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* limit to 2 lines */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
         
 
     </style>
@@ -45,10 +53,18 @@
                 data-id="{{ $value->id }}"
                 data-name="{{ $value->name }}"
                 href="{{ route('product', ['category[]' => $value->id]) }}"
-                style="cursor: pointer;">
-
-                    <img src="{{ asset('uploads/' . $value->picture_url) }}" alt="{{ $value->name }}">
-                    <h5>{{ $value->name }}</h5>
+                style="cursor: pointer;justify-items: center;place-items: center;">
+                    <div class="image-wrapper">
+                        <img src="{{ asset('uploads/' . $value->picture_url) }}"
+                            alt="{{ $value->name }}">
+                    </div>
+                    <h6 style="margin: 2px;">{{ $value->name }}</h6>
+                    <p class="truncate-multiline" style="font-size: 14px; margin: 0;font-weight: 500;">
+                        <!-- @foreach ($productSubCat[$value->id] ?? [] as $subValue)
+                            {{ $subValue->name }}
+                        @endforeach -->
+                        {{ collect($productSubCat[$value->id] ?? [])->pluck('name')->implode(', ') }}
+                    </p>
             </a>
             @endforeach
         </div>
@@ -222,13 +238,13 @@
             aspect-ratio: 285 / 118;
         }
     </style>
-    <div class="container-fluid my-5">
+    <div class="container-fluid my-5" style="justify-items: center;">
         <div class="find-more-about-our-brands"
             style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
             <h3 class="title text-uppercase">Find More About Our Brands</h3>
         </div>
 
-        <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
+        <div class="row row-cols-lg-4 row-cols-md-2 row-cols-2 g-4 justify-content-center" style="width: 85%;">
             @foreach ($categoryOnBrand as $value)
                 <div class="col" style="justify-items: center; align-items: center; text-align: -webkit-center; place-items: center;">
                     <a class="card border-0 text-center shadow-sm own-brand-card" href="{{ route('page', $value->url) }}" style="justify-self: center;">

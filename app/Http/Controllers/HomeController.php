@@ -19,8 +19,15 @@ class HomeController extends Controller
                 $query->where('parent_cat_id', 0)
                     ->orWhereNull('parent_cat_id');
             })
-            ->limit(10)
             ->get();
+
+        $productSubCat = Category::where('is_discontinue', 0)
+            ->where(function ($query) {
+                $query->whereNotNull('parent_cat_id')
+                    ->where('parent_cat_id', '!=', 0);
+            })
+            ->get()
+            ->groupBy('parent_cat_id');
 
         $product         = DB::table('category as A')
             ->join('product as B', 'A.id', '=', 'B.id_category')
@@ -48,6 +55,7 @@ class HomeController extends Controller
             'title'           => $title,
             'Setting'         => $setting,
             'productCategory' => $productCategory,
+            'productSubCat'   => $productSubCat,
             'product'         => $product,
             'brand'           => $brand,
             'categoryOnBrand' => categoryOnBrand(),
