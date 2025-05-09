@@ -36,7 +36,7 @@ class OwnerCategoryController extends Controller
             'name'          => ['required'],
             'category_code' => ['required'],
             // 'sub_category_name' => ['required'],
-            'picture_url' => ['required', 'mimes:jpeg,png,gif']
+            'picture_url' => ['required', 'mimes:jpg,jpeg,png,gif']
         ]);
 
         $category                    = new Category();
@@ -77,6 +77,10 @@ class OwnerCategoryController extends Controller
         ]);
 
         if ($request->hasFile('picture_url')) {
+            $request->validate([
+                'picture_url' => 'mimes:jpg,jpeg,png',
+            ]);
+            
             if ($category->picture_url) {
                 $file = public_path('uploads/' . $category->picture_url);
             

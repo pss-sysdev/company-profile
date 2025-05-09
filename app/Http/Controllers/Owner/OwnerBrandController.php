@@ -30,9 +30,9 @@ class OwnerBrandController extends Controller
         $rules = [
             'name' => ['required', 'unique:brand'],
             'url' => ['required', 'alpha_dash', 'unique:brand,url'],
-            'logo_picture' => ['required', 'mimes:jpeg,png,gif'],
+            'logo_picture' => ['required', 'mimes:jpg,jpeg,png,gif'],
             // 'logo_picture2' => ['nullable', 'mimes:jpeg,png,gif'],
-            'banner_picture' => ['nullable', 'mimes:jpeg,png,gif'],
+            'banner_picture' => ['nullable', 'mimes:jpg,jpeg,png,gif'],
             // 'bg_logo_picture' => ['nullable', 'mimes:jpeg,png,gif'],
         ];
     

@@ -48,7 +48,7 @@ class OwnerProductController extends Controller
             'description' => ['required'],
             'price' => ['required'],
             'sku_code' => ['required'],
-            'main_picture_url' => ['required', 'mimes:jpeg,png,gif'],
+            'main_picture_url' => ['required', 'mimes:jpg,jpeg,png,gif'],
         ]);
 
         $slug = Str::slug($request->slug ?? $request->name, '-');
@@ -124,9 +124,13 @@ class OwnerProductController extends Controller
             // 'description' => ['required'],
             'price' => ['required'],
             'sku_code' => ['required'],
+            'main_picture_url' => 'mimes:jpg,jpeg,png',
         ]);
 
         if ($request->hasFile('main_picture_url')) {
+            $request->validate([
+                'main_picture_url' => 'mimes:jpg,jpeg,png',
+            ]);
             if ($product->main_picture_url) {
                 $file = public_path('uploads/' . $product->main_picture_url);
 
