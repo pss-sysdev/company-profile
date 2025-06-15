@@ -198,10 +198,6 @@
             white-space: nowrap;
         }
 
-        .h3, h3 {
-            font-size: 20px;
-        }
-
         .h6, h6 {
             font-size: 18px;
         }
@@ -254,7 +250,7 @@
             .h3, h3 {
                 font-size: 20px;
             }
-            
+
             .h6, h6 {
                 font-size: 14px;
             }
