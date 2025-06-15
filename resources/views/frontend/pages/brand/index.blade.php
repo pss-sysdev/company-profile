@@ -109,7 +109,7 @@
             <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
                 @foreach ($categoryOnBrand as $value)
                     <div class="col">
-                        <div class="card border-0 text-center shadow-sm own-brand-card">
+                        <div class="card border-0 text-center own-brand-card" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                             <a href="{{ route('page', $value->url) }}">
                                 <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid own-brand-img"
                                     alt="{{ $value->name }}">
@@ -134,7 +134,7 @@
                 <div class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-2 g-3 g-md-4 mt-3">
                     @foreach ($brand->where('group_id', $brandCategory->group_id) as $value)
                         <a class="col" href="{{ route('product', ['category[]' => $value->group_id, 'brand[]' => $value->id]) }}">
-                            <div class="card border-0 text-center shadow-sm own-brand-card">
+                            <div class="card border-0 text-center own-brand-card" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                                 <img src="{{ asset('uploads/' . $value->logo_picture) }}"
                                     class="card-img-top img-fluid own-brand-cat-img" alt="{{ $value->name }}">
                             </div>

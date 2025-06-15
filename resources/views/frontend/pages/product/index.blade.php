@@ -57,7 +57,7 @@
                                         data-type="brand"
                                         data-id="{{ $brand->id }}"
                                         style="margin-bottom: 8px;">
-                                        <div class="wrapper-item shadow-sm filter-brand {{ in_array($brand->id, request()->input('brand', [])) ? 'active' : '' }}">
+                                        <div class="wrapper-item filter-brand {{ in_array($brand->id, request()->input('brand', [])) ? 'active' : '' }}" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                                             <img src="{{ asset('uploads/' . $brand->logo_picture) }}" alt="{{ $brand->name }}" class="brand-logo" >
                                         </div>
                                     </a>
@@ -192,51 +192,106 @@
     </div>
     
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const images = document.querySelectorAll('.brand-logo');
+        // document.addEventListener("DOMContentLoaded", () => {
+        //     const images = document.querySelectorAll('.brand-logo');
 
-            images.forEach(img => {
-                const wrapper = img.closest('.wrapper-item');
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
+        //     images.forEach(img => {
+        //         const wrapper = img.closest('.wrapper-item');
+        //         const canvas = document.createElement('canvas');
+        //         const ctx = canvas.getContext('2d');
 
-                img.crossOrigin = "anonymous"; // just in case
-                img.onload = function () {
-                    const width = img.naturalWidth;
-                    const height = img.naturalHeight;
-                    canvas.width = width;
-                    canvas.height = height;
-                    ctx.drawImage(img, 0, 0, width, height);
+        //         img.crossOrigin = "anonymous"; // just in case
+        //         img.onload = function () {
+        //             const width = img.naturalWidth;
+        //             const height = img.naturalHeight;
+        //             canvas.width = width;
+        //             canvas.height = height;
+        //             ctx.drawImage(img, 0, 0, width, height);
 
-                    const step = 5;
-                    const edgePixels = [];
+        //             const step = 5;
+        //             const edgePixels = [];
 
-                    for (let x = 0; x < width; x += step) {
-                        edgePixels.push(...ctx.getImageData(x, 0, 1, 1).data); // top
-                        edgePixels.push(...ctx.getImageData(x, height - 1, 1, 1).data); // bottom
+        //             for (let x = 0; x < width; x += step) {
+        //                 edgePixels.push(...ctx.getImageData(x, 0, 1, 1).data); // top
+        //                 edgePixels.push(...ctx.getImageData(x, height - 1, 1, 1).data); // bottom
+        //             }
+        //             for (let y = 0; y < height; y += step) {
+        //                 edgePixels.push(...ctx.getImageData(0, y, 1, 1).data); // left
+        //                 edgePixels.push(...ctx.getImageData(width - 1, y, 1, 1).data); // right
+        //             }
+
+        //             let r = 0, g = 0, b = 0, count = 0;
+        //             for (let i = 0; i < edgePixels.length; i += 4) {
+        //                 r += edgePixels[i];
+        //                 g += edgePixels[i + 1];
+        //                 b += edgePixels[i + 2];
+        //                 count++;
+        //             }
+
+        //             r = Math.round(r / count);
+        //             g = Math.round(g / count);
+        //             b = Math.round(b / count);
+
+        //             const avgColor = `rgb(${r}, ${g}, ${b})`;
+        //             wrapper.style.backgroundColor = avgColor;
+        //         };
+        //     });
+        // });
+        document.addEventListener('DOMContentLoaded', function () {
+            const applyEdgeBasedBgColor = (imgSelector, wrapperSelector) => {
+                const images = document.querySelectorAll(imgSelector);
+
+                images.forEach((img) => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    const applyColor = () => {
+                        canvas.width = img.naturalWidth;
+                        canvas.height = img.naturalHeight;
+
+                        if (canvas.width === 0 || canvas.height === 0) return;
+
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                        let chosenPixel = null;
+                        
+                        for (let y = 0; y < canvas.height; y += 5) {
+                            const [r, g, b, a] = ctx.getImageData(1, y, 1, 1).data;
+
+                            if (a > 0) {
+                                chosenPixel = { r, g, b, a };
+                                break;
+                            }
+                        }
+
+                        const wrapper = img.closest(wrapperSelector);
+
+                        if (!chosenPixel || !wrapper) {
+                            wrapper.style.backgroundColor = '#ffffff';
+                            return;
+                        }
+
+                        const { r, g, b, a } = chosenPixel;
+
+                        if (a < 255) {
+                            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                            wrapper.style.backgroundColor = brightness > 128 ? 'black' : 'white';
+                        } else {
+                            wrapper.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                        }
+                    };
+
+                    if (img.complete && img.naturalWidth > 0) {
+                        applyColor();
+                    } else {
+                        img.addEventListener('load', applyColor);
                     }
-                    for (let y = 0; y < height; y += step) {
-                        edgePixels.push(...ctx.getImageData(0, y, 1, 1).data); // left
-                        edgePixels.push(...ctx.getImageData(width - 1, y, 1, 1).data); // right
-                    }
+                });
+            };
 
-                    let r = 0, g = 0, b = 0, count = 0;
-                    for (let i = 0; i < edgePixels.length; i += 4) {
-                        r += edgePixels[i];
-                        g += edgePixels[i + 1];
-                        b += edgePixels[i + 2];
-                        count++;
-                    }
-
-                    r = Math.round(r / count);
-                    g = Math.round(g / count);
-                    b = Math.round(b / count);
-
-                    const avgColor = `rgb(${r}, ${g}, ${b})`;
-                    wrapper.style.backgroundColor = avgColor;
-                };
-            });
+            applyEdgeBasedBgColor('.brand-logo', '.wrapper-item');
         });
+
 
         document.querySelectorAll('.filter-btn').forEach(button => {
             button.addEventListener('click', () => {
@@ -290,77 +345,10 @@
             const path = url.pathname; // Keep /product
             window.location.href = path; // Redirect to /product without filters
         });
+        
     </script>
+    
 
     {{-- STEEL BEVEL & PRESSURE PAINT End --}}
 @endsection
 
-
-{{-- @push('modal')
-    <div id="QuickView" class="white-popup mfp-hide">
-        <div class="container bg-white position-relative">
-            <div class="row gx-60">
-                <div class="col-lg-6">
-                    <div class="product-big-img">
-                        <div class="img">
-                            <img src="assets/img/product/product_1_1.png" alt="Product Image" />
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 align-self-center">
-                    <div class="product-about">
-                        <p class="price">$125.00</p>
-                        <h2 class="product-title">Brembo Disc Brake S2</h2>
-                        <div class="product-rating">
-                            <div class="star-rating" role="img" aria-label="Rated 5.00 out of 5">
-                                <span style="width: 100%">Rated <strong class="rating">5.00</strong> out of 5 based
-                                    on <span class="rating">1</span> customer rating</span>
-                            </div>
-                            <a href="shop-details.html" class="woocommerce-review-link">(<span class="count">2</span>
-                                customer reviews)</a>
-                        </div>
-                        <p class="text">
-                            Syndicate customized growth strategies prospective human capital
-                            leverage other's optimal e-markets without transparent catalysts
-                            for change.
-                        </p>
-                        <div class="checklist">
-                            <ul>
-                                <li>
-                                    <i class="far fa-circle-check"></i> Lifetime structural, one
-                                    year face finish warranty
-                                </li>
-                                <li>
-                                    <i class="far fa-circle-check"></i>Mapped from “Center Caps”
-                                    under ” tment” tab
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="actions">
-                            <div class="quantity">
-                                <input type="number" class="qty-input" step="1" min="1" max="100"
-                                    name="quantity" value="1" title="Qty" />
-                                <button class="quantity-plus qty-btn">
-                                    <i class="far fa-chevron-up"></i>
-                                </button>
-                                <button class="quantity-minus qty-btn">
-                                    <i class="far fa-chevron-down"></i>
-                                </button>
-                            </div>
-                            <button class="as-btn">Add to Cart</button>
-                        </div>
-                        <div class="product_meta">
-                            <span class="sku_wrapper">SKU: <span class="sku">wheel-fits-chevy-camaro</span></span>
-                            <span class="posted_in">Category:
-                                <a href="shop.html" rel="tag">Tires & Wheels</a></span>
-                            <span>Tags: <a href="shop.html">automotive parts</a><a href="shop.html">wheels</a></span>
-                        </div>
-                    </div>
-                    <button title="Close (Esc)" type="button" class="mfp-close">
-                        ×
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-@endpush --}}

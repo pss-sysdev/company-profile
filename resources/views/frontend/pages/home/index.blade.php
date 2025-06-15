@@ -58,8 +58,8 @@
                         <img src="{{ asset('uploads/' . $value->picture_url) }}"
                             alt="{{ $value->name }}">
                     </div>
-                    <h6 style="margin: 2px;">{{ $value->name }}</h6>
-                    <p class="truncate-multiline" style="font-size: 14px; margin: 0;font-weight: 500;">
+                    <h6 style="margin: 2px 2px 4px 2px;line-height: 1.3;">{{ $value->name }}</h6>
+                    <p class="truncate-multiline" style="margin: 0;font-weight: 500;line-height: 1.3;">
                         <!-- @foreach ($productSubCat[$value->id] ?? [] as $subValue)
                             {{ $subValue->name }}
                         @endforeach -->
@@ -247,7 +247,7 @@
         <div class="row row-cols-lg-4 row-cols-md-2 row-cols-2 g-4 justify-content-center" style="width: 85%;">
             @foreach ($categoryOnBrand as $value)
                 <div class="col" style="justify-items: center; align-items: center; text-align: -webkit-center; place-items: center;">
-                    <a class="card border-0 text-center shadow-sm own-brand-card" href="{{ route('page', $value->url) }}" style="justify-self: center;">
+                    <a class="card border-0 text-center own-brand-card" href="{{ route('page', $value->url) }}" style="justify-self: center;box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                         <img src="{{ asset('uploads/' . $value->logo_picture) }}"
                             class="card-img-top img-fluid resized-img own-brand-img" alt="{{ $value->name }}">
                     </a>

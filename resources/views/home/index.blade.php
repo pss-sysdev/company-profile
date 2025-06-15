@@ -325,22 +325,22 @@
 
         <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
             <div class="col">
-                <div class="card border-0 text-center shadow-sm p-3">
+                <div class="card border-0 text-center p-3" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                     <img src="apex-1.0.0/img/fact-1.jpg" class="card-img-top img-fluid" alt="Product 1">
                 </div>
             </div>
             <div class="col">
-                <div class="card border-0 text-center shadow-sm p-3">
+                <div class="card border-0 text-center p-3" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                     <img src="apex-1.0.0/img/fact-2.jpg" class="card-img-top img-fluid" alt="Product 2">
                 </div>
             </div>
             <div class="col">
-                <div class="card border-0 text-center shadow-sm p-3">
+                <div class="card border-0 text-center p-3" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                     <img src="apex-1.0.0/img/fact-3.jpg" class="card-img-top img-fluid" alt="Product 3">
                 </div>
             </div>
             <div class="col">
-                <div class="card border-0 text-center shadow-sm p-3">
+                <div class="card border-0 text-center p-3" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                     <img src="apex-1.0.0/img/fact-4.jpg" class="card-img-top img-fluid" alt="Product 4">
                 </div>
             </div>
