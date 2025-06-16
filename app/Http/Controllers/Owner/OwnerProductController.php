@@ -12,6 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class OwnerProductController extends Controller
 {
@@ -39,55 +42,126 @@ class OwnerProductController extends Controller
         ]);
     }
 
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'name' => ['required', 'unique:product'],
+    //         'id_category' => ['required'],
+    //         'id_brand' => ['required'],
+    //         'description' => ['required'],
+    //         'price' => ['required'],
+    //         'sku_code' => ['required'],
+    //         'main_picture_url' => ['required', 'mimes:jpg,jpeg,png,gif'],
+    //     ]);
+
+    //     $slug = Str::slug($request->slug ?? $request->name, '-');
+
+    //     if (Product::where('slug', $slug)->exists()) {
+    //         return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
+    //     }
+
+    //     $product = new Product();
+
+    //     $final_name = 'main_picture_url_' . time() . '.' . $request->main_picture_url->extension();
+    //     $request->main_picture_url->move(public_path('uploads'), $final_name);
+    //     $product->main_picture_url = $final_name;
+
+    //     $product->name = $request->name;
+    //     $product->slug = $slug;
+    //     $product->id_category = $request->id_category;
+    //     $product->id_brand = $request->id_brand;
+    //     $product->description = $request->description;
+    //     $product->price = $request->price;
+    //     $product->sku_code = $request->sku_code;
+    //     $product->is_top_product = $request->is_top_product;
+    //     $product->is_discontinue = $request->is_discontinue;
+    //     $product->is_rental = $request->is_rental;
+    //     $product->is_indent = $request->is_indent;
+    //     $product->rental_price = $request->rental_price ?? '';
+    //     $product->save();
+
+    //     $dataProductSpec = $this->mappingDataAdditionalInformation($request, $product);
+    //     if ($dataProductSpec != null)
+    //         foreach ($dataProductSpec as $data) {
+    //             ProductSpec::create($data);
+    //         }
+
+    //     $dataExternalLink = $this->mappingDataExternalLink($request, $product);
+    //     if ($dataExternalLink != null)
+    //         foreach ($dataExternalLink as $data) {
+    //             ProductExternalLink::create($data);
+    //         }
+
+    //     return redirect()->route('owner.product')->with('success', __('Data is added successfully'));
+    // }
+
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'unique:product'],
-            'id_category' => ['required'],
-            'id_brand' => ['required'],
-            'description' => ['required'],
-            'price' => ['required'],
-            'sku_code' => ['required'],
-            'main_picture_url' => ['required', 'mimes:jpg,jpeg,png,gif'],
+            'name'             => ['required', 'unique:product'],
+            'id_category'      => ['required'],
+            'id_brand'         => ['required'],
+            'description'      => ['required'],
+            'price'            => ['required'],
+            'sku_code'         => ['required'],
+            'main_picture_url' => ['required', 'mimes:jpg,jpeg,png,gif,webp'],
         ]);
 
         $slug = Str::slug($request->slug ?? $request->name, '-');
-
         if (Product::where('slug', $slug)->exists()) {
-            return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
+            return redirect()->back()
+                ->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])
+                ->withInput();
         }
 
         $product = new Product();
+        
+        if ($request->hasFile('main_picture_url')) {
+            $image = $request->file('main_picture_url');
+            $filenameOnly = 'main_picture_url_' . time() . '.webp';
+            $filename = 'product/' . $filenameOnly;
+            $destination = public_path('uploads/' . $filename);
 
-        $final_name = 'main_picture_url_' . time() . '.' . $request->main_picture_url->extension();
-        $request->main_picture_url->move(public_path('uploads'), $final_name);
-        $product->main_picture_url = $final_name;
+            $directory = dirname($destination);
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0755, true);
+            }
 
-        $product->name = $request->name;
-        $product->slug = $slug;
-        $product->id_category = $request->id_category;
-        $product->id_brand = $request->id_brand;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->sku_code = $request->sku_code;
-        $product->is_top_product = $request->is_top_product;
-        $product->is_discontinue = $request->is_discontinue;
-        $product->is_rental = $request->is_rental;
-        $product->is_indent = $request->is_indent;
-        $product->rental_price = $request->rental_price ?? '';
+            $manager = new ImageManager(new Driver());
+            $manager->read($image->getRealPath())
+                ->toWebp(80)
+                ->save($destination);
+
+            $product->main_picture_url = $filename;
+        }
+
+        $product->name            = $request->name;
+        $product->slug            = $slug;
+        $product->id_category     = $request->id_category;
+        $product->id_brand        = $request->id_brand;
+        $product->description     = $request->description;
+        $product->price           = $request->price;
+        $product->sku_code        = $request->sku_code;
+        $product->is_top_product  = $request->is_top_product;
+        $product->is_discontinue  = $request->is_discontinue;
+        $product->is_rental       = $request->is_rental;
+        $product->is_indent       = $request->is_indent;
+        $product->rental_price    = $request->rental_price ?? 0;
         $product->save();
 
         $dataProductSpec = $this->mappingDataAdditionalInformation($request, $product);
-        if ($dataProductSpec != null)
+        if ($dataProductSpec) {
             foreach ($dataProductSpec as $data) {
                 ProductSpec::create($data);
             }
+        }
 
         $dataExternalLink = $this->mappingDataExternalLink($request, $product);
-        if ($dataExternalLink != null)
+        if ($dataExternalLink) {
             foreach ($dataExternalLink as $data) {
                 ProductExternalLink::create($data);
             }
+        }
 
         return redirect()->route('owner.product')->with('success', __('Data is added successfully'));
     }
@@ -107,73 +181,74 @@ class OwnerProductController extends Controller
 
     public function update(Request $request, $id)
     {
-        $product = Product::find($id);
+        $product = Product::findOrFail($id);
 
         $request->validate([
-            'name' => [
-                'required',
-                Rule::unique('product')->ignore($product->id)
-            ],
-            // 'slug' => [
-            //     'required',
-            //     'alpha_dash',
-            //     Rule::unique('product')->ignore($product->id)
-            // ],
+            'name' => ['required', Rule::unique('product')->ignore($product->id)],
             'id_category' => ['required'],
             'id_brand' => ['required'],
-            // 'description' => ['required'],
             'price' => ['required'],
             'sku_code' => ['required'],
-            'main_picture_url' => 'mimes:jpg,jpeg,png',
+            'main_picture_url' => ['nullable', 'mimes:jpg,jpeg,png,gif,webp'],
         ]);
-
+        
         if ($request->hasFile('main_picture_url')) {
-            $request->validate([
-                'main_picture_url' => 'mimes:jpg,jpeg,png',
-            ]);
-            if ($product->main_picture_url) {
-                $file = public_path('uploads/' . $product->main_picture_url);
-
-                if (file_exists($file)) {
-                    unlink($file);
+            if (!empty($product->main_picture_url)) {
+                $oldPath = public_path('uploads/' . $product->main_picture_url);
+                if (file_exists($oldPath)) {
+                    unlink($oldPath);
                 }
             }
 
-            $final_name = 'main_picture_url_' . time() . '.' . $request->main_picture_url->extension();
-            $request->main_picture_url->move(public_path('uploads'), $final_name);
-            $product->main_picture_url = $final_name;
+            $image = $request->file('main_picture_url');
+            $filenameOnly = 'main_picture_url_' . time() . '.webp';
+            $filename = 'product/' . $filenameOnly;
+            $destination = public_path('uploads/' . $filename);
+
+            $directory = dirname($destination);
+            if (!File::exists($directory)) {
+                File::makeDirectory($directory, 0755, true);
+            }
+
+            $manager = new ImageManager(new Driver());
+            $manager->read($image->getRealPath())
+                ->toWebp(80)
+                ->save($destination);
+
+            $product->main_picture_url = $filename;
         }
 
         $slug = Str::slug($request->slug ?? $request->name, '-');
-
         if (Product::where('slug', $slug)->where('id', '!=', $product->id)->exists()) {
-            return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
+            return redirect()->back()
+                ->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])
+                ->withInput();
         }
 
-
-        $product->name = $request->name;
-        $product->slug = $slug;
-        $product->id_category = $request->id_category;
-        $product->id_brand = $request->id_brand;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->sku_code = $request->sku_code;
-        $product->is_top_product = $request->is_top_product;
-        $product->is_discontinue = $request->is_discontinue;
-        $product->is_rental = $request->is_rental;
-        $product->is_indent = $request->is_indent;
-        $product->rental_price = $request->rental_price ?? '';
+        $product->name            = $request->name;
+        $product->slug            = $slug;
+        $product->id_category     = $request->id_category;
+        $product->id_brand        = $request->id_brand;
+        $product->description     = $request->description;
+        $product->price           = $request->price;
+        $product->sku_code        = $request->sku_code;
+        $product->is_top_product  = $request->is_top_product;
+        $product->is_discontinue  = $request->is_discontinue;
+        $product->is_rental       = $request->is_rental;
+        $product->is_indent       = $request->is_indent;
+        $product->rental_price    = $request->rental_price ?? '';
         $product->update();
 
         $dataProductSpec = $this->mappingDataAdditionalInformation($request, $product);
-        if ($dataProductSpec != null) {
+        if ($dataProductSpec) {
             ProductSpec::where('product_id', $product->id)->delete();
             foreach ($dataProductSpec as $data) {
                 ProductSpec::create($data);
             }
         }
+
         $dataExternalLink = $this->mappingDataExternalLink($request, $product);
-        if ($dataExternalLink != null) {
+        if ($dataExternalLink) {
             ProductExternalLink::where('product_id', $product->id)->delete();
             foreach ($dataExternalLink as $data) {
                 ProductExternalLink::create($data);
@@ -182,6 +257,84 @@ class OwnerProductController extends Controller
 
         return redirect()->route('owner.product')->with('success', __('Data is updated successfully'));
     }
+
+    // public function update(Request $request, $id)
+    // {
+    //     $product = Product::find($id);
+
+    //     $request->validate([
+    //         'name' => [
+    //             'required',
+    //             Rule::unique('product')->ignore($product->id)
+    //         ],
+    //         // 'slug' => [
+    //         //     'required',
+    //         //     'alpha_dash',
+    //         //     Rule::unique('product')->ignore($product->id)
+    //         // ],
+    //         'id_category' => ['required'],
+    //         'id_brand' => ['required'],
+    //         // 'description' => ['required'],
+    //         'price' => ['required'],
+    //         'sku_code' => ['required'],
+    //         'main_picture_url' => 'mimes:jpg,jpeg,png',
+    //     ]);
+
+    //     if ($request->hasFile('main_picture_url')) {
+    //         $request->validate([
+    //             'main_picture_url' => 'mimes:jpg,jpeg,png',
+    //         ]);
+    //         if ($product->main_picture_url) {
+    //             $file = public_path('uploads/' . $product->main_picture_url);
+
+    //             if (file_exists($file)) {
+    //                 unlink($file);
+    //             }
+    //         }
+
+    //         $final_name = 'main_picture_url_' . time() . '.' . $request->main_picture_url->extension();
+    //         $request->main_picture_url->move(public_path('uploads'), $final_name);
+    //         $product->main_picture_url = $final_name;
+    //     }
+
+    //     $slug = Str::slug($request->slug ?? $request->name, '-');
+
+    //     if (Product::where('slug', $slug)->where('id', '!=', $product->id)->exists()) {
+    //         return redirect()->back()->withErrors(['slug' => 'Product slug/url already exists. Try a different name.'])->withInput();
+    //     }
+
+
+    //     $product->name = $request->name;
+    //     $product->slug = $slug;
+    //     $product->id_category = $request->id_category;
+    //     $product->id_brand = $request->id_brand;
+    //     $product->description = $request->description;
+    //     $product->price = $request->price;
+    //     $product->sku_code = $request->sku_code;
+    //     $product->is_top_product = $request->is_top_product;
+    //     $product->is_discontinue = $request->is_discontinue;
+    //     $product->is_rental = $request->is_rental;
+    //     $product->is_indent = $request->is_indent;
+    //     $product->rental_price = $request->rental_price ?? '';
+    //     $product->update();
+
+    //     $dataProductSpec = $this->mappingDataAdditionalInformation($request, $product);
+    //     if ($dataProductSpec != null) {
+    //         ProductSpec::where('product_id', $product->id)->delete();
+    //         foreach ($dataProductSpec as $data) {
+    //             ProductSpec::create($data);
+    //         }
+    //     }
+    //     $dataExternalLink = $this->mappingDataExternalLink($request, $product);
+    //     if ($dataExternalLink != null) {
+    //         ProductExternalLink::where('product_id', $product->id)->delete();
+    //         foreach ($dataExternalLink as $data) {
+    //             ProductExternalLink::create($data);
+    //         }
+    //     }
+
+    //     return redirect()->route('owner.product')->with('success', __('Data is updated successfully'));
+    // }
 
     public function destroy($id)
     {
