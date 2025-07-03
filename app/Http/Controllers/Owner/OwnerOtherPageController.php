@@ -14,32 +14,32 @@ class OwnerOtherPageController extends Controller
         $company = CompanyProfile::find(1);
         return view('owner.pages.other_page.index', [
             'type_menu' => 'other-page',
-            'company' => $company
+            'company'   => $company
         ]);
     }
 
     public function updatePageAboutUs(Request $request)
     {
         $request->validate([
-            'overview' => ['required'],
-            'history' => ['required'],
-            'growth' => ['required'],
+            'overview'   => ['required'],
+            'history'    => ['required'],
+            'growth'     => ['required'],
             'industries' => ['required'],
             'commitment' => ['required'],
-            'vision' => ['required'],
-            'mission' => ['required'],
-            'motto' => ['required'],
+            'vision'     => ['required'],
+            'mission'    => ['required'],
+            'motto'      => ['required'],
         ]);
 
-        $company = CompanyProfile::find(1);
-        $company->overview = $request->overview;
-        $company->history = $request->history;
-        $company->growth = $request->growth;
+        $company             = CompanyProfile::find(1);
+        $company->overview   = $request->overview;
+        $company->history    = $request->history;
+        $company->growth     = $request->growth;
         $company->industries = $request->industries;
         $company->commitment = $request->commitment;
-        $company->vision = $request->vision;
-        $company->mission = $request->mission;
-        $company->motto = $request->motto;
+        $company->vision     = $request->vision;
+        $company->mission    = $request->mission;
+        $company->motto      = $request->motto;
         $company->update();
 
         return redirect()->back()->with('success', __('Data is updated successfully'));

@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="{{ asset('library/codemirror/lib/codemirror.css') }}">
     <link rel="stylesheet" href="{{ asset('library/codemirror/theme/duotone-dark.css') }}">
     <link rel="stylesheet" href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
-
 @endpush
 
 @section('main')
@@ -35,9 +34,9 @@
                                             role="tab" aria-controls="home" aria-selected="true">About Us</a>
                                     </li>
                                     <!-- <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4"
-                                            role="tab" aria-controls="profile" aria-selected="false">Contact Us</a>
-                                    </li> -->
+                                                <a class="nav-link" id="profile-tab4" data-toggle="tab" href="#profile4"
+                                                    role="tab" aria-controls="profile" aria-selected="false">Contact Us</a>
+                                            </li> -->
                                     <!-- Di Hide karena hard code dulu -->
                                 </ul>
                             </div>
@@ -68,17 +67,17 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Growth</label>
+                                                <label for="" class="form-label">Sale</label>
                                                 <textarea class="summernote-simple" data-height="150" name="growth">{{ $company->growth }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="" class="form-label">industries</label>
+                                                <label for="" class="form-label">Repair</label>
                                                 <textarea class="summernote-simple" data-height="150" name="industries">{{ $company->industries }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="" class="form-label">Commitment</label>
+                                                <label for="" class="form-label">Rental</label>
                                                 <textarea class="summernote-simple" data-height="150" name="commitment">{{ $company->commitment }}</textarea>
                                             </div>
 
