@@ -1,7 +1,6 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-
     <style>
         .card-body {
             padding: 0.25rem 0.55rem;
@@ -28,44 +27,43 @@
 
         .truncate-multiline {
             display: -webkit-box;
-            -webkit-line-clamp: 2; /* limit to 2 lines */
+            -webkit-line-clamp: 2;
+            /* limit to 2 lines */
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
         }
-        
-
     </style>
     <!-- Product Category -->
     <div class="container py-5">
         <div class="product-category">
             <div class="slogan-pss">
-                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Sale</h3>
-                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Repair</h3>
-                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> Rental</h3>
+                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> <a href="{{ route('about_us') }}#sale"
+                        style="color: black">Sale</a></h3>
+                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> <a href="{{ route('about_us') }}#repair"
+                        style="color: black">Repair</a></h3>
+                <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> <a
+                        href="{{ route('about_us') }}#rental" style="color: black">Rental</a></h3>
             </div><br><br>
             <h6 class="text-uppercase" style="color: black">Product Category</h6>
             <h3 class="title text-uppercase">We Provide Type of Product</h3>
         </div>
         <div class="product-list">
             @foreach ($productCategory as $value)
-            <a class="product-item"
-                data-id="{{ $value->id }}"
-                data-name="{{ $value->name }}"
-                href="{{ route('product', ['category[]' => $value->id]) }}"
-                style="cursor: pointer;justify-items: center;place-items: center;">
+                <a class="product-item" data-id="{{ $value->id }}" data-name="{{ $value->name }}"
+                    href="{{ route('product', ['category[]' => $value->id]) }}"
+                    style="cursor: pointer;justify-items: center;place-items: center;">
                     <div class="image-wrapper">
-                        <img src="{{ asset('uploads/' . $value->picture_url) }}"
-                            alt="{{ $value->name }}">
+                        <img src="{{ asset('uploads/' . $value->picture_url) }}" alt="{{ $value->name }}">
                     </div>
                     <h6 style="margin: 2px 2px 4px 2px;line-height: 1.3;">{{ $value->name }}</h6>
                     <p class="truncate-multiline" style="margin: 0;font-weight: 500;line-height: 1.3;">
                         <!-- @foreach ($productSubCat[$value->id] ?? [] as $subValue)
-                            {{ $subValue->name }}
-                        @endforeach -->
+    {{ $subValue->name }}
+    @endforeach -->
                         {{ collect($productSubCat[$value->id] ?? [])->pluck('name')->implode(', ') }}
                     </p>
-            </a>
+                </a>
             @endforeach
         </div>
         <br>
@@ -100,18 +98,21 @@
             background-color: #fff;
             text-align: center;
             box-sizing: border-box;
-            width: 50%; /* mobile: 2 columns */
+            width: 50%;
+            /* mobile: 2 columns */
         }
 
         @media (min-width: 768px) {
             .fixed-grid-item {
-                width: 33.3333%; /* tablet: 3 columns */
+                width: 33.3333%;
+                /* tablet: 3 columns */
             }
         }
 
         @media (min-width: 992px) {
             .fixed-grid-item {
-                width: 20%; /* desktop: 5 columns */
+                width: 20%;
+                /* desktop: 5 columns */
             }
         }
 
@@ -133,11 +134,13 @@
                 content: none;
             }
         }
+
         @media (min-width: 768px) and (max-width: 991.98px) {
             .fixed-grid-item:nth-child(3n)::after {
                 content: none;
             }
         }
+
         @media (max-width: 767.98px) {
             .fixed-grid-item:nth-child(2n)::after {
                 content: none;
@@ -165,14 +168,14 @@
             <h3 class="title text-uppercase">Our High Demand Products</h3>
         </div>
         <!--<br>-->
-        
+
         <div class="fixed-grid justify-content-centers">
             @foreach ($product as $value)
-                <a class="product-card text-decoration-none fixed-grid-item" href="{{ route('product.detail', ['slug' => $value->slug_product]) }}">
+                <a class="product-card text-decoration-none fixed-grid-item"
+                    href="{{ route('product.detail', ['slug' => $value->slug_product]) }}">
                     <div class="card border-0 text-center">
                         <img src="{{ asset('uploads/' . $value->main_picture_url_product) }}"
-                            class="card-img-top img-fluid"
-                            alt="{{ $value->name_product }}"
+                            class="card-img-top img-fluid" alt="{{ $value->name_product }}"
                             style="width: 85%; aspect-ratio: 1 / 1;">
                         <div class="card-body">
                             <h6 class="fw-bold mb-0">{{ $value->name_product }}</h6>
@@ -224,13 +227,13 @@
             margin: 0 auto;
         }
 
-        .own-brand-card{
+        .own-brand-card {
             aspect-ratio: 285 / 118;
             width: 100%;
             max-width: 285px;
         }
 
-        .own-brand-img{
+        .own-brand-img {
             /* object-fit: contain; */
             object-fit: cover;
             width: 100%;
@@ -246,8 +249,10 @@
 
         <div class="row row-cols-lg-4 row-cols-md-2 row-cols-2 g-4 justify-content-center" style="width: 85%;">
             @foreach ($categoryOnBrand as $value)
-                <div class="col" style="justify-items: center; align-items: center; text-align: -webkit-center; place-items: center;">
-                    <a class="card border-0 text-center own-brand-card" href="{{ route('page', $value->url) }}" style="justify-self: center;box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
+                <div class="col"
+                    style="justify-items: center; align-items: center; text-align: -webkit-center; place-items: center;">
+                    <a class="card border-0 text-center own-brand-card" href="{{ route('page', $value->url) }}"
+                        style="justify-self: center;box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                         <img src="{{ asset('uploads/' . $value->logo_picture) }}"
                             class="card-img-top img-fluid resized-img own-brand-img" alt="{{ $value->name }}">
                     </a>
@@ -272,7 +277,8 @@
                         <img src="{{ asset('uploads/' . $item->logo_picture) }}" alt="{{ $item->name }}">
                     </div>
                 @endforeach
-                @foreach ($brand as $item) {{-- duplicated for loop --}}
+                @foreach ($brand as $item)
+                    {{-- duplicated for loop --}}
                     <div class="carousel-item" style="border-radius: 8px;">
                         <img src="{{ asset('uploads/' . $item->logo_picture) }}" alt="{{ $item->name }}">
                     </div>
@@ -296,7 +302,8 @@
             display: flex;
             flex-wrap: nowrap;
             will-change: transform;
-            min-width: 200%; /* ✅ force to overflow beyond wrapper */
+            min-width: 200%;
+            /* ✅ force to overflow beyond wrapper */
         }
 
         .carousel-item {
@@ -433,60 +440,65 @@
     </div>
     <!-- We Provide Brands End -->
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const applyEdgeBasedBgColor = (imgSelector, parentSelector) => {
-            const images = document.querySelectorAll(imgSelector);
+        document.addEventListener('DOMContentLoaded', function() {
+            const applyEdgeBasedBgColor = (imgSelector, parentSelector) => {
+                const images = document.querySelectorAll(imgSelector);
 
-            images.forEach((img) => {
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
+                images.forEach((img) => {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
 
-                img.addEventListener('load', () => {
-                    canvas.width = img.naturalWidth;
-                    canvas.height = img.naturalHeight;
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    img.addEventListener('load', () => {
+                        canvas.width = img.naturalWidth;
+                        canvas.height = img.naturalHeight;
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-                    let chosenPixel = null;
+                        let chosenPixel = null;
 
-                    // Scan vertically on the left side every 5px
-                    for (let y = 0; y < canvas.height; y += 5) {
-                        const [r, g, b, a] = ctx.getImageData(1, y, 1, 1).data;
+                        // Scan vertically on the left side every 5px
+                        for (let y = 0; y < canvas.height; y += 5) {
+                            const [r, g, b, a] = ctx.getImageData(1, y, 1, 1).data;
 
-                        if (a > 0) {
-                            chosenPixel = { r, g, b, a };
-                            break;
+                            if (a > 0) {
+                                chosenPixel = {
+                                    r,
+                                    g,
+                                    b,
+                                    a
+                                };
+                                break;
+                            }
                         }
-                    }
 
-                    const target = img.closest(parentSelector);
-                    if (!chosenPixel || !target) {
-                        // target.style.backgroundColor = '#f0f0f0'; // fallback
-                        target.style.backgroundColor = '#ffffff'; // fallback
-                        return;
-                    }
+                        const target = img.closest(parentSelector);
+                        if (!chosenPixel || !target) {
+                            // target.style.backgroundColor = '#f0f0f0'; // fallback
+                            target.style.backgroundColor = '#ffffff'; // fallback
+                            return;
+                        }
 
-                    const { r, g, b, a } = chosenPixel;
+                        const {
+                            r,
+                            g,
+                            b,
+                            a
+                        } = chosenPixel;
 
-                    if (a < 255) {
-                        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-                        target.style.backgroundColor = brightness > 128 ? 'black' : 'white';
-                    } else {
-                        target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                    }
+                        if (a < 255) {
+                            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+                            target.style.backgroundColor = brightness > 128 ? 'black' : 'white';
+                        } else {
+                            target.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
+                        }
+                    });
                 });
-            });
-        };
+            };
 
-        // Apply to both sections
-        applyEdgeBasedBgColor('.carousel-item img', '.carousel-item');
-        applyEdgeBasedBgColor('.own-brand-img', '.own-brand-card');
-    });
-</script>
-
-
-
-
-
+            // Apply to both sections
+            applyEdgeBasedBgColor('.carousel-item img', '.carousel-item');
+            applyEdgeBasedBgColor('.own-brand-img', '.own-brand-card');
+        });
+    </script>
 @endsection
 
 <script>

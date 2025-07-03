@@ -272,7 +272,7 @@
                 font-size: 32px;
                 top: 37%;
             }
-            
+
             .card-container {
                 grid-template-columns: repeat(1, 1fr);
             }
@@ -368,7 +368,7 @@
             transform: scale(1.05);
         }
 
-        .justify-content-carausel{
+        .justify-content-carausel {
             justify-content: space-evenly;
         }
 
@@ -377,7 +377,7 @@
                 width: 30%;
             }
 
-            .justify-content-carausel{
+            .justify-content-carausel {
                 justify-content: space-between;
             }
         }
@@ -398,9 +398,9 @@
     <div class="accordion-nav">
         <button class="active" onclick="showContent('overview', this)">Overview</button>
         <button onclick="showContent('history', this)">History</button>
-        <button onclick="showContent('growth', this)">Growth</button>
-        <button onclick="showContent('industries', this)">Industries</button>
-        <button onclick="showContent('commitment', this)">Commitment</button>
+        <button onclick="showContent('sale', this)">Sale</button>
+        <button onclick="showContent('repair', this)">Repair</button>
+        <button onclick="showContent('rental', this)">Rental</button>
     </div>
     <div id="overview" class="content content-pss active">
         @foreach ($data as $value)
@@ -410,13 +410,13 @@
     <div id="history" class="content content-pss">
         <center class="center-pss">{!! $value->history !!}</center>
     </div>
-    <div id="growth" class="content content-pss">
+    <div id="sale" class="content content-pss">
         <center class="center-pss">{!! $value->growth !!}</center>
     </div>
-    <div id="industries" class="content content-pss">
+    <div id="repair" class="content content-pss">
         <center class="center-pss">{!! $value->industries !!}</center>
     </div>
-    <div id="commitment" class="content content-pss">
+    <div id="rental" class="content content-pss">
         <center class="center-pss">{!! $value->commitment !!}<center>
     </div><br>
     {{-- Accordion End --}}
@@ -465,13 +465,16 @@
             <h4 class="title text-uppercase">Client</h4>
         </div>
 
-        <div id="brandCarouselClient" class="carousel slide carousel-container" data-bs-ride="carousel" data-bs-interval="3000" data-bs-wrap="true">
+        <div id="brandCarouselClient" class="carousel slide carousel-container" data-bs-ride="carousel"
+            data-bs-interval="3000" data-bs-wrap="true">
             <div class="carousel-inner" id="client-carousel-inner"></div>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselClient" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselClient"
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselClient" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselClient"
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
             </button>
         </div>
@@ -534,7 +537,6 @@
             document.getElementById('client-carousel-inner').innerHTML = '';
             createClientCarousel();
         });
-
     </script>
 
 
@@ -553,10 +555,12 @@
             data-bs-interval="3000" data-bs-wrap="true">
             <div class="carousel-inner"></div>
 
-            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselProject" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#brandCarouselProject"
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon bg-dark rounded-circle" aria-hidden="true"></span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselProject" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#brandCarouselProject"
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon bg-dark rounded-circle" aria-hidden="true"></span>
             </button>
         </div>
@@ -631,7 +635,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", createProjectCarousel);
-        
+
         window.addEventListener("resize", () => {
             createProjectCarousel(); // Re-render on resize
         });
@@ -662,6 +666,25 @@
             document.querySelectorAll(".accordion-nav button").forEach(btn => btn.classList.remove("active"));
             element.classList.add("active");
         }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            const hash = window.location.hash.substring(1); // Misalnya 'sale'
+            if (hash) {
+                const targetButton = document.querySelector(`.accordion-nav button[onclick*="${hash}"]`);
+                if (targetButton) {
+                    targetButton.click();
+
+                    // Optional: Scroll to top accordion
+                    const accordionTop = document.querySelector('.accordion-nav')?.offsetTop;
+                    if (accordionTop !== undefined) {
+                        window.scrollTo({
+                            top: accordionTop - 80, // sesuaikan offset scroll
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            }
+        });
     </script>
 </body>
 

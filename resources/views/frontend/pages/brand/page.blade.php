@@ -194,7 +194,8 @@
             <div class="brand-logos d-flex justify-content-center gap-4">
                 @foreach ($listBrand as $value)
                     <div class="brand-logo-container">
-                        <a href="{{ $value->url === request()->segment(2) ? '#' : route('page', ['slug' => $value->url]) }}">
+                        <a
+                            href="{{ $value->url === request()->segment(2) ? '#' : route('page', ['slug' => $value->url]) }}">
                             <img src="{{ asset('uploads/' . $value->logo_picture) }}" alt="{{ $value->name }}"
                                 class="brand-logo">
                         </a>
@@ -235,7 +236,8 @@
                     <h5>{{ $value->title }}'s Category </h5>
                     @foreach ($brandCategoryDistinct as $distinct)
                         <p class="text-justify">
-                            <a href="{{ route('product', ['category[]' => $distinct->group_id, 'brand[]' => $distinct->id]) }}">{{ $distinct->group_name }}</a>
+                            <a
+                                href="{{ route('product', ['category[]' => $distinct->group_id, 'brand[]' => $distinct->id]) }}">{{ $distinct->group_name }}</a>
                         </p>
                     @endforeach
                 </div>
@@ -246,7 +248,9 @@
     <div class="product-section">
         <div class="product-grid">
             @foreach ($listProduct as $value)
-                <div class="product-card" onclick="window.location='{{ route('product.detail', ['slug' => $value->slug]) }}'" style="cursor: pointer;">
+                <div class="product-card"
+                    onclick="window.location='{{ route('product.detail', ['slug' => $value->slug]) }}'"
+                    style="cursor: pointer;">
                     <img src="{{ asset('uploads/' . $value->main_picture_url) }}" alt="{{ $value->product_name }}"
                         class="product-image">
                     <div class="product-info">
@@ -262,7 +266,8 @@
         </div>
 
         <!-- Explore Link -->
-        <a href="{{ route('product', ['brand[]' => $brand->first()->b_id]) }}" class="explore-link">Explore {{ $brand->first()->title }} Product</a>
+        <a href="{{ route('product', ['brand[]' => $brand->first()->b_id]) }}" class="explore-link">Explore
+            {{ $brand->first()->title }} Product</a>
         <br><br>
     </div>
 
