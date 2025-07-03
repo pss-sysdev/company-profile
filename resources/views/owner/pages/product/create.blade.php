@@ -114,7 +114,7 @@
 
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Description <span class="text-danger">*</span></label>
-                                                            <textarea class="summernote-simple" id="description" name="description"></textarea>
+                                                            <textarea class="summernote" id="description" name="description"></textarea>
                                                         </div>
 
                                                         <div class="mb-3">
@@ -131,7 +131,7 @@
 
                                                         <div class="mb-3">
                                                         <label for="" class="form-label">Main Picture
-                                                            Url<span class="text-danger">*</span> <span class="text-warning">(Recommended size: 450×450 px)</span></label> 
+                                                            Url<span class="text-danger">*</span> <span class="text-warning">(Recommended size: 450×450 px)</span></label>
                                                             <div><input type="file" name="main_picture_url"
                                                                     id="main_picture_url">
                                                             </div>

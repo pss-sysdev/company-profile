@@ -33,7 +33,7 @@
                                 <div class="clearfix mb-3"></div>
 
                                 <div class="table-responsive">
-                                    <table class="table-striped table">
+                                    <table class="table-striped table" id="table-product">
                                         <thead>
                                             <tr>
                                                 <th>Name</th>
@@ -76,6 +76,16 @@
 
 @push('scripts')
     <!-- JS Libraies -->
-
+    <script>
+        $(function() {
+            $("#table-product").dataTable({});
+            $(".magnific").magnificPopup({
+                type: "image",
+                gallery: {
+                    enabled: true,
+                },
+            });
+        })
+    </script>
     <!-- Page Specific JS File -->
 @endpush

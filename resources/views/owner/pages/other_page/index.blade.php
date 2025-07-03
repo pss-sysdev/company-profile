@@ -58,40 +58,40 @@
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Overview</label>
-                                                <textarea class="summernote-simple" name="overview">{{ $company->overview }}</textarea>
+                                                <textarea class="summernote" name="overview">{{ $company->overview }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">History</label>
-                                                <textarea class="summernote-simple" data-height="150" name="history">{{ $company->history }}</textarea>
+                                                <textarea class="summernote" data-height="150" name="history">{{ $company->history }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Sale</label>
-                                                <textarea class="summernote-simple" data-height="150" name="growth">{{ $company->growth }}</textarea>
+                                                <textarea class="summernote" data-height="150" name="growth">{{ $company->growth }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Repair</label>
-                                                <textarea class="summernote-simple" data-height="150" name="industries">{{ $company->industries }}</textarea>
+                                                <textarea class="summernote" data-height="150" name="industries">{{ $company->industries }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Rental</label>
-                                                <textarea class="summernote-simple" data-height="150" name="commitment">{{ $company->commitment }}</textarea>
+                                                <textarea class="summernote" data-height="150" name="commitment">{{ $company->commitment }}</textarea>
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Vision</label>
-                                                <textarea class="summernote-simple" data-height="150" name="vision">{{ $company->vision }}</textarea>
+                                                <textarea class="summernote" data-height="150" name="vision">{{ $company->vision }}</textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Mission</label>
-                                                <textarea class="summernote-simple" data-height="150" name="mission">{{ $company->mission }}</textarea>
+                                                <textarea class="summernote" data-height="150" name="mission">{{ $company->mission }}</textarea>
                                             </div>
                                             <div class="mb-3">
                                                 <label for="" class="form-label">Motto</label>
-                                                <textarea class="summernote-simple" data-height="150" name="motto">{{ $company->motto }}</textarea>
+                                                <textarea class="summernote" data-height="150" name="motto">{{ $company->motto }}</textarea>
                                             </div>
                                             <button class="btn btn-primary" type="submit">Update</button>
                                         </form>

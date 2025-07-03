@@ -13,7 +13,7 @@
             color: #ffffff;
         }
 
-        .title-product{
+        .title-product {
             display: inline-block;
             border-left: 3px solid red;
             padding-left: 5px;
@@ -54,11 +54,11 @@
                             <aside class="row brand-sidebar-area">
                                 @foreach ($brands as $brand)
                                     <a class="col-xl-12 col-lg-12 col-sm-2 col-3 filter-btn" href="javascript:void(0);"
-                                        data-type="brand"
-                                        data-id="{{ $brand->id }}"
-                                        style="margin-bottom: 8px;">
-                                        <div class="wrapper-item filter-brand {{ in_array($brand->id, request()->input('brand', [])) ? 'active' : '' }}" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
-                                            <img src="{{ asset('uploads/' . $brand->logo_picture) }}" alt="{{ $brand->name }}" class="brand-logo" >
+                                        data-type="brand" data-id="{{ $brand->id }}" style="margin-bottom: 8px;">
+                                        <div class="wrapper-item filter-brand {{ in_array($brand->id, request()->input('brand', [])) ? 'active' : '' }}"
+                                            style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
+                                            <img src="{{ asset('uploads/' . $brand->logo_picture) }}"
+                                                alt="{{ $brand->name }}" class="brand-logo">
                                         </div>
                                     </a>
                                 @endforeach
@@ -79,43 +79,52 @@
                                 }
 
                                 @media (max-width: 991px) {
-                                    .brand-sidebar-area{
+                                    .brand-sidebar-area {
                                         padding-top: 30px;
                                         padding-bottom: 30px;
                                     }
+
                                     .wrapper-item {
                                         max-height: 52px;
                                     }
                                 }
-
                             </style>
                         </div>
                         <div class="col-xl-11 col-lg-10 col-sm-12">
-                            <div class="tab-pane fade active show" id="tab-list" role="tabpanel" aria-labelledby="tab-shop-list">
+                            <div class="tab-pane fade active show" id="tab-list" role="tabpanel"
+                                aria-labelledby="tab-shop-list">
                                 <div class="row gy-25">
                                     @foreach ($products as $product)
                                         <div class="col-xl-3 col-lg-4 col-sm-4">
-                                                <div class="as-product" onclick="window.location='{{ route('product.detail', ['slug' => $product->slug]) }}'" style="cursor: pointer;">
-                                                    <div class="product-img">
-                                                        <img src="{{ asset('uploads/' . $product->main_picture_url) }}"
-                                                            alt="product image" />
-                                                    </div>
-                                                    <div class="product-content">
-                                                        <p class="meta"></p>
-                                                        <h4 class="product-title h5">
-                                                            <a href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
-                                                        </h4>
-                                                        <span class="price">
-                                                            @if (empty($product->price) || $product->price == 0)
-                                                                Call
-                                                            @else
-                                                                Rp. {{ number_format($product->price, 0, ',', '.') }}
-                                                            @endif
-                                                        </span>
-                                                        <a class="as-btn style3"
-                                                            href="{{ route('product.detail', ['slug' => $product->slug]) }}">Detail</a>
-                                                    </div>
+                                            <div class="as-product"
+                                                onclick="window.location='{{ route('product.detail', ['slug' => $product->slug]) }}'"
+                                                style="cursor: pointer;">
+
+                                                <img src="{{ asset('uploads/' . $product->brand->logo_picture) }}"
+                                                    alt="{{ $product->brand->name ?? 'Brand Logo' }}"
+                                                    class="product-brand-logo">
+
+                                                <div class="product-img">
+                                                    <img src="{{ asset('uploads/' . $product->main_picture_url) }}"
+                                                        alt="product image" />
                                                 </div>
+                                                <div class="product-content">
+                                                    <p class="meta"></p>
+                                                    <h4 class="product-title h5">
+                                                        <a
+                                                            href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
+                                                    </h4>
+                                                    <span class="price">
+                                                        @if (empty($product->price) || $product->price == 0)
+                                                            Call
+                                                        @else
+                                                            Rp. {{ number_format($product->price, 0, ',', '.') }}
+                                                        @endif
+                                                    </span>
+                                                    <a class="as-btn style3"
+                                                        href="{{ route('product.detail', ['slug' => $product->slug]) }}">Detail</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>
@@ -128,29 +137,29 @@
 
             </div>
 
-            
+
             <div class="col-xl-2 col-lg-3">
                 <aside class="sidebar-area">
                     <div class="widget widget_search">
-                    <form class="search-form" id="filterSearchForm">
-                        <input type="text" id="filterInput" name="filter" placeholder="Enter Keyword" value="{{ request('filter') }}" />
-                        <button type="submit"><i class="fas fa-search"></i></button>
-                    </form>
+                        <form class="search-form" id="filterSearchForm">
+                            <input type="text" id="filterInput" name="filter" placeholder="Enter Keyword"
+                                value="{{ request('filter') }}" />
+                            <button type="submit"><i class="fas fa-search"></i></button>
+                        </form>
 
                     </div>
                     <div class="widget widget_categories">
-                        <h5 class="widget_title text-uppercase">Categories 
+                        <h5 class="widget_title text-uppercase">Categories
                             <button id="resetFilterBtn" style="font-size: 12px;" class="btn btn-sm btn-link text-primary"
-                                data-bs-toggle="tooltip" 
-                                data-bs-placement="top" 
-                                title="Reset Filter">
-                                    <i class="fas fa-sync-alt"></i>
+                                data-bs-toggle="tooltip" data-bs-placement="top" title="Reset Filter">
+                                <i class="fas fa-sync-alt"></i>
                             </button>
                         </h5>
                         <ul>
                             @foreach ($categories as $category)
                                 <li>
-                                    <a class="filter-btn filter-cat {{ in_array($category->id, request()->input('category', [])) ? 'active' : '' }}" href="javascript:void(0);" data-type="category"
+                                    <a class="filter-btn filter-cat {{ in_array($category->id, request()->input('category', [])) ? 'active' : '' }}"
+                                        href="javascript:void(0);" data-type="category"
                                         data-id="{{ $category->id }}">{{ $category->name }}</a>
                                 </li>
                             @endforeach
@@ -190,7 +199,7 @@
             </div>
         </div>
     </div>
-    
+
     <script>
         // document.addEventListener("DOMContentLoaded", () => {
         //     const images = document.querySelectorAll('.brand-logo');
@@ -237,7 +246,7 @@
         //         };
         //     });
         // });
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const applyEdgeBasedBgColor = (imgSelector, wrapperSelector) => {
                 const images = document.querySelectorAll(imgSelector);
 
@@ -254,12 +263,17 @@
                         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
                         let chosenPixel = null;
-                        
+
                         for (let y = 0; y < canvas.height; y += 5) {
                             const [r, g, b, a] = ctx.getImageData(1, y, 1, 1).data;
 
                             if (a > 0) {
-                                chosenPixel = { r, g, b, a };
+                                chosenPixel = {
+                                    r,
+                                    g,
+                                    b,
+                                    a
+                                };
                                 break;
                             }
                         }
@@ -271,7 +285,12 @@
                             return;
                         }
 
-                        const { r, g, b, a } = chosenPixel;
+                        const {
+                            r,
+                            g,
+                            b,
+                            a
+                        } = chosenPixel;
 
                         if (a < 255) {
                             const brightness = (r * 299 + g * 587 + b * 114) / 1000;
@@ -322,7 +341,7 @@
         });
 
         // Handle filter by text input (search)
-        document.getElementById('filterSearchForm').addEventListener('submit', function (e) {
+        document.getElementById('filterSearchForm').addEventListener('submit', function(e) {
             e.preventDefault(); // prevent form reload
 
             const url = new URL(window.location.href);
@@ -340,15 +359,13 @@
             window.location.href = `${url.pathname}?${params.toString()}`;
         });
 
-        document.getElementById('resetFilterBtn').addEventListener('click', function () {
+        document.getElementById('resetFilterBtn').addEventListener('click', function() {
             const url = new URL(window.location.href);
             const path = url.pathname; // Keep /product
             window.location.href = path; // Redirect to /product without filters
         });
-        
     </script>
-    
+
 
     {{-- STEEL BEVEL & PRESSURE PAINT End --}}
 @endsection
-

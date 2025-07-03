@@ -597,7 +597,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Content</label>
-                                    <textarea class="summernote-simple"></textarea>
+                                    <textarea class="summernote"></textarea>
                                 </div>
                             </div>
                             <div class="card-footer pt-0">

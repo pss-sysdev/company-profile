@@ -107,7 +107,7 @@
 
                                                         <div class="mb-3">
                                                             <label for="" class="form-label">Description <span class="text-danger">*</span></label>
-                                                            <textarea class="summernote-simple" id="description" name="description">
+                                                            <textarea class="summernote" id="description" name="description">
                                                                 {{ $product->description }}
                                                             </textarea>
                                                         </div>
@@ -127,7 +127,7 @@
                                                         <div>
                                                             <div class="mb-3">
                                                                 <label for="" class="form-label">Main Picture
-                                                                    Url <span class="text-warning">(Recommended size: 450×450 px)</span></label>  
+                                                                    Url <span class="text-warning">(Recommended size: 450×450 px)</span></label>
                                                                 <div class="photo-container">
                                                                     @if ($product->main_picture_url == null)
                                                                         <img src="{{ asset('uploads/no_photo.png') }}"

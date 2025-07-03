@@ -38,6 +38,29 @@
     <link href="{{ asset('dealarohtml/style.css') }}" rel="stylesheet" />
     {{-- <link href="{{ asset('dealarohtml/fontawesome.min.css') }}" rel="stylesheet" /> --}}
     <style>
+        .product-brand-logo {
+            position: absolute;
+            /* Penting! Posisikan relatif terhadap .as-product */
+            top: 10px;
+            /* Jarak dari atas card */
+            right: 10px;
+            /* Jarak dari kanan card */
+            width: 40px;
+            /* Sesuaikan ukuran logo */
+            height: auto;
+            /* Pertahankan rasio aspek gambar */
+            max-width: 100%;
+            /* Pastikan logo tidak melebihi lebar aslinya */
+            z-index: 2;
+            /* Pastikan logo berada di atas gambar produk utama jika terjadi tumpang tindih */
+
+            /* Opsional: Tambahkan sedikit gaya untuk membuatnya terlihat lebih bagus */
+            /* background-color: rgba(255, 255, 255, 0.8); */
+            /* padding: 5px; */
+            /* border-radius: 50%; */
+            /* box-shadow: 0 0 5px rgba(0,0,0,0.1); */
+        }
+
         .product-category {
             text-align: center;
             margin-bottom: 24px;
@@ -198,7 +221,8 @@
             white-space: nowrap;
         }
 
-        .h6, h6 {
+        .h6,
+        h6 {
             font-size: 18px;
         }
 
@@ -235,9 +259,10 @@
         }
 
         @media screen and (max-width: 480px) {
-            .product-category{
+            .product-category {
                 margin-bottom: 19px;
             }
+
             .product-item {
                 width: 144px;
                 padding: 12px;
@@ -247,11 +272,13 @@
                 gap: 1.25rem;
             }
 
-            .h3, h3 {
+            .h3,
+            h3 {
                 font-size: 20px;
             }
 
-            .h6, h6 {
+            .h6,
+            h6 {
                 font-size: 14px;
             }
 
@@ -270,11 +297,13 @@
                 gap: 20px;
             }
 
-            .h3, h3 {
+            .h3,
+            h3 {
                 font-size: 16px;
             }
 
-            .h6, h6 {
+            .h6,
+            h6 {
                 font-size: 12px;
             }
 
@@ -282,7 +311,7 @@
                 font-size: 11px;
             }
 
-            .explore{
+            .explore {
                 font-size: 14px;
             }
         }
