@@ -19,7 +19,7 @@ class HomeController extends Controller
                 $query->where('parent_cat_id', 0)
                     ->orWhereNull('parent_cat_id');
             })
-            ->get();
+            ->orderBy('sort_by', 'asc')->get();
 
         $productSubCat = Category::where('is_discontinue', 0)
             ->where(function ($query) {
