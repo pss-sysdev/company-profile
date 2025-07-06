@@ -103,7 +103,6 @@
         .content {
             display: none;
             padding: 15px;
-            text-align: center;
             max-width: 1900px;
             margin: 10px auto;
             border: 1px solid #ddd;
@@ -404,20 +403,20 @@
     </div>
     <div id="overview" class="content content-pss active">
         @foreach ($data as $value)
-            <center class="center-pss">{!! $value->overview !!}</center>
+            <div class="center-pss">{!! $value->overview !!}</div>
         @endforeach
     </div>
     <div id="history" class="content content-pss">
-        <center class="center-pss">{!! $value->history !!}</center>
+        <div class="center-pss">{!! $value->history !!}</div>
     </div>
     <div id="sale" class="content content-pss">
-        <center class="center-pss">{!! $value->growth !!}</center>
+        <div class="center-pss">{!! $value->growth !!}</div>
     </div>
     <div id="repair" class="content content-pss">
-        <center class="center-pss">{!! $value->industries !!}</center>
+        <div class="center-pss">{!! $value->industries !!}</div>
     </div>
     <div id="rental" class="content content-pss">
-        <center class="center-pss">{!! $value->commitment !!}<center>
+        <div class="center-pss">{!! $value->commitment !!}<div>
     </div><br>
     {{-- Accordion End --}}
 

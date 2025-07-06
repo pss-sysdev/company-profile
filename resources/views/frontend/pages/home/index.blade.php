@@ -230,15 +230,38 @@
         .own-brand-card {
             aspect-ratio: 285 / 118;
             width: 100%;
-            max-width: 285px;
+            max-width: 254px;
         }
 
         .own-brand-img {
-            /* object-fit: contain; */
-            object-fit: cover;
+            /* object-fit: cover; */
+            object-fit: contain;
             width: 100%;
             height: auto;
             aspect-ratio: 285 / 118;
+        }
+        @media (max-width: 1024px) {
+            .own-brand-card {
+                width: 21%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .own-brand-card {
+                width: 21%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .own-brand-card {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .own-brand-card {
+                width: 45%;
+            }
         }
     </style>
     <div class="container-fluid my-5" style="justify-items: center;">
@@ -247,16 +270,15 @@
             <h3 class="title text-uppercase">Find More About Our Brands</h3>
         </div>
 
-        <div class="row row-cols-lg-4 row-cols-md-2 row-cols-2 g-4 justify-content-center" style="width: 85%;">
+        <div class="product-list">
             @foreach ($categoryOnBrand as $value)
-                <div class="col"
-                    style="justify-items: center; align-items: center; text-align: -webkit-center; place-items: center;">
-                    <a class="card border-0 text-center own-brand-card" href="{{ route('page', $value->url) }}"
+                <a class="card border-0 text-center own-brand-card" href="{{ route('page', $value->url) }}"
                         style="justify-self: center;box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                         <img src="{{ asset('uploads/' . $value->logo_picture) }}"
                             class="card-img-top img-fluid resized-img own-brand-img" alt="{{ $value->name }}">
                     </a>
-                </div>
+
+
             @endforeach
         </div>
     </div>

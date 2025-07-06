@@ -74,12 +74,12 @@
         .own-brand-card{
             aspect-ratio: 285 / 118;
             width: 100%;
-            max-width: 285px;
+            max-width: 254px;
         }
 
         .own-brand-img{
-            /* object-fit: contain; */
-            object-fit: cover;
+            /* object-fit: cover; */
+            object-fit: contain;
             width: 100%;
             height: auto;
             aspect-ratio: 285 / 118;
