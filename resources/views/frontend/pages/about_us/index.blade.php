@@ -416,11 +416,11 @@
         <div class="center-pss">{!! $value->industries !!}</div>
     </div>
     <div id="rental" class="content content-pss">
-        <div class="center-pss">{!! $value->commitment !!}<div>
-    </div><br>
+        <div class="center-pss">{!! $value->commitment !!}</div>
+    </div>
+    <br>
     {{-- Accordion End --}}
 
-    {{-- Let’s Build Success Together! --}}
     <a href="{{ route('contact_us') }}">
         <div class="header">
             <h1 style="color: white">Let’s Build Success Together!</h1>
@@ -430,9 +430,7 @@
                     SUKSES SEJAHTERA</strong> is here to help.</p>
         </div>
     </a><br>
-    {{-- Let’s Build Success Together! End --}}
 
-    {{-- Visi, Misi Motto --}}
     <div class="content_card">
         <div class="card">
             <h3>
@@ -564,7 +562,6 @@
             </button>
         </div>
 
-        <!-- Brand Links -->
         <div class="brand-section text-center mt-5">
             <p style="color: black">Find more about our another brand</p>
             <div class="brand-logos d-flex justify-content-center gap-4">
