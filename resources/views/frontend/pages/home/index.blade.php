@@ -33,8 +33,39 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+
+        /* Banner responsive styles */
+        .banner-container {
+            width: 80vw;
+            margin-left: calc(-40vw + 50%);
+        }
+
+        .banner-img {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .banner-container {
+                width: 95vw;
+                margin-left: calc(-47.5vw + 50%);
+            }
+            .banner-img {
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .banner-container {
+                width: 100vw;
+                margin-left: calc(-50vw + 50%);
+            }
+            .banner-img {
+                height: 200px;
+            }
+        }
     </style>
-    <!-- Product Category -->
+    <!-- Slogan -->
     <div class="container py-5">
         <div class="product-category">
             <div class="slogan-pss">
@@ -44,7 +75,18 @@
                         style="color: black">Repair</a></h3>
                 <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> <a
                         href="{{ route('about_us') }}#rental" style="color: black">Rental</a></h3>
-            </div><br><br>
+            </div>
+        </div>
+    </div>
+
+    <!-- Banner -->
+    <div class="banner-container">
+        <img src="{{ asset('img/banner terbaru.webp') }}" alt="Banner" class="img-fluid w-100 banner-img">
+    </div>
+
+    <!-- Product Category -->
+    <div class="container py-5">
+        <div class="product-category">
             <h6 class="text-uppercase" style="color: black">Product Category</h6>
             <h3 class="title text-uppercase">We Provide Type of Product</h3>
         </div>
@@ -240,6 +282,7 @@
             height: auto;
             aspect-ratio: 285 / 118;
         }
+
         @media (max-width: 1024px) {
             .own-brand-card {
                 width: 21%;
@@ -273,12 +316,10 @@
         <div class="product-list">
             @foreach ($categoryOnBrand as $value)
                 <a class="card border-0 text-center own-brand-card" href="{{ route('page', $value->url) }}"
-                        style="justify-self: center;box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
-                        <img src="{{ asset('uploads/' . $value->logo_picture) }}"
-                            class="card-img-top img-fluid resized-img own-brand-img" alt="{{ $value->name }}">
-                    </a>
-
-
+                    style="justify-self: center;box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
+                    <img src="{{ asset('uploads/' . $value->logo_picture) }}"
+                        class="card-img-top img-fluid resized-img own-brand-img" alt="{{ $value->name }}">
+                </a>
             @endforeach
         </div>
     </div>
