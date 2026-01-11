@@ -66,7 +66,7 @@
         }
     </style>
     <!-- Slogan -->
-    <div class="container py-5">
+    <!-- <div class="container py-5">
         <div class="product-category">
             <div class="slogan-pss">
                 <h3><i class="fa-solid fa-check text-red-500" style="color: red"></i> <a href="{{ route('about_us') }}#sale"
@@ -77,12 +77,63 @@
                         href="{{ route('about_us') }}#rental" style="color: black">Rental</a></h3>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Banner -->
-    <div class="banner-container">
+    <!-- <div class="banner-container">
         <img src="{{ asset('img/banner terbaru.webp') }}" alt="Banner" class="img-fluid w-100 banner-img">
+    </div> -->
+    
+    <!-- New banner -->
+    <div class="banner-wrapper position-relative w-100">
+
+        <!-- Banner image (background layer) -->
+        <img
+            src="{{ asset('img/banner terbaru.webp') }}"
+            alt="Banner"
+            class="img-fluid w-100 banner-img position-absolute top-0 start-0"
+        >
+
+        <!-- Text content (foreground layer) -->
+        <div class="container pt-5 position-relative banner-content">
+            <div class="product-category">
+                <div class="slogan-pss">
+                    <h3>
+                        <i class="fa-solid fa-check" style="color:red"></i>
+                        <a href="{{ route('about_us') }}#sale" style="color:white">Sale</a>
+                    </h3>
+                    <h3>
+                        <i class="fa-solid fa-check" style="color:red"></i>
+                        <a href="{{ route('about_us') }}#repair" style="color:white">Repair</a>
+                    </h3>
+                    <h3>
+                        <i class="fa-solid fa-check" style="color:red"></i>
+                        <a href="{{ route('about_us') }}#rental" style="color:white">Rental</a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+
     </div>
+
+    <style>
+        .banner-wrapper {
+            min-height: 400px; /* adjust as needed */
+            overflow: hidden;
+        }
+
+        .banner-img {
+            z-index: 0;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .banner-content {
+            z-index: 1;
+        }
+
+    </style>
+
 
     <!-- Product Category -->
     <div class="container py-5">
