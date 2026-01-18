@@ -27,10 +27,54 @@
         text-align: center;
     }
 
+    /* .nav-pss-name {
+        --title-size: 16px;
+    } */
+
+    .nav-pss-name {
+        --title-size: clamp(16px, 2vw, 18px);
+        max-width: 55vw;
+    }
+
     @media (max-width: 768px) {
         .nav-pss-name {
-            display: none;
+            --title-size: clamp(14px, 2vw, 18px);
         }
+    }
+
+    .f-pss-name {
+        font-size: var(--title-size);
+        margin: 0 0 4px 0;
+        color: #FF272B;
+        line-height: normal;
+    }
+
+    .f-pss-name-label {
+        font-size: calc(var(--title-size) - 4px);
+        line-height: normal;
+        color: #0000FF;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: ellipsis;
+    }
+
+    @media (max-width: 768px) {
+        /* .navbar-brand{
+            white-space: normal !important; 
+        }
+        .navbar-brand, 
+        .nav-pss-name {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;         
+        }
+        
+        .nav-pss-name {
+            --title-size: clamp(14px, 2vw, 18px);
+            max-width: 55vw;
+        } */
     }
 
     @media (max-width: 991px) {
@@ -59,10 +103,10 @@
     <a style="display: flex;" href="{{ route('home') }}" class="navbar-brand me-auto ps-0">
         <img src="{{ asset('uploads/' . $global_setting->logo) }}" alt="{{ env('APP_NAME') }}" style="max-height: 55px">
         <div class="nav-pss-name" style="margin-left: 10px; align-content: center;">
-            <h5 style="margin: 0 0 4px 0; color: #FF272B; line-height: normal;">
+            <h5 class="f-pss-name">
                 PT. Perintis Sukses Sejahtera
             </h5>
-            <div style="font-size: small; line-height: normal; color: #0000FF;">
+            <div class="f-pss-name-label">
                 Distribution of Welding Equipment Tools, Steel Contractor
             </div>
         </div>

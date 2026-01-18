@@ -86,13 +86,21 @@
     
     <!-- New banner -->
     <div class="banner-wrapper position-relative w-100">
-
-        <!-- Banner image (background layer) -->
-        <img
-            src="{{ asset('img/banner terbaru.webp') }}"
+        <!-- <img
+            src="{{ asset('img/desktop-pss-banner.webp') }}"
             alt="Banner"
             class="img-fluid w-100 banner-img position-absolute top-0 start-0"
-        >
+        > -->
+
+        <picture>
+            <source media="(max-width: 700px)" srcset="{{ asset('img/mobile-pss-banner.webp') }}">
+
+            <img
+                src="{{ asset('img/desktop-pss-banner.webp') }}"
+                alt="Banner"
+                class="img-fluid w-100 banner-img position-absolute top-0 start-0"
+            >
+        </picture>
 
         <!-- Text content (foreground layer) -->
         <div class="container pt-5 position-relative banner-content">
@@ -100,15 +108,15 @@
                 <div class="slogan-pss">
                     <h3>
                         <i class="fa-solid fa-check" style="color:red"></i>
-                        <a href="{{ route('about_us') }}#sale" style="color:white">Sale</a>
+                        <a href="{{ route('about_us') }}#sale" style="color:black">Sale</a>
                     </h3>
                     <h3>
                         <i class="fa-solid fa-check" style="color:red"></i>
-                        <a href="{{ route('about_us') }}#repair" style="color:white">Repair</a>
+                        <a href="{{ route('about_us') }}#repair" style="color:black">Repair</a>
                     </h3>
                     <h3>
                         <i class="fa-solid fa-check" style="color:red"></i>
-                        <a href="{{ route('about_us') }}#rental" style="color:white">Rental</a>
+                        <a href="{{ route('about_us') }}#rental" style="color:black">Rental</a>
                     </h3>
                 </div>
             </div>
@@ -118,21 +126,44 @@
 
     <style>
         .banner-wrapper {
-            min-height: 400px; /* adjust as needed */
+            position: relative;
             overflow: hidden;
         }
 
         .banner-img {
             z-index: 0;
-            height: 100%;
+            width: 100%;
+            height: auto; 
             object-fit: cover;
         }
 
         .banner-content {
+            position: relative;
             z-index: 1;
         }
 
     </style>
+
+    <script>
+        function syncBannerHeight() {
+            const img = document.querySelector('.banner-wrapper .banner-img');
+            const wrapper = document.querySelector('.banner-wrapper');
+            if (!img || !wrapper) return;
+
+            // use current rendered height
+            wrapper.style.height = img.getBoundingClientRect().height + 'px';
+        }
+
+        window.addEventListener('load', syncBannerHeight);
+        window.addEventListener('resize', syncBannerHeight);
+
+        // optional: if image swaps source after resize
+        document.addEventListener('DOMContentLoaded', () => {
+            const img = document.querySelector('.banner-wrapper .banner-img');
+            if (img) img.addEventListener('load', syncBannerHeight);
+        });
+        </script>
+
 
 
     <!-- Product Category -->
@@ -616,6 +647,12 @@
 @endsection
 
 <script>
+    window.addEventListener('load', () => {
+        const img = document.querySelector('.banner-img');
+        const wrapper = document.querySelector('.banner-wrapper');
+
+        wrapper.style.height = img.offsetHeight + 'px';
+    });
     document.addEventListener('DOMContentLoaded', function() {
         var carousel = new bootstrap.Carousel(document.getElementById('brandCarousel'), {
             interval: 2000,
