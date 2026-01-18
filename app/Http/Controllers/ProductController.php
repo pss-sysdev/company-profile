@@ -124,7 +124,13 @@ class ProductController extends Controller
         );
 
         $productsTop  = Product::where('is_top_product', 1)->with(['category', 'brand'])->limit(5)->get();
-        $categories   = Category::all();
+        // $categories   = Category::all();
+        $categories = Category::whereNull('parent_cat_id')
+            ->with('children')
+            ->orderBy('sort_by')
+            ->get();
+
+        // dd($categories);
         $selected_cat = $categories->whereIn('id', collect($categoryFilter)->map(fn($v) => (int) $v));
         $categorys  = category();
 
@@ -151,6 +157,7 @@ class ProductController extends Controller
                             ->limit(5)
                             ->get();
         $categorys  = category();
+        // dd($categorys);
 
         return view('frontend.pages.product.detail', [
             'type_menu'       => 'product',

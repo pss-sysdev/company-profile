@@ -13,6 +13,8 @@ class Category extends Model
     //     'password',
     // ];
 
+    // App\Models\Category.php
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_cat_id');
@@ -20,9 +22,18 @@ class Category extends Model
 
     public function children()
     {
-        return $this->hasMany(Category::class, 'parent_cat_id')->where('parent_id', '!=', 0);
+        return $this->hasMany(Category::class, 'parent_cat_id')->where('parent_cat_id', '!=', 0);
     }
 
+    // public function children()
+    // {
+    //     return $this->hasMany(Category::class, 'parent_cat_id', 'id')->orderBy('sort_by');
+    // }
+
+    // public function parent()
+    // {
+    //     return $this->belongsTo(Category::class, 'parent_cat_id', 'id');
+    // }
 
     public function products()
     {

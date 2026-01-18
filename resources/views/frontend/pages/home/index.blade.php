@@ -286,32 +286,34 @@
     </style>
 
 
-    <div class="container my-5">
-        <div class="top-selling-product text-center d-flex flex-column align-items-center">
-            <h6 class="text-uppercase">Top Selling Product</h6>
-            <h3 class="title text-uppercase">Our High Demand Products</h3>
-        </div>
-        <!--<br>-->
+    @if(isset($product) && $product->isNotEmpty())
+        <div class="container my-5">
+            <div class="top-selling-product text-center d-flex flex-column align-items-center">
+                <h6 class="text-uppercase">Top Selling Product</h6>
+                <h3 class="title text-uppercase">Our High Demand Products</h3>
+            </div>
+            <!--<br>-->
 
-        <div class="fixed-grid justify-content-centers">
-            @foreach ($product as $value)
-                <a class="product-card text-decoration-none fixed-grid-item"
-                    href="{{ route('product.detail', ['slug' => $value->slug_product]) }}">
-                    <div class="card border-0 text-center">
-                        <img src="{{ asset('uploads/' . $value->main_picture_url_product) }}"
-                            class="card-img-top img-fluid" alt="{{ $value->name_product }}"
-                            style="width: 85%; aspect-ratio: 1 / 1;">
-                        <div class="card-body">
-                            <h6 class="fw-bold mb-0">{{ $value->name_product }}</h6>
-                            <p class="text-muted mb-0">{{ $value->name_category }}</p>
+            <div class="fixed-grid justify-content-centers">
+                @foreach ($product as $value)
+                    <a class="product-card text-decoration-none fixed-grid-item"
+                        href="{{ route('product.detail', ['slug' => $value->slug_product]) }}">
+                        <div class="card border-0 text-center">
+                            <img src="{{ asset('uploads/' . $value->main_picture_url_product) }}"
+                                class="card-img-top img-fluid" alt="{{ $value->name_product }}"
+                                style="width: 85%; aspect-ratio: 1 / 1;">
+                            <div class="card-body">
+                                <h6 class="fw-bold mb-0">{{ $value->name_product }}</h6>
+                                <p class="text-muted mb-0">{{ $value->name_category }}</p>
+                            </div>
                         </div>
-                    </div>
-                </a>
-            @endforeach
+                    </a>
+                @endforeach
+            </div>
         </div>
-    </div>
-    <!-- Top Selling Product End -->
-
+        <!-- Top Selling Product End -->
+    @endif
+    
     <!-- Find More About Our Brands -->
     <style>
         .title {

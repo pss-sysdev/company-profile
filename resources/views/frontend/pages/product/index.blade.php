@@ -458,7 +458,7 @@
                             <button type="button" class="scrollbox-btn up" data-scroll-up>
                                 <i class="fa-solid fa-chevron-up"></i>
                             </button>
-
+<!-- 
                             <div class="scrollbox-inner" data-scroll-inner>
                                 <ul class="mb-0">
                                     @foreach ($categories as $category)
@@ -469,7 +469,34 @@
                                         </li>
                                     @endforeach
                                 </ul>
+                            </div> -->
+
+                            <div class="scrollbox-inner" data-scroll-inner>
+                                <ul class="mb-0">
+                                    @foreach ($categories as $parent)
+                                        <li class="mb-2">
+                                            <a class="filter-btn filter-cat {{ in_array($parent->id, request()->input('category', [])) ? 'active' : '' }}"
+                                            href="javascript:void(0);" data-type="category" data-id="{{ $parent->id }}">
+                                                <strong>{{ $parent->name }}</strong>
+                                            </a>
+
+                                            @if ($parent->children->isNotEmpty())
+                                                <ul class="mt-1 ps-3">
+                                                    @foreach ($parent->children as $child)
+                                                        <li>
+                                                            <a class="filter-btn filter-cat {{ in_array($child->id, request()->input('category', [])) ? 'active' : '' }}"
+                                                            href="javascript:void(0);" data-type="category" data-id="{{ $child->id }}">
+                                                                {{ $child->name }}
+                                                            </a>
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                        </li>
+                                    @endforeach
+                                </ul>
                             </div>
+
 
                             <button type="button" class="scrollbox-btn down" data-scroll-down>
                                 <i class="fa-solid fa-chevron-down"></i>
@@ -495,36 +522,37 @@
                             @endforeach
                         </ul>
                     </div> -->
+                    {{-- @if(!empty($productsTop) && count($productsTop) > 0) --}}
+                    @if(isset($productsTop) && $productsTop->isNotEmpty())
+                        <div class="widget widget_top_rated_products">
+                            <h4 class="widget_title">Popular Product</h4>
+                            <ul class="product_list_widget">
+                                @foreach ($productsTop as $product)
+                                    <li class="recent-post">
+                                        <div class="media-img">
+                                            <a href="shop-details.html">
+                                                <img src="{{ asset('uploads/' . $product->main_picture_url) }}" alt="thumb"
+                                                    width="70" height="70" />
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="recent-post-title h5">
+                                                <a href="shop-details.html">{{ $product->name }}</a>
+                                            </h4>
+                                            <span class="price">
+                                                @if (empty($product->price) || $product->price == 0)
+                                                    Call
+                                                @else
+                                                    Rp. {{ number_format($product->price, 0, ',', '.') }}
+                                                @endif
+                                            </span>
+                                        </div>
+                                    </li>
+                                @endforeach
 
-                    <div class="widget widget_top_rated_products">
-                        <h4 class="widget_title">Popular Product</h4>
-                        <ul class="product_list_widget">
-                            @foreach ($productsTop as $product)
-                                <li class="recent-post">
-                                    <div class="media-img">
-                                        <a href="shop-details.html">
-                                            <img src="{{ asset('uploads/' . $product->main_picture_url) }}" alt="thumb"
-                                                width="70" height="70" />
-                                        </a>
-                                    </div>
-                                    <div class="media-body">
-                                        <h4 class="recent-post-title h5">
-                                            <a href="shop-details.html">{{ $product->name }}</a>
-                                        </h4>
-                                        <span class="price">
-                                            @if (empty($product->price) || $product->price == 0)
-                                                Call
-                                            @else
-                                                Rp. {{ number_format($product->price, 0, ',', '.') }}
-                                            @endif
-                                        </span>
-                                    </div>
-                                </li>
-                            @endforeach
-
-                        </ul>
-                    </div>
-
+                            </ul>
+                        </div>
+                    @endif
                 </aside>
             </div>
         </div>
