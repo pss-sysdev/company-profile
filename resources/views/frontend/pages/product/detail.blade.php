@@ -134,21 +134,32 @@
                                         </div>
                                     </div>
                                     <style>
-                                        .sn-content { overflow-x: auto; }
+                                        /* wrapper: prevents breaking layout */
+                                        .sn-content{
+                                            overflow-x: auto;
+                                            -webkit-overflow-scrolling: touch;
+                                        }
 
-.sn-content table{
-  width: 100% !important;
-  max-width: 100% !important;
-  table-layout: fixed; /* shrink columns */
-}
+                                        /* CONTENT-BASED COLUMN WIDTH (shrink to fit) */
+                                        .sn-content table{
+                                            table-layout: auto !important; /* columns follow content width */
+                                            width: auto !important;        /* do NOT stretch full width */
+                                            max-width: 100%;
+                                            border-collapse: collapse;
+                                            display: inline-table;         /* helps table keep natural width */
+                                        }
 
-.sn-content th, .sn-content td{
-  font-size: 12px;
-  padding: 6px 8px;
-  line-height: 1.2;
-  white-space: normal;      /* allow wrap */
-  word-break: break-word;   /* break long words */
-}
+                                        /* compact cells */
+                                        .sn-content th,
+                                        .sn-content td{
+                                            padding: 4px 4px 4px 0;        /* right padding = 4px */
+                                            font-size: 12px;
+                                            line-height: 1.2;
+                                            white-space: nowrap;           /* key for "largest text decides width" */
+                                        }
+
+                                        /* OPTIONAL: if your theme adds big borders/padding, this keeps it neat */
+                                        .sn-content th, .sn-content td { vertical-align: top; }
                                     </style>
                                     @push('js_stack')
 <script>
