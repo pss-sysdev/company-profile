@@ -129,8 +129,54 @@
                                 @if (!empty($product->description) && $product->description != '')
                                     <div class="tab-pane fade show active" id="description" role="tabpanel"
                                         aria-labelledby="description-tab">
-                                        {!! $product->description !!}
+                                        <div class="sn-content">
+                                            {!! $product->description !!}
+                                        </div>
                                     </div>
+                                    <style>
+                                        /* summernote output wrapper */
+                                        .sn-content{
+                                        overflow-x: auto;
+                                        -webkit-overflow-scrolling: touch;
+                                        }
+
+                                        /* keep tables inside container */
+                                        .sn-content table{
+                                        width: 100% !important;
+                                        max-width: 100% !important;
+                                        table-layout: auto;
+                                        }
+
+                                        .sn-content th,
+                                        .sn-content td{
+                                        word-break: break-word;
+                                        white-space: normal;
+                                        }
+
+                                        .sn-content img{
+                                        max-width: 100%;
+                                        height: auto;
+                                        }
+                                        
+                                        .tab-pane { overflow: visible; }
+                                    </style>
+                                    @push('js_stack')
+                                        <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                        document.querySelectorAll('.sn-content table').forEach((table) => {
+                                            // remove fixed widths coming from summernote/html paste
+                                            table.removeAttribute('width');
+                                            table.style.width = '100%';
+                                            table.style.maxWidth = '100%';
+                                        });
+
+                                        document.querySelectorAll('.sn-content td, .sn-content th').forEach((cell) => {
+                                            cell.removeAttribute('width');
+                                            cell.style.maxWidth = '100%';
+                                        });
+                                        });
+                                        </script>
+                                    @endpush
                                 @endif
                                 <div class="tab-pane fade" id="add_info" role="tabpanel">
                                     <!-- <h6>Specification</h6> -->
