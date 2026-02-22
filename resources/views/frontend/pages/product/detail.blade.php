@@ -134,54 +134,49 @@
                                         </div>
                                     </div>
                                     <style>
-                                        /* wrapper: prevents breaking layout */
+                                        /* summernote output wrapper */
                                         .sn-content{
-                                            overflow-x: auto;
-                                            -webkit-overflow-scrolling: touch;
+                                        overflow-x: auto;
+                                        -webkit-overflow-scrolling: touch;
                                         }
 
-                                        /* CONTENT-BASED COLUMN WIDTH (shrink to fit) */
+                                        /* keep tables inside container */
                                         .sn-content table{
-                                            table-layout: auto !important; /* columns follow content width */
-                                            width: auto !important;        /* do NOT stretch full width */
-                                            max-width: 100%;
-                                            border-collapse: collapse;
-                                            display: inline-table;         /* helps table keep natural width */
+                                        width: 100% !important;
+                                        max-width: 100% !important;
+                                        table-layout: auto;
                                         }
 
-                                        /* compact cells */
                                         .sn-content th,
                                         .sn-content td{
-                                            padding: 4px 4px 4px 0;        /* right padding = 4px */
-                                            font-size: 12px;
-                                            line-height: 1.2;
-                                            white-space: nowrap;           /* key for "largest text decides width" */
+                                        word-break: break-word;
+                                        white-space: normal;
                                         }
 
-                                        /* OPTIONAL: if your theme adds big borders/padding, this keeps it neat */
-                                        .sn-content th, .sn-content td { vertical-align: top; }
+                                        .sn-content img{
+                                        max-width: 100%;
+                                        height: auto;
+                                        }
+                                        
+                                        .tab-pane { overflow: visible; }
                                     </style>
                                     @push('js_stack')
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll('.sn-content table').forEach((table) => {
-    table.style.width = '100%';
-    table.style.maxWidth = '100%';
+                                        <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                        document.querySelectorAll('.sn-content table').forEach((table) => {
+                                            // remove fixed widths coming from summernote/html paste
+                                            table.removeAttribute('width');
+                                            table.style.width = '100%';
+                                            table.style.maxWidth = '100%';
+                                        });
 
-    let fontSize = 14;
-    table.style.fontSize = fontSize + 'px';
-
-    const container = table.closest('.sn-content');
-    if (!container) return;
-
-    while (table.scrollWidth > container.clientWidth && fontSize > 10) {
-      fontSize -= 1;
-      table.style.fontSize = fontSize + 'px';
-    }
-  });
-});
-</script>
-@endpush
+                                        document.querySelectorAll('.sn-content td, .sn-content th').forEach((cell) => {
+                                            cell.removeAttribute('width');
+                                            cell.style.maxWidth = '100%';
+                                        });
+                                        });
+                                        </script>
+                                    @endpush
                                 @endif
                                 <div class="tab-pane fade" id="add_info" role="tabpanel">
                                     <!-- <h6>Specification</h6> -->
