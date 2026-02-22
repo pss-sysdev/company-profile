@@ -82,6 +82,7 @@ class ProductController extends Controller
         $brandFilter    = $request->input('brand', []);
         $categoryFilter = $request->input('category', []);
 
+        // product_spec & product related
         $productsBase = Product::with(['category.parent', 'brand']);
 
         if ($filter) {
