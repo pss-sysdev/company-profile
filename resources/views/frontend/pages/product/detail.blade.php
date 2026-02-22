@@ -118,10 +118,12 @@
                                             aria-selected="false">description</a>
                                     </li>
                                 @endif
-                                <li class="nav-item" role="presentation">
-                                    <a class="nav-link" id="info-tab" data-bs-toggle="tab" href="#add_info" role="tab"
-                                        aria-controls="add_info" aria-selected="false">Additional Information</a>
-                                </li>
+                                @if (!empty($product->spec) && count($product->spec) > 0)
+                                    <li class="nav-item" role="presentation">
+                                        <a class="nav-link" id="info-tab" data-bs-toggle="tab" href="#add_info" role="tab"
+                                            aria-controls="add_info" aria-selected="false">Specification</a>
+                                    </li>
+                                @endif
                             </ul>
                             <div class="tab-content" id="productTabContent">
                                 @if (!empty($product->description) && $product->description != '')
@@ -131,7 +133,7 @@
                                     </div>
                                 @endif
                                 <div class="tab-pane fade" id="add_info" role="tabpanel">
-                                    <h6>Specification</h6>
+                                    <!-- <h6>Specification</h6> -->
                                     <table class="woocommerce-table">
                                         <tbody>
                                             @foreach ($product->spec as $item)

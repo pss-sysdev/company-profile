@@ -12752,8 +12752,7 @@ table.woocommerce-product-attributes {
 .product-big-img {
   background-color: var(--smoke-color3);
   text-align: center;
-  padding: 50px;
-  height: 100%;
+  padding: 35px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
