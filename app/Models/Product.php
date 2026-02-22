@@ -27,7 +27,8 @@ class Product extends Model
 
     public function spec()
     {
-        return $this->hasMany(ProductSpec::class, 'product_id', 'id');
+        return $this->hasMany(ProductSpec::class, 'product_id', 'id')
+                    ->orderBy('id', 'desc');
     }
 
     public function externalLink()
