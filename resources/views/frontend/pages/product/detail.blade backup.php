@@ -134,43 +134,49 @@
                                         </div>
                                     </div>
                                     <style>
-                                        .sn-content { overflow-x: auto; }
+                                        /* summernote output wrapper */
+                                        .sn-content{
+                                        overflow-x: auto;
+                                        -webkit-overflow-scrolling: touch;
+                                        }
 
-.sn-content table{
-  width: 100% !important;
-  max-width: 100% !important;
-  table-layout: fixed; /* shrink columns */
-}
+                                        /* keep tables inside container */
+                                        .sn-content table{
+                                        width: 100% !important;
+                                        max-width: 100% !important;
+                                        table-layout: auto;
+                                        }
 
-.sn-content th, .sn-content td{
-  font-size: 12px;
-  padding: 6px 8px;
-  line-height: 1.2;
-  white-space: normal;      /* allow wrap */
-  word-break: break-word;   /* break long words */
-}
+                                        .sn-content th,
+                                        .sn-content td{
+                                        word-break: break-word;
+                                        white-space: normal;
+                                        }
+
+                                        .sn-content img{
+                                        max-width: 100%;
+                                        height: auto;
+                                        }
+                                        
+                                        .tab-pane { overflow: visible; }
                                     </style>
                                     @push('js_stack')
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelectorAll('.sn-content table').forEach((table) => {
-    table.style.width = '100%';
-    table.style.maxWidth = '100%';
+                                        <script>
+                                        document.addEventListener("DOMContentLoaded", function () {
+                                        document.querySelectorAll('.sn-content table').forEach((table) => {
+                                            // remove fixed widths coming from summernote/html paste
+                                            table.removeAttribute('width');
+                                            table.style.width = '100%';
+                                            table.style.maxWidth = '100%';
+                                        });
 
-    let fontSize = 14;
-    table.style.fontSize = fontSize + 'px';
-
-    const container = table.closest('.sn-content');
-    if (!container) return;
-
-    while (table.scrollWidth > container.clientWidth && fontSize > 10) {
-      fontSize -= 1;
-      table.style.fontSize = fontSize + 'px';
-    }
-  });
-});
-</script>
-@endpush
+                                        document.querySelectorAll('.sn-content td, .sn-content th').forEach((cell) => {
+                                            cell.removeAttribute('width');
+                                            cell.style.maxWidth = '100%';
+                                        });
+                                        });
+                                        </script>
+                                    @endpush
                                 @endif
                                 <div class="tab-pane fade" id="add_info" role="tabpanel">
                                     <!-- <h6>Specification</h6> -->
