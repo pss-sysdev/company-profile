@@ -77,6 +77,12 @@
             max-width: 254px;
         }
 
+        .brand-card{
+            /* aspect-ratio: 285 / 118; */
+            width: 100%;
+            max-width: 186px;
+        }
+
         .own-brand-img{
             object-fit: contain;
             width: 100%;
@@ -89,6 +95,29 @@
             width: 100%;
             height: auto;
             aspect-ratio: 285 / 118;
+        }
+
+        .brand-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px; /* 👈 YOU control spacing here */
+        }
+
+        .brand-item {
+            flex: 0 0 calc(25% - 20px); /* 4 per row */
+            max-width: 254px;
+        }
+        @media (max-width: 992px) {
+            .brand-item {
+                flex: 0 0 calc(50% - 20px); /* 2 per row */
+            }
+        }
+
+        @media (max-width: 576px) {
+            .brand-item {
+                flex: 0 0 100%; /* 1 per row */
+            }
         }
     </style>
 </head>
@@ -104,9 +133,10 @@
         </div>
 
         <div class="custom-container">
-            <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center">
+            <!-- <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4 justify-content-center"> -->
+            <div class="brand-grid">
                 @foreach ($categoryOnBrand as $value)
-                    <div class="col">
+                    <div class="brand-item">
                         <div class="card border-0 text-center own-brand-card" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                             <a href="{{ route('page', $value->url) }}">
                                 <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid own-brand-img"
@@ -132,9 +162,10 @@
                 <div class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-2 g-3 g-md-4 mt-3">
                     @foreach ($brand->where('group_id', $brandCategory->group_id) as $value)
                         <a class="col" href="{{ route('product', ['category[]' => $value->group_id, 'brand[]' => $value->id]) }}">
-                            <div class="card border-0 text-center own-brand-card" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
+                            <div class="card border-0 text-center brand-card" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
                                 <img src="{{ asset('uploads/' . $value->logo_picture) }}"
                                     class="card-img-top img-fluid own-brand-cat-img" alt="{{ $value->name }}">
+                                <p>{{$value->name}}</p>
                             </div>
                         </a>
                     @endforeach
