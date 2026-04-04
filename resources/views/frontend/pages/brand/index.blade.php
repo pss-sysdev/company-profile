@@ -85,6 +85,7 @@
         }
 
         .own-brand-cat-img {
+            object-fit: contain !important;
             width: 100%;
             height: auto;
             aspect-ratio: 285 / 118;
