@@ -450,7 +450,7 @@
                             Categories
                             <button id="resetFilterBtn" style="font-size: 12px;" class="btn btn-sm btn-link text-primary"
                                 data-bs-toggle="tooltip" data-bs-placement="top" title="Reset Filter">
-                                <i class="fas fa-sync-alt"></i>
+                                <i class="fas fa-sync-alt"></i> Reset Filter
                             </button>
                         </h5>
 

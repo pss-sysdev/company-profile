@@ -443,7 +443,7 @@
     {{-- Client  --}}
     {{-- <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
-            <h2 class="title">Client</h2>
+            <h2 class="title">Clients</h2>
         </div>
 
         <!-- Carousel -->

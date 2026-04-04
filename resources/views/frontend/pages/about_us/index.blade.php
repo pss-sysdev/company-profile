@@ -201,14 +201,27 @@
             margin-top: 5px;
         }
 
-        .header::after {
-            content: '\2197';
-            font-size: 40px;
-            font-weight: bold;
+        /* .header::after {
+            content: "Click here ↗";
+            font-size: 12px;
+            stle
             position: absolute;
             right: 10px;
-            top: 47%;
+            top: 27%;
             transform: translateY(-120%);
+        } */
+
+        .header {
+            position: relative;
+        }
+
+        .header .cta {
+            position: absolute;
+            font-size: 12px;
+            right: 10px;
+            top: 17%;
+            transform: translateY(-50%);
+            font-weight: bold;
         }
 
         .content_card {
@@ -428,6 +441,7 @@
                 working on a large-scale industrial project or need reliable tools for your business, <strong>PT.
                     PERINTIS
                     SUKSES SEJAHTERA</strong> is here to help.</p>
+            <span class="cta">Click here ↗</span>
         </div>
     </a><br>
 
@@ -459,7 +473,7 @@
 
     <div class="container-fluid my-5">
         <div class="we-provide-brands text-center">
-            <h4 class="title text-uppercase">Client</h4>
+            <h4 class="title text-uppercase">Clients</h4>
         </div>
 
         <div id="brandCarouselClient" class="carousel slide carousel-container" data-bs-ride="carousel"
