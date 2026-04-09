@@ -15,3 +15,7 @@ yarn-error.log
 /.idea
 /.vscode
 public/uploads
+resources/views/components_frontend/footer.blade.backup.php
+resources/views/components_frontend/footer.blade.backup.2.php
+resources/views/frontend/pages/home/index.blade.backup.php
+resources/views/frontend/pages/product/index.blade.backup.2.php

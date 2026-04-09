@@ -196,6 +196,15 @@
         .carousel-control-next {
             right: 0;
         }
+        .gap-gapgap {
+            padding: 30px 20px;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: -48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
         .request-quotation {
             background-color: #b01b1b;
@@ -333,13 +342,14 @@
     @include('components_frontend.header')
 
     @yield('content')
-
-    <div class="request-quotation">
+    <div class="gap-gapgap">
+    </div>
+    <!-- <div class="request-quotation">
         <button class="btn" onclick="location.href='{{ route('contact_us') }}#service-wrapper'">
             Request Quotation
             <i class="fa-solid fa-arrow-right"></i>
         </button>
-    </div>
+    </div> -->
 
     @include('components_frontend.footer')
 

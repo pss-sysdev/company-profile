@@ -1,245 +1,350 @@
 <style>
-    .footer {
-        background: #121212;
-        color: #fff;
-        padding: 40px 0;
+    .footer-modern {
+        background: #111111;
+        color: #ffffff;
+        padding: 64px 0 24px;
         font-family: Arial, sans-serif;
+        border-top: 4px solid #ff4d1a;
     }
 
-    .container-fluid {
-        width: 95%;
-        margin: auto;
+    .footer-modern .footer-wrap {
+        width: min(92%, 1400px);
+        margin: 0 auto;
     }
 
-    .footer-content {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        border-bottom: 1px solid #333;
-        padding-bottom: 20px;
+    .footer-modern .footer-top {
+        display: grid;
+        grid-template-columns: 1.35fr 0.9fr 1fr 1fr;
+        gap: 40px;
+        padding-bottom: 34px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .footer-section {
-        flex: 1;
-        min-width: 200px;
-        margin: 10px;
+    .footer-modern .footer-brand {
+        background: transparent;
+        border: none;
+        border-radius: 0;
+        padding: 0;
+        backdrop-filter: none;
     }
 
-    .footer-title {
+    .footer-modern .footer-kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255,255,255,0.58);
+        margin-bottom: 12px;
+    }
+
+    .footer-modern .footer-kicker::before {
+        content: "";
+        width: 28px;
+        height: 2px;
+        background: #ff4d1a;
+    }
+
+    .footer-modern .footer-brand-title {
+        font-size: 28px;
+        line-height: 1.2;
+        font-weight: 800;
+        color: #fff;
+        margin-bottom: 12px;
+    }
+
+    .footer-modern .footer-brand-text {
+        color: rgba(255,255,255,0.72);
+        font-size: 15px;
+        line-height: 1.8;
+        margin: 0 0 18px;
+        max-width: 520px;
+    }
+
+    .footer-modern .footer-contact-list {
+        display: grid;
+        gap: 8px;
+        margin-bottom: 22px;
+    }
+
+    .footer-modern .footer-contact-item {
+        color: rgba(255,255,255,0.82);
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .footer-modern .footer-cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        min-width: 220px;
+        padding: 13px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        background: #ff4d1a;
+        border: 1px solid #ff4d1a;
+        box-shadow: none;
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .footer-modern .footer-cta:hover {
+        color: #fff;
+        background: #e64516;
+        border-color: #e64516;
+        transform: translateY(-1px);
+    }
+
+    .footer-modern .footer-cta i {
+        font-size: 13px;
+    }
+
+    .footer-modern .footer-col-title {
+        font-size: 17px;
+        font-weight: 700;
+        color: #fff;
+        margin: 6px 0 18px;
+        padding-bottom: 10px;
         position: relative;
-        padding-left: 20px;
-        color: white !important;
     }
 
-    .footer-title::before {
+    .footer-modern .footer-col-title::after {
         content: "";
         position: absolute;
         left: 0;
-        top: 0;
-        width: 2px;
-        height: 100%;
-        background-color: #ff3c00;
+        bottom: 0;
+        width: 36px;
+        height: 2px;
+        background: #ff4d1a;
     }
 
-
-    .footer-section ul {
+    .footer-modern .footer-links {
         list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        gap: 10px;
+    }
+
+    .footer-modern .footer-links li {
+        margin: 0;
         padding: 0;
     }
 
-    .footer-section ul li {
-        margin: 5px 0;
-        color: #white;
+    .footer-modern .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        text-decoration: none;
+        color: rgba(255,255,255,0.76);
         font-size: 14px;
+        line-height: 1.5;
+        transition: color 0.2s ease, transform 0.2s ease;
     }
 
-    .footer-section ul li:hover {
-        color: #white;
-        cursor: pointer;
+    .footer-modern .footer-links a::before {
+        content: "\f105";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        font-size: 11px;
+        color: #ff4d1a;
     }
 
-    .social-icons {
+    .footer-modern .footer-links a:hover {
+        color: #ffffff;
+        transform: translateX(3px);
+    }
+
+    .footer-modern .footer-social-wrap {
+        margin-top: 24px;
+    }
+
+    .footer-modern .footer-social-label {
+        font-size: 13px;
+        color: rgba(255,255,255,0.58);
+        margin-bottom: 12px;
+    }
+
+    .footer-modern .footer-social {
         display: flex;
-        gap: 15px;
-        font-size: 18px;
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
-    .social-icons i {
+    .footer-modern .footer-social a {
+        width: 40px;
+        height: 40px;
+        border-radius: 4px;
+        border: 1px solid rgba(255,255,255,0.14);
+        background: transparent;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         color: #fff;
-        cursor: pointer;
+        text-decoration: none;
+        transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
     }
 
-    .social-icons i:hover {
-        color: #ff3c00;
+    .footer-modern .footer-social a:hover {
+        transform: translateY(-1px);
+        background: #ff4d1a;
+        border-color: #ff4d1a;
+        color: #fff;
     }
 
-    .contact p {
+    .footer-modern .footer-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-top: 22px;
+    }
+
+    .footer-modern .footer-copy {
+        color: rgba(255,255,255,0.68);
         font-size: 14px;
-        color: #ccc;
-        margin: 4px 0;
+        margin: 0;
     }
 
-    /* .quote-button {
-        display: block;
-        background: #4c32f4;
-        color: white;
-        padding: 10px;
-        border: none;
-        width: 100%;
-        text-align: center;
-        margin-top: 10px;
-        cursor: pointer;
-        border-radius: 5px;
-    } */
-
-    .quote-button:hover {
-        background: #3723c0;
+    .footer-modern .footer-mini-note {
+        color: rgba(255,255,255,0.45);
+        font-size: 13px;
+        margin: 0;
+        text-align: right;
     }
 
-    .footer-bottom {
-        text-align: left;
-        padding: 25px 0;
-        font-size: 16px;
-        color: #ccc;
+    @media (max-width: 1200px) {
+        .footer-modern .footer-top {
+            grid-template-columns: 1.2fr 1fr 1fr;
+        }
+
+        .footer-modern .footer-brand {
+            grid-column: 1 / -1;
+        }
     }
 
     @media (max-width: 768px) {
-        .footer-content {
-            flex-direction: column;
-            text-align: center;
+        .footer-modern {
+            padding: 50px 0 22px;
         }
 
-        .social-icons {
-            justify-content: center;
+        .footer-modern .footer-top {
+            grid-template-columns: 1fr;
+            gap: 30px;
         }
 
-        .quote-button {
-            width: auto;
-            padding: 10px 20px;
+        .footer-modern .footer-brand-title {
+            font-size: 24px;
         }
-    }
 
-    .quote-button {
-        display: block;
-        width: 100%;
-        max-width: 250px;
-        background-color: #5a42f5;
-        color: white;
-        padding: 12px;
-        text-align: center;
-        font-size: 16px;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background 0.3s ease;
-    }
-
-    .quote-button:hover {
-        background-color: #4836c1;
-    }
-
-    @media (max-width: 768px) {
-        .quote-button {
+        .footer-modern .footer-cta {
             width: 100%;
-            max-width: none;
+            min-width: unset;
         }
-    }
 
-    footer p {
-        color: white !important;
+        .footer-modern .footer-bottom {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .footer-modern .footer-mini-note {
+            text-align: left;
+        }
     }
 </style>
-<!-- Footer Start -->
 
-<footer class="footer">
-    <div class="container-fluid">
-        <div class="footer-content">
-            <!-- Navigation -->
-            <div class="footer-section">
-                <div class="footer-title">
-                    <h6 style="color: white">Navigation</h6>
-                    <ul>
-                        <li onclick="location.href='{{ route('home') }}';"><i class="fa fa-chevron-right"></i> Home</li>
-                        <li onclick="location.href='{{ route('product') }}';"><i class="fa fa-chevron-right"></i> Product</li>
-                        <li onclick="location.href='{{ route('brand') }}';"><i class="fa fa-chevron-right"></i> Brand</li>
-                        <li onclick="location.href='{{ route('contact_us') }}';"><i class="fa fa-chevron-right"></i> Contact Us</li>
-                        <li onclick="location.href='{{ route('about_us') }}';"><i class="fa fa-chevron-right"></i> About Us</li>
-                    </ul>
+<footer class="footer-modern">
+    <div class="footer-wrap">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <div class="footer-kicker">Industrial Solutions Partner</div>
+                <h2 class="footer-brand-title">PT. Perintis Sukses Sejahtera</h2>
+                <p class="footer-brand-text">
+                    Trusted partner for welding equipment, industrial solutions, and reliable business support.
+                </p>
+
+                <div class="footer-contact-list">
+                    <div class="footer-contact-item">Ruko Sentra Niaga Kalimas Blok B/18B</div>
+                    <div class="footer-contact-item">Jl. Inspeksi Kalimalang, Setiadarma</div>
+                    <div class="footer-contact-item">Tambun Selatan, Kabupaten Bekasi</div>
+                    <div class="footer-contact-item">Jawa Barat 17510 - Indonesia</div>
+                    <div class="footer-contact-item">+62 21 8839 4890 - +62 21 8837 0217</div>
                 </div>
+
+                @if (!request()->routeIs('contact_us'))
+                    <a href="{{ route('contact_us') }}#service-wrapper" class="footer-cta">
+                        Request Quotation
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                @endif
             </div>
 
-            <!-- Our Business Line -->
-            <div class="footer-section">
-                <div class="footer-title">
-                    <h6 style="color: white">Our Business Line</h6>
-                    <ul>
-                        @foreach ($categorys as $value)
+            <div class="footer-col">
+                <h5 class="footer-col-title">Navigation</h5>
+                <ul class="footer-links">
+                    <li><a href="{{ route('home') }}">Home</a></li>
+                    <li><a href="{{ route('product') }}">Product</a></li>
+                    <li><a href="{{ route('brand') }}">Brand</a></li>
+                    <li><a href="{{ route('contact_us') }}">Contact Us</a></li>
+                    <li><a href="{{ route('about_us') }}">About Us</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5 class="footer-col-title">Our Business Line</h5>
+                <ul class="footer-links">
+                    @foreach ($categorys as $value)
+                        <li>
                             <a href="{{ route('product', ['category[]' => $value->id]) }}">
-                                <li style="color: white"><i class="fa fa-chevron-right"></i> {{ $value->name }}</li>
+                                {{ $value->name }}
                             </a>
-                        @endforeach
-                    </ul>
-                </div>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
 
-            <!-- Our Brands -->
-            <div class="footer-section">
-                <div class="footer-title">
-                    <h6 style="color: white">Our Brands</h6>
-                    <ul>
-                        @foreach ($categoryOnBrand as $value)
-                            @if (!empty($value->url))
+            <div class="footer-col">
+                <h5 class="footer-col-title">Our Brands</h5>
+                <ul class="footer-links">
+                    @foreach ($categoryOnBrand as $value)
+                        @if (!empty($value->url))
+                            <li>
                                 <a href="{{ route('page', ['slug' => $value->url]) }}">
-                                    <li style="color: white"><i class="fa fa-chevron-right"></i> {{ $value->name }}</li>
+                                    {{ $value->name }}
                                 </a>
-                            @endif
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
+                            </li>
+                        @endif
+                    @endforeach
+                </ul>
 
-            <!-- Social Media -->
-            <div class="footer-section">
-                <div class="footer-title">
-                    <h6 style="color: white">Social Media</h6>
-                    <div class="social-icons">
-                        <a href="{{ $global_setting->facebook }}" target="_blank">
+                <div class="footer-social-wrap">
+                    <div class="footer-social-label">Follow us</div>
+                    <div class="footer-social">
+                        <a href="{{ $global_setting->facebook ?? '#' }}" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a href="{{ $global_setting->facebook }}" target="_blank">
+                        <a href="{{ $global_setting->instagram ?? '#' }}" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                             <i class="fab fa-instagram"></i>
                         </a>
-                        <a href="{{ $global_setting->facebook }}" target="_blank">
+                        <a href="{{ $global_setting->linkedin ?? '#' }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a href="{{ $global_setting->facebook }}" target="_blank">
+                        <a href="{{ !empty($global_setting->whatsapp ?? '') ? 'https://wa.me/' . preg_replace('/[^0-9]/', '', $global_setting->whatsapp) : '#' }}"
+                            target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                             <i class="fab fa-whatsapp"></i>
                         </a>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- Contact Info -->
-            <div class="footer-section contact">
-                <div class="footer-title">
-                    <h6 style="color: white">PT. Perintis Sukses Sejahtera</h6>
-                    <p>Ruko Sentra Niaga Kalimas Blok B/18B</p>
-                    <p>Jl. Inspeksi Kalimalang, Setiadarma</p>
-                    <p>Tambun Selatan, Kabupaten Bekasi</p>
-                    <p>Jawa Barat 17510 - Indonesia</p>
-                    <p>+62 21 8839 4890 - +62 21 8837 0217</p><br>
-                    <button class="quote-button"
-                        onclick="location.href='{{ route('contact_us') }}#service-wrapper'">Request
-                        Quotation</button>
-                </div>
-            </div>
+        <div class="footer-bottom">
+            <p class="footer-copy">Copyright © 2025 PT. Perintis Sukses Sejahtera. All rights reserved.</p>
+            <p class="footer-mini-note">Built for strong brands and industrial growth.</p>
         </div>
     </div>
-
-    <!-- Copyright -->
-    <div class="footer-bottom">
-        <p style="margin-left: 4%">Copyright © 2025 PT. Perintis Sukses Sejahtera</p>
-    </div>
 </footer>
-<!-- Footer End -->

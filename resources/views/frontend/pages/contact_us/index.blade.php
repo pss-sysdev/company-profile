@@ -147,10 +147,6 @@
             color: #dc3545;
         }
 
-        p {
-            color: black !important;
-        }
-
         .contact-box ul li {
             color: #000;
             font-size: 14px;
@@ -348,7 +344,7 @@
             <div class="d-flex justify-content-center">
                 <h3 class="underline-title text-uppercase">Contact Us</h3>
             </div>
-            <p class="text-center">
+            <p class="text-center" style="color: rgba(0,0,0,0.72) !important;">
                 If you have any questions, feel free to reach out! You can contact us by email or give us a call during
                 our business hours (Monday to Saturday, 8:00 AM – 5:30 PM). Alternatively, you can also fill the
                 ‘Quotation’ form below to send us a message. Our friendly customer support team is always happy to help!

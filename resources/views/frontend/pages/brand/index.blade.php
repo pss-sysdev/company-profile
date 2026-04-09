@@ -75,12 +75,14 @@
             aspect-ratio: 285 / 118;
             width: 100%;
             max-width: 254px;
+            box-shadow: 0 0 4px rgba(0,0,0,0.1);
         }
 
         .brand-card{
             /* aspect-ratio: 285 / 118; */
             width: 100%;
             max-width: 186px;
+            box-shadow: 0 0 4px rgba(0,0,0,0.1);
         }
 
         .own-brand-img{
@@ -101,8 +103,15 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px; /* 👈 YOU control spacing here */
+            gap: 20px; 
         }
+
+        /* .brand-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            justify-items: center;
+        } */
 
         .brand-item {
             flex: 0 0 calc(25% - 20px); /* 4 per row */
@@ -137,7 +146,7 @@
             <div class="brand-grid">
                 @foreach ($categoryOnBrand as $value)
                     <div class="brand-item">
-                        <div class="card border-0 text-center own-brand-card" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
+                        <div class="card border-0 text-center own-brand-card">
                             <a href="{{ route('page', $value->url) }}">
                                 <img src="{{ asset('uploads/' . $value->logo_picture) }}" class="card-img-top img-fluid own-brand-img"
                                     alt="{{ $value->name }}">
@@ -162,7 +171,7 @@
                 <div class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 row-cols-2 g-3 g-md-4 mt-3">
                     @foreach ($brand->where('group_id', $brandCategory->group_id) as $value)
                         <a class="col" href="{{ route('product', ['category[]' => $value->group_id, 'brand[]' => $value->id]) }}">
-                            <div class="card border-0 text-center brand-card" style="box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);">
+                            <div class="card border-0 text-center brand-card">
                                 <img src="{{ asset('uploads/' . $value->logo_picture) }}"
                                     class="card-img-top img-fluid own-brand-cat-img" alt="{{ $value->name }}">
                                 <p>{{$value->name}}</p>

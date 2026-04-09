@@ -3,42 +3,190 @@
 @section('content')
 
     <style>
-        .filter-brand.active {
-            outline: 3px solid #0066FF68;
+        :root {
+            --pss-accent: #ff4d1a;
+            --pss-accent-dark: #e64516;
+            --pss-text: #111111;
+            --pss-muted: #666666;
+            --pss-border: #e7e7e7;
+            --pss-surface: #ffffff;
+            --pss-soft: #f7f7f7;
+            --pss-shadow: 0 10px 28px rgba(17, 17, 17, 0.05);
         }
 
-        .filter-cat.active {
-            /* outline: 3px solid #0066FF68; */
-            background-color: #3030D7;
-            color: #ffffff;
+        .product-page-shell {
+            max-width: 1560px;
+            margin: 0 auto;
+            padding-left: 18px;
+            padding-right: 18px;
+            font-family: Arial, sans-serif;
+            color: var(--pss-text);
+        }
+
+        .product-page-header {
+            padding-top: 40px;
+            padding-bottom: 18px;
+        }
+
+        .product-page-wrap {
+            padding-bottom: 40px;
+        }
+
+        .product-page-wrap .row {
+            --bs-gutter-x: 1.35rem;
         }
 
         .title-product {
             display: inline-block;
-            border-left: 3px solid red;
-            padding-left: 5px;
+            border-left: 4px solid var(--pss-accent);
+            padding-left: 12px;
         }
 
+        .title-product h3,
+        .title-product h4,
+        .title-product h6 {
+            margin: 0;
+            color: var(--pss-text);
+            text-transform: uppercase;
+        }
 
-        /* Generic scrollbox */
+        .title-product h3 {
+            font-size: clamp(28px, 2vw, 40px);
+            font-weight: 800;
+            line-height: 1.12;
+        }
+
+        .title-product h4 {
+            font-size: clamp(26px, 1.8vw, 36px);
+            font-weight: 800;
+            line-height: 1.12;
+        }
+
+        .title-product h6 {
+            margin-top: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+
+        .product-page-summary {
+            border-bottom: 1px solid #dddddd;
+            padding-bottom: 18px;
+            margin-bottom: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar-area .widget {
+            background: var(--pss-surface);
+            /* border: 1px solid var(--pss-border); */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border-radius: 14px;
+            box-shadow: var(--pss-shadow);
+            padding: 20px;
+            margin-bottom: 18px;
+        }
+
+        .sidebar-area .widget_title {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            /* gap: 12px; */
+            line-height: 0.8em !important;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--pss-text);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        #resetFilterBtn {
+            padding: 0;
+            border: 0;
+            background: transparent;
+            color: var(--pss-accent) !important;
+            font-size: 12px !important;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: none !important;
+            white-space: nowrap;
+        }
+
+        #resetFilterBtn:hover {
+            color: var(--pss-accent-dark) !important;
+        }
+
+        .search-form {
+            display: flex;
+            align-items: stretch;
+            border: 1px solid var(--pss-border);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--pss-surface);
+        }
+
+        .search-form input {
+            flex: 1;
+            border: 0;
+            padding: 13px 14px;
+            font-size: 14px;
+            color: var(--pss-text);
+            background: transparent;
+        }
+
+        .search-form input:focus {
+            outline: none;
+            box-shadow: none;
+        }
+
+        .search-form button {
+            width: 46px;
+            border: 0;
+            background: #3b3b3b;
+            color: #ffffff;
+            transition: background 0.2s ease;
+        }
+
+        .search-form button:hover {
+            background: var(--pss-accent);
+        }
+
+        /* Category */
+        .filter-cat {
+            display: block;
+            padding: 12px 14px;
+            border-radius: 8px;
+            background: var(--pss-soft);
+            color: #4d4d4d;
+            text-decoration: none;
+            font-weight: 700;
+            line-height: 1.35;
+            transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .filter-cat:hover {
+            background: #fff3ee;
+            color: var(--pss-accent);
+            transform: translateY(-1px);
+            text-decoration: none;
+        }
+
+        .filter-cat.active {
+            background: var(--pss-accent);
+            color: #ffffff !important;
+            box-shadow: 0 8px 18px rgba(255, 77, 26, 0.18);
+        }
+
+        /* Scrollbox for categories */
         .scrollbox {
             position: relative;
         }
 
-        /* The actual scroll area */
         .scrollbox-inner {
-            max-height: 520px;        /* adjust for categories */
+            max-height: 520px;
             overflow-y: auto;
-            /* padding-right: 6px; */    /*   space for scrollbar */
             scroll-behavior: smooth;
         }
 
-        /* Brand column may need a different height */
-        .brand-scroll .scrollbox-inner {
-            max-height: 700px;        /* adjust for brand list */
-        }
-
-        /* Chevron buttons */
         .scrollbox-btn {
             position: absolute;
             left: 50%;
@@ -48,9 +196,9 @@
             width: 36px;
             height: 36px;
             border-radius: 999px;
-            background: rgba(0,0,0,0.55);
+            background: rgba(17,17,17,0.68);
             color: #fff;
-            display: none;            /* JS will toggle */
+            display: none;
             align-items: center;
             justify-content: center;
             cursor: pointer;
@@ -59,7 +207,6 @@
         .scrollbox-btn.up { top: 6px; }
         .scrollbox-btn.down { bottom: 6px; }
 
-        /* Fade overlays (disabled by default) */
         .scrollbox::before,
         .scrollbox::after {
             content: "";
@@ -73,27 +220,16 @@
             transition: opacity 0.2s ease;
         }
 
-        /* Top fade */
         .scrollbox::before {
             top: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,1),
-                rgba(255,255,255,0)
-            );
+            background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
         }
 
-        /* Bottom fade */
         .scrollbox::after {
             bottom: 0;
-            background: linear-gradient(
-                to top,
-                rgba(255,255,255,1),
-                rgba(255,255,255,0)
-            );
+            background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
         }
 
-        /* Enabled states */
         .scrollbox.has-top-shadow::before {
             opacity: 1;
         }
@@ -102,50 +238,376 @@
             opacity: 1;
         }
 
-        /* desktop behavior */
-        .brand-scroll .scrollbox-inner {
-            max-height: 700px;      /* whatever you want on desktop */
-            overflow-y: auto;
+        /* Brand chooser */
+        .brand-column-wrap {
+            display: flex;
+            justify-content: center;
         }
 
-        /* ✅ on smaller screens, restore the original "grid blocks" */
-        @media (max-width: 991px) {
-            .brand-scroll .scrollbox-inner {
-                max-height: none;
-                overflow: visible;
-                padding-right: 0;
+        .brand-box {
+            position: relative;
+            width: 100%;
+            max-width: 82px;
+            margin: 0 auto;
+        }
+
+        .brand-inner {
+            scroll-behavior: smooth;
+        }
+
+        .brand-btn {
+            position: absolute;
+            z-index: 10;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 999px;
+            background: rgba(17,17,17,0.68);
+            color: #fff;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .brand-item {
+            display: block;
+            width: 100%;
+            max-width: 82px;
+            margin: 0 auto;
+            text-decoration: none;
+        }
+
+        .filter-brand {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 285 / 118;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7px 8px;
+            background: #ffffff;
+            border: 1px solid var(--pss-border);
+            border-radius: 9px;
+            box-shadow: 0 4px 12px rgba(17, 17, 17, 0.04);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+            overflow: hidden;
+        }
+
+        .filter-brand:hover {
+            transform: translateY(-1px);
+            border-color: #ffd2c4;
+        }
+
+        .filter-brand.active {
+            background: #fff7f4;
+            border-color: rgba(255, 77, 26, 0.45);
+            box-shadow:
+                0 0 0 3px rgba(255, 77, 26, 0.10),
+                0 8px 18px rgba(17, 17, 17, 0.05);
+        }
+
+        .filter-brand.active::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border: 2px solid rgba(255, 77, 26, 0.18);
+            border-radius: 9px;
+            pointer-events: none;
+        }
+
+        .brand-logo {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        @media (min-width: 992px) {
+            .brand-inner {
+                max-height: 700px;
+                overflow-y: auto;
+                overflow-x: hidden;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 8px;
+                padding-right: 2px;
             }
 
-            .brand-scroll .scrollbox-btn {
+            .brand-btn.up {
+                top: 6px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .brand-btn.down {
+                bottom: 6px;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .brand-btn.left,
+            .brand-btn.right {
                 display: none !important;
             }
 
-            .brand-scroll::before,
-            .brand-scroll::after {
-                opacity: 0 !important;  /* hide fade shadows */
+            .brand-box::before,
+            .brand-box::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                height: 28px;
+                z-index: 9;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity .2s ease;
+            }
+
+            .brand-box::before {
+                top: 0;
+                background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
+            }
+
+            .brand-box::after {
+                bottom: 0;
+                background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+            }
+
+            .brand-box.has-top-shadow::before {
+                opacity: 1;
+            }
+
+            .brand-box.has-bottom-shadow::after {
+                opacity: 1;
             }
         }
 
+        /* Product cards */
+        .as-product {
+            background: #ffffff;
+            /* border: 1px solid var(--pss-border); */
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border-radius: 14px;
+            box-shadow: var(--pss-shadow);
+            overflow: hidden;
+            height: 100%;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+
+        .as-product:hover {
+            transform: translateY(-2px);
+            border-color: #ffd2c4;
+            box-shadow: 0 14px 30px rgba(17, 17, 17, 0.07);
+        }
+
+        .product-brand-logo {
+            max-height: 26px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+            margin: 16px 16px 0 auto;
+        }
+
+        .product-img {
+            padding: 10px 18px 0;
+        }
+
+        .product-img img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: contain;
+        }
+
+        .product-content {
+            padding: 10px 18px 22px;
+            text-align: center;
+        }
+
+        .product-title {
+            margin-bottom: 10px;
+        }
+
+        .product-title a {
+            color: var(--pss-text);
+            font-size: 17px;
+            font-weight: 800;
+            line-height: 1.35;
+            text-decoration: none;
+        }
+
+        .product-title a:hover {
+            color: var(--pss-accent);
+        }
+
+        .price {
+            display: block;
+            margin-bottom: 16px;
+            color: #d61515;
+            font-size: 15px;
+            font-weight: 700;
+        }
+
+        .as-btn.style3 {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 150px;
+            padding: 11px 18px;
+            border-radius: 6px;
+            border: 1px solid var(--pss-accent);
+            background: var(--pss-accent);
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .as-btn.style3:hover {
+            background: var(--pss-accent-dark);
+            border-color: var(--pss-accent-dark);
+            color: #ffffff;
+        }
+
+        /* Popular products */
+        .widget_top_rated_products .recent-post-title a {
+            color: var(--pss-text);
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .widget_top_rated_products .recent-post-title a:hover {
+            color: var(--pss-accent);
+        }
+
+        .widget_top_rated_products .price {
+            margin-bottom: 0;
+            font-size: 14px;
+        }
+
+        /* Mobile / Tablet */
+        @media (max-width: 991px) {
+            .product-page-shell {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .brand-box {
+                max-width: none;
+                width: 100%;
+            }
+
+            .brand-inner {
+                overflow-x: auto;
+                overflow-y: hidden;
+                display: grid;
+                grid-auto-flow: column;
+                grid-template-rows: repeat(2, auto);
+                gap: 10px;
+                padding: 10px 16px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .brand-item {
+                width: 118px;
+                min-width: 118px;
+                max-width: 118px;
+            }
+
+            .brand-btn.left {
+                left: 6px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .brand-btn.right {
+                right: 6px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+
+            .brand-btn.up,
+            .brand-btn.down {
+                display: none !important;
+            }
+
+            .brand-box::before,
+            .brand-box::after {
+                display: none !important;
+            }
+
+            .sidebar-area {
+                margin-top: 24px;
+            }
+        }
+
+        @media (max-width: 575px) {
+            .product-page-shell {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            .title-product h3 {
+                font-size: 22px;
+            }
+
+            .title-product h4 {
+                font-size: 19px;
+            }
+
+            .title-product h6 {
+                font-size: 13px;
+            }
+
+            .sidebar-area .widget {
+                padding: 16px;
+                border-radius: 12px;
+            }
+
+            .sidebar-area .widget_title {
+                font-size: 16px;
+            }
+
+            .brand-inner {
+                padding: 10px 14px;
+                gap: 8px;
+            }
+
+            .brand-item {
+                width: 112px;
+                min-width: 112px;
+                max-width: 112px;
+            }
+
+            .filter-brand {
+                padding: 8px 9px;
+                border-radius: 8px;
+            }
+
+            .as-btn.style3 {
+                min-width: 138px;
+            }
+        }
     </style>
 
-    <!-- Our Brands -->
-    <div class="container-fluid my-5">
-        <div class="find-more-about-our-brands"
-            style="display: flex; flex-direction: column; justify-content: center; align-items: start; text-align: start;">
-            <!-- <h3 class="title-product text-uppercase"> Product Page</h3> -->
-            <h3 class="title-product text-uppercase"> Product</h3>
+    <div class="product-page-shell product-page-header">
+        <div class="title-product">
+            <h3>Product</h3>
         </div>
     </div>
-    <!-- Our Brands End -->
 
-    {{-- Welding Machine Section  --}}
-    <div class="container-fluid my-5">
+    <div class="product-page-shell product-page-wrap">
         <div class="row flex-row-reverse">
-            <div class="col-xl-10 col-lg-9">
-                <div class="find-more-about-our-brands"
-                    style="display: flex; flex-direction: column; justify-content: center; align-items: start; text-align: start; border-bottom: 1px solid #e1e0e0; margin-bottom: 1rem;">
-                    <div class="title-product mb-3">
-                        <h4 class="mb-0 text-uppercase">
+            <div class="col-xl-10 col-lg-9 col-sm-12">
+                <div class="product-page-summary">
+                    <div class="title-product">
+                        <h4>
                             @if ($selected_cat->isNotEmpty())
                                 @foreach ($selected_cat as $sc)
                                     {{ $loop->last ? $sc->name : $sc->name . ', ' }}
@@ -154,20 +616,19 @@
                                 All Products
                             @endif
                         </h4>
-                        <h6 class="mb-0 text-uppercase">Brand Includes</h6>
+                        <h6>Brand Includes</h6>
                     </div>
                 </div>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="row">
-                            <div class="col-xl-1 col-lg-2 col-sm-12">
-                                <div class="brand-box" data-brandbox>
 
-                                    <!-- Desktop chevrons (vertical) -->
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="row align-items-start">
+                        <div class="col-xl-1 col-lg-2 col-sm-12">
+                            <div class="brand-column-wrap">
+                                <div class="brand-box" data-brandbox>
                                     <button type="button" class="brand-btn up" data-up>
                                         <i class="fa-solid fa-chevron-up"></i>
                                     </button>
 
-                                    <!-- Mobile chevrons (horizontal) -->
                                     <button type="button" class="brand-btn left" data-left>
                                         <i class="fa-solid fa-chevron-left"></i>
                                     </button>
@@ -175,11 +636,10 @@
                                     <div class="brand-inner" data-inner>
                                         @foreach ($brands as $brand)
                                             <a class="filter-btn brand-item"
-                                            href="javascript:void(0);"
-                                            data-type="brand"
-                                            data-id="{{ $brand->id }}">
-                                                <div class="wrapper-item filter-brand {{ in_array($brand->id, request()->input('brand', [])) ? 'active' : '' }}"
-                                                    style="box-shadow: 0px 0px 4px rgba(0,0,0,0.1);">
+                                                href="javascript:void(0);"
+                                                data-type="brand"
+                                                data-id="{{ $brand->id }}">
+                                                <div class="wrapper-item filter-brand {{ in_array($brand->id, request()->input('brand', [])) ? 'active' : '' }}">
                                                     <img src="{{ asset('uploads/' . $brand->logo_picture) }}"
                                                         alt="{{ $brand->name }}"
                                                         class="brand-logo">
@@ -188,209 +648,22 @@
                                         @endforeach
                                     </div>
 
-                                    <!-- Desktop chevrons (vertical) -->
                                     <button type="button" class="brand-btn down" data-down>
                                         <i class="fa-solid fa-chevron-down"></i>
                                     </button>
 
-                                    <!-- Mobile chevrons (horizontal) -->
                                     <button type="button" class="brand-btn right" data-right>
                                         <i class="fa-solid fa-chevron-right"></i>
                                     </button>
-
                                 </div>
                             </div>
-
-                        <style>
-                            /* ===== Brand box base ===== */
-                            .brand-box {
-                                position: relative;
-                            }
-
-                            /* The scrolling container */
-                            .brand-inner {
-                                scroll-behavior: smooth;
-                            }
-
-                            /* Buttons (shared) */
-                            .brand-btn {
-                                position: absolute;
-                                z-index: 10;
-                                border: none;
-                                width: 34px;
-                                height: 34px;
-                                border-radius: 999px;
-                                background: rgba(0,0,0,0.55);
-                                color: #fff;
-                                display: none;              /* JS toggles */
-                                align-items: center;
-                                justify-content: center;
-                                cursor: pointer;
-                            }
-
-                            /* Desktop: vertical scroll layout */
-                            @media (min-width: 992px) {
-                                .brand-inner {
-                                    max-height: 700px;
-                                    overflow-y: auto;
-                                    overflow-x: hidden;
-                                    display: flex;
-                                    flex-direction: column;
-                                    gap: 8px;
-                                }
-
-                                .brand-item { display: block; }
-
-                                .brand-btn.up   { top: 6px; left: 50%; transform: translateX(-50%); }
-                                .brand-btn.down { bottom: 6px; left: 50%; transform: translateX(-50%); }
-
-                                /* hide horizontal buttons */
-                                .brand-btn.left, .brand-btn.right { display: none !important; }
-
-                                /* Desktop fade shadows */
-                                .brand-box::before,
-                                .brand-box::after {
-                                    content: "";
-                                    position: absolute;
-                                    left: 0; right: 0;
-                                    height: 34px;
-                                    z-index: 9;
-                                    pointer-events: none;
-                                    opacity: 0;
-                                    transition: opacity .2s ease;
-                                }
-
-                                .brand-box::before {
-                                    top: 0;
-                                    background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
-                                }
-
-                                .brand-box::after {
-                                    bottom: 0;
-                                    background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
-                                }
-
-                                .brand-box.has-top-shadow::before { opacity: 1; }
-                                .brand-box.has-bottom-shadow::after { opacity: 1; }
-                            }
-
-                            /* Mobile/Tablet: 2-row horizontal scroller */
-                            @media (max-width: 991px) {
-                                .brand-inner {
-                                    overflow-x: auto;
-                                    overflow-y: hidden;
-
-                                    display: grid;
-                                    grid-auto-flow: column;     /* key: flow columns, not rows */
-                                    grid-template-rows: repeat(2, auto); /* 2 lines only */
-                                    gap: 10px;
-
-                                    padding: 10px 40px;         /* space for left/right buttons */
-                                    -webkit-overflow-scrolling: touch;
-                                }
-
-                                /* each item has a fixed width so it forms a nice horizontal list */
-                                .brand-item {
-                                    width: 160px;               /* adjust */
-                                    display: block;
-                                }
-
-                                /* left/right buttons */
-                                .brand-btn.left  { left: 6px; top: 50%; transform: translateY(-50%); }
-                                .brand-btn.right { right: 6px; top: 50%; transform: translateY(-50%); }
-
-                                /* hide vertical buttons + shadows */
-                                .brand-btn.up, .brand-btn.down { display: none !important; }
-                                .brand-box::before, .brand-box::after { display: none !important; }
-                            }
-
-                        </style>
-                        <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                            const box = document.querySelector('[data-brandbox]');
-                            if (!box) return;
-
-                            const inner = box.querySelector('[data-inner]');
-                            const btnUp = box.querySelector('[data-up]');
-                            const btnDown = box.querySelector('[data-down]');
-                            const btnLeft = box.querySelector('[data-left]');
-                            const btnRight = box.querySelector('[data-right]');
-
-                            function isMobile() {
-                                return window.matchMedia('(max-width: 991px)').matches;
-                            }
-
-                            function stepY() { return Math.max(120, inner.clientHeight * 0.6); }
-                            function stepX() { return Math.max(160, inner.clientWidth * 0.7); }
-
-                            function update() {
-                                // reset
-                                box.classList.remove('has-top-shadow', 'has-bottom-shadow');
-
-                                if (!isMobile()) {
-                                // DESKTOP (vertical)
-                                const max = inner.scrollHeight - inner.clientHeight;
-
-                                if (max <= 2) {
-                                    btnUp.style.display = 'none';
-                                    btnDown.style.display = 'none';
-                                    return;
-                                }
-
-                                const atTop = inner.scrollTop <= 2;
-                                const atBottom = inner.scrollTop >= max - 2;
-
-                                btnUp.style.display = atTop ? 'none' : 'flex';
-                                btnDown.style.display = atBottom ? 'none' : 'flex';
-
-                                if (!atTop) box.classList.add('has-top-shadow');
-                                if (!atBottom) box.classList.add('has-bottom-shadow');
-
-                                // ensure horizontal buttons hidden
-                                btnLeft.style.display = 'none';
-                                btnRight.style.display = 'none';
-
-                                } else {
-                                // MOBILE (horizontal)
-                                const max = inner.scrollWidth - inner.clientWidth;
-
-                                if (max <= 2) {
-                                    btnLeft.style.display = 'none';
-                                    btnRight.style.display = 'none';
-                                    return;
-                                }
-
-                                const atLeft = inner.scrollLeft <= 2;
-                                const atRight = inner.scrollLeft >= max - 2;
-
-                                btnLeft.style.display = atLeft ? 'none' : 'flex';
-                                btnRight.style.display = atRight ? 'none' : 'flex';
-
-                                // ensure vertical buttons hidden
-                                btnUp.style.display = 'none';
-                                btnDown.style.display = 'none';
-                                }
-                            }
-
-                            btnUp?.addEventListener('click', () => inner.scrollBy({ top: -stepY(), behavior: 'smooth' }));
-                            btnDown?.addEventListener('click', () => inner.scrollBy({ top: stepY(), behavior: 'smooth' }));
-                            btnLeft?.addEventListener('click', () => inner.scrollBy({ left: -stepX(), behavior: 'smooth' }));
-                            btnRight?.addEventListener('click', () => inner.scrollBy({ left: stepX(), behavior: 'smooth' }));
-
-                            inner.addEventListener('scroll', update);
-                            window.addEventListener('resize', update);
-                            window.addEventListener('load', update);
-
-                            update();
-                            });
-                        </script>
+                        </div>
 
                         <div class="col-xl-11 col-lg-10 col-sm-12">
-                            <div class="tab-pane fade active show" id="tab-list" role="tabpanel"
-                                aria-labelledby="tab-shop-list">
-                                <div class="row gy-25">
+                            <div class="tab-pane fade active show" id="tab-list" role="tabpanel" aria-labelledby="tab-shop-list">
+                                <div class="row gy-4">
                                     @foreach ($products as $product)
-                                        <div class="col-xl-3 col-lg-4 col-sm-4">
+                                        <div class="col-xl-3 col-lg-4 col-sm-6">
                                             <div class="as-product"
                                                 onclick="window.location='{{ route('product.detail', ['slug' => $product->slug]) }}'"
                                                 style="cursor: pointer;">
@@ -403,11 +676,13 @@
                                                     <img src="{{ asset('uploads/' . $product->main_picture_url) }}"
                                                         alt="product image" />
                                                 </div>
+
                                                 <div class="product-content">
                                                     <p class="meta"></p>
                                                     <h4 class="product-title h5">
-                                                        <a
-                                                            href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
+                                                        <a href="{{ route('product.detail', ['slug' => $product->slug]) }}">
+                                                            {{ $product->name }}
+                                                        </a>
                                                     </h4>
                                                     <span class="price">
                                                         @if (empty($product->price) || $product->price == 0)
@@ -417,7 +692,9 @@
                                                         @endif
                                                     </span>
                                                     <a class="as-btn style3"
-                                                        href="{{ route('product.detail', ['slug' => $product->slug]) }}">Detail</a>
+                                                        href="{{ route('product.detail', ['slug' => $product->slug]) }}">
+                                                        Detail
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -429,9 +706,7 @@
                 </div>
 
                 {{ $products->links() }}
-
             </div>
-
 
             <div class="col-xl-2 col-lg-3">
                 <aside class="sidebar-area">
@@ -441,15 +716,22 @@
                                 value="{{ request('filter') }}" />
                             <button type="submit"><i class="fas fa-search"></i></button>
                         </form>
-
                     </div>
 
-                    <!-- category start here-->
                     <div class="widget widget_categories">
-                        <h5 class="widget_title text-uppercase">
-                            Categories
-                            <button id="resetFilterBtn" style="font-size: 12px;" class="btn btn-sm btn-link text-primary"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Reset Filter">
+                        <style>
+                            .widget_title {
+                                display: flex;
+                                flex-direction: column; /* forces vertical layout */
+                            }
+                        </style>
+                        <h5 class="widget_title">
+                            <span>Categories</span>
+                            <br>
+                            <button id="resetFilterBtn"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title="Reset Filter">
                                 <i class="fas fa-sync-alt"></i> Reset Filter
                             </button>
                         </h5>
@@ -458,34 +740,26 @@
                             <button type="button" class="scrollbox-btn up" data-scroll-up>
                                 <i class="fa-solid fa-chevron-up"></i>
                             </button>
-<!-- 
-                            <div class="scrollbox-inner" data-scroll-inner>
-                                <ul class="mb-0">
-                                    @foreach ($categories as $category)
-                                        <li>
-                                            <a class="filter-btn filter-cat {{ in_array($category->id, request()->input('category', [])) ? 'active' : '' }}"
-                                                href="javascript:void(0);" data-type="category"
-                                                data-id="{{ $category->id }}">{{ $category->name }}</a>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div> -->
 
                             <div class="scrollbox-inner" data-scroll-inner>
                                 <ul class="mb-0">
                                     @foreach ($categories as $parent)
                                         <li class="mb-2">
                                             <a class="filter-btn filter-cat {{ in_array($parent->id, request()->input('category', [])) ? 'active' : '' }}"
-                                            href="javascript:void(0);" data-type="category" data-id="{{ $parent->id }}">
+                                                href="javascript:void(0);"
+                                                data-type="category"
+                                                data-id="{{ $parent->id }}">
                                                 <strong>{{ $parent->name }}</strong>
                                             </a>
 
                                             @if ($parent->children->isNotEmpty())
-                                                <ul class="mt-1 ps-3">
+                                                <ul class="mt-2 ps-3">
                                                     @foreach ($parent->children as $child)
-                                                        <li>
+                                                        <li class="mb-2">
                                                             <a class="filter-btn filter-cat {{ in_array($child->id, request()->input('category', [])) ? 'active' : '' }}"
-                                                            href="javascript:void(0);" data-type="category" data-id="{{ $child->id }}">
+                                                                href="javascript:void(0);"
+                                                                data-type="category"
+                                                                data-id="{{ $child->id }}">
                                                                 {{ $child->name }}
                                                             </a>
                                                         </li>
@@ -497,32 +771,12 @@
                                 </ul>
                             </div>
 
-
                             <button type="button" class="scrollbox-btn down" data-scroll-down>
                                 <i class="fa-solid fa-chevron-down"></i>
                             </button>
                         </div>
                     </div>
 
-
-                    <!-- <div class="widget widget_categories">
-                        <h5 class="widget_title text-uppercase">Categories
-                            <button id="resetFilterBtn" style="font-size: 12px;" class="btn btn-sm btn-link text-primary"
-                                data-bs-toggle="tooltip" data-bs-placement="top" title="Reset Filter">
-                                <i class="fas fa-sync-alt"></i>
-                            </button>
-                        </h5>
-                        <ul>
-                            @foreach ($categories as $category)
-                                <li>
-                                    <a class="filter-btn filter-cat {{ in_array($category->id, request()->input('category', [])) ? 'active' : '' }}"
-                                        href="javascript:void(0);" data-type="category"
-                                        data-id="{{ $category->id }}">{{ $category->name }}</a>
-                                </li>
-                            @endforeach
-                        </ul>
-                    </div> -->
-                    {{-- @if(!empty($productsTop) && count($productsTop) > 0) --}}
                     @if(isset($productsTop) && $productsTop->isNotEmpty())
                         <div class="widget widget_top_rated_products">
                             <h4 class="widget_title">Popular Product</h4>
@@ -530,14 +784,18 @@
                                 @foreach ($productsTop as $product)
                                     <li class="recent-post">
                                         <div class="media-img">
-                                            <a href="shop-details.html">
-                                                <img src="{{ asset('uploads/' . $product->main_picture_url) }}" alt="thumb"
-                                                    width="70" height="70" />
+                                            <a href="{{ route('product.detail', ['slug' => $product->slug]) }}">
+                                                <img src="{{ asset('uploads/' . $product->main_picture_url) }}"
+                                                    alt="thumb"
+                                                    width="70"
+                                                    height="70" />
                                             </a>
                                         </div>
                                         <div class="media-body">
                                             <h4 class="recent-post-title h5">
-                                                <a href="shop-details.html">{{ $product->name }}</a>
+                                                <a href="{{ route('product.detail', ['slug' => $product->slug]) }}">
+                                                    {{ $product->name }}
+                                                </a>
                                             </h4>
                                             <span class="price">
                                                 @if (empty($product->price) || $product->price == 0)
@@ -549,7 +807,6 @@
                                         </div>
                                     </li>
                                 @endforeach
-
                             </ul>
                         </div>
                     @endif
@@ -559,152 +816,145 @@
     </div>
 
     <script>
-        // document.addEventListener("DOMContentLoaded", () => {
-        //     const images = document.querySelectorAll('.brand-logo');
+        document.addEventListener('DOMContentLoaded', function () {
+            const box = document.querySelector('[data-brandbox]');
+            if (!box) return;
 
-        //     images.forEach(img => {
-        //         const wrapper = img.closest('.wrapper-item');
-        //         const canvas = document.createElement('canvas');
-        //         const ctx = canvas.getContext('2d');
+            const inner = box.querySelector('[data-inner]');
+            const btnUp = box.querySelector('[data-up]');
+            const btnDown = box.querySelector('[data-down]');
+            const btnLeft = box.querySelector('[data-left]');
+            const btnRight = box.querySelector('[data-right]');
 
-        //         img.crossOrigin = "anonymous"; // just in case
-        //         img.onload = function () {
-        //             const width = img.naturalWidth;
-        //             const height = img.naturalHeight;
-        //             canvas.width = width;
-        //             canvas.height = height;
-        //             ctx.drawImage(img, 0, 0, width, height);
+            function isMobile() {
+                return window.matchMedia('(max-width: 991px)').matches;
+            }
 
-        //             const step = 5;
-        //             const edgePixels = [];
+            function stepY() {
+                return Math.max(120, inner.clientHeight * 0.6);
+            }
 
-        //             for (let x = 0; x < width; x += step) {
-        //                 edgePixels.push(...ctx.getImageData(x, 0, 1, 1).data); // top
-        //                 edgePixels.push(...ctx.getImageData(x, height - 1, 1, 1).data); // bottom
-        //             }
-        //             for (let y = 0; y < height; y += step) {
-        //                 edgePixels.push(...ctx.getImageData(0, y, 1, 1).data); // left
-        //                 edgePixels.push(...ctx.getImageData(width - 1, y, 1, 1).data); // right
-        //             }
+            function stepX() {
+                return Math.max(140, inner.clientWidth * 0.7);
+            }
 
-        //             let r = 0, g = 0, b = 0, count = 0;
-        //             for (let i = 0; i < edgePixels.length; i += 4) {
-        //                 r += edgePixels[i];
-        //                 g += edgePixels[i + 1];
-        //                 b += edgePixels[i + 2];
-        //                 count++;
-        //             }
+            function update() {
+                box.classList.remove('has-top-shadow', 'has-bottom-shadow');
 
-        //             r = Math.round(r / count);
-        //             g = Math.round(g / count);
-        //             b = Math.round(b / count);
+                if (!isMobile()) {
+                    const max = inner.scrollHeight - inner.clientHeight;
 
-        //             const avgColor = `rgb(${r}, ${g}, ${b})`;
-        //             wrapper.style.backgroundColor = avgColor;
-        //         };
-        //     });
-        // });
-        document.addEventListener('DOMContentLoaded', function() {
-            const applyEdgeBasedBgColor = (imgSelector, wrapperSelector) => {
-                const images = document.querySelectorAll(imgSelector);
-
-                images.forEach((img) => {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-
-                    const applyColor = () => {
-                        canvas.width = img.naturalWidth;
-                        canvas.height = img.naturalHeight;
-
-                        if (canvas.width === 0 || canvas.height === 0) return;
-
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-                        let chosenPixel = null;
-
-                        for (let y = 0; y < canvas.height; y += 5) {
-                            const [r, g, b, a] = ctx.getImageData(1, y, 1, 1).data;
-
-                            if (a > 0) {
-                                chosenPixel = {
-                                    r,
-                                    g,
-                                    b,
-                                    a
-                                };
-                                break;
-                            }
-                        }
-
-                        const wrapper = img.closest(wrapperSelector);
-
-                        if (!chosenPixel || !wrapper) {
-                            wrapper.style.backgroundColor = '#ffffff';
-                            return;
-                        }
-
-                        const {
-                            r,
-                            g,
-                            b,
-                            a
-                        } = chosenPixel;
-
-                        if (a < 255) {
-                            const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-                            wrapper.style.backgroundColor = brightness > 128 ? 'black' : 'white';
-                        } else {
-                            wrapper.style.backgroundColor = `rgb(${r}, ${g}, ${b})`;
-                        }
-                    };
-
-                    if (img.complete && img.naturalWidth > 0) {
-                        applyColor();
-                    } else {
-                        img.addEventListener('load', applyColor);
+                    if (max <= 2) {
+                        btnUp.style.display = 'none';
+                        btnDown.style.display = 'none';
+                        btnLeft.style.display = 'none';
+                        btnRight.style.display = 'none';
+                        return;
                     }
-                });
-            };
 
-            applyEdgeBasedBgColor('.brand-logo', '.wrapper-item');
+                    const atTop = inner.scrollTop <= 2;
+                    const atBottom = inner.scrollTop >= max - 2;
+
+                    btnUp.style.display = atTop ? 'none' : 'flex';
+                    btnDown.style.display = atBottom ? 'none' : 'flex';
+                    btnLeft.style.display = 'none';
+                    btnRight.style.display = 'none';
+
+                    if (!atTop) box.classList.add('has-top-shadow');
+                    if (!atBottom) box.classList.add('has-bottom-shadow');
+                } else {
+                    const max = inner.scrollWidth - inner.clientWidth;
+
+                    if (max <= 2) {
+                        btnLeft.style.display = 'none';
+                        btnRight.style.display = 'none';
+                        btnUp.style.display = 'none';
+                        btnDown.style.display = 'none';
+                        return;
+                    }
+
+                    const atLeft = inner.scrollLeft <= 2;
+                    const atRight = inner.scrollLeft >= max - 2;
+
+                    btnLeft.style.display = atLeft ? 'none' : 'flex';
+                    btnRight.style.display = atRight ? 'none' : 'flex';
+                    btnUp.style.display = 'none';
+                    btnDown.style.display = 'none';
+                }
+            }
+
+            btnUp?.addEventListener('click', () => {
+                inner.scrollBy({ top: -stepY(), behavior: 'smooth' });
+            });
+
+            btnDown?.addEventListener('click', () => {
+                inner.scrollBy({ top: stepY(), behavior: 'smooth' });
+            });
+
+            btnLeft?.addEventListener('click', () => {
+                inner.scrollBy({ left: -stepX(), behavior: 'smooth' });
+            });
+
+            btnRight?.addEventListener('click', () => {
+                inner.scrollBy({ left: stepX(), behavior: 'smooth' });
+            });
+
+            inner.addEventListener('scroll', update);
+            window.addEventListener('resize', update);
+            window.addEventListener('load', update);
+
+            update();
         });
 
-
         document.querySelectorAll('.filter-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const type = button.getAttribute('data-type'); // 'brand' or 'category'
-                const id = button.getAttribute('data-id');
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const type = button.dataset.type;
+                const id = button.dataset.id;
 
                 const url = new URL(window.location.href);
                 const params = url.searchParams;
 
-                // Get all current values for this type
-                let currentValues = params.getAll(`${type}[]`);
+                const currentBrand = params.get('brand[]');
+                const currentCategory = params.get('category[]');
 
-                if (currentValues.includes(id)) {
-                    // Remove if already selected
-                    currentValues = currentValues.filter(val => val !== id);
-                } else {
-                    // Add if not selected
-                    currentValues.push(id);
+                const setSingleParam = (name, value) => {
+                    params.delete(name);
+                    if (value) {
+                        params.append(name, value);
+                    }
+                };
+
+                if (type === 'brand') {
+                    const nextBrand = currentBrand === id ? null : id;
+
+                    setSingleParam('brand[]', nextBrand);
+
+                    if (currentCategory) {
+                        setSingleParam('category[]', currentCategory);
+                    } else {
+                        params.delete('category[]');
+                    }
                 }
 
-                // Clear and re-append updated values
-                params.delete(`${type}[]`);
-                currentValues.forEach(val => params.append(`${type}[]`, val));
+                if (type === 'category') {
+                    const nextCategory = currentCategory === id ? null : id;
 
-                // Set the updated URL and reload
-                window.location.href = `${url.pathname}?${params.toString()}`;
+                    setSingleParam('category[]', nextCategory);
+                    params.delete('brand[]');
+                }
+
+                const query = params.toString();
+                window.location.href = query ? `${url.pathname}?${query}` : url.pathname;
             });
         });
 
-        // Handle filter by text input (search)
         document.getElementById('filterSearchForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // prevent form reload
+            e.preventDefault();
 
             const url = new URL(window.location.href);
             const params = url.searchParams;
-
             const keyword = document.getElementById('filterInput').value;
 
             if (keyword) {
@@ -713,21 +963,16 @@
                 params.delete('filter');
             }
 
-            // Redirect with new params
-            window.location.href = `${url.pathname}?${params.toString()}`;
+            const query = params.toString();
+            window.location.href = query ? `${url.pathname}?${query}` : url.pathname;
         });
 
         document.getElementById('resetFilterBtn').addEventListener('click', function() {
             const url = new URL(window.location.href);
-            const path = url.pathname; // Keep /product
-            window.location.href = path; // Redirect to /product without filters
+            window.location.href = url.pathname;
         });
-        
-    </script>
 
-    <script>
         document.addEventListener('DOMContentLoaded', function () {
-
             function setupScrollbox(scrollbox) {
                 if (window.matchMedia('(max-width: 991px)').matches) return;
 
@@ -740,64 +985,41 @@
                 const step = () => Math.max(120, inner.clientHeight * 0.6);
 
                 function updateButtons() {
-            const maxScroll = inner.scrollHeight - inner.clientHeight;
+                    const maxScroll = inner.scrollHeight - inner.clientHeight;
 
-            // Reset shadow states
-            scrollbox.classList.remove('has-top-shadow', 'has-bottom-shadow');
+                    scrollbox.classList.remove('has-top-shadow', 'has-bottom-shadow');
 
-            // If no overflow at all
-            if (maxScroll <= 2) {
-                btnUp.style.display = 'none';
-                btnDown.style.display = 'none';
-                return;
+                    if (maxScroll <= 2) {
+                        btnUp.style.display = 'none';
+                        btnDown.style.display = 'none';
+                        return;
+                    }
+
+                    const atTop = inner.scrollTop <= 2;
+                    const atBottom = inner.scrollTop >= maxScroll - 2;
+
+                    btnUp.style.display = atTop ? 'none' : 'flex';
+                    btnDown.style.display = atBottom ? 'none' : 'flex';
+
+                    if (!atTop) scrollbox.classList.add('has-top-shadow');
+                    if (!atBottom) scrollbox.classList.add('has-bottom-shadow');
+                }
+
+                btnUp.addEventListener('click', () => {
+                    inner.scrollBy({ top: -step(), behavior: 'smooth' });
+                });
+
+                btnDown.addEventListener('click', () => {
+                    inner.scrollBy({ top: step(), behavior: 'smooth' });
+                });
+
+                inner.addEventListener('scroll', updateButtons);
+                updateButtons();
+                window.addEventListener('load', updateButtons);
+                window.addEventListener('resize', updateButtons);
             }
 
-            const atTop = inner.scrollTop <= 2;
-            const atBottom = inner.scrollTop >= maxScroll - 2;
-
-            // Chevron visibility
-            btnUp.style.display = atTop ? 'none' : 'flex';
-            btnDown.style.display = atBottom ? 'none' : 'flex';
-
-            // Shadow visibility
-            if (!atTop) {
-                scrollbox.classList.add('has-top-shadow');
-            }
-            if (!atBottom) {
-                scrollbox.classList.add('has-bottom-shadow');
-            }
-        }
-
-
-        btnUp.addEventListener('click', () => {
-            inner.scrollBy({ top: -step(), behavior: 'smooth' });
+            document.querySelectorAll('[data-scrollbox]').forEach(setupScrollbox);
         });
-
-        btnDown.addEventListener('click', () => {
-            inner.scrollBy({ top: step(), behavior: 'smooth' });
-        });
-
-        inner.addEventListener('scroll', updateButtons);
-
-        // Run once, and also after images load (brand logos can change height)
-        updateButtons();
-        window.addEventListener('load', updateButtons);
-        window.addEventListener('resize', updateButtons);
-
-        window.addEventListener('resize', () => {
-  document.querySelectorAll('[data-scrollbox]').forEach(sb => {
-    // simplest: refresh page logic-free
-    // OR you can implement destroy/reinit, but this is enough for now:
-  });
-});
-    }
-
-    document.querySelectorAll('[data-scrollbox]').forEach(setupScrollbox);
-
-    
-});
-
-</script>
-
-    {{-- STEEL BEVEL & PRESSURE PAINT End --}}
+    </script>
 @endsection

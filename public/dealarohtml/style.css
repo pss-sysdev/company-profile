@@ -8792,12 +8792,12 @@ a.text-theme:hover,
   color: var(--white-color);
 }
 
-.footer-links ul {
+.footer-links-update ul {
   padding: 0;
   margin: 0;
 }
 
-.footer-links li {
+.footer-links-update li {
   display: inline-block;
   position: relative;
   line-height: normal;
@@ -8805,26 +8805,26 @@ a.text-theme:hover,
   font-weight: 400;
 }
 
-.footer-links li:not(:last-child) {
+.footer-links-update li:not(:last-child) {
   padding-right: 15px;
   margin-right: 10px;
   border-right: 1px solid var(--white-color);
 }
 
-.footer-links li a {
+.footer-links-update li a {
   color: var(--white-color);
 }
 
-.footer-links li a:hover {
+.footer-links-update li a:hover {
   color: var(--theme-color);
 }
 
-.footer-top {
+.footer-top-update {
   padding: 82px 0;
   border-bottom: 1px solid #262A35;
 }
 
-.footer-top .newsletter-wrap {
+.footer-top-update .newsletter-wrap {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -8845,7 +8845,7 @@ a.text-theme:hover,
   padding-left: 70px;
 }
 
-.footer-top .newsletter-wrap .newsletter-title {
+.footer-top-update .newsletter-wrap .newsletter-title {
   margin-top: -0.1em;
   margin-bottom: 4px;
   max-width: 420px;
@@ -8907,7 +8907,7 @@ a.text-theme:hover,
 
 /* Medium Large devices */
 @media (max-width: 1399px) {
-  .footer-top .newsletter-wrap {
+  .footer-top-update .newsletter-wrap {
     gap: 10px;
     padding-left: 20px;
   }
@@ -8915,7 +8915,7 @@ a.text-theme:hover,
 
 /* Large devices */
 @media (max-width: 1199px) {
-  .footer-top .newsletter-wrap {
+  .footer-top-update .newsletter-wrap {
     padding-left: 0;
     padding-top: 40px;
   }
@@ -8927,17 +8927,17 @@ a.text-theme:hover,
     text-align: center;
   }
 
-  .footer-top ul {
+  .footer-top-update ul {
     border-bottom: 5px solid #343c4f;
     padding: 135px 0 35px 0;
   }
 
-  .footer-top ul li {
+  .footer-top-update ul li {
     padding: 0;
     padding-bottom: 28px;
   }
 
-  .footer-top ul li+li+li {
+  .footer-top-update ul li+li+li {
     margin-left: 0;
     padding-left: 0;
     padding-top: 16px;
@@ -8967,15 +8967,15 @@ a.text-theme:hover,
     padding-bottom: var(--section-space-mobile);
   }
 
-  .footer-top {
+  .footer-top-update {
     text-align: center;
   }
 
-  .footer-top .newsletter-wrap {
+  .footer-top-update .newsletter-wrap {
     display: block;
   }
 
-  .footer-top .newsletter-wrap .newsletter-title {
+  .footer-top-update .newsletter-wrap .newsletter-title {
     max-width: -webkit-fit-content;
     max-width: -moz-fit-content;
     max-width: fit-content;
@@ -8983,7 +8983,7 @@ a.text-theme:hover,
     font-size: 30px;
   }
 
-  .footer-top .subscribe-form.style2 {
+  .footer-top-update .subscribe-form.style2 {
     max-width: -webkit-fit-content;
     max-width: -moz-fit-content;
     max-width: fit-content;
@@ -8997,15 +8997,15 @@ a.text-theme:hover,
 
 /* Small devices */
 @media (max-width: 767px) {
-  .footer-top ul li+li {
+  .footer-top-update ul li+li {
     margin-left: 0;
   }
 
-  .footer-top ul li+li+li {
+  .footer-top-update ul li+li+li {
     padding-top: 0;
   }
 
-  .footer-top ul {
+  .footer-top-update ul {
     padding: 100px 0 35px 0;
   }
 }
@@ -9027,7 +9027,7 @@ a.text-theme:hover,
     font-size: 20px;
   }
 
-  .footer-top .subscribe-form.style2 {
+  .footer-top-update .subscribe-form.style2 {
     display: block;
   }
 
@@ -21144,7 +21144,7 @@ span.select2-selection.select2-selection--single:focus {
   text-align: right;
 }
 
-[dir=rtl] .footer-top ul li+li {
+[dir=rtl] .footer-top-update ul li+li {
   border-right: 1px solid #2a3348;
   padding-right: 58px;
   margin-right: 85px;
@@ -21184,7 +21184,7 @@ span.select2-selection.select2-selection--single:focus {
 }
 
 @media (max-width: 1199px) {
-  [dir=rtl] .footer-top ul li+li {
+  [dir=rtl] .footer-top-update ul li+li {
     border: 0;
     margin-right: 54px;
     padding-right: 0px;
@@ -21192,7 +21192,7 @@ span.select2-selection.select2-selection--single:focus {
 }
 
 @media (max-width: 991px) {
-  [dir=rtl] .footer-top ul li+li+li {
+  [dir=rtl] .footer-top-update ul li+li+li {
     margin-right: 0;
     padding-right: 0;
     padding-top: 16px;
@@ -21200,11 +21200,11 @@ span.select2-selection.select2-selection--single:focus {
 }
 
 @media (max-width: 767px) {
-  [dir=rtl] .footer-top ul li+li {
+  [dir=rtl] .footer-top-update ul li+li {
     margin-right: 0;
   }
 
-  [dir=rtl] .footer-top ul li+li+li {
+  [dir=rtl] .footer-top-update ul li+li+li {
     padding-top: 0;
   }
 }
