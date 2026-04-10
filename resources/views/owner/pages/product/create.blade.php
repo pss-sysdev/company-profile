@@ -136,6 +136,17 @@
                                                                     id="main_picture_url">
                                                             </div>
                                                         </div>
+                                                        <div class="mb-4">
+                                                            <label class="form-label">Product Detail Pictures
+                                                                <span class="text-warning">(You can upload multiple images)</span>
+                                                            </label>
+                                                            <div>
+                                                                <input type="file" name="detail_picture_url[]" multiple accept=".jpg,.jpeg,.png,.gif,.webp">
+                                                                <small class="text-muted d-block mt-1">
+                                                                    You can select multiple files at once.
+                                                                </small>
+                                                            </div>
+                                                        </div>
 
                                                         <div class="row">
                                                             <div class="col-md-6">

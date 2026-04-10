@@ -145,6 +145,51 @@
                                                             </div>
                                                         </div>
 
+                                                        <div class="mb-4">
+                                                            <label class="form-label">Product Detail Pictures
+                                                                <span class="text-warning">(You can upload multiple images)</span>
+                                                            </label>
+
+                                                            @if($product->detailPictures->isNotEmpty())
+                                                                <div class="row">
+                                                                    @foreach ($product->detailPictures as $detailPicture)
+                                                                        <div class="col-md-3 mb-3">
+                                                                            <div class="card">
+                                                                                <div class="card-body p-2 text-center">
+                                                                                    <a href="{{ asset('uploads/' . $detailPicture->detail_picture_url) }}" class="magnific">
+                                                                                        <img src="{{ asset('uploads/' . $detailPicture->detail_picture_url) }}"
+                                                                                            alt="detail-picture"
+                                                                                            style="width: 100%; height: 160px; object-fit: cover; border-radius: 6px;">
+                                                                                    </a>
+
+                                                                                    <div class="form-check mt-2 text-left">
+                                                                                        <input class="form-check-input"
+                                                                                            type="checkbox"
+                                                                                            name="remove_detail_pictures[]"
+                                                                                            value="{{ $detailPicture->id }}"
+                                                                                            id="remove_detail_picture_{{ $detailPicture->id }}">
+                                                                                        <label class="form-check-label text-danger"
+                                                                                            for="remove_detail_picture_{{ $detailPicture->id }}">
+                                                                                            Remove this picture
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+                                                            @else
+                                                                <p class="text-muted">No detail pictures uploaded yet.</p>
+                                                            @endif
+
+                                                            <div class="mt-3">
+                                                                <input type="file" name="detail_picture_url[]" multiple accept=".jpg,.jpeg,.png,.gif,.webp">
+                                                                <small class="text-muted d-block mt-1">
+                                                                    You can select multiple files at once.
+                                                                </small>
+                                                            </div>
+                                                        </div>
+
                                                         <div class="row">
                                                             <div class="col-md-6">
                                                                 <div class="mb-3">

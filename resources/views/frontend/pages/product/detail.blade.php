@@ -11,17 +11,17 @@
         }
 
         .breadcrumb a {
-            text-decoration: underline; /* show as link */
-            color: #3B3BE7; /* default blue color */
+            text-decoration: underline;
+            color: #3B3BE7;
             transition: color 0.2s ease-in-out;
         }
 
         .breadcrumb a:hover {
-            color: #dc3545; /* red on hover */
+            color: #dc3545;
         }
 
         .breadcrumb {
-            --bs-breadcrumb-divider: '›'; /* or '»' */
+            --bs-breadcrumb-divider: '›';
         }
 
         .section-line {
@@ -29,7 +29,71 @@
             height: auto;
             background-color: red;
         }
+
+        .badge-info {
+            border-radius: 0.25rem;
+            padding: 0.35em 0.65em;
+        }
+
+        .bg-warning {
+            color: #222222;
+        }
+
+        .bg-info {
+            color: #ffffff;
+        }
+
+        .product-gallery-main {
+            border: 1px solid #e7e7e7;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #fff;
+            margin-bottom: 14px;
+        }
+
+        .product-gallery-main img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: contain;
+            display: block;
+            background: #fff;
+        }
+
+        .product-gallery-thumbs {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .product-gallery-thumb {
+            border: 1px solid #e7e7e7;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #fff;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .product-gallery-thumb.active {
+            border-color: #ff4d1a;
+            box-shadow: 0 0 0 2px rgba(255, 77, 26, 0.15);
+        }
+
+        .product-gallery-thumb img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: contain;
+            display: block;
+            background: #fff;
+        }
+
+        @media (max-width: 575px) {
+            .product-gallery-thumbs {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
     </style>
+
     <div class="container-fluid d-flex mt-4">
         <div class="section-line" style="margin-right: 0.5rem;"></div>
         <div aria-label="breadcrumb" class="m-0">
@@ -55,37 +119,37 @@
             <h3 class="title text-uppercase">Product Insights</h3>
         </div>
     </div>
-    
 
-    {{-- Welding Machine Section  --}}
-    <style>
-        .badge-info {
-            border-radius: 0.25rem;
-            /* Bootstrap default */
-            padding: 0.35em 0.65em;
-            /* Bootstrap default */
-        }
-
-        .bg-warning {
-            color: #222222;
-        }
-
-        .bg-info {
-            color: #ffffff;
-        }
-    </style>
     <div class="container-fluid">
         <section class="product-details">
             <div class="container">
                 <div class="row gx-60">
                     <div class="col-lg-5">
-                        <div class="product-big-img">
-                            <div class="img">
-                                <img src="{{ asset('uploads/' . $product->main_picture_url) }}" alt="Product Image"
-                                    style="aspect-ratio: 1 / 1; object-fit: cover;" />
+                        <div class="product-gallery">
+                            <div class="product-gallery-main">
+                                <img id="mainProductImage"
+                                    src="{{ asset('uploads/' . $product->main_picture_url) }}"
+                                    alt="{{ $product->name }}">
+                            </div>
+
+                            <div class="product-gallery-thumbs">
+                                <div class="product-gallery-thumb active"
+                                    data-image="{{ asset('uploads/' . $product->main_picture_url) }}">
+                                    <img src="{{ asset('uploads/' . $product->main_picture_url) }}"
+                                        alt="{{ $product->name }}">
+                                </div>
+
+                                @foreach ($product->detailPictures as $picture)
+                                    <div class="product-gallery-thumb"
+                                        data-image="{{ asset('uploads/' . $picture->detail_picture_url) }}">
+                                        <img src="{{ asset('uploads/' . $picture->detail_picture_url) }}"
+                                            alt="Detail Picture">
+                                    </div>
+                                @endforeach
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-7">
                         <div class="product-about position-relative">
                             <p class="price">
@@ -95,10 +159,13 @@
                                     Rp. {{ number_format($product->price, 0, ',', '.') }}
                                 @endif
                             </p>
+
                             <h2 class="product-title">{{ $product->name }}</h2>
+
                             @if ($product->is_rental == 1)
                                 <span class="badge-info bg-info">This product can be rented</span>
                             @endif
+
                             @if ($product->is_indent == 1)
                                 <span class="badge-info bg-warning">This product needs to be indented</span>
                             @endif
@@ -106,10 +173,12 @@
                             <div class="btn-group my-3" role="group" aria-label="Basic example">
                                 @foreach ($product->externalLink as $item)
                                     <a href="{{ $item->link }}" target="_blank" class="btn btn-secondary"
-                                        @style(['background-color:' . $item->hex_color, 'border-radius: 5px;color: white'])>{{ ucwords($item->link_name) }}</a>
+                                        @style(['background-color:' . $item->hex_color, 'border-radius: 5px;color: white'])>
+                                        {{ ucwords($item->link_name) }}
+                                    </a>
                                 @endforeach
-
                             </div>
+
                             <ul class="nav product-tab-style1" id="productTab" role="tablist">
                                 @if (!empty($product->description) && $product->description != '')
                                     <li class="nav-item" role="presentation">
@@ -118,6 +187,7 @@
                                             aria-selected="false">description</a>
                                     </li>
                                 @endif
+
                                 @if (!empty($product->spec) && count($product->spec) > 0)
                                     <li class="nav-item" role="presentation">
                                         <a class="nav-link" id="info-tab" data-bs-toggle="tab" href="#add_info" role="tab"
@@ -125,6 +195,7 @@
                                     </li>
                                 @endif
                             </ul>
+
                             <div class="tab-content" id="productTabContent">
                                 @if (!empty($product->description) && $product->description != '')
                                     <div class="tab-pane fade show active" id="description" role="tabpanel"
@@ -133,53 +204,54 @@
                                             {!! $product->description !!}
                                         </div>
                                     </div>
+
                                     <style>
-                                        /* summernote output wrapper */
-                                        .sn-content{
-                                        overflow-x: auto;
-                                        -webkit-overflow-scrolling: touch;
+                                        .sn-content {
+                                            overflow-x: auto;
+                                            -webkit-overflow-scrolling: touch;
                                         }
 
-                                        /* keep tables inside container */
-                                        .sn-content table{
-                                        width: 100% !important;
-                                        max-width: 100% !important;
-                                        table-layout: auto;
+                                        .sn-content table {
+                                            width: 100% !important;
+                                            max-width: 100% !important;
+                                            table-layout: auto;
                                         }
 
                                         .sn-content th,
-                                        .sn-content td{
-                                        word-break: break-word;
-                                        white-space: normal;
+                                        .sn-content td {
+                                            word-break: break-word;
+                                            white-space: normal;
                                         }
 
-                                        .sn-content img{
-                                        max-width: 100%;
-                                        height: auto;
+                                        .sn-content img {
+                                            max-width: 100%;
+                                            height: auto;
                                         }
-                                        
-                                        .tab-pane { overflow: visible; }
+
+                                        .tab-pane {
+                                            overflow: visible;
+                                        }
                                     </style>
+
                                     @push('js_stack')
                                         <script>
-                                        document.addEventListener("DOMContentLoaded", function () {
-                                        document.querySelectorAll('.sn-content table').forEach((table) => {
-                                            // remove fixed widths coming from summernote/html paste
-                                            table.removeAttribute('width');
-                                            table.style.width = '100%';
-                                            table.style.maxWidth = '100%';
-                                        });
+                                            document.addEventListener("DOMContentLoaded", function () {
+                                                document.querySelectorAll('.sn-content table').forEach((table) => {
+                                                    table.removeAttribute('width');
+                                                    table.style.width = '100%';
+                                                    table.style.maxWidth = '100%';
+                                                });
 
-                                        document.querySelectorAll('.sn-content td, .sn-content th').forEach((cell) => {
-                                            cell.removeAttribute('width');
-                                            cell.style.maxWidth = '100%';
-                                        });
-                                        });
+                                                document.querySelectorAll('.sn-content td, .sn-content th').forEach((cell) => {
+                                                    cell.removeAttribute('width');
+                                                    cell.style.maxWidth = '100%';
+                                                });
+                                            });
                                         </script>
                                     @endpush
                                 @endif
+
                                 <div class="tab-pane fade" id="add_info" role="tabpanel">
-                                    <!-- <h6>Specification</h6> -->
                                     <table class="woocommerce-table">
                                         <tbody>
                                             @foreach ($product->spec as $item)
@@ -196,11 +268,11 @@
                     </div>
                 </div>
 
-
                 <div class="space-top theme-red">
                     <div class="title-area text-center mb-3">
                         <h4 class="sec-title text-uppercase">Related Products</h4>
                     </div>
+
                     <div class="row as-carousel product-slider g-0" data-slide-show="4" data-lg-slide-show="3"
                         data-md-slide-show="2" data-sm-slide-show="2" data-xs-slide-show="1" data-arrows="true"
                         data-xl-arrows="true" data-ml-arrows="true">
@@ -214,7 +286,9 @@
                                     </div>
                                     <div class="product-content">
                                         <h4 class="product-title h5">
-                                            <a href="shop-details.html">{{ $product->name }}</a>
+                                            <a href="{{ route('product.detail', ['slug' => $product->slug]) }}">
+                                                {{ $product->name }}
+                                            </a>
                                         </h4>
                                         <span class="price">
                                             @if (empty($product->price) || $product->price == 0)
@@ -224,7 +298,9 @@
                                             @endif
                                         </span>
                                         <a class="as-btn style3"
-                                            href="{{ route('product.detail', ['slug' => $product->slug]) }}"> Detail</a>
+                                            href="{{ route('product.detail', ['slug' => $product->slug]) }}">
+                                            Detail
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -234,30 +310,43 @@
             </div>
         </section>
     </div>
-    {{-- STEEL BEVEL & PRESSURE PAINT End --}}
 @endsection
-
 
 @push('js_stack')
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const mainImage = document.getElementById('mainProductImage');
+            const thumbs = document.querySelectorAll('.product-gallery-thumb');
+
+            thumbs.forEach((thumb) => {
+                thumb.addEventListener('click', function () {
+                    const image = this.getAttribute('data-image');
+
+                    if (mainImage && image) {
+                        mainImage.src = image;
+                    }
+
+                    thumbs.forEach((item) => item.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+
         $(function() {
             "use strict";
 
             $(".as-carousel").each(function() {
                 var asSlide = $(this);
 
-                // Collect Data
                 function d(data) {
                     return asSlide.data(data);
                 }
 
-                // Custom Arrow Button
                 var prevButton =
                     '<button type="button" class="slick-prev"><i class="fa-solid fa-arrow-right"></i></button>',
                     nextButton =
                     '<button type="button" class="slick-next"><i class="fa-solid fa-arrow-right"></i></button>';
 
-                // Function For Custom Arrow Btn
                 $("[data-slick-next]").each(function() {
                     $(this).on("click", function(e) {
                         e.preventDefault();
@@ -272,7 +361,6 @@
                     });
                 });
 
-                // Check for arrow wrapper
                 if (d("arrows") == true) {
                     if (!asSlide.closest(".arrow-wrap").length) {
                         asSlide.closest(".container").parent().addClass("arrow-wrap");
@@ -310,8 +398,7 @@
                             settings: {
                                 arrows: d("xl-arrows") ? true : false,
                                 dots: d("xl-dots") ? true : false,
-                                slidesToShow: d("xl-slide-show") ?
-                                    d("xl-slide-show") : d("slide-show"),
+                                slidesToShow: d("xl-slide-show") ? d("xl-slide-show") : d("slide-show"),
                                 centerMode: d("xl-center-mode") ? true : false,
                                 centerPadding: "0",
                             },
@@ -321,8 +408,7 @@
                             settings: {
                                 arrows: d("ml-arrows") ? true : false,
                                 dots: d("ml-dots") ? true : false,
-                                slidesToShow: d("ml-slide-show") ?
-                                    d("ml-slide-show") : d("slide-show"),
+                                slidesToShow: d("ml-slide-show") ? d("ml-slide-show") : d("slide-show"),
                                 centerMode: d("ml-center-mode") ? true : false,
                                 centerPadding: 0,
                             },
@@ -332,10 +418,8 @@
                             settings: {
                                 arrows: d("lg-arrows") ? true : false,
                                 dots: d("lg-dots") ? true : false,
-                                slidesToShow: d("lg-slide-show") ?
-                                    d("lg-slide-show") : d("slide-show"),
-                                centerMode: d("lg-center-mode") ?
-                                    d("lg-center-mode") : false,
+                                slidesToShow: d("lg-slide-show") ? d("lg-slide-show") : d("slide-show"),
+                                centerMode: d("lg-center-mode") ? d("lg-center-mode") : false,
                                 centerPadding: 0,
                             },
                         },
@@ -344,10 +428,8 @@
                             settings: {
                                 arrows: d("md-arrows") ? true : false,
                                 dots: d("md-dots") ? true : false,
-                                slidesToShow: d("md-slide-show") ?
-                                    d("md-slide-show") : 1,
-                                centerMode: d("md-center-mode") ?
-                                    d("md-center-mode") : false,
+                                slidesToShow: d("md-slide-show") ? d("md-slide-show") : 1,
+                                centerMode: d("md-center-mode") ? d("md-center-mode") : false,
                                 centerPadding: 0,
                             },
                         },
@@ -356,10 +438,8 @@
                             settings: {
                                 arrows: d("sm-arrows") ? true : false,
                                 dots: d("sm-dots") ? true : false,
-                                slidesToShow: d("sm-slide-show") ?
-                                    d("sm-slide-show") : 1,
-                                centerMode: d("sm-center-mode") ?
-                                    d("sm-center-mode") : false,
+                                slidesToShow: d("sm-slide-show") ? d("sm-slide-show") : 1,
+                                centerMode: d("sm-center-mode") ? d("sm-center-mode") : false,
                                 centerPadding: 0,
                             },
                         },
@@ -368,16 +448,11 @@
                             settings: {
                                 arrows: d("xs-arrows") ? true : false,
                                 dots: d("xs-dots") ? true : false,
-                                slidesToShow: d("xs-slide-show") ?
-                                    d("xs-slide-show") : 1,
-                                centerMode: d("xs-center-mode") ?
-                                    d("xs-center-mode") : false,
+                                slidesToShow: d("xs-slide-show") ? d("xs-slide-show") : 1,
+                                centerMode: d("xs-center-mode") ? d("xs-center-mode") : false,
                                 centerPadding: 0,
                             },
                         },
-                        // You can unslick at a given breakpoint now by adding:
-                        // settings: "unslick"
-                        // instead of a settings object
                     ],
                 });
 

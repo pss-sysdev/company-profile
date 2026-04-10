@@ -149,16 +149,31 @@ class ProductController extends Controller
     }
 
 
+
     public function detail($slug)
     {
-        $title          = 'Product Detail - Perintis Sukses Sejahtera';
-        $product        = Product::where('slug', $slug)->first();
-        $productsRelate = Product::where('id_category', $product->id_category)
-                            ->orWhere('id_brand', $product->id_brand)
-                            ->limit(5)
-                            ->get();
-        $categorys  = category();
-        // dd($categorys);
+        $title = 'Product Detail - Perintis Sukses Sejahtera';
+
+        $product = Product::with([
+                'category',
+                'brand',
+                'externalLink',
+                'spec',
+                'detailPictures',
+            ])
+            ->where('slug', $slug)
+            ->firstOrFail();
+
+        $productsRelate = Product::with(['brand'])
+            ->where(function ($query) use ($product) {
+                $query->where('id_category', $product->id_category)
+                    ->orWhere('id_brand', $product->id_brand);
+            })
+            ->where('id', '!=', $product->id)
+            ->limit(5)
+            ->get();
+
+        $categorys = category();
 
         return view('frontend.pages.product.detail', [
             'type_menu'       => 'product',

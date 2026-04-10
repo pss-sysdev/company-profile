@@ -343,7 +343,7 @@
         </div>
 
         <div class="footer-bottom">
-            <p class="footer-copy">Copyright © 2025 PT. Perintis Sukses Sejahtera. All rights reserved.</p>
+            <p class="footer-copy">Copyright © 2026 PT. Perintis Sukses Sejahtera. All rights reserved.</p>
             <p class="footer-mini-note">Built for strong brands and industrial growth.</p>
         </div>
     </div>

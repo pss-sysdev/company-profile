@@ -35,4 +35,9 @@ class Product extends Model
     {
         return $this->hasMany(ProductExternalLink::class, 'product_id', 'id');
     }
+
+    public function detailPictures()
+    {
+        return $this->hasMany(ProductDetailPicture::class, 'product_id')->orderBy('sort_number');
+    }
 }
