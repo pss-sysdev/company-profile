@@ -62,8 +62,8 @@
 
                                     <div class="mb-3">
                                         <label for="" class="form-label">Phone</label>
-                                        <input type="text" class="form-control" name="phone_number" id="phone_number"
-                                            value="{{ $quotation->phone_number }}">
+                                        <input type="text" class="form-control" name="contact_number" id="contact_number"
+                                            value="{{ $quotation->contact_number }}">
                                     </div>
 
                                     <div class="mb-3">

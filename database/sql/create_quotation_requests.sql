@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS `quotation_requests` (
+  `id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `product_id` BIGINT UNSIGNED NULL,
+  `name` VARCHAR(255) NOT NULL,
+  `category` VARCHAR(255) NOT NULL,
+  `company_name` VARCHAR(255) NOT NULL,
+  `industry` VARCHAR(255) NULL,
+  `contact_number` VARCHAR(50) NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `request_date` DATE NOT NULL,
+  `message` TEXT NOT NULL,
+  `status` VARCHAR(50) NOT NULL DEFAULT 'new',
+  `admin_email_sent` TINYINT(1) NOT NULL DEFAULT 0,
+  `customer_email_sent` TINYINT(1) NOT NULL DEFAULT 0,
+  `ip_address` VARCHAR(45) NULL,
+  `user_agent` TEXT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT NULL,
+  `updated_at` TIMESTAMP NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

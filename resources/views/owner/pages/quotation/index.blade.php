@@ -48,7 +48,7 @@
                                                     <td>{{ $qutation->name }}</td>
                                                     <td>{{ $qutation->company_name }}</td>
                                                     <td>{{ $qutation->email }}</td>
-                                                    <td>{{ $qutation->phone_number }}</td>
+                                                    <td>{{ $qutation->contact_number }}</td>
                                                     <td>
                                                         <a href="{{ route('owner.quotation.edit', $qutation->id) }}"
                                                             class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></a>

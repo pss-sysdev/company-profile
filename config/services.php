@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'quotation' => [
+        'admin_email' => env('QUOTATION_ADMIN_EMAIL', 'sales@domain.com'),
+        'company_phone' => env('COMPANY_PHONE', 'COMPANY_PHONE_HERE'),
+    ],
+
 ];

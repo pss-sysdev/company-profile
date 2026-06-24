@@ -451,6 +451,11 @@
                                 @if ($product_id)
                                     <input type="hidden" name="product_id" value="{{ $product_id }}">
                                 @endif
+                                <div style="position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden;"
+                                    aria-hidden="true">
+                                    <label for="website">Website</label>
+                                    <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                                </div>
 
                                 <div class="row g-3">
                                     <div class="col-md-12">
@@ -466,20 +471,20 @@
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="text"
-                                                class="form-control border-0 bg-light @error('your_category') is-invalid @enderror"
-                                                id="your_category" name="your_category"
-                                                value="{{ old('your_category') }}" placeholder="your_category" />
-                                            <label for="your_category">Your Category (Buyer/seller)</label>
+                                                class="form-control border-0 bg-light @error('category') is-invalid @enderror"
+                                                id="category" name="category"
+                                                value="{{ old('category') }}" placeholder="category" />
+                                            <label for="category">Your Category (Buyer/seller)</label>
                                         </div>
                                     </div>
 
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="date"
-                                                class="form-control border-0 bg-light @error('request_appointment') is-invalid @enderror"
-                                                id="request_appointment" name="request_appointment"
-                                                value="{{ old('request_appointment') }}" placeholder="request" />
-                                            <label for="request_appointment">Request appointment/quotation</label>
+                                                class="form-control border-0 bg-light @error('request_date') is-invalid @enderror"
+                                                id="request_date" name="request_date"
+                                                value="{{ old('request_date') }}" placeholder="request" />
+                                            <label for="request_date">Request appointment/quotation</label>
                                         </div>
                                     </div>
 
@@ -518,20 +523,18 @@
                                     <div class="col-6">
                                         <div class="form-floating">
                                             <input type="email"
-                                                class="form-control border-0 bg-light @error('email_address') is-invalid @enderror"
-                                                id="email_address" name="email_address"
-                                                value="{{ old('email_address') }}" placeholder="email_address" />
-                                            <label for="email_address">Email Address</label>
+                                                class="form-control border-0 bg-light @error('email') is-invalid @enderror"
+                                                id="email" name="email"
+                                                value="{{ old('email') }}" placeholder="email" />
+                                            <label for="email">Email Address</label>
                                         </div>
                                     </div>
 
                                     <div class="col-12">
                                         <div class="form-floating">
-                                            <input type="text"
-                                                class="form-control border-0 bg-light @error('your_message') is-invalid @enderror"
-                                                id="your_message" name="your_message"
-                                                value="{{ old('your_message') }}" placeholder="your_message" />
-                                            <label for="your_message">Your Message</label>
+                                            <textarea class="form-control border-0 bg-light @error('message') is-invalid @enderror"
+                                                id="message" name="message" placeholder="message" style="height: 120px">{{ old('message') }}</textarea>
+                                            <label for="message">Your Message</label>
                                         </div>
                                     </div>
 

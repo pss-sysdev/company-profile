@@ -28,13 +28,22 @@ class OwnerQuotationController extends Controller
 
     public function update($id, Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'company_name' => ['required', 'string', 'max:255'],
+            'industry' => ['nullable', 'string', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'contact_number' => ['required', 'string', 'max:50'],
+            'message' => ['required', 'string', 'max:5000'],
+        ]);
+
         $quotation = QuotationRequest::find($id);
 
         $quotation->name = $request->name;
         $quotation->company_name = $request->company_name;
         $quotation->industry = $request->industry;
         $quotation->email = $request->email;
-        $quotation->phone_number = $request->phone_number;
+        $quotation->contact_number = $request->contact_number;
         $quotation->message = $request->message;
 
         $quotation->update();
@@ -46,6 +55,6 @@ class OwnerQuotationController extends Controller
     {
         $brand = QuotationRequest::find($id);
         $brand->delete();
-        return redirect()->route('owner.brand')->with('success', 'Data is deleted successfully');
+        return redirect()->route('owner.quotation.index')->with('success', 'Data is deleted successfully');
     }
 }
