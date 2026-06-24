@@ -33,6 +33,7 @@ return [
 
     'quotation' => [
         'admin_email' => env('QUOTATION_ADMIN_EMAIL', 'sales@domain.com'),
+        'admin_emails' => array_filter(array_map('trim', explode(',', env('QUOTATION_ADMIN_EMAILS', env('QUOTATION_ADMIN_EMAIL', 'sales@domain.com'))))),
         'company_phone' => env('COMPANY_PHONE', 'COMPANY_PHONE_HERE'),
     ],
 

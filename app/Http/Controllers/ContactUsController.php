@@ -80,12 +80,13 @@ class ContactUsController extends Controller
     private function sendQuotationEmails(QuotationRequest $quotationRequest): void
     {
         $adminEmail = config('services.quotation.admin_email', 'sales@domain.com');
+        $adminEmails = config('services.quotation.admin_emails', [$adminEmail]);
         $companyPhone = config('services.quotation.company_phone', 'COMPANY_PHONE_HERE');
 
         try {
-            Mail::raw($this->adminEmailBody($quotationRequest), function ($message) use ($quotationRequest, $adminEmail) {
+            Mail::raw($this->adminEmailBody($quotationRequest), function ($message) use ($quotationRequest, $adminEmails) {
                 $message
-                    ->to($adminEmail)
+                    ->to($adminEmails)
                     ->replyTo($quotationRequest->email, $quotationRequest->name)
                     ->subject('New Appointment / Quotation Request - ' . $quotationRequest->company_name);
             });
